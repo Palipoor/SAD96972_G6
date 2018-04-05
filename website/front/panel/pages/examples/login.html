@@ -30,23 +30,24 @@
         <p class="login-box-msg">ورود به سامانه</p>
         <form action="../customer/user_panel_customer.html" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="ایمیل">
+            <input type="email" name = "email" class="form-control" placeholder="ایمیل">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="رمزعبور">
+            <input type="password" name = "password" class="form-control" placeholder="رمزعبور">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
+                  <h6 name = "not valid" >اطلاعات وارد شده اشتباه اند. لطفا دوباره تلاش کنید.</h6>
                   <input type="checkbox"  dir="rtl"> مرا به خاطر بسپار
                 </label>
               </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
+              <button type="submit" name = "log in button"class="btn btn-primary btn-block btn-flat">ورود</button>
             </div><!-- /.col -->
           </div>
         </form>
