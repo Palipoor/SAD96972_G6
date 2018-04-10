@@ -223,7 +223,7 @@
                   <span>کیف پول‌های من</span>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="wallet_rial.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
+                  <li><a href="wallet_rial.html" name = "rial-wallet"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
                   <li><a href="#"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
                   <li><a href="../../pages/layout/fixed.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
                 </ul>
@@ -259,18 +259,17 @@
            				<form role="form">
            					<div class = "form-group">
            						<label>مبلغ مورد نظر</label>
-           						<input type="number" class="form-control" placeholder="مبلغ مورد نظر را به یورو وارد کنید.">
-
+           						<input type="number" class="form-control" placeholder="مبلغ مورد نظر را به یورو وارد کنید." name = "desired-amount">
+                      <small>معادل  </small><small name = "rial-amount">10000</small><small>ریال</small>
            					</div>
            				</form>
            			</div><!--box body-->
            			<div class="box-footer">
                    <div class = "row">
                    <div class = "col-lg-1">
-                    <button type="submit" class="btn btn-primary">پرداخت و شارژ</button>
+                    <button type="submit" class="btn btn-primary" name = "charge-button">پرداخت و شارژ</button>
 					   </div>
                    <div class = "col-lg-3"></div>
-                   <div class = "col-lg-3"><small>معادل ۱۰۰۰۰۰ ریال</small></div>
 					  </div>
                   </div>
             	</div>
@@ -279,7 +278,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>۱۵۰</h3>
+                  <h3 name = "credit">۱۵۰</h3>
                   <p>موجودی  کیف پول</p>
                 </div>
                 <div class="icon">
