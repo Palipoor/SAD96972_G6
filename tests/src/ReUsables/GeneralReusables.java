@@ -1,3 +1,5 @@
+package ReUsables;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,8 +14,9 @@ import org.openqa.selenium.WebElement;
 
 // در توابعی که قرار نیست وبدرایور عوض بشه، باید برای استفاده یک وبدرایور ساخت و بهش داد.
 
-public class ReUsables {
+public class GeneralReusables {
 
+    public static String PANEL_TITLE = "پنل مدیریت";
     public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
         WebElement loginButton = homepage.findElement(By.name("log in"));
         loginButton.click();
@@ -52,11 +55,8 @@ public class ReUsables {
     }
 
     public static int getPrice(WebDriver homepage, String currency) { // حتما بهش یک وبدرایور جدید که آدرس هومپیج رو باز کرده بدین! به باد می‌رین مگرنه.
-        return 0;
+        return 0; // currency parameter could be "dollar" or "euro" or "rial"
     }
 
-    public static int getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
-        return 0;
-    }
 
 }

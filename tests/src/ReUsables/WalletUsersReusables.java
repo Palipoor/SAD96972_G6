@@ -1,0 +1,22 @@
+package ReUsables;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+/**
+ * Created by Golpar on 4/12/2018 AD.
+ */
+public class WalletUsersReusables {
+
+    public static String RIAL_WALLET_TITLE = "پنل مدیریت | کیف پول ریال";
+
+    public static void navigateToRialWallet(WebDriver panel) {
+        WebElement rialWallet = panel.findElement(By.name("rial-wallet"));
+        rialWallet.click();
+    }
+
+    public static int getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
+        return 0;//حواست باشه بک بزنی وقتی می‌ری تو صفحات دیگر.
+    }
+}
