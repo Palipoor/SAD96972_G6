@@ -3,6 +3,9 @@ package ReUsables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Golpar on 4/12/2018 AD.
@@ -17,6 +20,15 @@ import org.openqa.selenium.WebElement;
 public class GeneralReusables {
 
     public static String PANEL_TITLE = "پنل مدیریت";
+
+
+    public static void setUpToHomepage(WebDriver driver) {
+        String homePageAddress = "homePageAddress"; //// TODO: 4/12/2018 AD درست کردن این ادرس
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.get(homePageAddress);
+    }
+
     public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
         WebElement loginButton = homepage.findElement(By.name("log in"));
         loginButton.click();
@@ -55,7 +67,7 @@ public class GeneralReusables {
     }
 
     public static int getPrice(WebDriver homepage, String currency) { // حتما بهش یک وبدرایور جدید که آدرس هومپیج رو باز کرده بدین! به باد می‌رین مگرنه.
-        return 0; // currency parameter could be "dollar" or "euro" or "rial"
+        return 0; // currency parameter could be "dollar" or "euro" or "rial" //todo implement this
     }
 
 

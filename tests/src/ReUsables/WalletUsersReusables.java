@@ -18,5 +18,6 @@ public class WalletUsersReusables {
 
     public static int getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
         return 0;//حواست باشه بک بزنی وقتی می‌ری تو صفحات دیگر.
+        //// TODO: 4/12/2018 AD implement this
     }
 }

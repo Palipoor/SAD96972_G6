@@ -1,4 +1,5 @@
 import ReUsables.GeneralReusables;
+import com.sun.tools.javac.jvm.Gen;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,10 +21,7 @@ public class WalletExistenceCustomer {
 
     @BeforeClass
     public void setUp() {
-        String homePageAddress = "homePageAddress"; //// TODO: 4/12/2018 AD درست کردن این ادرس
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get(homePageAddress);
+        GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
     }
 
