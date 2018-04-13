@@ -21,6 +21,7 @@ public class WalletExistenceCustomer {
 
     @BeforeClass
     public void setUp() {
+        driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
     }

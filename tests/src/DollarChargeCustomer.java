@@ -4,6 +4,7 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -17,6 +18,7 @@ public class DollarChargeCustomer {
 
     @BeforeClass
     public void setUp() {
+        driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
         WalletUsersReusables.navigateToWallet(driver, "dollar");
@@ -71,5 +73,11 @@ public class DollarChargeCustomer {
         chargeButton.click();
         WebElement errorMessage = driver.findElement(By.name("error"));
         assertEquals(errorMessage.getText(), WalletUsersReusables.NOT_ENOUGH_ERROR_MESSAGE);// ارور خالی نباشد!
+    }
+
+
+    @AfterClass
+    public void tearDown() {
+        GeneralReusables.logout(driver);
     }
 }

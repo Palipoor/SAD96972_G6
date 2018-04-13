@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +19,7 @@ public class RialChargeCustomer {
 
     @BeforeClass
     public void setUp() {
+        driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
         WalletUsersReusables.navigateToWallet(driver, "rial");

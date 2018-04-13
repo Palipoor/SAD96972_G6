@@ -24,7 +24,6 @@ public class GeneralReusables {
 
     public static void setUpToHomepage(WebDriver driver) {
         String homePageAddress = "homePageAddress"; //// TODO: 4/12/2018 AD درست کردن این ادرس
-        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(homePageAddress);
     }
