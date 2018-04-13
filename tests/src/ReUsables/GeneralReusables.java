@@ -66,7 +66,7 @@ public class GeneralReusables {
         logoutButton.click();
     }
 
-    public static int getPrice(WebDriver homepage, String currency) { // حتما بهش یک وبدرایور جدید که آدرس هومپیج رو باز کرده بدین! به باد می‌رین مگرنه.
+    public static int getPrice(String currency) { // حتما بهش یک وبدرایور جدید که آدرس هومپیج رو باز کرده بدین! به باد می‌رین مگرنه.
         return 0; // currency parameter could be "dollar" or "euro" or "rial" //todo implement this
     }
 

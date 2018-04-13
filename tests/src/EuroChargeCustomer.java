@@ -1,17 +1,17 @@
 import ReUsables.GeneralReusables;
 import ReUsables.WalletUsersReusables;
-import org.junit.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by Golpar on 4/12/2018 AD.
  */
-public class DollarChargeCustomer {
+public class EuroChargeCustomer {
     private WebDriver driver;
     private String amount = "1";
 
@@ -19,13 +19,13 @@ public class DollarChargeCustomer {
     public void setUp() {
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
-        WalletUsersReusables.navigateToWallet(driver, "dollar");
+        WalletUsersReusables.navigateToWallet(driver, "euro");
     }
 
     @Test
     public void postConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, WalletUsersReusables.DOLLAR_WALLET_TITLE);
+        assertEquals(title, WalletUsersReusables.EURO_WALLET_TITLE);
     }
 
     @Test
@@ -33,8 +33,8 @@ public class DollarChargeCustomer {
         //todo ye kare behtari ba in kon
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(amount);
-        int dollarPrice = GeneralReusables.getPrice("dollar");
-        int rial = dollarPrice * Integer.valueOf(amount);
+        int euroPrice = GeneralReusables.getPrice("euro");
+        int rial = euroPrice * Integer.valueOf(amount);
         WebElement rialAmount = driver.findElement(By.name("rial-amount"));
         int shownRial = Integer.valueOf(rialAmount.getText());
         assertEquals(rial, shownRial);
@@ -53,18 +53,18 @@ public class DollarChargeCustomer {
 
     @Test
     public void increaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
-        int dollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
+        int euroCredit = WalletUsersReusables.getWalletCredit(driver, "euro");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         Integer increaseAmount = Integer.valueOf(amount);
         chargeButton.click();
-        int currentDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
-        assertEquals(currentDollarCredit, dollarCredit + increaseAmount);
+        int currenteuroCredit = WalletUsersReusables.getWalletCredit(driver, "euro");
+        assertEquals(currenteuroCredit, euroCredit + increaseAmount);
     }
 
     @Test
     public void invalidDecreaseTest() {
         int rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        int decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
+        int decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("euro")); // بیشتر از آن چه دارد.
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(String.valueOf(decreaseAmount));
         WebElement chargeButton = driver.findElement(By.name("charge-button"));

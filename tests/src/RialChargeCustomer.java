@@ -6,10 +6,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +20,7 @@ public class RialChargeCustomer {
     public void setUp() {
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
-        WalletUsersReusables.navigateToRialWallet(driver);
+        WalletUsersReusables.navigateToWallet(driver, "rial");
     }
 
     @Test
