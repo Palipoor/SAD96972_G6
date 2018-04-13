@@ -1,5 +1,6 @@
-import ReUsables.GeneralReusables;
-import com.sun.tools.javac.jvm.Gen;
+package Wallet;
+
+import Reusables.GeneralReusables;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

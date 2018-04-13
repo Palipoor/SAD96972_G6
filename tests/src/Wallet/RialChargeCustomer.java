@@ -1,5 +1,7 @@
-import ReUsables.GeneralReusables;
-import ReUsables.WalletUsersReusables;
+package Wallet;
+
+import Reusables.GeneralReusables;
+import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
