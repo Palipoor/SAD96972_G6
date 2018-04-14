@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>پنل مدیریت | ویرایش اطلاعات موسسه</title>
+    <title>پنل مدیریت | اطلاعات موسسه</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -44,7 +44,7 @@
 
         <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="user_panel_manager.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices --><strong>پنل مدیریت</strong><br>
@@ -177,9 +177,9 @@
                   <!-- User image -->
                   <li class="user-header">
                     <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
-                    <p>
+                    <<p>
                       سپاا
-                    </p>
+                    </p>>
 					</li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
@@ -201,7 +201,7 @@
                 <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
               </div>
               <div class="pull-left info">
-                <p>سپاا</p>
+               <p><a href = "company_details.html">سپاا</a></p>
               </div>
             </div>
             <!-- deleted "search form" -->
@@ -212,13 +212,13 @@
                 <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات موسسه</span>
                 </a>
                 <ul class="treeview-menu">
-                  <li class="active"><a href="company_details.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
+                  <li class="active"><a href="company_settings.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
                   <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i>  تغییر رمز عبور مدیریت</a></li>
                 </ul>
               </li>
-              <li> <a href="transactions.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
+              <li> <a href="transaction_details.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
               <li> <a href="people.html"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
-              <li> <a href="people.html"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
+              <li> <a href="customers.html"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
               <li> <a href="transaction_details.html"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
               <li class="treeview">
                 <a href="#">
@@ -240,11 +240,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            ویرایش مشخصات موسسه
+            مشخصات مؤسسه
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
-            <li>ویرایش مشخصات موسسه</li>
+            <li><a href="user_panel_manager"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
+            <li>مشخصات موسسه</li>
           </ol>
         </section>
 
@@ -255,54 +255,34 @@
               <div class = "col-md-4">
             	<div class = "box">
      				    <div class="box-header with-border">
-                  <h4>مشخصات اصلی</h4>
+                  <h3>مشخصات اصلی</h3>
                 </div><!--box header-->
                 <div class = "box-body">
-           				<form role="form">
-                        <div class = "form-group">
-                      			<label for="exampleInputFile">لوگو موسسه</label>
-                      			<input type="file" id="exampleInputFile">
-                            <p class="help-block">تصویر انتخابی نباید بزرگتر از یک مگابایت باشد.</p>
-                        </div>
-                          <div class = "form-group">
-                          <label>نام کاربری مدیر</label>
-                          <p class = "margin">myusername</p>
-                          <input type="text" class="form-control" placeholder = "نام کاربری جدید">
-                        </div>
-                        <div class = "form-group">
-                          <label>نام موسسه</label>
-                          <p class = "margin">سپاا</p>
-                          <input type="text" class="form-control" placeholder ="نام">
-                        </div>
-                   </form>
+                        <img src="../../dist/img/logo-sapa-64x64.png" class="user-image" alt="User Image">
                   </div>
-                 <div class="box-footer" allign = "Left">
-                    <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-                  </div>
-            	</div>
+                  <div class = "box-body">
+                    <h4>نام مؤسسه</h4>
+                    <small>سپاا</small>
+              </div>
+              <div class = "box-body">
+                <h4>نام کاربری مدیر</h4>
+                <small>@managerusername</small>
+            </div>
+            </div>
             </div>
               <div class = "col-lg-4 col-xs-4">
                   <div class = "box" allign = "center">
                      <div class="box-header with-border">
-                      <h4>اطلاعات مالی</h4>
+                      <h3>اطلاعات مالی</h3>
                     </div><!--box header-->
                      <div class = "box-body">
-                       <form role="form">
-                          <div class="form-group">
-                                <label>شمارهٔ حساب </label>
-                                <p class = "margin">1010-10121416</p>
-                                <input type="text" class="form-control" placeholder = "شمارهٔ حساب جدید">
-                          </div>
-                          <div class="form-group">
-                              <label>کف موجودی کیف پول ریالی </label>
-                              <p class = "margin">۱۵۰۰۰۰۰۰۰ ریال</p>
-                              <input type="text" class="form-control" placeholder = "کف جدید موجودی">
-                        </div>
-                       </form>
-                     </div><!--box body-->
-                     <div class="box-footer" allign = "Left">
-                        <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-                      </div>
+                      <h4>شمارهٔ حساب مؤسسه</h4>
+                      <small>100200 - 3040 - 50</small>
+                     </div>
+                     <div class = "box-body">
+                      <h4>کف موجودی کیف پول ریالی</h4>
+                      <small>1000000</small><small>ریال</small>
+                     </div>
                   </div>
                 </div>
           </div><!-- /.row -->
