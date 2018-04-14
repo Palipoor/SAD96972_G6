@@ -2,9 +2,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title> پنل مدیریت | مشتریان</title>
+    <title> پنل مدیریت | جزئیات تراکنش و درخواست</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/iCheck/all.css">
     <!-- Bootstrap 3.3.4 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -137,27 +139,27 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-                       <a href="#">
-                        <i class="fa fa-exclamation-triangle text-yellow"></i>
+                       <a>
+                        <i class="fa fa-credit-card text-green"></i>
                         <h7>
-                          یک گزارش خطا.
+                            یک تراکنش انجام شد.
                         </h7>
-						          </a>
+						  </a>
                       </li>
                      
                       <li>
-                       <a href="#">
+                       <a>
                         <i class="fa fa-credit-card text-red"></i>
                         <h7>
-                          اعلان کمبود بودجه موسسه.
+                            یک تراکنش ناموفق شد.
                         </h7>
 						  </a>
                       </li>
                      <li>
-                       <a href = "#">
-                        <i class="fa fa-exclamation-triangle text-yellow"></i>
+                       <a>
+                        <i class="fa fa-credit-card text-green"></i>
                         <h7>
-                          یک گزارش خطای دیگر
+                            یک تراکنش دیگر انجام شد.
                         </h7>
 						  </a>
                       </li>
@@ -168,22 +170,22 @@
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu" name = "user menu">
+              <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../../dist/img/logo-sapa.png" class="user-image" alt="User Image">
-                  <span class="hidden-xs">سپاا</span>
+                  <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <span class="hidden-xs">محمد شریفی</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
+                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      سپاا
+                     محمد شریفی
                     </p>
 					</li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                      <a href="#" class="btn btn-default btn-flat" name = "logout">خروج از حساب کاربری</a>
+                      <a href="#" class="btn btn-default btn-flat">خروج از حساب کاربری</a>
                   </li>
                 </ul>
               </li>
@@ -193,65 +195,156 @@
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
-          <!-- sidebar: style can be found in sidebar.less -->
-          <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-              <div class="pull-right image">
-                <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+              <!-- Sidebar user panel -->
+              <div class="user-panel">
+                <div class="pull-right image">
+                  <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                  <p>سپاا</p>
+                </div>
               </div>
-              <div class="pull-left info">
-                <p>سپاا</p>
-              </div>
-            </div>
-            <!-- deleted "search form" -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-              <li class="treeview">
-                <a href="#">
-                <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات موسسه</span>
-                </a>
-                <ul class="treeview-menu">
-                  <li class="active"><a href="company_details.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
-                  <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i>  تغییر رمز عبور مدیریت</a></li>
-                </ul>
-              </li>
-              <li> <a href="transactions.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
-              <li> <a href="people.html"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
-              <li> <a href="people.html"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
-              <li> <a href="transaction_details.html"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
-              <li class="treeview">
-                <a href="#">
-                <i class="fa fa-money"></i>
-                  <span>کیف پول‌های موسسه</span>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="wallet_rial.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
-                  <li><a href="wallet_euro.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
-                  <li><a href="wallet_dollar.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-          <!-- /.sidebar -->
-        </aside>
+              <!-- deleted "search form" -->
+              <!-- sidebar menu: : style can be found in sidebar.less -->
+              <ul class="sidebar-menu">
+                <li class="treeview">
+                  <a href="#">
+                  <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات موسسه</span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li class="active"><a href="company_details.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
+                    <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i>  تغییر رمز عبور مدیریت</a></li>
+                  </ul>
+                </li>
+                <li> <a href="transaction_details.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
+                <li> <a href="people.html"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
+                <li> <a href="people.html"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
+                <li> <a href="transaction_details.html"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
+                <li class="treeview">
+                  <a href="#">
+                  <i class="fa fa-money"></i>
+                    <span>کیف پول‌های موسسه</span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="wallet_rial.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
+                    <li><a href="wallet_euro.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
+                    <li><a href="wallet_dollar.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+            <!-- /.sidebar -->
+          </aside>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            مشتریان
+            مشاهدهٔ جزییات تراکنش
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
-            <li>‌مشتریان</li>
+            <li><a href="user_panel_customer.html"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
+            <li class="active">جزئیات تراکنش‌ها و درخواست‌ها</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class="pull-right header"> جزئیات تراکنش</li>
+              <li class="active"><a href="#tab_1-1" data-toggle="tab">مشخصات اصلی</a></li>
+              <li><a href="#tab_2-2" data-toggle="tab">مشخصات درخواست</a></li>
+              <li><a href="#tab_3-2" data-toggle="tab">مشخصات پرداخت</a></li>
+              <li><a href="#tab_4-2" data-toggle="tab">دیگر جزییات</a></li>
+              <li><a href="#tab_5-2" data-toggle="tab">مشخصات انجام</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+                  <dl>
+                      <dt>شناسه</dt>
+                      <dd>شناسهٔ تراکنش</dd>
+                      <dt>نوع</dt>
+                      <dd>نوع تراکنش</dd>
+                    </dl>
+              </div><!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2-2">
+                  <dl>
+                      <dt>تاریخ و زمان ثبت درخواست</dt>
+                      <dd>2010 - 10 - 10  10:10</dd>
+                      <dt>درخواست‌دهنده</dt>
+                      <dd>محمد شریفی</dd>
+                    </dl>
+              </div><!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_3-2">
+                  <dl>
+                      <dt> مبلغ پرداختی</dt>
+                      <dd>۲۰۰۰۰ دلار</dd>
+                      <dt>کارمزد</dt>
+                      <dd>۲۰۰۰۰ ریال</dd>
+                    </dl>
+              </div>
+              <div class="tab-pane" id="tab_4-2">
+                  <dl>
+                      <dt> دیگرجزییات یک</dt>
+                      <dd> توضیح یک</dd>
+                      <dt> دیگرجزییات دو</dt>
+                      <dd> توضیح دو</dd>
+                      <dt> دیگرجزییات سه</dt>
+                      <dd> توضیح سه</dd>
+                    </dl>
+                </div>
+                <div class="tab-pane" id="tab_5-2">
+                    <dt> وضعیت</dt>
+                    <dd> ناموفق</dd>
+                    <dt> زمان پیگیری درخواست</dt>
+                    <dd> 2010 - 10 - 10  13:10
+
+                    </dd>
+                    <dt>توضیحات</dt>
+                    <dd> به علت عدم موجودی حساب ارزی ناموفق شد.</dd>
+                </div>
+                  <!-- /.tab-pane -->
+            </div><!-- /.tab-content -->
+          </div><!-- nav-tabs-custom -->
+          <div>
+              <div class="form-group">
+                  <label class="">
+                    <div class="iradio_flat-green" style="position: relative;" aria-checked="false" aria-disabled="false"><input name="r3" class="flat-red" checked="" style="position: absolute; opacity: 0;" type="radio"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>
+                    تایید درخواست
+                  </label>
+                  <label class="">
+                    <div class="iradio_flat-green" style="position: relative;" aria-checked="true" aria-disabled="false"><input name="r3" class="flat-red" style="position: absolute; opacity: 0;" type="radio"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>
+                    رد درخواست
+                  </label>
+                  
+                </div>
+                
+            <div class="btn-group">
+              <button type="button" class="btn btn-info">قبلی</button>
+              <button type="button" class="btn btn-info">ثبت</button>
+              <button type="button" class="btn btn-info">بعدی</button>
+            </div>
+                            <p><span class="label label-danger">رد شده</span></p>
+
+          </div>
+        </section>
+             
+            
+              
+         <!-- /.nav-tabs-custom -->
+
+              
+          
+             
+
+            
+          </section><!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          </div>
+
           </div><!-- /.row (main row) -->
 
         </section><!-- /.content -->
@@ -465,7 +558,14 @@
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="../../dist/js/pages/dashboard.js"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <script>
+      $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass: 'iradio_flat-green'
+      });</script>
   </body>
 </html>
