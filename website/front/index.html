@@ -87,12 +87,12 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
-                            <li><a href="#HOME">خانه</a> </li>
-                            <li><a href="#ABOUT">دربارهٔ ما </a> </li>
-                            <li><a href="#FEATURES">خدمات</a></li>
-                            <li><a href="#HISTORY">تاریخچه</a> </li>
-                            <li><a href="#FINANCE">نرخ و مبادله ارز </a> </li>
-                            <li><a href="#CONTACT">ارتباط با ما </a> </li>
+                            <li><a href="#HOME" name = "home">خانه</a> </li>
+                            <li><a href="#ABOUT" name = "about">دربارهٔ ما </a> </li>
+                            <li><a href="#FEATURES" name = "features">خدمات</a></li>
+                            <li><a href="#HISTORY" name = "history" >تاریخچه</a> </li>
+                            <li><a href="#FINANCE" name = "prices">نرخ و مبادله ارز </a> </li>
+                            <li><a href="#CONTACT" name = "contact">ارتباط با ما </a> </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -119,7 +119,7 @@
                             <div class="download-btn">
                             <!-- BUTTON -->
                             
-                                <a class="btn home-btn wow fadeInLeft" href="panel\pages\examples\login.html">ورود</a>
+                                <a class="btn home-btn wow fadeInLeft" href="panel\pages\examples\login.html" name = "log in" >ورود</a>
                                 <a class="tuor btn wow fadeInRight" href="#ABOUT">اطلاعات بیشتر<i class="fa fa-angle-down"></i></a>
                             </div>
                         </div>
@@ -144,12 +144,12 @@
 ============================== -->
 
 
-    <section class="about page" id="ABOUT" >
+    <section class="about page" id="ABOUT">
         <div class="container" >
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <!-- ABOUT US SECTION TITLE-->
-                    <div class="section_title">
+                    <div class="section_title"  name = "about us">
                         <h2>دربارهٔ ما</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                     </div>
@@ -321,7 +321,7 @@
 
         <div class="feature_inner">
             <div class="container">
-                <div class="row">
+                <div class="row" name = "transactions">
                     <div class="col-md-4 right_no_padding wow fadeInLeft" data-wow-duration="1s">
                         <!-- FEATURE -->
 
@@ -422,7 +422,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-primary btn-action" href="panel\pages\examples\register.html" role="button">ثبت نام</a>
+                    <a class="btn btn-primary btn-action" href="panel\pages\examples\register.html" role="button" name = "sign up">ثبت نام</a>
                 </div>
             </div>
         </div>
@@ -501,7 +501,7 @@
                     </div>
                     <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- TITLE -->
-                        <div class="inner_about_title" dir= "rtl">
+                        <div class="inner_about_title" dir= "rtl" name = "history">
                             <h2 dir= "rtl">تاریخچه</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
@@ -521,32 +521,30 @@
 <section class="about page" id="FINANCE" >
         <div class="inner_about_area">
             <div class="container">
-                    <div class="inner_about_title" dir= "rtl">
+                    <div class="inner_about_title" dir= "rtl" name = "prices">
                             <h2 dir= "rtl">نرخ ارز</h2>
-                        </div>
+                    </div>
                     <div class="row">
-                                <div class="col-md-4">
-                                        <input type="email" class="form-control" id="finance_value" placeholder="مبلغ ورودی">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="finance_value" placeholder="مبلغ ورودی" name = "value"></input>
                                     <div class="form-group">
                                         <label>شیوه تبدیل</label>
-                                        <select class="form-control" id="finance_type" name="hammal">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
-                                        <option>option 5</option>
+                                        <select class="form-control" id="finance_type" name="exchange dropdown">
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
                                         </select>
                                 </div>
                                 <div class="row">
-                                    <a class="btn home-btn wow fadeInLeft" style='margin: 15px;' >محاسبه کن</a>
-                                    <label id="finance_value"> 100 </label>
+                                    <a class="btn home-btn wow fadeInLeft" style='margin: 15px;'name = "calculate" >محاسبه کن</a>
+                                    <label id="finance_value" name = "result"> 100 </label>
                                 </div>
 
 
                             </div>
-
-
-                            <div class="col-md-8">
+                            <div class="col-md-8" name = "prices-content">
                                     <div>
                                             <p>Lorem ipsum dolor sit amet, consectetur <br> Lorem ipsum dolor sit amet, consectetur <br> Lorem ipsum dolor sit amet, consectetur <br> Lorem ipsum dolor sit amet, consectetur </p>
                                         </div>
@@ -582,13 +580,13 @@
                 <div class="container">
 
                 <!-- START ERROR AND SUCCESS MESSAGE -->
-                    <div class="form_error text-center">
-                        <div class="name_error hide error">Please Enter your name</div>
-                        <div class="email_error hide error">Please Enter your Email</div>
-                        <div class="email_val_error hide error">Please Enter a Valid Email Address</div>
-                        <div class="message_error hide error">Please Enter Your Message</div>
+                    <div class="form_error text-center" name = "errorbox">
+                        <div class="name_error hide error">لطفا نام خود را وارد کنید.</div>
+                        <div class="email_error hide error">لطفا ایمیل خود را وارد کنید.</div>
+                        <div class="email_val_error hide error">لطفا یک ایمیل معتبر وارد کنید.</div>
+                        <div class="message_error hide error">لطفا پیام خود را وارد کنید.</div>
                     </div>
-                    <div class="Sucess"></div>
+                    <div class="Sucess" name = "success">پیام شما با موفقیت ارسال شد.</div>
                 <!-- END ERROR AND SUCCESS MESSAGE -->
 
                 <!-- CONTACT FORM starts here, Go to contact.php and add your email ID, thats it.-->    
@@ -596,7 +594,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <textarea class="form-control" id="message" rows="25" cols="10" placeholder=" متن پیام"></textarea>
-                                <button type="button" class="btn btn-default submit-btn form_submit">SEND MESSAGE</button>
+                                <button type="button" name = "send message" class="btn btn-default submit-btn form_submit">ارسال پیام</button>
                             </div>
 
                             <div class="col-md-4">
