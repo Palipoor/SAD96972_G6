@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>پنل مدیریت</title>
+    <title>پنل مدیریت | کیف پول ریال</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -42,7 +42,7 @@
   <body class="skin-blue sidebar-mini" dir = "rtl">
     <div class="wrapper">
 
-      <header class="main-header">
+		<header class="main-header">
         <!-- Logo -->
         <a href="user_panel_customer.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -202,7 +202,7 @@
               </div>
               <div class="pull-left info">
                   <a href="user_details.html">محمد شریفی</a>
-                </div>
+              </div>
             </div>
             <!-- deleted "search form" -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -212,14 +212,18 @@
                 <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات کاربری</span> 
                 </a>
                 <ul class="treeview-menu">
-                  <li class="active"><a href="user_settings.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
+                  <li class="active"><a href="user_details.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
                   <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a></li>
                 </ul>
               </li>
-              <li> <a href="#"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های من</span> </a> </li>
-              <li class="treeview"><a href="#"> <em class="fa fa-money"></em> <span>کیف پول‌های من</span> </a>
+              <li> <a href="../../pages/customer/mytransactions.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های من</span> </a> </li>
+              <li class="treeview">
+                <a href="#">
+                <i class="fa fa-money"></i>
+                  <span>کیف پول‌های من</span>
+                </a>
                 <ul class="treeview-menu">
-                  <li><a href="wallet_rial.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
+                  <li><a href="#"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
                   <li><a href="wallet_euro.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
                   <li><a href="wallet_dollar.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
                 </ul>
@@ -232,17 +236,52 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>تراکنش‌های من</h1>
+          <h1>
+            پیشخوان
+            <small>پنل مدیریت</small>
+          </h1>
           <ol class="breadcrumb">
             <li><a href="user_panel_customer.html"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
-            <li class="active">تراکنش‌های من</li>
+            <li class="active">کیف پول ریالی</li>
           </ol>
-          
         </section>
 
         <!-- Main content -->
         <section class="content">
           <!-- Small boxes (Stat box) -->
+          <div class="row">
+              <div class = "col-lg-6 col-xs-6">
+            	<div class = "box" name = "charge-box">
+     				<div class="box-header with-border">
+                 		 <h3 class="box-title">شارژ کیف پول </h3>
+					</div><!--box header-->
+           			<div class = "box-body">
+           				<form role="form">
+           					<div class = "form-group">
+           						<label>مبلغ مورد نظر</label>
+           						<input type="number" class="form-control" placeholder="مبلغ مورد نظر را به ریال وارد کنید." name = "desired-amount">
+
+           					</div>
+           				</form>
+           			</div><!--box body-->
+           			<div class="box-footer">
+                    <button type="submit" class="btn btn-primary" name = "charge-button">پرداخت و شارژ</button>
+                  </div>
+            	</div>
+            </div>
+            <div class="col-lg-6 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3 name="credit">۱۵۰</h3>
+                  <p>موجودی  کیف پول</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+          </div><!-- /.row -->
           <!-- Main row -->
           <div class="row">
             <!-- Left col -->
@@ -251,10 +290,10 @@
               
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">تراکنش‌ها</h3>
+                  <h3 class="box-title">گردش کیف پول</h3>
                   <div class="box-tools">
                     <div class="input-group" style="width: 150px;">
-                      <input name="table_search" class="form-control input-sm pull-right" placeholder="جستجو در تراکنش‌ها" type="text">
+                      <input name="table_search" class="form-control input-sm pull-right" placeholder="جستجو در گردش کیف پول" type="text">
                       <div class="input-group-btn">
                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
@@ -264,54 +303,47 @@
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tbody><tr>
-                      <th>شناسه تراکنش</th>
-                      <th>نوع تراکنش</th>
+                      <th>شناسه تراکنش مربوط</th>
+                      <th>ساعت</th>
                       <th>تاریخ</th>
-                      <th>وضعیت</th>
+                      <th>مبلغ ( ریال)</th>
+                      <th>نوع</th>
                       </tr>
                     <tr>
-                      <td><a href="transaction_details.html">OR9842</a></td>
-                      <td>یک نوع تراکنش</td>
+                      <td><a href="../../pages/examples/invoice.html">OR9842</a></td>
+                      <td>22:10</td>
                       <td>11-7-2014</td>
-                      <td><span class="label label-success">انجام شده</span></td>
+                      <td>50000</td>
+                      <td><span class="label label-success">واریز</span></td>
                     </tr>
                     <tr>
-                      <td><a href="transaction_details.html">OR9842</a></td>
-                      <td>این نوع تراکنش</td>
+                       <td><a href="../../pages/examples/invoice.html">OR9842</a></td>
+                      <td>22:10</td>
                       <td>11-7-2014</td>
-                      <td><span class="label label-warning">در انتظار تایید</span></td>
+                      <td>50000</td>
+                      <td><span class="label label-success">واریز</span></td>
                     </tr>
                     <tr>
-                      <td><a href="transaction_details.html">OR9842</a></td>
-                      <td>اون نوع تراکنش</td>
+                       <td><a href="../../pages/examples/invoice.html">OR9842</a></td>
+                      <td>22:10</td>
                       <td>11-7-2014</td>
-                      <td><span class="label label-success">انجام شده</span></td>
+                      <td>50000</td>
+                      <td><span class="label label-success">واریز</span></td>
                     </tr>
                     <tr>
-                      <td><a href="transaction_details.html">OR9842</a></td>
-                      <td>نوعی دیگر تراکنش</td>
+                      <td><a href="../../pages/examples/invoice.html">OR9842</a></td>
+                      <td>22:10</td>
                       <td>11-7-2014</td>
-                      <td><span class="label label-danger">ناموفق</span></td>
+                      <td>50000</td>
+                      <td><span class="label label-danger">برداشت</span></td>
                     </tr>
                   </tbody></table>
                 </div><!-- /.box-body -->
-                <div class="box-footer clearfix">
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
-                </div>
               </div><!-- /.box -->
             
               <!-- /.table-responsive -->
-            </div><!-- /.box-body -->
-              
+              </div><!-- /.box-body -->
                 </section>
-             
-            
               
                   <!-- /.nav-tabs-custom -->
 
@@ -322,7 +354,7 @@
             
                 </section><!-- /.Left col -->
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        </div>
+          </div>
 
           </div><!-- /.row (main row) -->
 
@@ -338,10 +370,6 @@
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-        </ul>
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
           <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
           <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
