@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-	  <title>پنل مدیریت | ویرایش اطلاعات کاربری</title>
+	  <title>پنل مدیریت | اطلاعات کاربری</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -201,7 +201,7 @@
                 <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
               </div>
               <div class="pull-left info">
-                <p>محمد شریفی</p>
+                <a href = "user_details.html">محمد شریفی</a>
               </div>
             </div>
             <!-- deleted "search form" -->
@@ -212,7 +212,7 @@
                 <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات کاربری</span>
                 </a>
                 <ul class="treeview-menu">
-                  <li class="active"><a href="user_details.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
+                  <li class="active"><a href="user_settings.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات کاربری</a></li>
                   <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a></li>
                 </ul>
               </li>
@@ -234,10 +234,10 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>ویرایش مشخصات کاربری</h1>
+          <h1>مشخصات کاربری</h1>
           <ol class="breadcrumb">
             <li><a href="user_panel_customer.html"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
-            <li class="active">تغییر رمز عبور</li>
+            <li class="active">مشخصات کاربری</li>
           </ol>
         </section>
 
@@ -245,105 +245,29 @@
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-              <div class = "col-md-4">
+            <div class = "col-md-4">
             	<div class = "box">
-     				    <div class="box-header with-border">
-                  <h4>مشخصات شخصی</h4>
-                </div><!--box header-->
                 <div class = "box-body">
-           				<form role="form">
-                        <div class = "form-group">
-                      			<label for="exampleInputFile">تصویر کاربری</label>
-                      			<input type="file" id="exampleInputFile">
-                            <p class="help-block">تصویر انتخابی نباید بزرگتر از یک مگابایت باشد.</p>
-                        </div>
-                          <div class = "form-group">
-                          <label>نام کاربری</label>
-                          <p class = "margin">myusername</p>
-                          <input type="text" class="form-control" placeholder = "نام کاربری جدید">
-                        </div>
-                        <div class = "form-group">
-                          <label>نام و نام خانوادگی</label>
-                          <p class = "margin">محمد</p>
-                          <input type="text" class="form-control" placeholder ="نام">
-                        </div>
-                        <div class = "form-group">
-                          <p class = "margin">شریفی</p>
-                          <input type="text" class="form-control" placeholder ="نام خانوادگی">
-                          </div>
-                          <div class = "form-group">
-                              <label> نام و نام خانوادگی لاتین</label>
-                              <p class = "margin">Mohammad</p>
-                              <input type="text" class="form-control" placeholder ="Name">
-                            </div>
-                            <div class = "form-group">
-                              <p class = "margin">Sharifi</p>
-                              <input type="text" class="form-control" placeholder ="Family Name">
-                              </div>
-                   </form>
+                        <img src="../../dist/img/user1-128x128.jpg" class="user-image" alt="User Image">
                   </div>
-                 <div class="box-footer" allign = "Left">
-                    <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-                  </div>
-            	</div>
+                  <div class = "box-body">
+                      <h4>نام</h4>
+                      <small>کارمند</small>
+                </div>
+                <div class = "box-body">
+                    <h4>نام خانوادگی</h4>
+                    <small>خسته</small>
+              </div>
+              <div class = "box-body">
+                  <h4>نام کاربری</h4>
+                  <small>@username</small>
             </div>
-            <div class = "col-lg-4 col-xs-4">
-                <div class = "box" allign = "center">
-                   <div class="box-header with-border">
-                    <h4>راه‌های ارتباطی</h4>
-                  </div><!--box header-->
-                   <div class = "box-body">
-                     <form role="form">
-                        <div class="form-group">
-                              <label>آدرس ایمیل</label>
-                              <p class = "margin">formeraddress@gmail.com</p>
-                              <input type="email" class="form-control" placeholder = "newemail@gmail.com">
-                              </div>
-                              <div class = "form-group">
-                                <label>شمارهٔ تماس</label>
-                                <p class = "margin">09379605628</p>
-                                <input type="text" class="form-control" placeholder = "شماره تماس جدید">
-                              </div>
-                              <div class = "form-group">
-                                <label>راه تماس</label>
-                              <div class="radio">
-                                  <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="email" checked>
-                                    ایمیل
-                                  </label>
-                                  <label>
-                                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="phone">
-                                      پیامک
-                                    </label>
-                                </div>
-                              </div>
-                            </form>
-                        </div>
-                        <div class="box-footer" allign = "Left">
-                            <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-                          </div>
-                   </div><!--box body-->
-
-                </div>
-              <div class = "col-lg-4 col-xs-4">
-                  <div class = "box" allign = "center">
-                     <div class="box-header with-border">
-                      <h4>اطلاعات حساب</h4>
-                    </div><!--box header-->
-                     <div class = "box-body">
-                       <form role="form">
-                          <div class="form-group">
-                                <label>شمارهٔ حساب </label>
-                                <p class = "margin">1010-10121416</p>
-                                <input type="text" class="form-control" placeholder = "شمارهٔ حساب جدید">
-                          </div>
-                       </form>
-                     </div><!--box body-->
-                     <div class="box-footer" allign = "Left">
-                        <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-                      </div>
-                  </div>
-                </div>
+            <div class = "box-body">
+                <h4>حقوق پایه</h4>
+                <small>500000</small><small>ریال</small>
+          </div>
+            </div>
+            </div>
           </div><!-- /.row -->
      
                 </section>
