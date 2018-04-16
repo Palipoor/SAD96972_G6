@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d416e91f-6705-4233-bbee-41f4472444ac" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Profile/SeeProfileCustomer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/DollarChargeCustomer.java" afterPath="$PROJECT_DIR$/src/Wallet/DollarChargeCustomer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/EuroChargeCustomer.java" afterPath="$PROJECT_DIR$/src/Wallet/EuroChargeCustomer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/RialChargeCustomer.java" afterPath="$PROJECT_DIR$/src/Wallet/RialChargeCustomer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/WalletCreditCustomer.java" afterPath="$PROJECT_DIR$/src/Wallet/WalletCreditCustomer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/WalletExistenceCustomer.java" afterPath="$PROJECT_DIR$/src/Wallet/WalletExistenceCustomer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Use Cases.pages" afterPath="$PROJECT_DIR$/../Use Cases.pages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ReUsables/GeneralReusables.java" afterPath="$PROJECT_DIR$/src/ReUsables/GeneralReusables.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ReUsables/WalletUsersReusables.java" afterPath="$PROJECT_DIR$/src/ReUsables/WalletUsersReusables.java" />
-    </list>
+    <list default="true" id="d416e91f-6705-4233-bbee-41f4472444ac" name="Default" comment="" />
     <ignored path="tests.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
