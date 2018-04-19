@@ -27,6 +27,7 @@ public class FaultReport {
     @Test
     public void invalidIdTest() {
         WebElement idEntry = driver.findElement(By.id("transaction-id"));
+        idEntry.clear();
         idEntry.sendKeys(GeneralReusables.INVALID_TRANSACTION_ID);
         WebElement reasonEntry = driver.findElement(By.id("why"));
         reasonEntry.sendKeys("some random reason");
@@ -39,8 +40,10 @@ public class FaultReport {
     @Test
     public void successfulReportTest() {
         WebElement idEntry = driver.findElement(By.id("transaction-id"));
-        idEntry.sendKeys("1");//todo in bayad intor she ke bere bebine che transaction haii hast yekio bardare.
+        idEntry.clear();
+        idEntry.sendKeys("1");//todo in bayad intor she ke bere bebine che transaction haii hast yekio bardare?
         WebElement reasonEntry = driver.findElement(By.id("why"));
+        reasonEntry.clear();
         reasonEntry.sendKeys("some random reason");
         WebElement sendButton = driver.findElement(By.name("send"));
         sendButton.click();
