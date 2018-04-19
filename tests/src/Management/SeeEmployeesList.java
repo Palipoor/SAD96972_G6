@@ -1,7 +1,5 @@
 package Management;
 
-import Reusables.CustomerReusables;
-import Reusables.EmployeeReusables;
 import Reusables.GeneralReusables;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,13 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Golpar on 4/19/2018 AD.
  */
-public class SeeFaultReports {
+public class SeeEmployeesList {
     private WebDriver driver;
 
     @BeforeClass
@@ -29,16 +26,16 @@ public class SeeFaultReports {
     }
 
     @Test
-    public void reportExistsTest() {
+    public void employeesListExistsTest() {
         List<WebElement> tables = driver.findElements(By.xpath("//table"));
-        boolean isThereAnyReportsTable = false;
+        boolean isthereAnyEmployeesTable = false;
         for (WebElement table : tables) {
-            if (table.getAttribute("name").equals("reports")) {
-                isThereAnyReportsTable = true;
+            if (table.getAttribute("name").equals("employees")) {
+                isthereAnyEmployeesTable = true;
             }
         }
 
-        assertTrue(isThereAnyReportsTable);
+        assertTrue(isthereAnyEmployeesTable);
     }
 
     @Test
