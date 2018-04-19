@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from backend.views.landing import index
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('^$', landing.index),
+
+    path(r'landing/', index),
 ]
