@@ -1,6 +1,8 @@
 package Management;
 
 import Reusables.GeneralReusables;
+import Reusables.ManagerReusables;
+import com.sun.source.tree.AssertTree;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,12 +18,17 @@ import static org.junit.Assert.assertTrue;
  */
 public class FaultReport {
     private WebDriver driver;
+    private String transactionId;
+    private String reason = "some random reason";
+    private String employeeUsername;
 
     @BeforeClass
     public void setUp() {
+        int id = GeneralReusables.createNewTransaction();
+        transactionId = String.valueOf(id);
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsAnEmployee(driver);
+        employeeUsername = GeneralReusables.loginAsAnEmployee(driver);
     }
 
     @Test
@@ -30,7 +37,7 @@ public class FaultReport {
         idEntry.clear();
         idEntry.sendKeys(GeneralReusables.INVALID_TRANSACTION_ID);
         WebElement reasonEntry = driver.findElement(By.id("why"));
-        reasonEntry.sendKeys("some random reason");
+        reasonEntry.sendKeys(reason);
         WebElement sendButton = driver.findElement(By.name("send"));
         sendButton.click();
         WebElement message = driver.findElement(By.name("message"));
@@ -41,15 +48,21 @@ public class FaultReport {
     public void successfulReportTest() {
         WebElement idEntry = driver.findElement(By.id("transaction-id"));
         idEntry.clear();
-        idEntry.sendKeys("1");//todo in bayad intor she ke bere bebine che transaction haii hast yekio bardare?
+        idEntry.sendKeys(transactionId);//todo in bayad intor she ke bere bebine che transaction haii hast yekio bardare?
         WebElement reasonEntry = driver.findElement(By.id("why"));
         reasonEntry.clear();
-        reasonEntry.sendKeys("some random reason");
+        reasonEntry.sendKeys(reason);
         WebElement sendButton = driver.findElement(By.name("send"));
         sendButton.click();
         WebElement message = driver.findElement(By.name("message"));
         assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.SUCCESSFULLY_SENT));
     }
+
+    @Test
+    public void successfulReceiveReportTest() {
+        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername));
+    }
+
 
     @AfterClass
     public void tearDown() {

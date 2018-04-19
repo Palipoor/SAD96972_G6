@@ -56,10 +56,16 @@ public class GeneralReusables {
         login(homepage, email, password);
     }
 
-    public static void loginAsAnEmployee(WebDriver homepage) {
+    public static String loginAsAnEmployee(WebDriver homepage) {
         String email = "customerEmail";
         String password = "customerPassword";
         login(homepage, email, password);
+        return getUsername(homepage);
+    }
+
+    private static String getUsername(WebDriver homepage) {
+        return "";
+        //// TODO: 4/19/2018 AD  go to user details page and return username for employee or customer
     }
 
     public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
@@ -74,4 +80,12 @@ public class GeneralReusables {
     }
 
 
+    public static int createNewTransaction(){ //requests a new transaction and returns its id
+        int id = 0; //todo complete
+        return id;
+    }
+    public static int createNewUser(){ // creates a new customer and returns its customer_id
+        int id = 0;
+        return id; //// TODO: 4/19/2018 AD complete
+    }
 }
