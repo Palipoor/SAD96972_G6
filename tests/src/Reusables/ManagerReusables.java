@@ -21,4 +21,7 @@ public class ManagerReusables {
         return true; //// TODO: 4/19/2018 AD complete
     }
 
+    public int getNewestTransactionId(){
+        return 0;
+    }
 }

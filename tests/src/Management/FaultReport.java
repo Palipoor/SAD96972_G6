@@ -1,5 +1,6 @@
 package Management;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import com.sun.source.tree.AssertTree;
@@ -24,7 +25,7 @@ public class FaultReport {
 
     @BeforeClass
     public void setUp() {
-        int id = GeneralReusables.createNewTransaction();
+        int id = CustomerReusables.createNewTransaction();
         transactionId = String.valueOf(id);
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);

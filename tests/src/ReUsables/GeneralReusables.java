@@ -79,11 +79,6 @@ public class GeneralReusables {
         return 0; // currency parameter could be "dollar" or "euro" or "rial" //todo implement this
     }
 
-
-    public static int createNewTransaction(){ //requests a new transaction and returns its id
-        int id = 0; //todo complete
-        return id;
-    }
     public static int createNewUser(){ // creates a new customer and returns its customer_id
         int id = 0;
         return id; //// TODO: 4/19/2018 AD complete
