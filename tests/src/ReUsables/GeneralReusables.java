@@ -24,6 +24,7 @@ public class GeneralReusables {
     public static String PANEL_TITLE = "پنل مدیریت";
     public static String WRONG_ID_ERROR;
     public static String SUCCESSFULLY_SENT;
+    public static String WRONG_USERNAME_ERROR;
 
 
     public static void setUpToHomepage(WebDriver driver) {
