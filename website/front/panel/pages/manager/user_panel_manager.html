@@ -292,7 +292,7 @@
           <!-- Main row -->
           <div class="row">
             <!-- Left col -->
-            <div class="col-lg-8 connectedSortable">
+            <div class="col-md-12 connectedSortable">
               <!-- Custom tabs (Charts with tabs)-->
               
               <div class="box">
@@ -300,28 +300,35 @@
                   <h3 class="box-title">‌گزارشات خطای رسیده</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body  table-bordered table-striped">
-                  <table id="table" class="table table-hover">
-                    <tbody><tr>
+                  <table name = "reports" id="table" class="table table-hover">
+                    <thead>
+                    <tr>
                       <th>شناسه تراکنش</th>
                       <th>نوع تراکنش</th>
+                      <th>گزارش‌ دهنده</th>
                       <th>تاریخ</th>
                       <th>توضیح</th>
                       </tr>
+                    </thead>
+                    <tbody>
                     <tr>
                       <td>OR9842</td>
                       <td>پرداخت ارزی</td>
+                      <td><a href = "employee_details_for_manager.html">username</a></td>
                       <td>11-7-2014</td>
                       <td>خیلی خطا بوده.</td>
                     </tr>
                     <tr>
                       <td>OR9842</td>
                       <td>پرداخت ارزی</td>
+                      <td><a href = "employee_details_for_manager.html">username</a></td>
                       <td>11-7-2014</td>
                       <td>خیلی خطا بوده.</td>
                     </tr>
                     <tr>
                       <td>OR9842</td>
                       <td>ثبت نام TOFEL</td>
+                      <td><a href = "employee_details_for_manager.html">username</a></td>
                       <td>11-7-2014</td>
                       <td>خطا بوده.</td>
                     </tr>
@@ -330,6 +337,7 @@
                     <tr>
                       <th>شناسه تراکنش</th>
                       <th>نوع تراکنش</th>
+                      <th>گزارش دهنده</th>
                       <th>تاریخ</th>
                       <th>توضیح</th>
                     </tr>
@@ -672,7 +680,7 @@
         // Setup - add a text input to each footer cell
         $('#table tfoot th').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            $(this).html( '<input type="text" name = "' + title + '" placeholder="Search '+title+'" />' );
         } );
      
         // DataTable
