@@ -24,4 +24,5 @@ public class ManagerReusables {
     public int getNewestTransactionId(){
         return 0;
     }
+
 }
