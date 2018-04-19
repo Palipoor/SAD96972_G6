@@ -18,7 +18,12 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralReusables {
 
+    //todo درست کردن این فیلدها
+
+    public static CharSequence INVALID_TRANSACTION_ID = "10000";
     public static String PANEL_TITLE = "پنل مدیریت";
+    public static String WRONG_ID_ERROR;
+    public static String SUCCESSFULLY_SENT;
 
 
     public static void setUpToHomepage(WebDriver driver) {

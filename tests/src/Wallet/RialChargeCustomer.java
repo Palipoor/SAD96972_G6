@@ -28,7 +28,7 @@ public class RialChargeCustomer {
     }
 
     @Test
-    public void postCondtionTest() {
+    public void preCondtionTest() {
         String title = driver.getTitle();
         assertEquals(title, WalletUsersReusables.RIAL_WALLET_TITLE);
     }

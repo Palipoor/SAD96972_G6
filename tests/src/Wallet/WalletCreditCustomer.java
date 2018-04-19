@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
@@ -24,6 +25,12 @@ public class WalletCreditCustomer {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
+    }
+
+    @Test
+    public void preCondtionTest() {
+        String title = driver.getTitle();
+        assertEquals(title, WalletUsersReusables.RIAL_WALLET_TITLE);
     }
 
     @Test
