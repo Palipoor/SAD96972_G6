@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by Golpar on 4/12/2018 AD.
  */
@@ -14,14 +12,11 @@ public class ProfileReusables {
 
     public static  String SignUpTitle= "ثبت‌ نام";
     public static  String logInTitle= "ورود";
-    public static String emailSample1= "dorna.abdolazimi@gmail.com";
-    public static String usernameSample1 = "Dorna";
     public static String phoneNumberSample1 = "09137927608";
-    public static String ShomareHesabSample1 = "0123456789123";
     public static String passwordSample1 = "12345Dorna";
     public static String emailDummySample= "dorna.abdolazimi@gmail.com";
     public static String usernameDummySample = "Dorna";
-    public static String ShomareHesabDummySample = "0123456789123";
+    public static String ShomareHesabDummySample = "0123456789123"; //TODO
     public static String invalidEmailError = "ایمیل وارد شده معتبر نیست.";
     public static String alreadyRegisteredEmailError = "ایمیل وارد شده استفاده شده‌ است.";
     public static String invalidUsernameError = "نام کاربری وارد شده معتبر نیست.";
@@ -44,7 +39,6 @@ public class ProfileReusables {
         signUpButton.click();
 
 
-        ProfileReusables.enterValidUsername1(driver);
         WebElement username = driver.findElement(By.id("username"));
         username.sendKeys(ProfileReusables.usernameDummySample);
 
@@ -54,39 +48,39 @@ public class ProfileReusables {
         WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
         shomareHesab.sendKeys(ProfileReusables.ShomareHesabDummySample);
 
-        enterValidPassword1(driver);
+        enterValidPassword(driver);
 
-        enterValidPhoneNumber1(driver);
+        enterValidPhoneNumber(driver);
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
         submitButton.click();
     }
 
-    public static void enterValidUsername1(WebDriver driver){
+    public static void enterValidUsername(WebDriver driver){
         WebElement username = driver.findElement(By.id("username"));
         username.clear();
-        username.sendKeys(ProfileReusables.usernameSample1);
+        username.sendKeys("dorna"+ System.currentTimeMillis());
 
     }
-    public static void enterValidEmail1(WebDriver driver){
+    public static void enterValidEmail(WebDriver driver){
         WebElement email = driver.findElement(By.id("email"));
         email.clear();
-        email.sendKeys(ProfileReusables.emailSample1);
+        email.sendKeys("dorna"+ System.currentTimeMillis()+"gmail.com");
 
     }
-    public static void enterValidPhoneNumber1(WebDriver driver){
+    public static void enterValidPhoneNumber(WebDriver driver){
         WebElement phoneNumber = driver.findElement(By.id("phone-number"));
         phoneNumber.clear();
         phoneNumber.sendKeys(ProfileReusables.phoneNumberSample1);
     }
 
-    public static void enterValidShomareHesab1(WebDriver driver){
+    public static void enterValidShomareHesab(WebDriver driver){
         WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
         shomareHesab.clear();
-        shomareHesab.sendKeys(ProfileReusables.ShomareHesabSample1);
+        shomareHesab.sendKeys(""); //TODO : shomare hesab ya shomare card???
     }
 
-    public static void enterValidPassword1(WebDriver driver){
+    public static void enterValidPassword(WebDriver driver){
         WebElement password = driver.findElement(By.id("password"));
         password.clear();
         password.sendKeys(ProfileReusables.passwordSample1);

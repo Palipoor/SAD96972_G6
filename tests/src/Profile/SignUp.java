@@ -25,7 +25,7 @@ public class SignUp {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //for checking already registered info
-        ProfileReusables.dummySignUp(driver);
+        //ProfileReusables.dummySignUp(driver);
         GeneralReusables.setUpToHomepage(driver);
         // Go to Sign up page
         WebElement signUpButton = driver.findElement(By.name("sign-up"));
@@ -44,15 +44,15 @@ public class SignUp {
     public void invalidEmail() throws Exception {
 
 
-        ProfileReusables.enterValidUsername1(driver);
+        ProfileReusables.enterValidUsername(driver);
 
         // Enter an invalid email
         WebElement email = driver.findElement(By.id("email"));
         email.sendKeys("email.com");   //wrong format
 
-        ProfileReusables.enterValidPhoneNumber1(driver);
-        ProfileReusables.enterValidShomareHesab1(driver);
-        ProfileReusables.enterValidPassword1(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
+        ProfileReusables.enterValidPassword(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -66,12 +66,16 @@ public class SignUp {
     @Test
     public void registeredEmail() throws Exception {
 
+        ProfileReusables.enterValidUsername(driver);
 
 
         // Enter an already registered email
         WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys(ProfileReusables.emailDummySample);   //wrong format //TODO
+        email.sendKeys(ProfileReusables.emailDummySample);   //already registered
 
+        ProfileReusables.enterValidPhoneNumber(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
+        ProfileReusables.enterValidPassword(driver);
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
         submitButton.click();
@@ -87,10 +91,14 @@ public class SignUp {
         //invalid username
         WebElement username = driver.findElement(By.id("username"));
         username.clear();
-        username.sendKeys("");  //maybe already registered maybe wrong format //TODO
+        username.sendKeys("");  //wrong format //TODO
 
 
-        ProfileReusables.enterValidEmail1(driver);
+        ProfileReusables.enterValidEmail(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
+        ProfileReusables.enterValidPassword(driver);
+
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -99,7 +107,7 @@ public class SignUp {
 
         //    Verify that error message is displayed for authentication failure.
         String usernameErrorText = driver.findElement(By.name("username-error-text")).getText();
-        assertEquals(usernameErrorText, ProfileReusables.alreadyRegisteredUsernameError);
+        assertEquals(usernameErrorText, ProfileReusables.invalidUsernameError);
     }
 
     @Test
@@ -111,6 +119,10 @@ public class SignUp {
         WebElement email = driver.findElement(By.id("username"));
         email.sendKeys(ProfileReusables.usernameDummySample);
 
+        ProfileReusables.enterValidEmail(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
+        ProfileReusables.enterValidPassword(driver);
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
         submitButton.click();
@@ -124,12 +136,16 @@ public class SignUp {
     public void invalidPhoneNumber() throws Exception {
 
 
+        ProfileReusables.enterValidUsername(driver);
+        ProfileReusables.enterValidEmail(driver);
+
         WebElement phoneNumber = driver.findElement(By.id("phone-number"));
         phoneNumber.clear();
         phoneNumber.sendKeys("");  // wrong format //TODO
 
 
-        ProfileReusables.enterValidUsername1(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
+        ProfileReusables.enterValidPassword(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -146,13 +162,16 @@ public class SignUp {
     public void invalidShomareHesab() throws Exception {
 
 
+        ProfileReusables.enterValidUsername(driver);
+        ProfileReusables.enterValidEmail(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+
+
         WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
         shomareHesab.clear();
         shomareHesab.sendKeys("");  //wrong format //TODO
 
-
-        ProfileReusables.enterValidPhoneNumber1(driver);
-
+        ProfileReusables.enterValidPassword(driver);
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
         submitButton.click();
@@ -166,11 +185,16 @@ public class SignUp {
     @Test
     public void registeredShomareHesab() throws Exception {
 
+        ProfileReusables.enterValidUsername(driver);
+        ProfileReusables.enterValidEmail(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+
 
         WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
         shomareHesab.clear();
         shomareHesab.sendKeys(ProfileReusables.ShomareHesabDummySample);
 
+        ProfileReusables.enterValidPassword(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -179,20 +203,23 @@ public class SignUp {
 
         //    Verify that error message is displayed for authentication failure.
         String usernameErrorText = driver.findElement(By.name("shomare-hesab-error-text")).getText();
-        assertEquals(usernameErrorText, ProfileReusables.invalidShomareHesabError);
+        assertEquals(usernameErrorText, ProfileReusables.alreadyRegisteredShomareHesabError);
     }
 
 
     @Test
     public void invalidPassword() throws Exception {
 
+        ProfileReusables.enterValidUsername(driver);
+        ProfileReusables.enterValidEmail(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
 
         WebElement password = driver.findElement(By.id("password"));
         password.clear();
         password.sendKeys("");  //wrong format //TODO
 
 
-        ProfileReusables.enterValidShomareHesab1(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -207,9 +234,11 @@ public class SignUp {
 
     @Test
     public void validSignUp() throws Exception {
-
-
-        ProfileReusables.enterValidPassword1(driver);
+        ProfileReusables.enterValidUsername(driver);
+        ProfileReusables.enterValidEmail(driver);
+        ProfileReusables.enterValidPhoneNumber(driver);
+        ProfileReusables.enterValidShomareHesab(driver);
+        ProfileReusables.enterValidPassword(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -223,7 +252,7 @@ public class SignUp {
 
     @AfterClass
     public void tearDown() {
-        // TODO : dummy account should be deleted.
+        // TODO : dummy account should be deleted???
 
     }
 

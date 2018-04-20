@@ -49,7 +49,7 @@ public class LogIn {
         email.sendKeys("");   // wrong format //TODO
 
 
-        ProfileReusables.enterValidPassword1(driver);
+        ProfileReusables.enterValidPassword(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
@@ -86,7 +86,7 @@ public class LogIn {
     public void invalidPassword() throws Exception {
 
 
-        ProfileReusables.enterValidEmail1(driver);
+        ProfileReusables.enterValidEmail(driver);
 
 
         WebElement password  = driver.findElement(By.id("password"));
@@ -109,7 +109,7 @@ public class LogIn {
     public void validLogIn() throws Exception {
 
 
-        ProfileReusables.enterValidPassword1(driver);
+        ProfileReusables.enterValidPassword(driver);
 
 
         WebElement submitButton = driver.findElement(By.id("submit-button"));
