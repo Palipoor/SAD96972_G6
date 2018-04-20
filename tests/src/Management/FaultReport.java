@@ -18,13 +18,13 @@ import static org.junit.Assert.assertTrue;
  * Created by Golpar on 4/19/2018 AD.
  */
 public class FaultReport {
-    private WebDriver driver;
-    private String transactionId;
+    private static WebDriver driver;
+    private static String transactionId;
     private String reason = "some random reason";
-    private String employeeUsername;
+    private static String employeeUsername;
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         int id = CustomerReusables.createNewTransaction();
         transactionId = String.valueOf(id);
         driver = new ChromeDriver();

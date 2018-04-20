@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -15,12 +17,13 @@ import static org.junit.Assert.assertTrue;
  * Created by Golpar on 4/20/2018 AD.
  */
 public class ContactUs {
-    private WebElement theForm;
+    private static WebDriver driver;
+    private static WebElement theForm;
     private String theSubject;
 
     @BeforeClass
-    public void setUp() {
-        WebDriver driver = new ChromeDriver();
+    public static void setUp() {
+        driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         WebElement contactUs = driver.findElement(By.name("contact"));
         contactUs.click();
@@ -159,8 +162,28 @@ public class ContactUs {
 
         WebElement successMessage = theForm.findElement(By.name("success"));
         assertFalse(successMessage.getText().equals(""));
+        //// TODO: 4/20/2018 AD find a way to login and check wether the email is received
+    }
 
-        //// TODO: 4/20/2018 AD find a way to login and check wether the email is received 
+    @Test
+    public void isReceivedTest() {
+        driver.get("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&hl=en&emr=1&elo=1");
+        driver.findElement(By.id("Email")).sendKeys("palipoor976");
+        driver.findElement(By.xpath("//input[@id='Passwd']")).sendKeys("mardechini");
+        driver.findElement(By.xpath("//input[@type='checkbox']")).click();
+        driver.findElement(By.name("signIn")).click();
+
+        List<WebElement> emails = driver.findElements(By.cssSelector("div.xT>div.y6>span>b"));
+
+        boolean isReceived = false;
+        for (WebElement emailsub : emails) {
+            if (emailsub.getText().equals(theSubject)) {
+                emailsub.click();
+                isReceived = true;
+            }
+        }
+
+        assertTrue(isReceived);
     }
 
 

@@ -16,10 +16,10 @@ import static org.junit.Assert.assertTrue;
  * Created by Golpar on 4/19/2018 AD.
  */
 public class SeeEmployeesList {
-    private WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
