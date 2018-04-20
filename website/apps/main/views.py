@@ -8,3 +8,7 @@ import os
 def index(request):
     template = loader.get_template("index.html")
     return HttpResponse(template.render())
+
+def login(request):
+    template = loader.get_template("panel/pages/examples/login.html")
+    return HttpResponse(template.render())
