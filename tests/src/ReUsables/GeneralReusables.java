@@ -79,6 +79,7 @@ public class GeneralReusables {
         userMenu.click();
         WebElement logoutButton = panel.findElement(By.name("logout"));
         logoutButton.click();
+        panel.close();
     }
 
     public static int getPrice(String currency) {

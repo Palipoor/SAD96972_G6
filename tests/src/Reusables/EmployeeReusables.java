@@ -9,7 +9,7 @@ public class EmployeeReusables {
 
     }
 
-    public static String reportFault(String transactionId){
+    public static String reportFaultAndGiveTheUsername(String transactionId){
 
         return "";//// TODO: 4/19/2018 AD username e employee ro bede
     }
