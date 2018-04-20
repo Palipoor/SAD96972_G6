@@ -227,11 +227,59 @@ public class ManagerReusables {
     }
 
     public static int getSalary(String employeeUsername) {
-        return 1; //// TODO: 4/19/2018 AD complete
+        WebDriver driver = new ChromeDriver();
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.loginAsTheManager(driver);
+
+        WebElement employee = driver.findElement(By.name("employee"));
+        employee.click();
+        WebElement employeetable = driver.findElement(By.name("employees-table"));
+        WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری"));
+        usernameSearchBox.clear();
+        usernameSearchBox.sendKeys(employeeUsername);
+
+        List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody//tr"));
+        List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+        int usernameIndex = 0;
+        for (int i = 0; i < headerTitles.size(); i++) {
+            if (headerTitles.get(i).getText().equals("میزان حقوق")) {
+                usernameIndex = i;
+            }
+        }
+        List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
+        driver.close();
+        return Integer.valueOf(employeeDetails.get(usernameIndex).getText());
     }
 
     public static boolean reportExists(String id, String reason, String username) {
-        return true; //// TODO: 4/19/2018 AD complete
+        WebDriver driver = new ChromeDriver();
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.loginAsTheManager(driver);
+
+        WebElement reportsTable = driver.findElement(By.name("reports"));
+        WebElement idSearchBox = reportsTable.findElement(By.name("شناسه تراکنش"));
+        idSearchBox.clear();
+        idSearchBox.sendKeys(id);
+
+        List<WebElement> tableHeader = reportsTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+        int usernameIndex = 0;
+        for (int i = 0; i < headerTitles.size(); i++) {
+            if (headerTitles.get(i).getText().equals("گزارش دهنده")) {
+                usernameIndex = i;
+            }
+        }
+        List<WebElement> tableRows = reportsTable.findElements(By.xpath("//tbody//tr"));
+
+        for (WebElement tableRow : tableRows) {
+            List<WebElement> employeeDetails = tableRow.findElements(By.xpath("//td"));
+            String theUsername = employeeDetails.get(usernameIndex).getText();
+            if (theUsername.equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getNewestTransactionId() {
