@@ -6,6 +6,7 @@ package Reusables;
 public class ManagerReusables {
 
     public static String EMPLOYEES_PAGE_TITLE = "پنل مدیریت | کارمندان";
+    public static String  CUSTOMERS_PAGE_TITLE = "پنل مدیریت | مشتریان";
 
     public static boolean customerExists(String username) {
         return true; //// TODO: 4/19/2018 AD complete
@@ -18,6 +19,16 @@ public class ManagerReusables {
     public static String getAnEmployee(){
         // چک میکنه اگر ایمپلویی داشتیم یوزرنیمش رو میده. اگر نداشتیم یکی می‌سازه!
         return "";
+    }
+
+    public static int getACustomerId() { // چک می‌کنه اگر کاستومر داشتیم آیدیش رو می‌ده وگرنه یکی می‌سازه.
+        int id = 0;
+        return id; //// TODO: 4/19/2018 AD complete
+    }
+
+
+    public static String getACustomerUsername() { // چک می‌کنه اگر کاستومر داشتیم آیدیش رو می‌ده وگرنه یکی می‌سازه.
+        return ""; //// TODO: 4/19/2018 AD complete
     }
 
     public static int getSalary(String employeeUsername) {

@@ -3,6 +3,7 @@ package Reusables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +26,8 @@ public class GeneralReusables {
     public static String WRONG_ID_ERROR;
     public static String SUCCESSFULLY_SENT;
     public static String WRONG_USERNAME_ERROR;
+    public static String ACCESS_DENIED_ERROR;
+    public static String NO_SUCH_USER_ERROR;
 
 
     public static void setUpToHomepage(WebDriver driver) {
@@ -64,9 +67,11 @@ public class GeneralReusables {
         return getUsername(homepage);
     }
 
-    private static String getUsername(WebDriver homepage) {
-        return "";
-        //// TODO: 4/19/2018 AD  go to user details page and return username for employee or customer
+    private static String getUsername(WebDriver panel) {
+        WebElement userDetails = panel.findElement(By.name("user-details"));
+        userDetails.click();
+        WebElement usernameElement = panel.findElement(By.name("my-username"));
+        return usernameElement.getText();
     }
 
     public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
@@ -76,12 +81,13 @@ public class GeneralReusables {
         logoutButton.click();
     }
 
-    public static int getPrice(String currency) { // حتما بهش یک وبدرایور جدید که آدرس هومپیج رو باز کرده بدین! به باد می‌رین مگرنه.
-        return 0; // currency parameter could be "dollar" or "euro" or "rial" //todo implement this
+    public static int getPrice(String currency) {
+        String elemenName = currency + "-price";
+        WebDriver homepage = new ChromeDriver();
+        setUpToHomepage(homepage);
+        WebElement priceElement = homepage.findElement(By.name(elemenName));
+        return Integer.valueOf(priceElement.getText());
     }
 
-    public static int createNewUser(){ // creates a new customer and returns its customer_id
-        int id = 0;
-        return id; //// TODO: 4/19/2018 AD complete
-    }
+
 }
