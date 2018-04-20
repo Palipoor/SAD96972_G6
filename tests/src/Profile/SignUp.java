@@ -25,7 +25,7 @@ public class SignUp {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //for checking already registered info
-        //ProfileReusables.dummySignUp(driver);
+        ProfileReusables.signUpUser1(driver);
         GeneralReusables.setUpToHomepage(driver);
         // Go to Sign up page
         WebElement signUpButton = driver.findElement(By.name("sign-up"));
@@ -71,7 +71,7 @@ public class SignUp {
 
         // Enter an already registered email
         WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys(ProfileReusables.emailDummySample);   //already registered
+        email.sendKeys(ProfileReusables.email1);   //already registered
 
         ProfileReusables.enterValidPhoneNumber(driver);
         ProfileReusables.enterValidShomareHesab(driver);
@@ -117,7 +117,7 @@ public class SignUp {
 
         // Enter an already registered username
         WebElement email = driver.findElement(By.id("username"));
-        email.sendKeys(ProfileReusables.usernameDummySample);
+        email.sendKeys(ProfileReusables.username1);
 
         ProfileReusables.enterValidEmail(driver);
         ProfileReusables.enterValidPhoneNumber(driver);
@@ -179,7 +179,7 @@ public class SignUp {
 
         //    Verify that error message is displayed for authentication failure.
         String usernameErrorText = driver.findElement(By.name("shomare-hesab-error-text")).getText();
-        assertEquals(usernameErrorText, ProfileReusables.invalidShomareHesabError);
+        assertEquals(usernameErrorText, ProfileReusables.invalidPhoneNumberError);
     }
 
     @Test
@@ -192,7 +192,7 @@ public class SignUp {
 
         WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
         shomareHesab.clear();
-        shomareHesab.sendKeys(ProfileReusables.ShomareHesabDummySample);
+        shomareHesab.sendKeys(ProfileReusables.ShomareHesab1);
 
         ProfileReusables.enterValidPassword(driver);
 

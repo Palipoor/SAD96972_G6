@@ -41,7 +41,7 @@ public class LogIn {
 
     @Test
     public void invalidEmail() throws Exception {
-        ProfileReusables.enterValidUsername1(driver);
+        ProfileReusables.enterValidUsername(driver);
 
 
         // Enter an invalid email
@@ -63,13 +63,13 @@ public class LogIn {
 
     @Test
     public void notRegisteredEmail() throws Exception {
-        ProfileReusables.enterValidUsername1(driver);
+        ProfileReusables.enterValidUsername(driver);
 
 
         // Enter an not registered email
         WebElement email = driver.findElement(By.id("email"));
         email.clear();
-        email.sendKeys(ProfileReusables.emailDummySample);
+        email.sendKeys(ProfileReusables.email1);
 
 
 

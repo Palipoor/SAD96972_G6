@@ -12,11 +12,11 @@ public class ProfileReusables {
 
     public static  String SignUpTitle= "ثبت‌ نام";
     public static  String logInTitle= "ورود";
-    public static String phoneNumberSample1 = "09137927608";
-    public static String passwordSample1 = "12345Dorna";
-    public static String emailDummySample= "dorna.abdolazimi@gmail.com";
-    public static String usernameDummySample = "Dorna";
-    public static String ShomareHesabDummySample = "0123456789123"; //TODO
+    public static String phoneNumber1 = "09137927608";
+    public static String password1 = "12345Dorna";
+    public static String email1 = "dorna.abdolazimi@gmail.com";
+    public static String username1 = "Dorna";
+    public static String ShomareHesab1 = "0123456789123"; //TODO
     public static String invalidEmailError = "ایمیل وارد شده معتبر نیست.";
     public static String alreadyRegisteredEmailError = "ایمیل وارد شده استفاده شده‌ است.";
     public static String invalidUsernameError = "نام کاربری وارد شده معتبر نیست.";
@@ -33,20 +33,20 @@ public class ProfileReusables {
 
 
 
-    public static void dummySignUp(WebDriver driver){
+    public static void signUpUser1(WebDriver driver){
         GeneralReusables.setUpToHomepage(driver);
         WebElement signUpButton = driver.findElement(By.name("sign-up"));
         signUpButton.click();
 
 
         WebElement username = driver.findElement(By.id("username"));
-        username.sendKeys(ProfileReusables.usernameDummySample);
+        username.sendKeys(ProfileReusables.username1);
 
         WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys(ProfileReusables.emailDummySample);
+        email.sendKeys(ProfileReusables.email1);
 
         WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
-        shomareHesab.sendKeys(ProfileReusables.ShomareHesabDummySample);
+        shomareHesab.sendKeys(ProfileReusables.ShomareHesab1);
 
         enterValidPassword(driver);
 
@@ -71,7 +71,7 @@ public class ProfileReusables {
     public static void enterValidPhoneNumber(WebDriver driver){
         WebElement phoneNumber = driver.findElement(By.id("phone-number"));
         phoneNumber.clear();
-        phoneNumber.sendKeys(ProfileReusables.phoneNumberSample1);
+        phoneNumber.sendKeys(ProfileReusables.phoneNumber1);
     }
 
     public static void enterValidShomareHesab(WebDriver driver){
@@ -83,7 +83,7 @@ public class ProfileReusables {
     public static void enterValidPassword(WebDriver driver){
         WebElement password = driver.findElement(By.id("password"));
         password.clear();
-        password.sendKeys(ProfileReusables.passwordSample1);
+        password.sendKeys(ProfileReusables.password1);
     }
 
 
