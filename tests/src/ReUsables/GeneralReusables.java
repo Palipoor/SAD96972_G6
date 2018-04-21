@@ -83,10 +83,10 @@ public class GeneralReusables {
     }
 
     public static int getPrice(String currency) {
-        String elemenName = currency + "-price";
+        String elementName = currency + "-price";
         WebDriver homepage = new ChromeDriver();
         setUpToHomepage(homepage);
-        WebElement priceElement = homepage.findElement(By.name(elemenName));
+        WebElement priceElement = homepage.findElement(By.name(elementName));
         return Integer.valueOf(priceElement.getText());
     }
 

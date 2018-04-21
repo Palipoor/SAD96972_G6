@@ -1,6 +1,8 @@
 package Nonmembers;
 
 import Reusables.GeneralReusables;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -186,5 +188,9 @@ public class ContactUs {
         assertTrue(isReceived);
     }
 
+    @AfterClass
+    public static void tearDown() {
+        driver.close();
+    }
 
 }
