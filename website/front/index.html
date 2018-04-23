@@ -151,8 +151,8 @@
                 <div class="col-md-10 col-md-offset-1">
                     <!-- ABOUT US SECTION TITLE-->
                     <div class="section_title"  name = "about us">
-                        <h2>دربارهٔ ما</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                        <h2 name = "about-us-header">دربارهٔ ما</h2>
+                        <p name = "about-us-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                     </div>
                 </div>
 
@@ -527,20 +527,21 @@
                     </div>
                     <div class="row">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="finance_value" placeholder="مبلغ ورودی" name = "value"></input>
+                                <input type="text" class="form-control" id="conversion" placeholder="مبلغ ورودی" name = "value"></input>
                                     <div class="form-group">
                                         <label>شیوه تبدیل</label>
-                                        <select class="form-control" id="finance_type" name="exchange dropdown">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
+                                        <select class="form-control" id="conversion-type" name="exchange dropdown">
+                                            <option value = "dollar2rial">دلار به ریال</option>
+                                            <option value = "rial2dollar">ریال به دلار</option>
+                                            <option value = "euro2rial">یورو به ریال</option>
+                                            <option value = "rial2euro">ریال به یورو</option>
+                                            <option value = "euro2dollar">یورو به دلار</option>
+                                            <option value = "dollar2euro">دلار به یورو</option>
                                         </select>
                                 </div>
                                 <div class="row">
                                     <a class="btn home-btn wow fadeInLeft" style='margin: 15px;'name = "calculate" >محاسبه کن</a>
-                                    <label id="finance_value" name = "result"> 100 </label>
+                                    <label id="conversion" name = "result"> 100 </label>
                                 </div>
 
 
