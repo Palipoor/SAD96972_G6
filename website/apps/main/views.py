@@ -10,5 +10,15 @@ def index(request):
     return HttpResponse(template.render())
 
 def login(request):
-    template = loader.get_template("panel/pages/examples/login.html")
+    template = loader.get_template("main/login.html")
+    return HttpResponse(template.render())
+
+
+def register(request):
+    template = loader.get_template("main/register.html")
+    return HttpResponse(template.render())
+
+
+def register_success(request):
+    template = loader.get_template("main/success.html")
     return HttpResponse(template.render())
