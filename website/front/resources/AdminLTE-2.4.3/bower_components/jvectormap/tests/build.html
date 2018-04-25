@@ -1,11 +1,12 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>jVectorMap demo</title>
-  <link rel="stylesheet" media="all" href="../jquery-jvectormap.css"/>
-  <script src="assets/jquery-1.8.2.js"></script>
-  <script src="../jquery.jvectormap.min.js"></script>
-  <script src="assets/jquery-jvectormap-world-mill-en.js"></script>
+  <link rel="stylesheet" media="all" href = '{% static "resources/AdminLTE-2.4.3/bower_components/jvectormap/jquery-jvectormap.css" %}' />
+  <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/jvectormap/tests/assets/jquery-1.8.2.js" %}' ></script>
+  <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/jvectormap/jquery.jvectormap.min.js" %}' ></script>
+  <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js" %}' ></script>
   <script>
     $(function(){
       $('#map').vectorMap({

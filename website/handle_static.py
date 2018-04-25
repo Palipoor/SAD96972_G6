@@ -21,7 +21,7 @@ def replace(match):
 link_reg = re.compile(r"""(?P<tag>href|src)\s*=\s*['"](?!http)(?!{%)(?P<address>.*?)[\'\"]""",re.DOTALL)
 for dirpath, dnames, fnames in os.walk(root):
     for file_name in fnames:
-        root_to_html = "." + dirpath[len(root):] +'/'
+        root_to_html = "." +"/" +  dirpath[len(root):] +'/'
         file_address = dirpath + "/" + file_name
         print(dirpath)
         if (file_name.endswith('.html')):

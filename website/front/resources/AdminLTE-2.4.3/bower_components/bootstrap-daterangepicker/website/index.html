@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,13 +8,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="moment.min.js"></script>         
+        <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/moment.min.js" %}' ></script>         
 
-        <script src="daterangepicker.js"></script>
-        <link rel="stylesheet" type="text/css" href="daterangepicker.css" />
+        <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/daterangepicker.js" %}' ></script>
+        <link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/daterangepicker.css" %}'  />
 
-        <script src="website.js"></script>
-        <link rel="stylesheet" type="text/css" href="website.css" />
+        <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/website.js" %}' ></script>
+        <link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/website.css" %}'  />
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -111,23 +112,23 @@
 
                     <div id="sidebar">
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#usage">Usage</a></li>
+                            <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#usage" %}' >Usage</a></li>
                             <li>
-                                <a href="#examples">Examples</a>
+                                <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#examples" %}' >Examples</a>
                                 <ul class="nav nav-pills nav-stacked" style="margin: 0 0 0 15px; padding: 0; font-size: 13px">
-                                    <li><a href="#ex1">Date Range Picker</a></li>
-                                    <li><a href="#ex2">Date and Time</a></li>
-                                    <li><a href="#ex3">Single Date Picker</a></li>
-                                    <li><a href="#ex4">Predefined Ranges</a></li>
-                                    <li><a href="#ex5">Input Initially Empty</a></li>
+                                    <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#ex1" %}' >Date Range Picker</a></li>
+                                    <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#ex2" %}' >Date and Time</a></li>
+                                    <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#ex3" %}' >Single Date Picker</a></li>
+                                    <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#ex4" %}' >Predefined Ranges</a></li>
+                                    <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#ex5" %}' >Input Initially Empty</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#config">Configuration Generator</a></li>
-                            <li><a href="#options">Options, Methods &amp; Events</a></li>
-                            <li><a href="#license">License</a></li>
+                            <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#config" %}' >Configuration Generator</a></li>
+                            <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#options" %}' >Options, Methods &amp; Events</a></li>
+                            <li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#license" %}' >License</a></li>
                         </ul>
 
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <script async src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" %}' ></script>
                         <!-- DRP Responsive -->
                         <ins class="adsbygoogle"
                              style="display:block"
@@ -174,7 +175,7 @@
                         <hr />
 
                         <p>
-                            You can customize Date Range Picker with <a href="#options">options</a>, and 
+                            You can customize Date Range Picker with <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website/#options" %}' >options</a>, and 
                             get notified when the user chooses new dates by providing a callback function.
                         </p>
 
@@ -798,7 +799,7 @@
                             /* * * DON'T EDIT BELOW THIS LINE * * */
                             (function() {
                                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                dsq.src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-daterangepicker/website" %}'  + disqus_shortname + '.disqus.com/embed.js';
                                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                             })();
                         </script>

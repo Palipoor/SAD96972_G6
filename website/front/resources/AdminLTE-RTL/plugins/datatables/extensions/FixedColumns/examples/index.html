@@ -1,14 +1,15 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
+	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.css" %}' >
+	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.js" %}' ></script>
 
 	<title>FixedColumns examples - FixedColumns examples</title>
 </head>
@@ -19,9 +20,9 @@
 			<h1>FixedColumns example <span>FixedColumns examples</span></h1>
 
 			<div class="info">
-				<p>When making use of DataTables' x-axis scrolling feature (<a href="//datatables.net/reference/option/scrollX"><code class="option" title=
+				<p>When making use of DataTables' x-axis scrolling feature (<a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/datatables.net/reference/option/scrollX" %}' ><code class="option" title=
 				"DataTables initialisation option">scrollX<span>DT</span></code></a>), you may wish to fix the left or right most columns in place. This extension for DataTables
-				provides exactly this option (for non-scrolling tables, please use the <a href="//datatables.net/extensions/fixedheader">FixedHeader extension</a>, which can fix
+				provides exactly this option (for non-scrolling tables, please use the <a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/datatables.net/extensions/fixedheader" %}' >FixedHeader extension</a>, which can fix
 				headers, footers and columns). Key features include:</p>
 
 				<ul class="markdown">
@@ -40,21 +41,21 @@
 			<div class="liner">
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="./index.html">Examples</a></h3>
+						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/index.html" %}' >Examples</a></h3>
 						<ul class="toc">
-							<li><a href="./left_right_columns.html">Left and right fixed columns</a></li>
-							<li><a href="./simple.html">Basic initialisation</a></li>
-							<li><a href="./two_columns.html">Multiple fixed columns</a></li>
-							<li><a href="./right_column.html">Right column only</a></li>
-							<li><a href="./rowspan.html">Complex headers</a></li>
-							<li><a href="./colvis.html">ColVis integration</a></li>
-							<li><a href="./server-side-processing.html">Server-side processing</a></li>
-							<li><a href="./css_size.html">CSS row sizing</a></li>
-							<li><a href="./size_fixed.html">Assigned column width</a></li>
-							<li><a href="./size_fluid.html">Fluid column width</a></li>
-							<li><a href="./col_filter.html">Individual column filtering</a></li>
-							<li><a href="./bootstrap.html">Bootstrap</a></li>
-							<li><a href="./index_column.html">Index column</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/left_right_columns.html" %}' >Left and right fixed columns</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/simple.html" %}' >Basic initialisation</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/two_columns.html" %}' >Multiple fixed columns</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/right_column.html" %}' >Right column only</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/rowspan.html" %}' >Complex headers</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/colvis.html" %}' >ColVis integration</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/server-side-processing.html" %}' >Server-side processing</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/css_size.html" %}' >CSS row sizing</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/size_fixed.html" %}' >Assigned column width</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/size_fluid.html" %}' >Fluid column width</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/col_filter.html" %}' >Individual column filtering</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/bootstrap.html" %}' >Bootstrap</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/FixedColumns/examples/index_column.html" %}' >Index column</a></li>
 						</ul>
 					</div>
 				</div>

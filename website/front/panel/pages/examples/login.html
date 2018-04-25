@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,13 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = '{% static "panel/bootstrap/css/bootstrap.min.css" %}' >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/css/AdminLTE.min.css" %}' >
     <!-- iCheck -->
-    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/iCheck/square/blue.css" %}' >
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,7 +25,7 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html">سپاا</a>
+        <a href = '{% static "panel/index2.html" %}' >سپاا</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">ورود به سامانه</p>
@@ -54,21 +55,21 @@
 
         <!-- <div class="social-auth-links text-center">
           <p>- OR -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
-          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
+          <a href = '{% static "panel/pages/examples/#" %}'  class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
+          <a href = '{% static "panel/pages/examples/#" %}'  class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
         </div> /.social-auth-links -->
-        <a href="#"  dir="rtl">رمز عبورم را فراموش کرده‌ام.</a><br>
-        <a href="register.html" class="text-center">ثبت نام</a>
+        <a href = '{% static "panel/pages/examples/#" %}'   dir="rtl">رمز عبورم را فراموش کرده‌ام.</a><br>
+        <a href = '{% static "panel/pages/examples/register.html" %}'  class="text-center">ثبت نام</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src = '{% static "panel/plugins/jQuery/jQuery-2.1.4.min.js" %}' ></script>
     <!-- Bootstrap 3.3.4 -->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src = '{% static "panel/bootstrap/js/bootstrap.min.js" %}' ></script>
     <!-- iCheck -->
-    <script src="../../plugins/iCheck/icheck.min.js"></script>
+    <script src = '{% static "panel/plugins/iCheck/icheck.min.js" %}' ></script>
     <script>
       $(function () {
         $('input').iCheck({

@@ -1,7 +1,8 @@
+{% load static staticfiles %}
 <html>
 <head>
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="../../../resources/datatables/dataTables.min.js"></script>
+        <script src = '{% static "resources/datatables/dataTables.min.js" %}' ></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#table_id').dataTable();
