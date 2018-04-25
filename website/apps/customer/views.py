@@ -28,3 +28,14 @@ def mytransactions(request):
 def transaction_details(request):
     template = loader.get_template("customer/transaction_details.html")
     return HttpResponse(template.render())
+
+
+def wallet(request,currency):
+    if currency == "dollar":
+        currency = "دلار"
+    elif currency == "euro":
+        currency = "یورو"
+    elif currency == "rial":
+        currency = "ریال"
+    template = loader.get_template("customer/wallet.html")
+    return HttpResponse(template.render({"currency":currency}))
