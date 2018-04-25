@@ -258,10 +258,10 @@
                     <h3 class="box-title">مشتریان موسسه</h3>
                   </div><!-- /.box-header -->
                   <div class="box-body">
-                    <table id="table" class="table table-bordered table-striped">
+                    <table id="table" class="table table-bordered table-striped" name="customers-table">
                       <thead>
                         <tr>
-                          <th>شناسهٔ مشتری</th>
+                          <th>شناسه مشتری</th>
                           <th>نام کاربری</th>
                           <th>نام خانوادگی</th>
                           <th>نام </th>
@@ -556,7 +556,7 @@
         // Setup - add a text input to each footer cell
         $('#table tfoot th').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            $(this).html( '<input type="text" name ="' + title +'" placeholder="Search '+title+'" />' );
         } );
      
         // DataTable

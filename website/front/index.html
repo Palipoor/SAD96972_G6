@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>صفحه شنستیذنشسذیتنیذ اصلی سپاا</title>
+    <title>سپاا</title>
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Raleway:500,600,700,800,900,400,300' rel='stylesheet' type='text/css'>
 
@@ -153,8 +153,8 @@
                 <div class="col-md-10 col-md-offset-1">
                     <!-- ABOUT US SECTION TITLE-->
                     <div class="section_title"  name = "about us">
-                        <h2>دربارهٔ ما</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                        <h2 name = "about-us-header">دربارهٔ ما</h2>
+                        <p name = "about-us-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                     </div>
                 </div>
 
@@ -529,28 +529,28 @@
                     </div>
                     <div class="row">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="finance_value" placeholder="مبلغ ورودی" name = "value"></input>
+                                <input type="text" class="form-control" id="conversion" placeholder="مبلغ ورودی" name = "value"></input>
                                     <div class="form-group">
                                         <label>شیوه تبدیل</label>
-                                        <select class="form-control" id="finance_type" name="exchange dropdown">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
+                                        <select class="form-control" id="conversion-type" name="exchange dropdown">
+                                            <option value = "dollar2rial">دلار به ریال</option>
+                                            <option value = "rial2dollar">ریال به دلار</option>
+                                            <option value = "euro2rial">یورو به ریال</option>
+                                            <option value = "rial2euro">ریال به یورو</option>
+                                            <option value = "euro2dollar">یورو به دلار</option>
+                                            <option value = "dollar2euro">دلار به یورو</option>
                                         </select>
                                 </div>
                                 <div class="row">
                                     <a class="btn home-btn wow fadeInLeft" style='margin: 15px;'name = "calculate" >محاسبه کن</a>
-                                    <label id="finance_value" name = "result"> 100 </label>
+                                    <label id="conversion" name = "result"> 100 </label>
                                 </div>
 
 
                             </div>
                             <div class="col-md-8" name = "prices-content">
-                                    <div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur <br> Lorem ipsum dolor sit amet, consectetur <br> Lorem ipsum dolor sit amet, consectetur <br> Lorem ipsum dolor sit amet, consectetur </p>
-                                        </div>
+                                        <div class = "row"><div class = "col-md-3"><p>نرخ دلار</p></div><div class = "col-md-3"><p name = "dollar-price">42000</p></div></div>
+                                        <div class = "row"><div class = "col-md-3"><p>نرخ یورو</p></div><div class = "col-md-3"><p name = "euro-price">50000</p></div></div>
                             </div>
                     </div>
             </div>
@@ -606,16 +606,16 @@
 
                 <!-- START ERROR AND SUCCESS MESSAGE -->
                     <div class="form_error text-center" name = "errorbox">
-                        <div class="name_error hide error">لطفا نام خود را وارد کنید.</div>
-                        <div class="email_error hide error">لطفا ایمیل خود را وارد کنید.</div>
-                        <div class="email_val_error hide error">لطفا یک ایمیل معتبر وارد کنید.</div>
-                        <div class="message_error hide error">لطفا پیام خود را وارد کنید.</div>
+                        <div class="name_error hide error" name = "name-error">لطفا نام خود را وارد کنید.</div>
+                        <div class="email_error hide error" name = "email-error">لطفا ایمیل خود را وارد کنید.</div>
+                        <div class="email_val_error hide error"name = "email-val-error">لطفا یک ایمیل معتبر وارد کنید.</div>
+                        <div class="message_error hide error"name = "message-error">لطفا پیام خود را وارد کنید.</div>
                     </div>
                     <div class="Sucess" name = "success">پیام شما با موفقیت ارسال شد.</div>
                 <!-- END ERROR AND SUCCESS MESSAGE -->
 
                 <!-- CONTACT FORM starts here, Go to contact.php and add your email ID, thats it.-->    
-                    <form role="form" action="contact.php">
+                    <form role="form" action="contact.php" name = "contact-form">
                         <div class="row">
                             <div class="col-md-8">
                                 <textarea class="form-control" id="message" rows="25" cols="10" placeholder=" متن پیام"></textarea>

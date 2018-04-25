@@ -258,7 +258,7 @@
                     <h3 class="box-title">کارمندان موسسه</h3>
                   </div><!-- /.box-header -->
                   <div class="box-body">
-                    <table id="table" class="table table-bordered table-striped">
+                    <table id="table" class="table table-bordered table-striped" name = "employees-table">
                       <thead>
                         <tr>
                           <th>شناسهٔ کارمند</th>
@@ -346,15 +346,43 @@
                 <div class="box-footer">
                   <button type="submit" class="btn btn-info pull-right">قطع دسترسی</button>
                   <div class = "col-md-5">
-                      <p name = "error-message-1">این جا پیام خطا می‌آید.</p>
+                      <p name = "message">این جا پیام خطا می‌آید.</p>
                     </div>
                 </div><!-- /.box-footer -->
               </form>
             </div>
+            <div class="box" name = "salary-change-box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">تغییر حقوق کارمند</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="username" class="col-sm-2 control-label">نام کاربری کارمند</label>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control" id="username">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="salary" class="col-sm-2 control-label">حقوق جدید</label>
+                      <div class="col-sm-6">
+                        <input type = "number" id="salary" class = "form-control"></textarea>
+                      </div>
+                    </div>
+                  </div><!-- /.box-body -->
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-info pull-right" id = "set-button">تغییر حقوق</button>
+                    <div class = "col-md-5">
+                        <p name = "message">این جا پیام خطا می‌آید.</p>
+                      </div>
+                  </div><!-- /.box-footer -->
+                </form>
+              </div>
         </div>
         <div class = "col-md-6">
             <!-- Horizontal Form -->
-            <div class="box">
+            <div class="box" name = "add-employee">
               <div class="box-header with-border">
                 <h3 class="box-title"> فرم اضافه کردن کارمند</h3>
               </div><!-- /.box-header -->
@@ -389,7 +417,7 @@
                 <div class="box-footer">
                   <button type="submit" class="btn btn-info pull-right">افزودن</button>
                   <div class = "col-md-5">
-                  <p name = "error-message-2">این جا پیام خطا می‌آید.</p>
+                  <p name = "message">این جا پیام خطا می‌آید.</p>
                 </div>
                 </div><!-- /.box-footer -->
               </form>
@@ -598,7 +626,7 @@
         // Setup - add a text input to each footer cell
         $('#table tfoot th').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            $(this).html( '<input type="text" name ="'+title + '" placeholder="Search '+title+'" />' );
         } );
      
         // DataTable

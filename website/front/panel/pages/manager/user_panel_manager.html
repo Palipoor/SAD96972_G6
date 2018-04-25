@@ -216,10 +216,10 @@
                   <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i>  تغییر رمز عبور مدیریت</a></li>
                 </ul>
               </li>
-              <li> <a href="transaction_details.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
-              <li> <a href="people.html"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
-              <li> <a href="customers.html"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
-              <li> <a href="transaction_details.html"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
+              <li> <a href="transaction_details.html" name = "transactions"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
+              <li> <a href="people.html" name = "employee"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
+              <li> <a href="customers.html" name = "customers"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
+              <li> <a href="transaction_details.html" name = "requests"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
               <li class="treeview">
                 <a href="#">
                 <i class="fa fa-money"></i>
@@ -292,40 +292,56 @@
           <!-- Main row -->
           <div class="row">
             <!-- Left col -->
-            <div class="col-lg-8 connectedSortable">
+            <div class="col-md-12 connectedSortable">
               <!-- Custom tabs (Charts with tabs)-->
               
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">‌گزارشات خطای رسیده</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                    <tbody><tr>
+                <div class="box-body  table-bordered table-striped">
+                  <table name = "reports" id="table" class="table table-hover">
+                    <thead>
+                    <tr>
                       <th>شناسه تراکنش</th>
                       <th>نوع تراکنش</th>
+                      <th>گزارش دهنده</th>
                       <th>تاریخ</th>
                       <th>توضیح</th>
                       </tr>
+                    </thead>
+                    <tbody>
                     <tr>
                       <td>OR9842</td>
                       <td>پرداخت ارزی</td>
+                      <td><a href = "employee_details_for_manager.html">username</a></td>
                       <td>11-7-2014</td>
                       <td>خیلی خطا بوده.</td>
                     </tr>
                     <tr>
                       <td>OR9842</td>
                       <td>پرداخت ارزی</td>
+                      <td><a href = "employee_details_for_manager.html">username</a></td>
                       <td>11-7-2014</td>
                       <td>خیلی خطا بوده.</td>
                     </tr>
                     <tr>
                       <td>OR9842</td>
                       <td>ثبت نام TOFEL</td>
+                      <td><a href = "employee_details_for_manager.html">username</a></td>
                       <td>11-7-2014</td>
                       <td>خطا بوده.</td>
                     </tr>
-                  </tbody></table>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>شناسه تراکنش</th>
+                      <th>نوع تراکنش</th>
+                      <th>گزارش دهنده</th>
+                      <th>تاریخ</th>
+                      <th>توضیح</th>
+                    </tr>
+                  </tfoot></table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             
@@ -340,7 +356,7 @@
                     <h3 class="box-title">تراکنش‌ها و درخواست‌های تراکنش</h3>
                   </div><!-- /.box-header -->
                   <div class="box-body">
-                    <table id="table" class="table table-bordered table-striped">
+                    <table id="table"  name = "employees" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th>شناسه تراکنش</th>
@@ -664,7 +680,7 @@
         // Setup - add a text input to each footer cell
         $('#table tfoot th').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            $(this).html( '<input type="text" name = "' + title + '" placeholder="Search '+title+'" />' );
         } );
      
         // DataTable
