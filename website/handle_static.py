@@ -6,9 +6,9 @@ root = "."
 static_to_root = '.'
 print(sys.argv)
 if(len(sys.argv) > 1):
-    root = sys.argv[1]
+    root = sys.argv[1] + "/"
 if (len(sys.argv) > 2):
-    static_to_root = sys.argv[2]
+    static_to_root = sys.argv[2] + "/"
 address_input_for_function = ""
 def replace(match):
     result = match.group("tag") + r''' = '{% static "''' + os.path.normpath(address_input_for_function+match.group('address')) + r'''" %}' '''
