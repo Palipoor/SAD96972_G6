@@ -1,0 +1,44 @@
+{% load static staticfiles %}
+
+<li class="treeview">
+    <a href='{% static "panel/pages/customer/#" %}'>
+        <i class="glyphicon glyphicon-user"></i>
+        <span>ویرایش مشخصات کاربری</span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="active">
+            <a href='{% static "panel/pages/customer/user_settings.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/customer/password_change.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href='{% static "panel/pages/customer/mytransactions.html" %}'>
+        <em class="glyphicon glyphicon-credit-card"></em>
+        <span>تراکنش‌های من</span>
+    </a>
+</li>
+<li class="treeview">
+    <a href='{% static "panel/pages/customer/#" %}'>
+        <i class="fa fa-money"></i>
+        <span name="my-wallets">کیف پول‌های من</span>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a href='{% static "panel/pages/customer/wallet_rial.html" %}' name="rial-wallet">
+                <i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/customer/wallet_euro.html" %}' name="euro-wallet">
+                <i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/customer/wallet_dollar.html" %}' name="dollar-wallet">
+                <i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a>
+        </li>
+    </ul>
+</li>
