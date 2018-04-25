@@ -22,3 +22,8 @@ def register(request):
 def register_success(request):
     template = loader.get_template("main/success.html")
     return HttpResponse(template.render())
+
+
+def user_panel(request):
+    template = loader.get_template("user_panel.html")
+    return HttpResponse(template.render())

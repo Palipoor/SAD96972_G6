@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.customer.views import dashboard
+from apps.customer.views import dashboard, change_password, settings, mytransactions, transaction_details
 urlpatterns = [
-    path('dashboard', dashboard),
+    path('dashboard', dashboard), 
+    path('change_password', change_password),
+    path('settings', settings),
+    path('mytransactions', mytransactions),
+    path('transaction_details', transaction_details),
 ]
