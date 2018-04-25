@@ -11,6 +11,11 @@ if (len(sys.argv) > 2):
     static_to_root = sys.argv[2] + "/"
 address_input_for_function = ""
 def replace(match):
+    print('harrrrr')
+    print(address_input_for_function)
+    print(match.group('address'))
+    print(os.path.normpath(address_input_for_function+match.group('address')))
+    print('harrrrr')
     result = match.group("tag") + r''' = '{% static "''' + os.path.normpath(address_input_for_function+match.group('address')) + r'''" %}' '''
     return result
 link_reg = re.compile(r"""(?P<tag>href|src)\s*=\s*['"](?!http)(?!{%)(?P<address>.*?)[\'\"]""",re.DOTALL)
