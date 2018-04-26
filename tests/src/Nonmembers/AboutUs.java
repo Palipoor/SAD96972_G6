@@ -1,6 +1,7 @@
 package Nonmembers;
 
 import Reusables.GeneralReusables;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -31,7 +32,7 @@ public class AboutUs {
         assertTrue(!title.getText().equals("") && !content.getText().equals(""));
     }
 
-    @Test
+    @AfterClass
     public static void tearDown() {
         driver.close();
     }
