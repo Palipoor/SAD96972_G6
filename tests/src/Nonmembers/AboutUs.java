@@ -25,14 +25,14 @@ public class AboutUs {
     }
 
     @Test
-    public void containtText() {
+    public void containsText() {
         WebElement title = driver.findElement(By.name("about-us-header"));
         WebElement content = driver.findElement(By.name("about-us-content"));
         assertTrue(!title.getText().equals("") && !content.getText().equals(""));
     }
 
     @Test
-    public static void tearDown(){
+    public static void tearDown() {
         driver.close();
     }
 }
