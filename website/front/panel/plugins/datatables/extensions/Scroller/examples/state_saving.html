@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,18 +7,18 @@
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
 
 	<title>Scroller example - State saving</title>
-	<link rel="stylesheet" type="text/css" href="../../../media/css/jquery.dataTables.css">
-	<link rel="stylesheet" type="text/css" href="../css/dataTables.scroller.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/media/css/jquery.dataTables.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/extensions/Scroller/css/dataTables.scroller.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/demo.css" %}' >
 	<style type="text/css" class="init">
 
 	</style>
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="../js/dataTables.scroller.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.dataTables.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/demo.js" %}' ></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 
@@ -43,8 +44,7 @@ $(document).ready(function() {
 
 			<div class="info">
 				<p>Scroller will automatically integrate with DataTables in order to save the scrolling position of the
-				table, if state saving is enabled in the DataTable (<a href=
-				"//datatables.net/reference/option/stateSave"><code class="option" title=
+				table, if state saving is enabled in the DataTable (<a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/datatables.net/reference/option/stateSave" %}' ><code class="option" title=
 				"DataTables initialisation option">stateSave<span>DT</span></code></a>). This example shows that in
 				practice - to demonstrate, scroll the table and then reload the page.</p>
 			</div>
@@ -87,10 +87,9 @@ $(document).ready(function() {
 					example:</p>
 
 					<ul>
-						<li><a href="../../../media/js/jquery.js">../../../media/js/jquery.js</a></li>
-						<li><a href=
-						"../../../media/js/jquery.dataTables.js">../../../media/js/jquery.dataTables.js</a></li>
-						<li><a href="../js/dataTables.scroller.js">../js/dataTables.scroller.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' >../../../media/js/jquery.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/js/jquery.dataTables.js" %}' >../../../media/js/jquery.dataTables.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js" %}' >../js/dataTables.scroller.js</a></li>
 					</ul>
 				</div>
 
@@ -110,9 +109,8 @@ $(document).ready(function() {
 					table:</p>
 
 					<ul>
-						<li><a href=
-						"../../../media/css/jquery.dataTables.css">../../../media/css/jquery.dataTables.css</a></li>
-						<li><a href="../css/dataTables.scroller.css">../css/dataTables.scroller.css</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/css/jquery.dataTables.css" %}' >../../../media/css/jquery.dataTables.css</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/extensions/Scroller/css/dataTables.scroller.css" %}' >../css/dataTables.scroller.css</a></li>
 					</ul>
 				</div>
 
@@ -124,7 +122,7 @@ $(document).ready(function() {
 				<div class="php">
 					<p>The script used to perform the server-side processing for this table is shown below. Please note
 					that this is just an example script using PHP. Server-side processing scripts can be written in any
-					language, using <a href="//datatables.net/manual/server-side">the protocol described in the
+					language, using <a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/datatables.net/manual/server-side" %}' >the protocol described in the
 					DataTables documentation</a>.</p>
 				</div>
 			</div>
@@ -140,14 +138,14 @@ $(document).ready(function() {
 
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="./index.html">Examples</a></h3>
+						<h3><a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/index.html" %}' >Examples</a></h3>
 						<ul class="toc active">
-							<li><a href="./simple.html">Basic initialisation</a></li>
-							<li class="active"><a href="./state_saving.html">State saving</a></li>
-							<li><a href="./large_js_source.html">Client-side data source (50,000 rows)</a></li>
-							<li><a href="./server-side_processing.html">Server-side processing (5,000,000
+							<li><a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/simple.html" %}' >Basic initialisation</a></li>
+							<li class="active"><a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/state_saving.html" %}' >State saving</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/large_js_source.html" %}' >Client-side data source (50,000 rows)</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/server-side_processing.html" %}' >Server-side processing (5,000,000
 							rows)</a></li>
-							<li><a href="./api_scrolling.html">API</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/Scroller/examples/api_scrolling.html" %}' >API</a></li>
 						</ul>
 					</div>
 				</div>

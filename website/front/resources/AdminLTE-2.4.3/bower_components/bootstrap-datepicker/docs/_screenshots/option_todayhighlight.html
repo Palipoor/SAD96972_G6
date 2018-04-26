@@ -1,8 +1,9 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="script/common.css">
-        <script src="script/common.js"></script>
+        <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-datepicker/docs/_screenshots/script/common.css" %}' >
+        <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap-datepicker/docs/_screenshots/script/common.js" %}' ></script>
         <script>
             function patch_date(f){
                 var NativeDate = window.Date;

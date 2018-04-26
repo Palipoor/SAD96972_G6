@@ -1,0 +1,106 @@
+{% load static staticfiles %}
+
+        <!-- Main content -->
+        <section class="content">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+              <div class = "col-md-3">
+            	<div class = "box">
+     				    <div class="box-header with-border">
+                  <h3>مشخصات اصلی</h3>
+                </div><!--box header-->
+                <div class = "box-body">
+                        <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
+                  </div>
+                  <div class = "box-body">
+                    <h4>نام</h4>
+                    <small>محمد</small>
+              </div>
+              <div class = "box-body">
+                  <h4>نام خانوادگی</h4>
+                  <small>شریفی</small>
+            </div>
+            <div class = "box-body">
+                <h4>نام لاتین</h4>
+                <small>Mohammad</small>
+            </div>
+            <div class = "box-body">
+                <h4>نام خانوادگی لاتین</h4>
+                <small>Sharifi</small>
+              </div>
+              <div class = "box-body">
+                <h4>نام کاربری</h4>
+                <small>@customerusername</small>
+            </div>
+            </div>
+            </div>
+              <div class = "col-md-3">
+                  <div class = "box" allign = "center">
+                      <div class="box-header with-border">
+                       <h3>راه‌های ارتباطی</h3>
+                     </div>
+                      <div class = "box-body">
+                       <h4>آدرس ایمیل</h4>
+                       <small>useremai@gmail.com</small>
+                      </div>
+                      <div class = "box-body">
+                          <h4>شمارهٔ تماس</h4>
+                          <small>09379605628</small>
+                         </div>
+                   </div>
+                  <div class = "box" allign = "center">
+                     <div class="box-header with-border">
+                      <h3>اطلاعات مالی</h3>
+                    </div><!--box header-->
+                     <div class = "box-body">
+                      <h4>شمارهٔ حساب</h4>
+                      <small>100200 - 3040 - 50</small>
+                     </div>
+                  </div>
+                </div>
+                <div class = "col-md-6">
+                    <div class = "box">
+                      <div class = "box-header with-border">
+                          <h3>تراکنش‌ها</h3>
+                      </div>
+                      <div class = "box-body">
+                          <table id="table" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>شناسه تراکنش</th>
+                                    <th>نوع تراکنش</th>
+                                    <th>تاریخ تراکنش </th>
+                                  </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><a href = '{% static "panel/pages/manager/transaction_details.html" %}' >102030</a></td>
+                                <td>واریز به حساب خارجی</td>
+                                <td>1395 - 05 - 05</td>
+                              </tr>
+                            <tr>
+                                <td><a href = '{% static "panel/pages/manager/transaction_details.html" %}' >102030</a></td>
+                                <td>واریز به حساب خارجی</td>
+                                <td>1395 - 05 - 05</td>
+                              </tr>
+                              <tr>
+                                  <td><a href = '{% static "panel/pages/manager/transaction_details.html" %}' >102030</a></td>
+                                  <td>واریز به حساب خارجی</td>
+                                  <td>1395 - 05 - 05</td>
+                                </tr>
+                              </tbody>
+                              <tfoot>
+                                  <tr>
+                                      <th>شناسه تراکنش</th>
+                                      <th>نوع تراکنش</th>
+                                      <th>تاریخ تراکنش </th>
+                                  </tr>
+                                </tfoot>
+                          </table>
+                      </div>
+                    </div>
+                </div>
+          </div><!-- /.row -->
+
+
+        </section><!-- /.content -->

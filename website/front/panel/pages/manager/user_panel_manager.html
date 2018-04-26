@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,32 +7,32 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = '{% static "panel/bootstrap/css/bootstrap.min.css" %}' >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons 2.0.0 -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/css/AdminLTE.min.css" %}' >
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/css/skins/_all-skins.min.css" %}' >
     <!-- iCheck -->
-    <link rel="stylesheet" href="../../plugins/iCheck/flat/blue.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/iCheck/flat/blue.css" %}' >
     <!-- Morris chart -->
-    <link rel="stylesheet" href="../../plugins/morris/morris.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/morris/morris.css" %}' >
     <!-- jvectormap -->
-    <link rel="stylesheet" href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/jvectormap/jquery-jvectormap-1.2.2.css" %}' >
     <!-- Date Picker -->
-    <link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/datepicker/datepicker3.css" %}' >
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/daterangepicker/daterangepicker-bs3.css" %}' >
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" %}' >
 
-    <link rel="stylesheet" href="../../dist/fonts/fonts-fa.css">
-    <link rel="stylesheet" href="../../dist/css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" href="../../dist/css/rtl.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/fonts/fonts-fa.css" %}' >
+    <link rel="stylesheet" href = '{% static "panel/dist/css/bootstrap-rtl.min.css" %}' >
+    <link rel="stylesheet" href = '{% static "panel/dist/css/rtl.css" %}' >
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,7 +45,7 @@
 
         <header class="main-header">
         <!-- Logo -->
-        <a href="user_panel_manager.html" class="logo">
+        <a href = '{% static "panel/pages/manager/user_panel_manager.html" %}'  class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices --><strong>پنل مدیریت</strong><br>
@@ -52,7 +53,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href = '{% static "panel/pages/manager/#" %}'  class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="navbar-custom-menu">
@@ -65,9 +66,9 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- start message -->
-                        <a href="#">
+                        <a href = '{% static "panel/pages/manager/#" %}' >
                           <div class="pull-right">
-                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Support Team
@@ -77,9 +78,9 @@
                         </a>
                       </li><!-- end message -->
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/pages/manager/#" %}' >
                           <div class="pull-right">
-                            <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -89,9 +90,9 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/pages/manager/#" %}' >
                           <div class="pull-right">
-                            <img src="../../../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "../dist/img/user4-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Developers
@@ -101,9 +102,9 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/pages/manager/#" %}' >
                           <div class="pull-right">
-                            <img src="../../../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "../dist/img/user3-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Sales Department
@@ -113,9 +114,9 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/pages/manager/#" %}' >
                           <div class="pull-right">
-                            <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user4-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Reviewers
@@ -126,18 +127,18 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
+                  <li class="footer"><a href = '{% static "panel/pages/manager/#" %}' >See All Messages</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <em class="fa fa-bell-o"></em> <span class="label label-warning">۳</span> </a>
+              <li class="dropdown notifications-menu"><a href = '{% static "panel/pages/manager/#" %}'  class="dropdown-toggle" data-toggle="dropdown"> <em class="fa fa-bell-o"></em> <span class="label label-warning">۳</span> </a>
                 <ul class="dropdown-menu">
                   <li class="header" allign = "center">شما ۳ اعلان جدید دارید.</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-                       <a href="#">
+                       <a href = '{% static "panel/pages/manager/#" %}' >
                         <i class="fa fa-exclamation-triangle text-yellow"></i>
                         <h7>
                           یک گزارش خطا.
@@ -146,7 +147,7 @@
                       </li>
                      
                       <li>
-                       <a href="#">
+                       <a href = '{% static "panel/pages/manager/#" %}' >
                         <i class="fa fa-credit-card text-red"></i>
                         <h7>
                           اعلان کمبود بودجه موسسه.
@@ -154,7 +155,7 @@
 						  </a>
                       </li>
                      <li>
-                       <a href = "#">
+                       <a href = '{% static "panel/pages/manager/#" %}' >
                         <i class="fa fa-exclamation-triangle text-yellow"></i>
                         <h7>
                           یک گزارش خطای دیگر
@@ -163,27 +164,27 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">مشاهدهٔ همه</a></li>
+                  <li class="footer"><a href = '{% static "panel/pages/manager/#" %}' >مشاهدهٔ همه</a></li>
                 </ul>
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu" name = "user menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../../dist/img/logo-sapa.png" class="user-image" alt="User Image">
+                <a href = '{% static "panel/pages/manager/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+                  <img src = '{% static "panel/dist/img/logo-sapa.png" %}'  class="user-image" alt="User Image">
                   <span class="hidden-xs">سپاا</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
+                    <img src = '{% static "panel/dist/img/logo-sapa.png" %}'  class="img-circle" alt="User Image">
                     <p>
                       سپاا
                     </p>
 					</li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                      <a href="#" class="btn btn-default btn-flat" name = "logout">خروج از حساب کاربری</a>
+                      <a href = '{% static "panel/pages/manager/#" %}'  class="btn btn-default btn-flat" name = "logout">خروج از حساب کاربری</a>
                   </li>
                 </ul>
               </li>
@@ -198,37 +199,37 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
               <div class="pull-right image">
-                <img src="../../dist/img/logo-sapa.png" class="img-circle" alt="User Image">
+                <img src = '{% static "panel/dist/img/logo-sapa.png" %}'  class="img-circle" alt="User Image">
               </div>
               <div class="pull-left info">
-                <p><a href = "company_details.html">سپاا</a></p>
+                <p><a href = '{% static "panel/pages/manager/company_details.html" %}' >سپاا</a></p>
               </div>
             </div>
             <!-- deleted "search form" -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
               <li class="treeview">
-                <a href="#">
+                <a href = '{% static "panel/pages/manager/#" %}' >
                 <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات موسسه</span>
                 </a>
                 <ul class="treeview-menu">
-                  <li class="active"><a href="company_settings.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
-                  <li><a href="password_change.html"><i class="glyphicon glyphicon-chevron-left"></i>  تغییر رمز عبور مدیریت</a></li>
+                  <li class="active"><a href = '{% static "panel/pages/manager/company_settings.html" %}' ><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
+                  <li><a href = '{% static "panel/pages/manager/password_change.html" %}' ><i class="glyphicon glyphicon-chevron-left"></i>  تغییر رمز عبور مدیریت</a></li>
                 </ul>
               </li>
-              <li> <a href="transaction_details.html" name = "transactions"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
-              <li> <a href="people.html" name = "employee"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
-              <li> <a href="customers.html" name = "customers"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
-              <li> <a href="transaction_details.html" name = "requests"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
+              <li> <a href = '{% static "panel/pages/manager/transaction_details.html" %}'  name = "transactions"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های موسسه</span> </a> </li>
+              <li> <a href = '{% static "panel/pages/manager/people.html" %}'  name = "employee"> <em class="fa fa-users"></em> <span>کارمندان</span> </a> </li>
+              <li> <a href = '{% static "panel/pages/manager/customers.html" %}'  name = "customers"> <em class="fa fa-users"></em> <span>مشتریان</span> </a> </li>
+              <li> <a href = '{% static "panel/pages/manager/transaction_details.html" %}'  name = "requests"> <em class="fa fa-comments"></em> <span>درخواست‌های تاییدنشده</span> </a> </li>
               <li class="treeview">
-                <a href="#">
+                <a href = '{% static "panel/pages/manager/#" %}' >
                 <i class="fa fa-money"></i>
                   <span>کیف پول‌های موسسه</span>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="wallet_rial.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
-                  <li><a href="wallet_euro.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
-                  <li><a href="wallet_dollar.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
+                  <li><a href = '{% static "panel/pages/manager/wallet_rial.html" %}' ><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
+                  <li><a href = '{% static "panel/pages/manager/wallet_euro.html" %}' ><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
+                  <li><a href = '{% static "panel/pages/manager/wallet_dollar.html" %}' ><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
                 </ul>
               </li>
             </ul>
@@ -244,7 +245,7 @@
             <small>پنل مدیریت</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> پیشخوان</a></li>
+            <li><a href = '{% static "panel/pages/manager/#" %}' ><i class="fa fa-dashboard"></i> پیشخوان</a></li>
           </ol>
         </section>
 
@@ -314,21 +315,21 @@
                     <tr>
                       <td>OR9842</td>
                       <td>پرداخت ارزی</td>
-                      <td><a href = "employee_details_for_manager.html">username</a></td>
+                      <td><a href = '{% static "panel/pages/manager/employee_details_for_manager.html" %}' >username</a></td>
                       <td>11-7-2014</td>
                       <td>خیلی خطا بوده.</td>
                     </tr>
                     <tr>
                       <td>OR9842</td>
                       <td>پرداخت ارزی</td>
-                      <td><a href = "employee_details_for_manager.html">username</a></td>
+                      <td><a href = '{% static "panel/pages/manager/employee_details_for_manager.html" %}' >username</a></td>
                       <td>11-7-2014</td>
                       <td>خیلی خطا بوده.</td>
                     </tr>
                     <tr>
                       <td>OR9842</td>
                       <td>ثبت نام TOFEL</td>
-                      <td><a href = "employee_details_for_manager.html">username</a></td>
+                      <td><a href = '{% static "panel/pages/manager/employee_details_for_manager.html" %}' >username</a></td>
                       <td>11-7-2014</td>
                       <td>خطا بوده.</td>
                     </tr>
@@ -370,12 +371,12 @@
                       <tbody>
                         <tr>
                           <td>
-                            <a href="transaction_details.html">921112</a>
+                            <a href = '{% static "panel/pages/manager/transaction_details.html" %}' >921112</a>
                           </td>
                           <td>blah</td>
                           <td>blah</td>
                           <td>
-                              <a href="customer_details_for_manager.html">921112</a>
+                              <a href = '{% static "panel/pages/manager/customer_details_for_manager.html" %}' >921112</a>
                           </td>
                           <td>blah</td>
                           <td>
@@ -384,12 +385,12 @@
                         </tr>
                         <tr>
                             <td>
-                              <a href="transaction_details.html">921112</a>
+                              <a href = '{% static "panel/pages/manager/transaction_details.html" %}' >921112</a>
                             </td>
                             <td>blah</td>
                             <td>blah</td>
                             <td>
-                                <a href="customer_details_for_manager.html">921112</a>
+                                <a href = '{% static "panel/pages/manager/customer_details_for_manager.html" %}' >921112</a>
                             </td>
                             <td>blah</td>
                             <td>
@@ -398,12 +399,12 @@
                           </tr>
                           <tr>
                               <td>
-                                <a href="transaction_details.html">921112</a>
+                                <a href = '{% static "panel/pages/manager/transaction_details.html" %}' >921112</a>
                               </td>
                               <td>blah</td>
                               <td>blah</td>
                               <td>
-                                  <a href="customer_details_for_manager.html">921112</a>
+                                  <a href = '{% static "panel/pages/manager/customer_details_for_manager.html" %}' >921112</a>
                               </td>
                               <td>blah</td>
                               <td>
@@ -412,12 +413,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                  <a href="transaction_details.html">921112</a>
+                                  <a href = '{% static "panel/pages/manager/transaction_details.html" %}' >921112</a>
                                 </td>
                                 <td>blah</td>
                                 <td>blah</td>
                                 <td>
-                                    <a href="customer_details_for_manager.html">921112</a>
+                                    <a href = '{% static "panel/pages/manager/customer_details_for_manager.html" %}' >921112</a>
                                 </td>
                                 <td>blah</td>
                                 <td>
@@ -426,12 +427,12 @@
                               </tr>
                               <tr>
                                   <td>
-                                    <a href="transaction_details.html">921112</a>
+                                    <a href = '{% static "panel/pages/manager/transaction_details.html" %}' >921112</a>
                                   </td>
                                   <td>blah</td>
                                   <td>blah</td>
                                   <td>
-                                      <a href="customer_details_for_manager.html">921112</a>
+                                      <a href = '{% static "panel/pages/manager/customer_details_for_manager.html" %}' >921112</a>
                                   </td>
                                   <td>blah</td>
                                   <td>
@@ -440,12 +441,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                      <a href="transaction_details.html">921112</a>
+                                      <a href = '{% static "panel/pages/manager/transaction_details.html" %}' >921112</a>
                                     </td>
                                     <td>blah</td>
                                     <td>blah</td>
                                     <td>
-                                        <a href="customer_details_for_manager.html">921112</a>
+                                        <a href = '{% static "panel/pages/manager/customer_details_for_manager.html" %}' >921112</a>
                                     </td>
                                     <td>blah</td>
                                     <td>
@@ -491,8 +492,8 @@
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+          <li><a href = '{% static "panel/pages/manager/#control-sidebar-home-tab" %}'  data-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href = '{% static "panel/pages/manager/#control-sidebar-settings-tab" %}'  data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -501,7 +502,7 @@
             <h3 class="control-sidebar-heading">Recent Activity</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <i class="menu-icon fa fa-birthday-cake bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
@@ -510,7 +511,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <i class="menu-icon fa fa-user bg-yellow"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
@@ -519,7 +520,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
@@ -528,7 +529,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <i class="menu-icon fa fa-file-code-o bg-green"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
@@ -541,7 +542,7 @@
             <h3 class="control-sidebar-heading">Tasks Progress</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Custom Template Design
                     <span class="label label-danger pull-left">70%</span>
@@ -552,7 +553,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Update Resume
                     <span class="label label-success pull-left">95%</span>
@@ -563,7 +564,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Laravel Integration
                     <span class="label label-warning pull-left">50%</span>
@@ -574,7 +575,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/pages/manager/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Back End Framework
                     <span class="label label-primary pull-left">68%</span>
@@ -642,7 +643,7 @@
               <div class="form-group">
                 <label class="control-sidebar-subheading">
                   Delete chat history
-                  <a href="javascript::;" class="text-red pull-left"><i class="fa fa-trash-o"></i></a>
+                  <a href = '{% static "panel/pages/manager/javascript::;" %}'  class="text-red pull-left"><i class="fa fa-trash-o"></i></a>
                 </label>
               </div><!-- /.form-group -->
             </form>
@@ -655,20 +656,20 @@
     </div><!-- ./wrapper -->
 
 <!-- jQuery 2.1.4 -->
-<script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src = '{% static "panel/plugins/jQuery/jQuery-2.1.4.min.js" %}' ></script>
 <!-- Bootstrap 3.3.4 -->
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<script src = '{% static "panel/bootstrap/js/bootstrap.min.js" %}' ></script>
 <!-- DataTables -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src = '{% static "panel/plugins/datatables/jquery.dataTables.min.js" %}' ></script>
+<script src = '{% static "panel/plugins/datatables/dataTables.bootstrap.min.js" %}' ></script>
 <!-- SlimScroll -->
-<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src = '{% static "panel/plugins/slimScroll/jquery.slimscroll.min.js" %}' ></script>
 <!-- FastClick -->
-<script src="../../plugins/fastclick/fastclick.min.js"></script>
+<script src = '{% static "panel/plugins/fastclick/fastclick.min.js" %}' ></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/app.min.js"></script>
+<script src = '{% static "panel/dist/js/app.min.js" %}' ></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src = '{% static "panel/dist/js/demo.js" %}' ></script>
 <!-- page script -->
 <script>
     $(document).ready(function() {

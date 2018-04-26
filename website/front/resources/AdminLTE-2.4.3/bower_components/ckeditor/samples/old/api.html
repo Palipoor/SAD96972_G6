@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
@@ -7,8 +8,8 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 <head>
 	<meta charset="utf-8">
 	<title>API Usage &mdash; CKEditor Sample</title>
-	<script src="../../ckeditor.js"></script>
-	<link href="sample.css" rel="stylesheet">
+	<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js" %}' ></script>
+	<link href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/sample.css" %}'  rel="stylesheet">
 	<script>
 
 // The instanceReady event is fired, when an instance of CKEditor has finished
@@ -122,7 +123,7 @@ function onBlur() {
 </head>
 <body>
 	<h1 class="samples">
-		<a href="index.html">CKEditor Samples</a> &raquo; Using CKEditor JavaScript API
+		<a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/index.html" %}' >CKEditor Samples</a> &raquo; Using CKEditor JavaScript API
 	</h1>
 	<div class="warning deprecated">
 		This sample is not maintained anymore. Check out its <a href="https://sdk.ckeditor.com/samples/api.html">brand new version in CKEditor SDK</a>.
@@ -182,7 +183,7 @@ function onBlur() {
 			<input onclick="SetContents();" type="button" value="Set Editor Contents">
 			<input onclick="GetContents();" type="button" value="Get Editor Contents (HTML)">
 			<br>
-			<textarea cols="100" id="htmlArea" rows="3">&lt;h2&gt;Test&lt;/h2&gt;&lt;p&gt;This is some &lt;a href="/Test1.html"&gt;sample&lt;/a&gt; HTML code.&lt;/p&gt;</textarea>
+			<textarea cols="100" id="htmlArea" rows="3">&lt;h2&gt;Test&lt;/h2&gt;&lt;p&gt;This is some &lt;a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/Test1.html" %}' &gt;sample&lt;/a&gt; HTML code.&lt;/p&gt;</textarea>
 			<br>
 			<br>
 			<input onclick="InsertText();" type="button" value="Insert Text">

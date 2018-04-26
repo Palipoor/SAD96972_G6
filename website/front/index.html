@@ -1,4 +1,6 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
+
 <html lang="en">
 <!--
 	Bent - Bootstrap Landing Page Template by Dcrazed
@@ -16,39 +18,39 @@
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href='{% static "css/bootstrap.min.css"%}'rel="stylesheet">
 
     <!-- Owl Carousel Assets -->
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.theme.css" rel="stylesheet">
+    <link href='{% static "css/owl.carousel.css"%}' rel="stylesheet">
+    <link href='{% static "css/owl.theme.css" %}' rel="stylesheet">
 
 
     <!-- Pixeden Icon Font -->
-    <link rel="stylesheet" href="css/Pe-icon-7-stroke.css">
+    <link rel="stylesheet" href='{% static "css/Pe-icon-7-stroke.css" %}'>
 
     <!-- Font Awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href='{% static "css/font-awesome.min.css" %}' rel="stylesheet">
 
 
     <!-- PrettyPhoto -->
     <!-- PrettyPhoto -->
-    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href='{% static "css/prettyPhoto.css" %}' rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href='{% static "favicon.ico" %}' />
 
     <!-- Style -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href='{% static "css/style.css" %}' rel="stylesheet"> -->
 
-    <link href="css/animate.css" rel="stylesheet">
+    <link href='{% static "css/animate.css" %}' rel="stylesheet">
     <!-- Responsive CSS -->
-    <link href="css/responsive.css" rel="stylesheet">
+    <link href='{% static "css/responsive.css" %}' rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+        	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        	<![endif]-->
 </head>
 
 <body  dir= "rtl">
@@ -79,21 +81,21 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">
-                            <img src="images/logo.png" alt="Logo">
+                        <a class="navbar-brand" href = '{% static "#" %}' >
+                            <img src= '{% static "images/logo.png" %}' alt="Logo">
                         </a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="navbar" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
-                            <li><a href="#HOME" name = "home">خانه</a> </li>
-                            <li><a href="#ABOUT" name = "about">دربارهٔ ما </a> </li>
-                            <li><a href="#FEATURES" name = "features">خدمات</a></li>
-                            <li><a href="#HISTORY" name = "history" >تاریخچه</a> </li>
-                            <li><a href="#FINANCE" name = "prices">نرخ و مبادله ارز </a> </li>
-                            <li><a href="#LAW" name = "law">قوانین و مقررات</a> </li>
-                            <li><a href="#CONTACT" name = "contact">ارتباط با ما </a> </li>
+                            <li><a href = '{% static "#HOME" %}'  name = "home">خانه</a> </li>
+                            <li><a href = '{% static "#ABOUT" %}'  name = "about">دربارهٔ ما </a> </li>
+                            <li><a href = '{% static "#FEATURES" %}'  name = "features">خدمات</a></li>
+                            <li><a href = '{% static "#HISTORY" %}'  name = "history" >تاریخچه</a> </li>
+                            <li><a href = '{% static "#FINANCE" %}'  name = "prices">نرخ و مبادله ارز </a> </li>
+                            <li><a href = '{% static "#LAW" %}'  name = "law">قوانین و مقررات</a> </li>
+                            <li><a href = '{% static "#CONTACT" %}'  name = "contact">ارتباط با ما </a> </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -106,7 +108,7 @@
                     <div class="col-md-12">
                         <div class="logo text-center">
                                 <!-- LOGO -->
-                            <img width="125" height="55" src="images/logo.png" alt="">
+                            <img width="125" height="55" src='{% static "images/logo.png" %}' alt="">
                         </div>
                     </div>
                 </div>
@@ -115,19 +117,19 @@
                         <div class="home_text">
                             <!-- TITLE AND DESC -->
                             <h1  dir="rtl">سپاا</h1>
-                            <p  dir="rtl">توضیحات مربوطه توضیحات مربوطه <br> توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه </p>
-                            <small>  <font color="white">عضو سامانه نیستید؟ می‌توانید از  </font> <a href="" style="color:orange">اینجا</a><font color="white"> ثبت نام کنید.</font> </small>
+                            <p  dir="rtl">توضیحات مربوطه توضیحات مربوطه <br> توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه  </p>
+                            <small>  <font color="white">عضو سامانه نیستید؟ می‌توانید از  </font> <a href = '{% static "." %}'  style="color:orange">اینجا</a><font color="white"> ثبت نام کنید.</font> </small>
                             <div class="download-btn">
                             <!-- BUTTON -->
                             
-                                <a class="btn home-btn wow fadeInLeft" href="panel\pages\examples\login.html" name = "log in" >ورود</a>
-                                <a class="tuor btn wow fadeInRight" href="#ABOUT">اطلاعات بیشتر<i class="fa fa-angle-down"></i></a>                                
+                                <a class="btn home-btn wow fadeInLeft" href = '{% static "panel\pages\examples\login.html" %}'  name = "log in" >ورود</a>
+                                <a class="tuor btn wow fadeInRight" href = '{% static "#ABOUT" %}' >اطلاعات بیشتر<i class="fa fa-angle-down"></i></a>                                
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-md-offset-1 col-sm-4">
                         <div class="home-iphone">
-                            <img src="images/iPhone_Home.png" alt="">
+                            <img src='{% static "images/iPhone_Home.png" %}' alt="">
                         </div>
                     </div>
                 </div>
@@ -164,7 +166,7 @@
                     <div class="col-md-6">
                         <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- PHONE -->
-                            <img src="images/about_iphone.png" alt="">
+                            <img src='{% static "images/about_iphone.png" %}' alt="">
                         </div>
                     </div>
                     <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -246,7 +248,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                 <!-- IMAGE -->
-                                                <img src="images/client_1.png" alt="">
+                                                <img src='{% static "images/client_1.png" %}' alt="">
                                                 <div class="testimonial_caption">
                                                    <!-- DESCRIPTION -->  
                                                     <h2>ممد</h2>
@@ -262,7 +264,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                  <!-- IMAGE -->
-                                                <img src="images/client_2.png" alt="">
+                                                <img src='{% static "images/client_2.png" %}' alt="">
                                                 <div class="testimonial_caption">
                                                 <!-- DESCRIPTION --> 
                                                     <h2>مریم</h2>
@@ -278,7 +280,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                 <!-- IMAGE -->
-                                                <img src="images/client_3.png" alt="">
+                                                <img src= '{% static "images/client_3.png" %}' alt="">
                                                 <div class="testimonial_caption">
                                                 <!-- DESCRIPTION --> 
                                                     <h2>میترا</h2>
@@ -365,7 +367,7 @@
                     <div class="col-md-4">
                         <div class="feature_iphone">
                             <!-- FEATURE PHONE IMAGE -->
-                            <img class="wow bounceIn" data-wow-duration="1s" src="images/iPhone02.png" alt="">
+                            <img class="wow bounceIn" data-wow-duration="1s" src='{% static "images/iPhone02.png" %}' alt="">
                         </div>
                     </div>
                     <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
@@ -423,7 +425,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-primary btn-action" href="panel\pages\examples\register.html" role="button" name = "sign up">ثبت نام</a>
+                    <a class="btn btn-primary btn-action" href = '{% static "panel\pages\examples\register.html" %}'  role="button" name = "sign up">ثبت نام</a>
                 </div>
             </div>
         </div>
@@ -497,7 +499,7 @@
                     <div class="col-md-6">
                         <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- PHONE -->
-                            <img src="images/about_iphone.png" alt="">
+                            <img src='{% static "images/about_iphone.png" %}' alt="">
                         </div>
                     </div>
                     <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -634,15 +636,15 @@
                     <div class="col-md-12 wow bounceInLeft">
                         <div class="social_icons">
                             <ul>
-                                <li><a href=""><i class="fa fa-facebook"></i></a>
+                                <li><a href = '{% static "." %}' ><i class="fa fa-facebook"></i></a>
                                 </li>
-                                <li><a href=""><i class="fa fa-twitter"></i></a>
+                                <li><a href = '{% static "." %}' ><i class="fa fa-twitter"></i></a>
                                 </li>
-                                <li><a href=""><i class="fa fa-dribbble"></i></a>
+                                <li><a href = '{% static "." %}' ><i class="fa fa-dribbble"></i></a>
                                 </li>
-                                <li><a href=""><i class="fa fa-behance"></i></a>
+                                <li><a href = '{% static "." %}' ><i class="fa fa-behance"></i></a>
                                 </li>
-                                <li><a href=""><i class="fa fa-youtube-play"></i></a>
+                                <li><a href = '{% static "." %}' ><i class="fa fa-youtube-play"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -675,7 +677,7 @@
 
                 <div class="col-md-6">
                     <div class="scroll_top">
-                        <a href="#HOME"><i class="fa fa-angle-up"></i></a>
+                        <a href = '{% static "#HOME" %}' ><i class="fa fa-angle-up"></i></a>
                     </div>
                 </div>
             </div>
@@ -689,19 +691,19 @@
 ============================== -->
 
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.js"></script>
-    <script src="js/jquery.fitvids.js"></script>
-    <script src="js/smoothscroll.js"></script>
-    <script src="js/jquery.parallax-1.1.3.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.ajaxchimp.langs.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src='{% static "js/jquery.min.js" %}' ></script>
+    <script src='{% static "js/bootstrap.min.js"  %}'></script>
+    <script src='{% static "js/owl.carousel.js" %}'></script>
+    <script src='{% static "js/jquery.fitvids.js" %}'></script>
+    <script src='{% static "js/smoothscroll.js" %}'></script>
+    <script src='{% static "js/jquery.parallax-1.1.3.js" %}'></script>
+    <script src='{% static "js/jquery.prettyPhoto.js" %}'></script>
+    <script src='{% static "js/jquery.ajaxchimp.min.js" %}'></script>
+    <script src='{% static "js/jquery.ajaxchimp.langs.js" %}'></script>
+    <script src='{% static "js/wow.min.js" %}'></script>
+    <script src='{% static "js/waypoints.min.js" %}'></script>
+    <script src='{% static "js/jquery.counterup.min.js" %}'></script>
+    <script src='{% static "js/script.js" %}'></script>
 
 
 </body>

@@ -1,0 +1,304 @@
+{% extends "manager/mother_panel.html" %} 
+{% load static staticfiles %} 
+
+{% block title %} 
+{{type}}ان
+{% endblock title %} 
+
+{% block content_header_text %}
+<h1>{{type}}ان</h1>
+{{ block.super }} 
+{% endblock content_header_text %} 
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active">{{type}}ان </li>
+{% endblock content_header_link %}
+
+{% block main_content %}
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">{{type}}ان موسسه</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="table" class="table table-bordered table-striped" name="customers-table">
+                        <thead>
+                            <tr>
+                                <th>شناسه {{type}}</th>
+                                <th>نام کاربری</th>
+                                <th>نام خانوادگی</th>
+                                <th>نام </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                                </td>
+                                <td>@blahblah</td>
+                                <td>blah</td>
+                                <td>
+                                    blah
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                                </td>
+                                <td>@blahblah</td>
+                                <td>blah</td>
+                                <td>
+                                    blah
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                                </td>
+                                <td>@blahblah</td>
+                                <td>blah</td>
+                                <td>
+                                    blah
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                                </td>
+                                <td>@blahblah</td>
+                                <td>blah</td>
+                                <td>
+                                    blah
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>شناسهٔ {{type}}</th>
+                                <th>نام کاربری</th>
+                                <th>نام خانوادگی</th>
+                                <th>نام </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    {% if type == 'مشتری' %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-8">
+                <!-- Horizontal Form -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"> فرم قطع دسترسی {{type}}</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">نام کاربری</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="why" class="col-sm-2 control-label">توضیح</label>
+                                <div class="col-sm-6">
+                                    <textarea id="why" class="form-control" placeholder="دلیل قطع دسترسی"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-info pull-right">قطع دسترسی</button>
+                            <div class="col-md-5">
+                                <p name="error-message-1">این جا پیام خطا می‌آید.</p>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Horizontal Form -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> فرم قطع دسترسی کارمند</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">نام کاربری</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="why" class="col-sm-2 control-label">توضیح</label>
+                            <div class="col-sm-6">
+                                <textarea id="why" class="form-control" placeholder="دلیل قطع دسترسی"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">قطع دسترسی</button>
+                        <div class="col-md-5">
+                            <p name="message">این جا پیام خطا می‌آید.</p>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <div class="box" name="salary-change-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">تغییر حقوق کارمند</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">نام کاربری کارمند</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="salary" class="col-sm-2 control-label">حقوق جدید</label>
+                            <div class="col-sm-6">
+                                <input type="number" id="salary" class="form-control">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right" id="set-button">تغییر حقوق</button>
+                        <div class="col-md-5">
+                            <p name="message">این جا پیام خطا می‌آید.</p>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Horizontal Form -->
+            <div class="box" name="add-employee">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> فرم اضافه کردن کارمند</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">نام</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="familyname" class="col-sm-2 control-label"> نام خانوادگی</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="familyname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">نام کاربری</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="salary" class="col-sm-2 control-label">میزان حقوق</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="salary">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">افزودن</button>
+                        <div class="col-md-5">
+                            <p name="message">این جا پیام خطا می‌آید.</p>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    </div>
+    <!-- /.row (main row) -->
+    
+    {% endif %}
+    </div>
+    </div>
+    <!-- /.row (main row) -->
+
+</section>
+<!-- /.content -->
+{% endblock main_content %}
+
+{% block scripts %}
+<script src='{% static "panel/plugins/jQuery/jQuery-2.1.4.min.js" %}'></script>
+<!-- Bootstrap 3.3.4 -->
+<script src='{% static "panel/bootstrap/js/bootstrap.min.js" %}'></script>
+<!-- DataTables -->
+<script src='{% static "panel/plugins/datatables/jquery.dataTables.min.js" %}'></script>
+<script src='{% static "panel/plugins/datatables/dataTables.bootstrap.min.js" %}'></script>
+<!-- SlimScroll -->
+<script src='{% static "panel/plugins/slimScroll/jquery.slimscroll.min.js" %}'></script>
+<!-- FastClick -->
+<script src='{% static "panel/plugins/fastclick/fastclick.min.js" %}'></script>
+<!-- AdminLTE App -->
+<script src='{% static "panel/dist/js/app.min.js" %}'></script>
+<!-- AdminLTE for demo purposes -->
+<script src='{% static "panel/dist/js/demo.js" %}'></script>
+<script>
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" name = "' + title + '" placeholder="Search ' + title + '" />');
+        });
+
+        // DataTable
+        var table = $('#table').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+</script>
+{% endblock scripts %}

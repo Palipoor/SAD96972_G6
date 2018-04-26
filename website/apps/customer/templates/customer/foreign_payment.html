@@ -1,0 +1,65 @@
+{% extends "customer/mother_panel.html" %} 
+{% load static staticfiles %} 
+
+{% block title %} 
+پرداخت ارزی
+{% endblock title %} 
+
+{% block content_header_text %}
+<h1>پرداخت ارزی</h1>
+{{ block.super }} 
+{% endblock content_header_text %} 
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active">پرداخت ارزی </li>
+{% endblock content_header_link %}
+
+{% block main_content %}
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+              <form role="form">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label>نام</label>
+                      <input type="text" class="form-control" placeholder="مهدی" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>نام خانوادگی</label>
+                        <input type="text" class="form-control" placeholder="شریفی" disabled>
+                      </div>
+                    <div class="form-group">
+                      <label>مبلغ</label>
+                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder=" مبلغ درخواستی به واحد ارزی">
+                      <div class="radio">
+                          <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="dollar" checked>
+                            دلار
+                          </label>
+                          <label>
+                              <input type="radio" name="optionsRadios" id="optionsRadios2" value="euro">
+                              یورو
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                      <p name="karmozd">مبلغ کارمزد:   ۱۰۰۰۰ ریال</p>
+                    </div>
+                    <div class="form-group">
+                        <label>شماره حساب مقصد</label>
+                        <input type="text" class="form-control" placeholder="شماره حساب مقصد را این جا وارد کنید." >
+                      </div>
+                    <div class="form-group">
+                      <label>فایل ضمیمه<small>(در صورت لزوم)</small></label>
+                      <input type="file" id="exampleInputFile">
+                    </div>
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">ثبت درخواست</button>
+                  </div>
+                </form>
+          </div><!-- nav-tabs-custom -->
+        </section>
+{% endblock main_content %}

@@ -1,0 +1,20 @@
+{% extends "manager/mother_panel.html" %} 
+{% load static staticfiles %} 
+
+{% block title %} 
+اطلاعات کاربری
+{% endblock title %} 
+
+{% block content_header_text %}
+<h1>اطلاعات کاربری</h1>
+{{ block.super }} 
+{% endblock content_header_text %} 
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active"> اطلاعات کاربری </li>
+{% endblock content_header_link %}
+
+{% block main_content %}
+{% include "employee_details.html" %}
+{% endblock main_content %}

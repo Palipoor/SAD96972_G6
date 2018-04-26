@@ -1,0 +1,33 @@
+{% load static staticfiles %}
+<li class="treeview">
+    <a href='{% static "panel/pages/employee/#" %}'>
+        <i class="glyphicon glyphicon-user"></i>
+        <span>ویرایش مشخصات کاربری</span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="active">
+            <a href='{% static "panel/pages/employee/user_settings.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/employee/password_change.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a>
+        </li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href='{% static "panel/pages/employee/#" %}'>
+        <i class="fa fa-money"></i>
+        <span>مشاهدهٔ درخواست‌ها و تراکنش‌ها</span>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a href='{% static "panel/pages/employee/transaction_details.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> مشاهده تراکنش‌ها</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/employee/transaction_details.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> مشاهده درخواست‌ها</a>
+        </li>
+    </ul>
+</li>

@@ -1,14 +1,15 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/demo.css" %}' >
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/demo.js" %}' ></script>
 
 	<title>ColReorder examples - ColReorder examples</title>
 </head>
@@ -39,22 +40,22 @@
 			<div class="liner">
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="./index.html">Examples</a></h3>
+						<h3><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/index.html" %}' >Examples</a></h3>
 						<ul class="toc">
-							<li><a href="./simple.html">Basic initialisation</a></li>
-							<li><a href="./new_init.html">Initialisation using `new`</a></li>
-							<li><a href="./alt_insert.html">Alternative insert styling</a></li>
-							<li><a href="./realtime.html">Realtime updating</a></li>
-							<li><a href="./state_save.html">State saving</a></li>
-							<li><a href="./scrolling.html">Scrolling table</a></li>
-							<li><a href="./predefined.html">Predefined column ordering</a></li>
-							<li><a href="./reset.html">Reset ordering API</a></li>
-							<li><a href="./colvis.html">ColVis integration</a></li>
-							<li><a href="./fixedcolumns.html">FixedColumns integration</a></li>
-							<li><a href="./fixedheader.html">FixedHeader integration</a></li>
-							<li><a href="./jqueryui.html">jQuery UI styling</a></li>
-							<li><a href="./col_filter.html">Individual column filtering</a></li>
-							<li><a href="./server_side.html">Server-side processing</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/simple.html" %}' >Basic initialisation</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/new_init.html" %}' >Initialisation using `new`</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/alt_insert.html" %}' >Alternative insert styling</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/realtime.html" %}' >Realtime updating</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/state_save.html" %}' >State saving</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/scrolling.html" %}' >Scrolling table</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/predefined.html" %}' >Predefined column ordering</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/reset.html" %}' >Reset ordering API</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/colvis.html" %}' >ColVis integration</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/fixedcolumns.html" %}' >FixedColumns integration</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/fixedheader.html" %}' >FixedHeader integration</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/jqueryui.html" %}' >jQuery UI styling</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/col_filter.html" %}' >Individual column filtering</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/ColReorder/examples/server_side.html" %}' >Server-side processing</a></li>
 						</ul>
 					</div>
 				</div>
