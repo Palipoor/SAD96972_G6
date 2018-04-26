@@ -1,0 +1,84 @@
+{% extends "manager/mother_panel.html" %} 
+{% load static staticfiles %} 
+
+{% block title %} 
+ویرایش مشخصات موسسه
+{% endblock title %} 
+
+{% block content_header_text %}
+<h1>ویرایش مشخصات موسسه</h1>
+{{ block.super }} 
+{% endblock content_header_text %} 
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active"> ویرایش مشخصات موسسه </li>
+{% endblock content_header_link %}
+
+{% block main_content %}
+<section class="content">
+<!-- Small boxes (Stat box) -->
+<div class="row">
+  <div class="col-md-4">
+    <div class="box">
+      <div class="box-header with-border">
+        <h4>مشخصات اصلی</h4>
+      </div>
+      <!--box header-->
+      <div class="box-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="exampleInputFile">لوگو موسسه</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">تصویر انتخابی نباید بزرگتر از یک مگابایت باشد.</p>
+          </div>
+          <div class="form-group">
+            <label>نام کاربری مدیر</label>
+            <p class="margin">myusername</p>
+            <input type="text" class="form-control" placeholder="نام کاربری جدید">
+          </div>
+          <div class="form-group">
+            <label>نام موسسه</label>
+            <p class="margin">سپاا</p>
+            <input type="text" class="form-control" placeholder="نام">
+          </div>
+        </form>
+      </div>
+      <div class="box-footer" allign="Left">
+        <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-xs-4">
+    <div class="box" allign="center">
+      <div class="box-header with-border">
+        <h4>اطلاعات مالی</h4>
+      </div>
+      <!--box header-->
+      <div class="box-body">
+        <form role="form">
+          <div class="form-group">
+            <label>شمارهٔ حساب </label>
+            <p class="margin">1010-10121416</p>
+            <input type="text" class="form-control" placeholder="شمارهٔ حساب جدید">
+          </div>
+          <div class="form-group">
+            <label>کف موجودی کیف پول ریالی </label>
+            <p class="margin">۱۵۰۰۰۰۰۰۰ ریال</p>
+            <input type="text" class="form-control" placeholder="کف جدید موجودی">
+          </div>
+        </form>
+      </div>
+      <!--box body-->
+      <div class="box-footer" allign="Left">
+        <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.row -->
+
+
+</section>
+<!-- /.content -->
+{% endblock main_content %}

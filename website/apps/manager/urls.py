@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.employee.views import dashboard, change_password, settings, transaction_details, customer_details
+from apps.manager.views import dashboard, change_password, settings, transaction_details, users, customer_details, employee_details
 urlpatterns = [
     path('dashboard', dashboard), 
     path('change_password', change_password),
     path('settings', settings),
-    path('transaction_details', transaction_details),
+    path('<id>_transaction_details', transaction_details),
     path('settings/', settings),
+    path('<user_type>_users/', users),
     path('<user_id>_customer_details/', customer_details),
+    path('<employee_id>_employee_details/', employee_details),
+    
 ]
