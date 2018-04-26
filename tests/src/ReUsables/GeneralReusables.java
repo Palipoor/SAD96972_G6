@@ -28,6 +28,10 @@ public class GeneralReusables {
     public static String WRONG_USERNAME_ERROR;
     public static String ACCESS_DENIED_ERROR;
     public static String NO_SUCH_USER_ERROR;
+    public static String REPORTED_TRANSACTION;
+    public static String DONE_TRANSACTION;
+    public static String PENDING_TRANSACTION;
+    public static String FAILED_TRANSACTION;
 
 
     public static void setUpToHomepage(WebDriver driver) {

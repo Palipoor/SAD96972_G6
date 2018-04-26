@@ -61,7 +61,7 @@ public class FaultReport {
 
     @Test
     public void successfulReceiveReportTest() {
-        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals("گزارش شده"));
+        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.REPORTED_TRANSACTION));
     }
 
 
