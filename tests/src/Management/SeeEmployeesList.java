@@ -34,7 +34,6 @@ public class SeeEmployeesList {
                 isthereAnyEmployeesTable = true;
             }
         }
-
         assertTrue(isthereAnyEmployeesTable);
     }
 

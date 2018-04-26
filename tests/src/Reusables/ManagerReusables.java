@@ -302,6 +302,8 @@ public class ManagerReusables {
         idSearchBox.sendKeys(id);
         List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
         List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
+
+        GeneralReusables.logout(driver);
         return transactionDetails.get(statusIndex).getText();
     }
 
