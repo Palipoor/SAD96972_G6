@@ -1,5 +1,6 @@
 package Employee;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,14 +24,18 @@ public class ShowingRequests {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
+        CustomerReusables.createNewTransaction();
     }
 
     @Test
-    public void employeesListExistsTest() {
+    public void requestsListExistsTest() {
         WebElement transactionsTable = driver.findElement(By.name("transactions-table"));
         WebElement searchBox = transactionsTable.findElement(By.name("وضعیت"));
         searchBox.clear();
-        searchBox.sendKeys("");
+        searchBox.sendKeys("در انتظار");
+        List<WebElement> tableRows = transactionsTable.findElements(By.xpath("//tbody//tr"));
+
+        assertTrue(tableRows.size() > 0);
     }
 
     @Test

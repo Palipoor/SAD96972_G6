@@ -307,8 +307,28 @@ public class ManagerReusables {
         return transactionDetails.get(statusIndex).getText();
     }
 
-    public int getNewestTransactionId() {
-        return 0;
+    public String getNewestTransactionId() {
+        WebDriver driver = new ChromeDriver();
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.loginAsTheManager(driver);
+
+        WebElement theTable = driver.findElement(By.name("transactions-table"));
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+        int idIndex = 0;
+        for (int i = 0; i < headerTitles.size(); i++) {
+            if (headerTitles.get(i).getText().equals("شناسه تراکنش")) {
+                idIndex = i;
+            }
+            if (headerTitles.get(i).getText().equals("تاریخ تراکنش")) {
+                headerTitles.get(i).click();// sort by time
+            }
+        }
+        GeneralReusables.logout(driver);
+        WebElement tableRow = theTable.findElements(By.xpath("//tbody//tr")).get(0);
+        List<WebElement> transactionDetails = tableRow.findElements(By.xpath("//td"));
+        return transactionDetails.get(idIndex).getText();
     }
+
 
 }
