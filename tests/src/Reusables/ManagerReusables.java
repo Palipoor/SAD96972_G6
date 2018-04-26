@@ -28,7 +28,7 @@ public class ManagerReusables {
         usernameSearchBox.sendKeys(username);
 
         List<WebElement> tableRows = customersTable.findElements(By.xpath("//tbody//tr"));
-        driver.close();
+        GeneralReusables.logout(driver);
         return (tableRows.size() > 0);
     }
 
@@ -45,7 +45,7 @@ public class ManagerReusables {
         usernameSearchBox.sendKeys(username);
 
         List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody//tr"));
-        driver.close();
+        GeneralReusables.logout(driver);
         return (tableRows.size() > 0);
     }
 
@@ -70,7 +70,7 @@ public class ManagerReusables {
                 }
             }
             List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-            driver.close();
+            GeneralReusables.logout(driver);
             return employeeDetails.get(usernameIndex).getText();
         }
     }
@@ -96,8 +96,7 @@ public class ManagerReusables {
         WebElement salary = theForm.findElement(By.id("salary"));
         salary.clear();
         salary.sendKeys("100000");
-
-        driver.close();
+        GeneralReusables.logout(driver);
         return newUsername;
     }
 
@@ -122,7 +121,7 @@ public class ManagerReusables {
                 }
             }
             List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-            driver.close();
+            GeneralReusables.logout(driver);
             return employeeDetails.get(idIndex).getText();
         }
     }
@@ -168,8 +167,7 @@ public class ManagerReusables {
 
         signupButton = driver.findElement(By.name("sign up"));
         signupButton.click();
-
-        driver.close();
+        GeneralReusables.logout(driver);
         return getCustomerIdByUsername(newUsername);
     }
 
@@ -195,7 +193,7 @@ public class ManagerReusables {
             }
         }
         List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        driver.close();
+        GeneralReusables.logout(driver);
         return employeeDetails.get(idIndex).getText();
     }
 
@@ -222,7 +220,7 @@ public class ManagerReusables {
             }
         }
         List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        driver.close();
+        GeneralReusables.logout(driver);
         return employeeDetails.get(usernameIndex).getText();
     }
 
@@ -248,7 +246,7 @@ public class ManagerReusables {
             }
         }
         List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        driver.close();
+        GeneralReusables.logout(driver);
         return Integer.valueOf(employeeDetails.get(usernameIndex).getText());
     }
 
@@ -276,10 +274,35 @@ public class ManagerReusables {
             List<WebElement> employeeDetails = tableRow.findElements(By.xpath("//td"));
             String theUsername = employeeDetails.get(usernameIndex).getText();
             if (theUsername.equals(username)) {
+                GeneralReusables.logout(driver);
                 return true;
             }
         }
+        GeneralReusables.logout(driver);
         return false;
+    }
+
+    public static String getTransactionStatus(String id) {
+        WebDriver driver = new ChromeDriver();
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.loginAsTheManager(driver);
+
+        WebElement theTable = driver.findElement(By.name("transactions-table"));
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+        int statusIndex = 0;
+        for (int i = 0; i < headerTitles.size(); i++) {
+            if (headerTitles.get(i).getText().equals("وضعیت")) {
+                statusIndex = i;
+            }
+        }
+
+        WebElement idSearchBox = theTable.findElement(By.name("وضعیت"));
+        idSearchBox.clear();
+        idSearchBox.sendKeys(id);
+        List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
+        List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
+        return transactionDetails.get(statusIndex).getText();
     }
 
     public int getNewestTransactionId() {
