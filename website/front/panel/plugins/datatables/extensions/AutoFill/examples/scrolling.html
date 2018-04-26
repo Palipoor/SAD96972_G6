@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,18 +7,18 @@
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
 
 	<title>AutoFill example - Scrolling DataTable</title>
-	<link rel="stylesheet" type="text/css" href="../../../media/css/jquery.dataTables.css">
-	<link rel="stylesheet" type="text/css" href="../css/dataTables.autoFill.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/media/css/jquery.dataTables.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/extensions/AutoFill/css/dataTables.autoFill.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/demo.css" %}' >
 	<style type="text/css" class="init">
 
 	</style>
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="../js/dataTables.autoFill.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.dataTables.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/extensions/AutoFill/js/dataTables.autoFill.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/demo.js" %}' ></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 
@@ -554,10 +555,9 @@ $(document).ready(function() {
 					example:</p>
 
 					<ul>
-						<li><a href="../../../media/js/jquery.js">../../../media/js/jquery.js</a></li>
-						<li><a href=
-						"../../../media/js/jquery.dataTables.js">../../../media/js/jquery.dataTables.js</a></li>
-						<li><a href="../js/dataTables.autoFill.js">../js/dataTables.autoFill.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' >../../../media/js/jquery.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/js/jquery.dataTables.js" %}' >../../../media/js/jquery.dataTables.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/js/dataTables.autoFill.js" %}' >../js/dataTables.autoFill.js</a></li>
 					</ul>
 				</div>
 
@@ -577,9 +577,8 @@ $(document).ready(function() {
 					table:</p>
 
 					<ul>
-						<li><a href=
-						"../../../media/css/jquery.dataTables.css">../../../media/css/jquery.dataTables.css</a></li>
-						<li><a href="../css/dataTables.autoFill.css">../css/dataTables.autoFill.css</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/css/jquery.dataTables.css" %}' >../../../media/css/jquery.dataTables.css</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/css/dataTables.autoFill.css" %}' >../css/dataTables.autoFill.css</a></li>
 					</ul>
 				</div>
 
@@ -591,7 +590,7 @@ $(document).ready(function() {
 				<div class="php">
 					<p>The script used to perform the server-side processing for this table is shown below. Please note
 					that this is just an example script using PHP. Server-side processing scripts can be written in any
-					language, using <a href="//datatables.net/manual/server-side">the protocol described in the
+					language, using <a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/datatables.net/manual/server-side" %}' >the protocol described in the
 					DataTables documentation</a>.</p>
 				</div>
 			</div>
@@ -607,15 +606,15 @@ $(document).ready(function() {
 
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="./index.html">Examples</a></h3>
+						<h3><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/index.html" %}' >Examples</a></h3>
 						<ul class="toc active">
-							<li><a href="./simple.html">Basic initialisation</a></li>
-							<li><a href="./columns.html">Column options</a></li>
-							<li class="active"><a href="./scrolling.html">Scrolling DataTable</a></li>
-							<li><a href="./fill-both.html">Horizontal and vertical fill</a></li>
-							<li><a href="./fill-horizontal.html">Horizontal fill</a></li>
-							<li><a href="./complete-callback.html">Complete callback</a></li>
-							<li><a href="./step-callback.html">Step callback</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/simple.html" %}' >Basic initialisation</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/columns.html" %}' >Column options</a></li>
+							<li class="active"><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/scrolling.html" %}' >Scrolling DataTable</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/fill-both.html" %}' >Horizontal and vertical fill</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/fill-horizontal.html" %}' >Horizontal fill</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/complete-callback.html" %}' >Complete callback</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/AutoFill/examples/step-callback.html" %}' >Step callback</a></li>
 						</ul>
 					</div>
 				</div>

@@ -1,0 +1,61 @@
+{% load static staticfiles %}
+<li class="treeview">
+    <a href='{% static "panel/pages/manager/#" %}'>
+        <i class="glyphicon glyphicon-user"></i>
+        <span>ویرایش مشخصات موسسه</span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="active">
+            <a href='{% static "panel/pages/manager/company_settings.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/manager/password_change.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور مدیریت</a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href='{% static "panel/pages/manager/transaction_details.html" %}' name="transactions">
+        <em class="glyphicon glyphicon-credit-card"></em>
+        <span>تراکنش‌های موسسه</span>
+    </a>
+</li>
+<li>
+    <a href='{% static "panel/pages/manager/people.html" %}' name="employee">
+        <em class="fa fa-users"></em>
+        <span>کارمندان</span>
+    </a>
+</li>
+<li>
+    <a href='{% static "panel/pages/manager/customers.html" %}' name="customers">
+        <em class="fa fa-users"></em>
+        <span>مشتریان</span>
+    </a>
+</li>
+<li>
+    <a href='{% static "panel/pages/manager/transaction_details.html" %}' name="requests">
+        <em class="fa fa-comments"></em>
+        <span>درخواست‌های تاییدنشده</span>
+    </a>
+</li>
+<li class="treeview">
+    <a href='{% static "panel/pages/manager/#" %}'>
+        <i class="fa fa-money"></i>
+        <span>کیف پول‌های موسسه</span>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a href='{% static "panel/pages/manager/wallet_rial.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/manager/wallet_euro.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a>
+        </li>
+        <li>
+            <a href='{% static "panel/pages/manager/wallet_dollar.html" %}'>
+                <i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a>
+        </li>
+    </ul>
+</li>

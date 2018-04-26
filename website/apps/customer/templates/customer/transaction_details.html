@@ -1,0 +1,26 @@
+{% extends "customer/mother_panel.html" %}
+{% load static staticfiles %}
+
+ {% block title %} 
+جزئیات تراکنش
+ {% endblock title %}
+
+{% block scripts %}
+{% include "datatable_js.html" %}
+{% endblock scripts %}
+
+{% block content_header_text %}
+<h1>جزئیات تراکنش</h1>
+{{ block.super }}
+{% endblock content_header_text %}
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active">تراکنش‌های من </li>
+<li class="active">جزئیات تراکنش</li>
+{% endblock content_header_link %} 
+
+{% block main_content %}
+{% include "transaction_details.html" %}
+{% endblock main_content %}
+             

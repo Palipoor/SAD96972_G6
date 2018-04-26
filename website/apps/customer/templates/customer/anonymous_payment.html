@@ -1,0 +1,47 @@
+{% extends "customer/mother_panel.html" %} 
+{% load static staticfiles %} 
+
+{% block title %} 
+پرداخت ناشناس
+{% endblock title %} 
+
+{% block content_header_text %}
+<h1>پرداخت ناشناس</h1>
+{{ block.super }} 
+{% endblock content_header_text %} 
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active">پرداخت ناشناس </li>
+{% endblock content_header_link %}
+
+{% block main_content %}
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+              <form role="form">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label>مبلغ</label>
+                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder=" مبلغ درخواستی به واحد ریال">
+                    <div>
+                      <p name="karmozd">مبلغ کارمزد:   ۱۰۰۰۰ ریال</p>
+                    </div>
+                    <div class="form-group">
+                        <label>ایمیل شخص دریافت‌کننده</label>
+                        <input type="email" class="form-control" placeholder="آدرس ایمیل شخص دریافت‌کننده" >
+                      </div>
+                      <div class="form-group">
+                          <label>شمارهٔ تماس شخص دریافت‌کننده</label>
+                          <input type="tel" class="form-control" placeholder="شمارهٔ تماس شخص دریافت‌کننده" >
+                      </div>
+
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">ثبت درخواست</button>
+                  </div>
+                </form>
+          </div><!-- nav-tabs-custom -->
+        </section>
+{% endblock main_content %}

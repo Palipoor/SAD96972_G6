@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,18 +7,18 @@
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
 
 	<title>TableTools example - Plug-in button types</title>
-	<link rel="stylesheet" type="text/css" href="../../../media/css/jquery.dataTables.css">
-	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/media/css/jquery.dataTables.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/extensions/TableTools/css/dataTables.tableTools.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "panel/plugins/datatables/examples/resources/demo.css" %}' >
 	<style type="text/css" class="init">
 
 	</style>
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" language="javascript" src="../js/dataTables.tableTools.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/media/js/jquery.dataTables.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "panel/plugins/datatables/examples/resources/demo.js" %}' ></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 
@@ -61,7 +62,7 @@ $(document).ready(function() {
 
 			<div class="info">
 				<p>This example shows now a plug-in button type can be created for TableTools. Button types are attached to the <code>$.fn.dataTable.TableTools.buttons</code>
-				object and extend <code>$.fn.dataTable.TableTools.buttonBase</code>. All of the <a href="//datatables.net/extensions/tabletools/button_options">button options
+				object and extend <code>$.fn.dataTable.TableTools.buttonBase</code>. All of the <a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/datatables.net/extensions/tabletools/button_options" %}' >button options
 				defined in the documentation</a> are available and can be overridden as required. Finally to use the button simply include its name in the <code>aButtons</code>
 				array or use it as a button extender (<code>sExtends</code>).</p>
 
@@ -596,9 +597,9 @@ $(document).ready(function() {
 					<p>In addition to the above code, the following Javascript library files are loaded for use in this example:</p>
 
 					<ul>
-						<li><a href="../../../media/js/jquery.js">../../../media/js/jquery.js</a></li>
-						<li><a href="../../../media/js/jquery.dataTables.js">../../../media/js/jquery.dataTables.js</a></li>
-						<li><a href="../js/dataTables.tableTools.js">../js/dataTables.tableTools.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/js/jquery.js" %}' >../../../media/js/jquery.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/js/jquery.dataTables.js" %}' >../../../media/js/jquery.dataTables.js</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js" %}' >../js/dataTables.tableTools.js</a></li>
 					</ul>
 				</div>
 
@@ -615,8 +616,8 @@ $(document).ready(function() {
 					<p>The following CSS library files are loaded for use in this example to provide the styling of the table:</p>
 
 					<ul>
-						<li><a href="../../../media/css/jquery.dataTables.css">../../../media/css/jquery.dataTables.css</a></li>
-						<li><a href="../css/dataTables.tableTools.css">../css/dataTables.tableTools.css</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/media/css/jquery.dataTables.css" %}' >../../../media/css/jquery.dataTables.css</a></li>
+						<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/css/dataTables.tableTools.css" %}' >../css/dataTables.tableTools.css</a></li>
 					</ul>
 				</div>
 
@@ -627,7 +628,7 @@ $(document).ready(function() {
 
 				<div class="php">
 					<p>The script used to perform the server-side processing for this table is shown below. Please note that this is just an example script using PHP. Server-side
-					processing scripts can be written in any language, using <a href="//datatables.net/manual/server-side">the protocol described in the DataTables
+					processing scripts can be written in any language, using <a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/datatables.net/manual/server-side" %}' >the protocol described in the DataTables
 					documentation</a>.</p>
 				</div>
 			</div>
@@ -643,26 +644,26 @@ $(document).ready(function() {
 
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="./index.html">Examples</a></h3>
+						<h3><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/index.html" %}' >Examples</a></h3>
 						<ul class="toc active">
-							<li><a href="./simple.html">Basic initialisation</a></li>
-							<li><a href="./swf_path.html">Setting the SWF path</a></li>
-							<li><a href="./new_init.html">Initialisation with `new`</a></li>
-							<li><a href="./defaults.html">Defaults</a></li>
-							<li><a href="./select_single.html">Row selection - single row select</a></li>
-							<li><a href="./select_multi.html">Row selection - multi-row select</a></li>
-							<li><a href="./select_os.html">Row selection - operating system style</a></li>
-							<li><a href="./select_column.html">Row selection - row selector on specific cells</a></li>
-							<li><a href="./multiple_tables.html">Multiple tables</a></li>
-							<li><a href="./multi_instance.html">Multiple toolbars</a></li>
-							<li><a href="./collection.html">Button collections</a></li>
-							<li class="active"><a href="./plug-in.html">Plug-in button types</a></li>
-							<li><a href="./button_text.html">Custom button text</a></li>
-							<li><a href="./alter_buttons.html">Button arrangement</a></li>
-							<li><a href="./ajax.html">Ajax loaded data</a></li>
-							<li><a href="./pdf_message.html">PDF message</a></li>
-							<li><a href="./bootstrap.html">Bootstrap styling</a></li>
-							<li><a href="./jqueryui.html">jQuery UI styling</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/simple.html" %}' >Basic initialisation</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/swf_path.html" %}' >Setting the SWF path</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/new_init.html" %}' >Initialisation with `new`</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/defaults.html" %}' >Defaults</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/select_single.html" %}' >Row selection - single row select</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/select_multi.html" %}' >Row selection - multi-row select</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/select_os.html" %}' >Row selection - operating system style</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/select_column.html" %}' >Row selection - row selector on specific cells</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/multiple_tables.html" %}' >Multiple tables</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/multi_instance.html" %}' >Multiple toolbars</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/collection.html" %}' >Button collections</a></li>
+							<li class="active"><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/plug-in.html" %}' >Plug-in button types</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/button_text.html" %}' >Custom button text</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/alter_buttons.html" %}' >Button arrangement</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/ajax.html" %}' >Ajax loaded data</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/pdf_message.html" %}' >PDF message</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/bootstrap.html" %}' >Bootstrap styling</a></li>
+							<li><a href = '{% static "panel/plugins/datatables/extensions/TableTools/examples/jqueryui.html" %}' >jQuery UI styling</a></li>
 						</ul>
 					</div>
 				</div>

@@ -1,8 +1,9 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="utf-8">
     <title>Eve Use Case</title>
-    <script src="eve.js"></script>
+    <script src = '{% static "resources/AdminLTE-2.4.3/bower_components/eve-raphael/eve.js" %}' ></script>
     <script>
         var log = function (text) {
             log.log = log.log || [];

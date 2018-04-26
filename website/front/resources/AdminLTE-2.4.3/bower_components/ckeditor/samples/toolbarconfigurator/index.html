@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
@@ -9,16 +10,16 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 <head>
 	<meta charset="utf-8">
 	<title>Toolbar Configurator</title>
-	<script src="../../ckeditor.js"></script>
+	<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js" %}' ></script>
 	<script>
 		if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 			CKEDITOR.tools.enableHtml5Elements( document );
 	</script>
-	<link rel="stylesheet" href="lib/codemirror/codemirror.css">
-	<link rel="stylesheet" href="lib/codemirror/show-hint.css">
-	<link rel="stylesheet" href="lib/codemirror/neo.css">
-	<link rel="stylesheet" href="css/fontello.css">
-	<link rel="stylesheet" href="../css/samples.css">
+	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.css" %}' >
+	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.css" %}' >
+	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css" %}' >
+	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/css/fontello.css" %}' >
+	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/css/samples.css" %}' >
 </head>
 <body id="toolbar">
 
@@ -38,12 +39,12 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 <header class="header-a">
 	<div class="grid-container">
 		<h1 class="header-a-logo grid-width-30">
-			<a href="../index.html"><img src="../img/logo.png" alt="CKEditor Logo"></a>
+			<a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/index.html" %}' ><img src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/img/logo.png" %}'  alt="CKEditor Logo"></a>
 		</h1>
 		<nav class="navigation-b grid-width-70">
 			<ul>
-				<li><a href="../index.html"  class="button-a">Start</a></li>
-				<li><a href="index.html"  class="button-a button-a-background">Toolbar configurator</a></li>
+				<li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/index.html" %}'   class="button-a">Start</a></li>
+				<li><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/index.html" %}'   class="button-a button-a-background">Toolbar configurator</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -56,7 +57,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 				<div class="grid-container-nested">
 					<h1 class="grid-width-60">
 						Toolbar Configurator
-						<a href="#help-content" type="button" title="Configurator help" id="help" class="button-a button-a-background button-a-no-text icon-pos-left icon-question-mark">Help</a>
+						<a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/#help-content" %}'  type="button" title="Configurator help" id="help" class="button-a button-a-background button-a-no-text icon-pos-left icon-question-mark">Help</a>
 					</h1>
 
 					<div class="grid-width-40 grid-switch-magic">
@@ -105,17 +106,17 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 					<div class="basic">
 						<div class="grid-width-50">
 							<p>Arrange <a href="https://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.config-cfg-toolbarGroups">toolbar groups</a>, toggle <a href="https://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.config-cfg-removeButtons">button visibility</a> according to your needs and get your toolbar configuration.</p>
-							<p>You can replace the content of the <a href="../../config.js"><code>config.js</code></a> file with the generated configuration. If you already set some configuration options you will need to merge both configurations.</p>
+							<p>You can replace the content of the <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/config.js" %}' ><code>config.js</code></a> file with the generated configuration. If you already set some configuration options you will need to merge both configurations.</p>
 						</div>
 						<div class="grid-width-50">
 							<p>Read more about different ways of <a href="https://docs.ckeditor.com/ckeditor4/docs/#!/guide/dev_configuration">setting configuration</a> and do not forget about <strong>clearing browser cache</strong>.</p>
-							<p>Arranging toolbar groups is the recommended way of configuring the toolbar, but if you need more freedom you can use the <a href="#advanced">advanced configurator</a>.</p>
+							<p>Arranging toolbar groups is the recommended way of configuring the toolbar, but if you need more freedom you can use the <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/#advanced" %}' >advanced configurator</a>.</p>
 						</div>
 					</div>
 					<div class="advanced" style="display: none;">
 						<div class="grid-width-50">
 							<p>With this code editor you can edit your <a href="https://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.config-cfg-toolbar">toolbar configuration</a> live.</p>
-							<p>You can replace the content of the <a href="../../config.js"><code>config.js</code></a> file with the generated configuration. If you already set some configuration options you will need to merge both configurations.</p>
+							<p>You can replace the content of the <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/config.js" %}' ><code>config.js</code></a> file with the generated configuration. If you already set some configuration options you will need to merge both configurations.</p>
 						</div>
 						<div class="grid-width-50">
 							<p>Read more about different ways of <a href="https://docs.ckeditor.com/ckeditor4/docs/#!/guide/dev_configuration">setting configuration</a> and do not forget about <strong>clearing browser cache</strong>.</p>
@@ -140,15 +141,15 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 	</p>
 </footer>
 
-<script src="lib/codemirror/codemirror.js"></script>
-<script src="lib/codemirror/javascript.js"></script>
-<script src="lib/codemirror/show-hint.js"></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.js" %}' ></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/javascript.js" %}' ></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.js" %}' ></script>
 
-<script src="js/fulltoolbareditor.js"></script>
-<script src="js/abstracttoolbarmodifier.js"></script>
-<script src="js/toolbarmodifier.js"></script>
-<script src="js/toolbartextmodifier.js"></script>
-<script src="../js/sf.js"></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/js/fulltoolbareditor.js" %}' ></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/js/abstracttoolbarmodifier.js" %}' ></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/js/toolbarmodifier.js" %}' ></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/js/toolbartextmodifier.js" %}' ></script>
+<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/js/sf.js" %}' ></script>
 
 <script>
 	( function() {

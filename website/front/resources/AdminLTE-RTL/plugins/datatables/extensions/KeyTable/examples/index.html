@@ -1,14 +1,15 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
-	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
-	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
-	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
+	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
+	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.css" %}' >
+	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.js" %}' ></script>
 
 	<title>KeyTable examples - KeyTable examples</title>
 </head>
@@ -41,12 +42,12 @@
 			<div class="liner">
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href="./index.html">Examples</a></h3>
+						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/index.html" %}' >Examples</a></h3>
 						<ul class="toc">
-							<li><a href="./simple.html">Basic initialisation</a></li>
-							<li><a href="./events.html">Events</a></li>
-							<li><a href="./scrolling.html">Scrolling table</a></li>
-							<li><a href="./html.html">Plain HTML table</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/simple.html" %}' >Basic initialisation</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/events.html" %}' >Events</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/scrolling.html" %}' >Scrolling table</a></li>
+							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/html.html" %}' >Plain HTML table</a></li>
 						</ul>
 					</div>
 				</div>

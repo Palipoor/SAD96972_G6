@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
@@ -7,8 +8,8 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 <head>
 	<meta charset="utf-8">
 	<title>Editing source code in a dialog &mdash; CKEditor Sample</title>
-	<script src="../../../ckeditor.js"></script>
-	<link rel="stylesheet" href="../../../samples/old/sample.css">
+	<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js" %}' ></script>
+	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/sample.css" %}' >
 	<meta name="ckeditor-sample-name" content="Editing source code in a dialog">
 	<meta name="ckeditor-sample-group" content="Plugins">
 	<meta name="ckeditor-sample-description" content="Editing HTML content of both inline and classic editor instances.">
@@ -25,7 +26,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 </head>
 <body>
 	<h1 class="samples">
-		<a href="../../../samples/old/index.html">CKEditor Samples</a> &raquo; Editing source code in a dialog
+		<a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/index.html" %}' >CKEditor Samples</a> &raquo; Editing source code in a dialog
 	</h1>
 	<div class="warning deprecated">
 		This sample is not maintained anymore. Check out its <a href="https://sdk.ckeditor.com/samples/sourcearea.html">brand new version in CKEditor SDK</a>.
