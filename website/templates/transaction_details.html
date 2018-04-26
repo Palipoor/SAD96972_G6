@@ -1,0 +1,63 @@
+{% load static staticfiles %}
+
+        <section class="content">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+              <li class="pull-right header"> جزئیات تراکنش</li>
+              <li class="active"><a href = '{% static "panel/pages/customer/#tab_1-1" %}'  data-toggle="tab">مشخصات اصلی</a></li>
+              <li><a href = '{% static "panel/pages/customer/#tab_2-2" %}'  data-toggle="tab">مشخصات درخواست</a></li>
+              <li><a href = '{% static "panel/pages/customer/#tab_3-2" %}'  data-toggle="tab">مشخصات پرداخت</a></li>
+              <li><a href = '{% static "panel/pages/customer/#tab_4-2" %}'  data-toggle="tab">دیگر جزییات</a></li>
+              <li><a href = '{% static "panel/pages/customer/#tab_5-2" %}'  data-toggle="tab">مشخصات انجام</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1-1">
+                  <dl>
+                      <dt>شناسه</dt>
+                      <dd>شناسهٔ تراکنش</dd>
+                      <dt>نوع</dt>
+                      <dd>نوع تراکنش</dd>
+                    </dl>
+              </div><!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2-2">
+                  <dl>
+                      <dt>تاریخ و زمان ثبت درخواست</dt>
+                      <dd>2010 - 10 - 10  10:10</dd>
+                      <dt>درخواست‌دهنده</dt>
+                      <dd>محمد شریفی</dd>
+                    </dl>
+              </div><!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_3-2">
+                  <dl>
+                      <dt> مبلغ پرداختی</dt>
+                      <dd>۲۰۰۰۰ دلار</dd>
+                      <dt>کارمزد</dt>
+                      <dd>۲۰۰۰۰ ریال</dd>
+                    </dl>
+              </div>
+              <div class="tab-pane" id="tab_4-2">
+                  <dl>
+                      <dt> دیگرجزییات یک</dt>
+                      <dd> توضیح یک</dd>
+                      <dt> دیگرجزییات دو</dt>
+                      <dd> توضیح دو</dd>
+                      <dt> دیگرجزییات سه</dt>
+                      <dd> توضیح سه</dd>
+                    </dl>
+                </div>
+                <div class="tab-pane" id="tab_5-2">
+                    <dt> وضعیت</dt>
+                    <dd> ناموفق</dd>
+                    <dt> زمان پیگیری درخواست</dt>
+                    <dd> 2010 - 10 - 10  13:10
+
+                    </dd>
+                    <dt>توضیحات</dt>
+                    <dd> به علت عدم موجودی حساب ارزی ناموفق شد.</dd>
+                </div>
+                  <!-- /.tab-pane -->
+            </div><!-- /.tab-content -->
+          </div><!-- nav-tabs-custom -->
+        </section>
+
+             
