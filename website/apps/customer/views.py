@@ -39,3 +39,22 @@ def wallet(request,currency):
         currency = "ریال"
     template = loader.get_template("customer/wallet.html")
     return HttpResponse(template.render({"currency":currency}))
+
+def reverse_charge(request):
+    template = loader.get_template("customer/reverse_charge.html")
+    return HttpResponse(template.render())
+
+
+def foreign_payment(request):
+    template = loader.get_template("customer/foreign_payment.html")
+    return HttpResponse(template.render())
+
+
+def application_fee(request):
+    template = loader.get_template("customer/application_fee.html")
+    return HttpResponse(template.render())
+
+
+def anonymous_payment(request):
+    template = loader.get_template("customer/anonymous_payment.html")
+    return HttpResponse(template.render())
