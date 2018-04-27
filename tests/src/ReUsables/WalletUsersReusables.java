@@ -20,7 +20,6 @@ public class WalletUsersReusables {
     }
 
     public static int getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
-        //havaset bashe back bezani:D
         navigateToWallet(panel, currency);
         WebElement credit = panel.findElement(By.name("credit"));
         int creditValue = Integer.valueOf(credit.getText());

@@ -16,16 +16,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Created by Golpar on 4/13/2018 AD.
+ * Created by Golpar on 4/27/2018 AD.
  */
-public class WalletCreditCustomer {
+public class WalletCreditManager {
     private static WebDriver driver;
 
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
+        GeneralReusables.loginAsTheManager(driver);
     }
 
     @Test

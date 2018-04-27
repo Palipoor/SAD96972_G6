@@ -72,7 +72,7 @@ public class ChangeSalary {
     }
 
     @AfterClass
-    public void tearDown() {
+    public static void tearDown() {
         GeneralReusables.logout(driver);
     }
 }

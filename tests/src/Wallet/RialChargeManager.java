@@ -10,20 +10,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Golpar on 4/12/2018 AD.
+ * Created by Golpar on 4/27/2018 AD.
  */
-public class RialChargeCustomer {
-
+public class RialChargeManager {
     private static WebDriver driver;
 
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
+        GeneralReusables.loginAsTheManager(driver);
         WalletUsersReusables.navigateToWallet(driver, "rial");
     }
 
@@ -35,15 +34,15 @@ public class RialChargeCustomer {
 
     @Test
     public void rialWalletCharge() {
-        int rialCredit = WalletUsersReusables.getWalletCredit(driver,"rial");
+        int rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         WebElement amountBox = driver.findElement(By.name("desired-amount"));
         amountBox.sendKeys("10000");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
         //todo چیزی که باید از درگاه برمی‌گرده ببینه رو این جا بنویس.
-        int newRialCredit = WalletUsersReusables.getWalletCredit(driver,"rial");
+        int newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         int charged = newRialCredit - rialCredit;
-        assertEquals(charged,10000); // oon ghadri ke lazeme charge shode bashe
+        assertEquals(charged, 10000); // oon ghadri ke lazeme charge shode bashe
     }
 
     @AfterClass

@@ -32,7 +32,7 @@ public class RemoveAccess {
     }
 
     @Test
-    public void formFillingForCustomerTest(){
+    public static void formFillingForCustomerTest(){
 
     }
 }

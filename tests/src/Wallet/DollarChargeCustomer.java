@@ -15,11 +15,11 @@ import static org.junit.Assert.assertNotEquals;
  * Created by Golpar on 4/12/2018 AD.
  */
 public class DollarChargeCustomer {
-    private WebDriver driver;
+    private static WebDriver driver;
     private String amount = "1";
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
@@ -79,7 +79,7 @@ public class DollarChargeCustomer {
 
 
     @AfterClass
-    public void tearDown() {
+    public static void tearDown() {
         GeneralReusables.logout(driver);
     }
 }

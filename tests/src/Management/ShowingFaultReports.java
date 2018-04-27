@@ -42,7 +42,7 @@ public class ShowingFaultReports {
     }
 
     @Test
-    public void tearDown() {
+    public static void tearDown() {
         GeneralReusables.logout(driver);
     }
 }
