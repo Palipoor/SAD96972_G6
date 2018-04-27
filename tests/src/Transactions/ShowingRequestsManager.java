@@ -1,4 +1,4 @@
-package Employee;
+package Transactions;
 
 import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
@@ -14,9 +14,9 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Golpar on 4/26/2018 AD.
+ * Created by Golpar on 4/27/2018 AD.
  */
-public class ShowingRequests {
+public class ShowingRequestsManager {
     private static WebDriver driver;
 
     @BeforeClass

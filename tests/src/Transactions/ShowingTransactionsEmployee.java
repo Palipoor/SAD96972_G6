@@ -1,4 +1,4 @@
-package Employee;
+package Transactions;
 
 import Reusables.GeneralReusables;
 import org.junit.AfterClass;
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Golpar on 4/26/2018 AD.
  */
-public class ShowingTransactions {
+public class ShowingTransactionsEmployee {
     private static WebDriver driver;
 
     @BeforeClass
