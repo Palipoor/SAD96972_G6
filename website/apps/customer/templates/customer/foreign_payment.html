@@ -31,14 +31,14 @@
                       </div>
                     <div class="form-group">
                       <label>مبلغ</label>
-                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder=" مبلغ درخواستی به واحد ارزی">
+                      <input type="number" class="form-control"  name="amount" placeholder=" مبلغ درخواستی به واحد ارزی">
                       <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="dollar" checked>
+                            <input type="radio" name="dollar-radio" id="optionsRadios1" value="dollar" checked>
                             دلار
                           </label>
                           <label>
-                              <input type="radio" name="optionsRadios" id="optionsRadios2" value="euro">
+                              <input type="radio" name="euro-radio" id="optionsRadios2" value="euro">
                               یورو
                             </label>
                         </div>
@@ -48,16 +48,16 @@
                     </div>
                     <div class="form-group">
                         <label>شماره حساب مقصد</label>
-                        <input type="text" class="form-control" placeholder="شماره حساب مقصد را این جا وارد کنید." >
+                        <input type="text" class="form-control" name="destination" placeholder="شماره حساب مقصد را این جا وارد کنید." >
                       </div>
                     <div class="form-group">
                       <label>فایل ضمیمه<small>(در صورت لزوم)</small></label>
-                      <input type="file" id="exampleInputFile">
+                      <input type="file" id="exampleInputFile" name="attachment">
                     </div>
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">ثبت درخواست</button>
+                    <button type="submit" class="btn btn-primary" name="submit-button">ثبت درخواست</button>
                   </div>
                 </form>
           </div><!-- nav-tabs-custom -->

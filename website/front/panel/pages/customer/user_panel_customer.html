@@ -311,7 +311,7 @@
                   <h3 class="box-title">تراکنش‌های اخیر</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
+                  <table class="table table-hover" name = "newest-transactions">
                     <tbody><tr>
                       <th>شناسه تراکنش</th>
                       <th>نوع تراکنش</th>
@@ -383,7 +383,7 @@
                           <img src = '{% static "panel/dist/img/default-50x50.gif" %}'  alt="Product Image">
                         </div>
                         <div class="product-info">
-                          <a href = '{% static "panel/pages/customer/anonymous_payment_form.html" %}'  class="product-title">پرداخت به صورت ناشناس </a>
+                          <a href = '{% static "panel/pages/customer/anonymous_payment_form.html" %}'  class="product-title" name = "anonymous-payment">پرداخت به صورت ناشناس </a>
                           <span class="product-description">
                             یسری توضیح یسری توضیح یسری توضیح
                           </span>
