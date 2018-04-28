@@ -27,7 +27,7 @@ public class DollarChargeCustomer {
     }
 
     @Test
-    public void postConditionTest() {
+    public void preConditionTest() {
         String title = driver.getTitle();
         assertEquals(title, WalletUsersReusables.DOLLAR_WALLET_TITLE);
     }

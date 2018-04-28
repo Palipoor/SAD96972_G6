@@ -27,7 +27,7 @@ public class WalletExistenceCustomer {
     }
 
     @Test
-    public void postConditionTest() {
+    public void preConditionTest() {
         String title = driver.getTitle();
         assertEquals(title, GeneralReusables.PANEL_TITLE);
     }

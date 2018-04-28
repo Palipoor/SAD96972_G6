@@ -3,6 +3,7 @@ package Reusables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,19 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralReusables {
 
+    //todo درست کردن این فیلدها
+
+    public static CharSequence INVALID_TRANSACTION_ID = "10000";
     public static String PANEL_TITLE = "پنل مدیریت";
+    public static String WRONG_ID_ERROR;
+    public static String SUCCESSFULLY_SENT;
+    public static String WRONG_USERNAME_ERROR;
+    public static String ACCESS_DENIED_ERROR;
+    public static String NO_SUCH_USER_ERROR;
+    public static String REPORTED_TRANSACTION;
+    public static String DONE_TRANSACTION;
+    public static String PENDING_TRANSACTION;
+    public static String FAILED_TRANSACTION;
 
 
     public static void setUpToHomepage(WebDriver driver) {
@@ -51,10 +64,18 @@ public class GeneralReusables {
         login(homepage, email, password);
     }
 
-    public static void loginAsAnEmployee(WebDriver homepage) {
+    public static String loginAsAnEmployee(WebDriver homepage) {
         String email = "customerEmail";
         String password = "customerPassword";
         login(homepage, email, password);
+        return getUsername(homepage);
+    }
+
+    private static String getUsername(WebDriver panel) {
+        WebElement userDetails = panel.findElement(By.name("user-details"));
+        userDetails.click();
+        WebElement usernameElement = panel.findElement(By.name("my-username"));
+        return usernameElement.getText();
     }
 
     public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
@@ -62,10 +83,15 @@ public class GeneralReusables {
         userMenu.click();
         WebElement logoutButton = panel.findElement(By.name("logout"));
         logoutButton.click();
+        panel.close();
     }
 
-    public static int getPrice(String currency) { // حتما بهش یک وبدرایور جدید که آدرس هومپیج رو باز کرده بدین! به باد می‌رین مگرنه.
-        return 0; // currency parameter could be "dollar" or "euro" or "rial" //todo implement this
+    public static int getPrice(String currency) {
+        String elementName = currency + "-price";
+        WebDriver homepage = new ChromeDriver();
+        setUpToHomepage(homepage);
+        WebElement priceElement = homepage.findElement(By.name(elementName));
+        return Integer.valueOf(priceElement.getText());
     }
 
 
