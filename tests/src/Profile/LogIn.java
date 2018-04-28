@@ -40,67 +40,65 @@ public class LogIn {
     }
 
     @Test
-    public void invalidEmail() throws Exception {
+    public void invalidEmail()  throws Exception {
         ProfileReusables.enterValidUsername(driver);
 
 
         // Enter an invalid email
-        WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys("");   // wrong format //TODO
+        WebElement email = driver.findElement(By.name("email"));
+        email.sendKeys("email.com");
 
 
         ProfileReusables.enterValidPassword(driver);
 
 
-        WebElement submitButton = driver.findElement(By.id("submit-button"));
-        submitButton.click();
+        ProfileReusables.clickForLogIn(driver);
 
 
         //    Verify that error message is displayed for authentication failure.
-        String emailErrorText = driver.findElement(By.name("email-error-text")).getText();
+        String emailErrorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(emailErrorText, ProfileReusables.invalidEmailError);
     }
 
     @Test
-    public void notRegisteredEmail() throws Exception {
-        ProfileReusables.enterValidUsername(driver);
+    public void notRegisteredEmail()  throws Exception {
+
 
 
         // Enter an not registered email
-        WebElement email = driver.findElement(By.id("email"));
+        WebElement email = driver.findElement(By.name("email"));
         email.clear();
-        email.sendKeys(ProfileReusables.email1);
+        email.sendKeys(ProfileReusables.notRegisteredEmail);
+
+        ProfileReusables.enterValidPassword(driver);
 
 
-
-        WebElement submitButton = driver.findElement(By.id("submit-button"));
-        submitButton.click();
+        ProfileReusables.clickForLogIn(driver);
 
 
         //    Verify that error message is displayed for authentication failure.
-        String emailErrorText = driver.findElement(By.name("email-error-text")).getText();
+        String emailErrorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(emailErrorText,ProfileReusables.notRegisteredEmailError);
     }
 
     @Test
-    public void invalidPassword() throws Exception {
+    public void wrongPassword() throws Exception {
 
 
         ProfileReusables.enterValidEmail(driver);
 
 
-        WebElement password  = driver.findElement(By.id("password"));
+        WebElement password  = driver.findElement(By.name("password"));
         password.clear();
-        password.sendKeys("");  //wrong format //TODO
+        password.sendKeys(ProfileReusables.wrongPassword);
 
 
-        WebElement submitButton = driver.findElement(By.id("submit-button"));
-        submitButton.click();
+        ProfileReusables.clickForLogIn(driver);
 
 
         //    Verify that error message is displayed for authentication failure.
-        String usernameErrorText = driver.findElement(By.name("password-error-text")).getText();
-        assertEquals(usernameErrorText, ProfileReusables.invalidPasswordError); //TODO : complete the message
+        String passwordErrorText = driver.findElement(By.name("not valid")).getText();
+        assertEquals(passwordErrorText, ProfileReusables.wrongPasswordError);
     }
 
 
@@ -108,14 +106,17 @@ public class LogIn {
     @Test
     public void validLogIn() throws Exception {
 
+        ProfileReusables.enterValidEmail(driver);
 
         ProfileReusables.enterValidPassword(driver);
 
 
-        WebElement submitButton = driver.findElement(By.id("submit-button"));
-        submitButton.click();
+        ProfileReusables.clickForLogIn(driver);
 
-        //TODO : what does happen?
+        boolean present =  driver.findElements( By.id("user menu") ).size() != 0;
+        assertEquals(true, present);
+
+
     }
 
 

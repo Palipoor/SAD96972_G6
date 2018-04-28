@@ -10,22 +10,41 @@ import org.openqa.selenium.WebElement;
  */
 public class ProfileReusables {
 
+    //TODO
+
     public static  String SignUpTitle= "ثبت‌ نام";
     public static  String logInTitle= "ورود";
-    public static String phoneNumber1 = "09137927608";
-    public static String password1 = "12345Dorna";
-    public static String email1 = "dorna.abdolazimi@gmail.com";
+    public static String firstName1 = "Dorna";
+    public static String surName1 = "Abdolazimi";
     public static String username1 = "Dorna";
-    public static String ShomareHesab1 = "0123456789123"; //TODO
+    public static String email1 = "dorna.abdolazimi@gmail.com";
+    public static String phoneNumber1 = "09137927608";
+    public static String accountNumber1 = "0123456789123";
+    public static String password1 = "12345Dorna";
+
+    public static String notRegisteredEmail = "dorna.gmail.com";
+    public static String wrongPassword = "duck";
+
+
+    public static String invalidFirstNameError = "نام وارد شده معتبر نیست.";
+    public static String invalidFamilyNameError = "نام خانوادگی وارد شده معتبر نیست.";
+    public static String invalidUsernameError = "نام کاربری وارد شده معتبر نیست.";
+    public static String alreadyRegisteredUsernameError = "نام کاربری وارد شده استفاده شده است.";
     public static String invalidEmailError = "ایمیل وارد شده معتبر نیست.";
     public static String alreadyRegisteredEmailError = "ایمیل وارد شده استفاده شده‌ است.";
-    public static String invalidUsernameError = "نام کاربری وارد شده معتبر نیست.";
-    public static String alreadyRegisteredUsernameError = "ایمیل وارد شده استفاده شده است.";
     public static String invalidPhoneNumberError = "شماره تلفن وارد شده معتبر نیست.";
-    public static String invalidPasswordError = "پسورد وارد شده معتبر نیست.";
-    public static String invalidShomareHesabError = "شماره حساب وارد شده معتبر نیست.";
-    public static String alreadyRegisteredShomareHesabError = "شماره حساب وارد شده استفاده شده است.";
+    public static String invalidAccountNumberError = "شماره حساب وارد شده معتبر نیست.";
+    public static String alreadyRegisteredAccountNumberError = "شماره حساب وارد شده استفاده شده است.";
+    public static String invalidPasswordError = "رمز عبور وارد شده معتبر نیست.";
+    public static String invalidPasswordRepaetError = "رمز عبور ها مطابق نیستند.";
+    public static String successMessage = "ثبت نام با موفقیت انجام شد.";
     public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
+    public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
+
+
+
+    public static String panelAddress = ""; //TODO:
+
 
 
 
@@ -35,55 +54,92 @@ public class ProfileReusables {
 
     public static void signUpUser1(WebDriver driver){
         GeneralReusables.setUpToHomepage(driver);
-        WebElement signUpButton = driver.findElement(By.name("sign-up"));
+        WebElement signUpButton = driver.findElement(By.name("sign-up"));  //TODO :!!!!!!!!!!!!!!!!!!!!!!!
         signUpButton.click();
 
 
-        WebElement username = driver.findElement(By.id("username"));
+        enterValidFirstName(driver);
+        enterValidFamilyName(driver);
+
+
+        WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(ProfileReusables.username1);
 
-        WebElement email = driver.findElement(By.id("email"));
+        WebElement email = driver.findElement(By.name("email"));
         email.sendKeys(ProfileReusables.email1);
-
-        WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
-        shomareHesab.sendKeys(ProfileReusables.ShomareHesab1);
-
-        enterValidPassword(driver);
 
         enterValidPhoneNumber(driver);
 
-        WebElement submitButton = driver.findElement(By.id("submit-button"));
-        submitButton.click();
+        WebElement accountNumber = driver.findElement(By.name("account number"));
+        accountNumber.sendKeys(ProfileReusables.accountNumber1);
+
+        enterValidPassword(driver);
+        repeatValidPassword(driver);
+
+        clickForSignUp(driver);
+
+    }
+
+
+    public static void enterValidFirstName(WebDriver driver){
+        WebElement email = driver.findElement(By.name("first name"));
+        email.clear();
+        email.sendKeys(firstName1);
+
+    }
+
+    public static void enterValidFamilyName(WebDriver driver){
+        WebElement email = driver.findElement(By.name("family name"));
+        email.clear();
+        email.sendKeys(surName1);
+
     }
 
     public static void enterValidUsername(WebDriver driver){
-        WebElement username = driver.findElement(By.id("username"));
+        WebElement username = driver.findElement(By.name("username"));
         username.clear();
-        username.sendKeys("dorna"+ System.currentTimeMillis());
+        username.sendKeys("dorna"+ System.currentTimeMillis());  //TODO
 
     }
     public static void enterValidEmail(WebDriver driver){
-        WebElement email = driver.findElement(By.id("email"));
+        WebElement email = driver.findElement(By.name("email"));
         email.clear();
-        email.sendKeys("dorna"+ System.currentTimeMillis()+"gmail.com");
+        email.sendKeys("dorna"+ System.currentTimeMillis()+"gmail.com");  //TODO
 
     }
     public static void enterValidPhoneNumber(WebDriver driver){
-        WebElement phoneNumber = driver.findElement(By.id("phone-number"));
+        WebElement phoneNumber = driver.findElement(By.name("contact number"));
         phoneNumber.clear();
         phoneNumber.sendKeys(ProfileReusables.phoneNumber1);
     }
 
-    public static void enterValidShomareHesab(WebDriver driver){
-        WebElement shomareHesab = driver.findElement(By.id("shomare-hesab"));
+    public static void enterValidAccountNumber(WebDriver driver){
+        WebElement shomareHesab = driver.findElement(By.name("account number"));
         shomareHesab.clear();
         shomareHesab.sendKeys(""); //TODO : shomare hesab ya shomare card???
     }
 
     public static void enterValidPassword(WebDriver driver){
-        WebElement password = driver.findElement(By.id("password"));
+        WebElement password = driver.findElement(By.name("password"));
         password.clear();
         password.sendKeys(ProfileReusables.password1);
+    }
+
+    public static void repeatValidPassword(WebDriver driver){
+        WebElement password = driver.findElement(By.name("password repeat"));
+        password.clear();
+        password.sendKeys(ProfileReusables.password1);
+    }
+
+    public static void clickForSignUp(WebDriver driver){
+        WebElement submitButton = driver.findElement(By.name("sign up"));
+        submitButton.click();
+    }
+
+
+    public static void clickForLogIn(WebDriver driver){
+        WebElement submitButton = driver.findElement(By.name("log in button"));
+        submitButton.click();
     }
 
 

@@ -21,7 +21,7 @@ public class LogOut {
     public void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
+        GeneralReusables.loginAsACustomer(driver); //TODO:!!!!!!!!!!!!!
     }
 
     @Test
@@ -30,9 +30,19 @@ public class LogOut {
         assertEquals(title, GeneralReusables.PANEL_TITLE);
     }
 
-    public void SignOup() {
+    @Test
+    public void signOut() {
 
-        //TODO :
+        WebElement user_menu = driver.findElement(By.name("user menu"));
+        user_menu.click();
+
+        WebElement logout = driver.findElement(By.name("logout"));
+        logout.submit();
+
+        driver.get(ProfileReusables.panelAddress);
+        boolean present =  driver.findElements( By.id("log in button") ).size() != 0;
+        assertEquals(true, present);
+
 
 
     }
