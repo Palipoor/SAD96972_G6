@@ -9,9 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class LogIn {
     private WebDriver driver;
@@ -113,8 +115,10 @@ public class LogIn {
 
         ProfileReusables.clickForLogIn(driver);
 
-        boolean present =  driver.findElements( By.id("user menu") ).size() != 0;
-        assertEquals(true, present);
+        List<WebElement> userMenu = driver.findElements(By.name("user menu"));
+        assertNotEquals(userMenu.size(), 0);// exists such element in the page
+
+
 
 
     }

@@ -285,7 +285,7 @@ public class SignUp {
 
         WebElement password = driver.findElement(By.name("password"));
         password.clear();
-        password.sendKeys("");  //wrong format //TODO
+        password.sendKeys(ProfileReusables.invalidPassword);
 
         ProfileReusables.repeatValidPassword(driver);
 
@@ -313,7 +313,7 @@ public class SignUp {
 
         WebElement password = driver.findElement(By.name("password repeat"));
         password.clear();
-        password.sendKeys("something else");  //wrong repeat
+        password.sendKeys(ProfileReusables.notMatchedPassword);  //wrong repeat
 
 
 

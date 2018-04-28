@@ -14,6 +14,9 @@ public class ProfileReusables {
 
     public static  String SignUpTitle= "ثبت‌ نام";
     public static  String logInTitle= "ورود";
+    public static  String passwordChangeTitle= "تغییر رمز عبور";
+
+
     public static String firstName1 = "Dorna";
     public static String surName1 = "Abdolazimi";
     public static String username1 = "Dorna";
@@ -24,6 +27,10 @@ public class ProfileReusables {
 
     public static String notRegisteredEmail = "dorna.gmail.com";
     public static String wrongPassword = "duck";
+    public static String invalidPassword = "";//TODO
+    public static String notMatchedPassword = "somethingElse";
+
+
 
 
     public static String invalidFirstNameError = "نام وارد شده معتبر نیست.";
@@ -40,6 +47,9 @@ public class ProfileReusables {
     public static String successMessage = "ثبت نام با موفقیت انجام شد.";
     public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
     public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
+
+
+
 
 
 
