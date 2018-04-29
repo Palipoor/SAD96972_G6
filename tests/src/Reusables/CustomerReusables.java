@@ -28,11 +28,12 @@ public class CustomerReusables {
         email.clear();
         email.sendKeys("palipoor976@gmail.com");
 
-        WebElement phone = driver.findElement(By.name("email"));
+        WebElement phone = driver.findElement(By.name("phone"));
         phone.clear();
         phone.sendKeys("09379605628");
 
         WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
 
         driver.navigate().back();
 
