@@ -61,7 +61,7 @@ public class GeneralReusables {
     public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
         GeneralReusables.setUpToHomepage(homepage);
         // Go to Sign up page
-        String linkToOpen= homepage.findElement(By.name("log in")).getAttribute("href");
+        String linkToOpen = homepage.findElement(By.name("log in")).getAttribute("href");
         homepage.get(linkToOpen);
         WebElement emailField = homepage.findElement(By.name("email"));
         emailField.sendKeys(email);
@@ -73,7 +73,7 @@ public class GeneralReusables {
     }
 
     public static void loginAsACustomer(WebDriver homepage) {
-            homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
+        homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
 //        String email = ProfileReusables.email1;
 //        String password = ProfileReusables.password1;
 //        login(homepage, email, password);
@@ -92,6 +92,7 @@ public class GeneralReusables {
 //        String password = "customerPassword";
 //        login(homepage, email, password);
 //        return getUsername(homepage);
+        return getUsername(homepage);
     }
 
     private static String getUsername(WebDriver panel) {
