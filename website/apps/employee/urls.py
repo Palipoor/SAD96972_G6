@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.employee.views import dashboard, change_password, settings, transaction_details, customer_details
+from apps.employee.views import dashboard, change_password, settings, transaction_details, customer_details, notifications
 urlpatterns = [
     path('dashboard', dashboard, name='dashboard'),
     path('change_password', change_password, name='change_password'),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('<transaction_id>_transaction_details', transaction_details, name='transaction_details'),
     path('settings/', settings, name='settings'),
     path('<user_id>_customer_details/', customer_details, name='customer_details'),
+    path('notifications/', notifications, name='notifications'),
 ]

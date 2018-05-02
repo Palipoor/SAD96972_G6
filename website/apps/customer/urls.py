@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.customer.views import dashboard, change_password, settings, mytransactions, transaction_details, wallet, reverse_charge, foreign_payment, application_fee, anonymous_payment
+from apps.customer.views import dashboard, change_password, settings, mytransactions, transaction_details, wallet, reverse_charge, foreign_payment, application_fee, anonymous_payment,notifications
 urlpatterns = [
     path('dashboard', dashboard , name = 'dashboard'), 
     path('change_password', change_password, name='change_password'),
@@ -28,4 +28,5 @@ urlpatterns = [
     path('application_fee/', application_fee, name='application_fee'),
     path('anonymous_payment/', anonymous_payment, name='anonymous_payment'),
     path('<currency>_wallet/', wallet, name='wallet'),
+    path('notifications/', notifications, name='notifications'),
 ]

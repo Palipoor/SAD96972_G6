@@ -53,3 +53,8 @@ def wallet(request, currency):
         currency = "ریال"
     template = loader.get_template("customer/wallet.html")
     return HttpResponse(template.render({"currency": currency}))
+
+
+def notifications(request):
+    template = loader.get_template("manager/notifications.html")
+    return HttpResponse(template.render())

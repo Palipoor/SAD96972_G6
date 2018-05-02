@@ -30,3 +30,6 @@ def customer_details(request, user_id):
     return HttpResponse(template.render())
 
 
+def notifications(request):
+    template = loader.get_template("employee/notifications.html")
+    return HttpResponse(template.render())
