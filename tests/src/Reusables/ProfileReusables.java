@@ -5,10 +5,36 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Golpar on 4/12/2018 AD.
  */
 public class ProfileReusables {
+
+
+    public static final Map<String, String> reusableStrings;
+
+    static {
+        reusableStrings = new HashMap<String, String>();
+        reusableStrings.put("sign-up-title",  "سپاا | ثبت‌ نام");
+        reusableStrings.put("log-in-title", "ورود");
+        reusableStrings.put("first-name", "");
+        reusableStrings.put("sur-name", "");
+        reusableStrings.put("username", "");
+        reusableStrings.put("email", "");
+        reusableStrings.put("phone-number", "");
+        reusableStrings.put("account-number", "");
+        reusableStrings.put("not-registered-email", "");
+        reusableStrings.put("wrong-password", "");
+        reusableStrings.put("invalid-password", "");
+        reusableStrings.put("not-matched-password", "");
+        reusableStrings.put("invalid-name", "");
+        reusableStrings.put("invalid-phone-number", "");
+        reusableStrings.put("invalid-account-number", "");
+
+    }
 
     //TODO
     public static String SignUpTitle = "سپاا | ثبت‌ نام";

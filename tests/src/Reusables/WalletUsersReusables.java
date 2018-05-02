@@ -33,7 +33,7 @@ public class WalletUsersReusables {
         wallet.click();
     }
 
-    public static int getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
+    public static double getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
         navigateToWallet(panel, currency);
         WebElement credit = panel.findElement(By.name("credit"));
         int creditValue = Integer.valueOf(credit.getText());

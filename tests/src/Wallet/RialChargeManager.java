@@ -34,15 +34,15 @@ public class RialChargeManager {
 
     @Test
     public void rialWalletCharge() {
-        int rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         WebElement amountBox = driver.findElement(By.name("desired-amount"));
         amountBox.sendKeys("10000");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
         //todo چیزی که باید از درگاه برمی‌گرده ببینه رو این جا بنویس.
-        int newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        int charged = newRialCredit - rialCredit;
-        assertEquals(charged, 10000); // oon ghadri ke lazeme charge shode bashe
+        double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        double charged = newRialCredit - rialCredit;
+        assertEquals(charged, 10000, GeneralReusables.delta); // oon ghadri ke lazeme charge shode bashe
     }
 
     @AfterClass

@@ -29,7 +29,7 @@ public class DollarChargeCustomer {
     @Test
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, WalletUsersReusables.DOLLAR_WALLET_TITLE);
+        assertEquals(title, WalletUsersReusables.reusableStrings.get("dollar-wallet-title"));
     }
 
     @Test
@@ -37,38 +37,38 @@ public class DollarChargeCustomer {
         //todo ye kare behtari ba in kon
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(amount);
-        int dollarPrice = GeneralReusables.getPrice("dollar");
-        int rial = dollarPrice * Integer.valueOf(amount);
+        double dollarPrice = GeneralReusables.getPrice("dollar");
+        double rial = dollarPrice * Double.valueOf(amount);
         WebElement rialAmount = driver.findElement(By.name("rial-amount"));
-        int shownRial = Integer.valueOf(rialAmount.getText());
-        assertEquals(rial, shownRial);
+        double shownRial = Double.valueOf(rialAmount.getText());
+        assertEquals(rial, shownRial, GeneralReusables.delta);
     }
 
     @Test
     public void decreaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
-        int rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         WebElement rialAmount = driver.findElement(By.name("rial-amount"));
-        int shownRial = Integer.valueOf(rialAmount.getText());
+        double shownRial = Double.valueOf(rialAmount.getText());
         chargeButton.click();
-        int currentRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        assertEquals(currentRialCredit, rialCredit - shownRial);
+        double currentRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        assertEquals(currentRialCredit, rialCredit - shownRial, GeneralReusables.delta);
     }
 
     @Test
     public void increaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
-        int dollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
+        double dollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
-        Integer increaseAmount = Integer.valueOf(amount);
+        double increaseAmount = Double.valueOf(amount);
         chargeButton.click();
-        int currentDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
-        assertEquals(currentDollarCredit, dollarCredit + increaseAmount);
+        double currentDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
+        assertEquals(currentDollarCredit, dollarCredit + increaseAmount, GeneralReusables.delta);
     }
 
     @Test
     public void invalidDecreaseTest() {
-        int rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        int decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
+        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        double decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(String.valueOf(decreaseAmount));
         WebElement chargeButton = driver.findElement(By.name("charge-button"));

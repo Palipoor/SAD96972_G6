@@ -23,6 +23,8 @@ public class GeneralReusables {
 
     //todo درست کردن این فیلدها
 
+    public static double delta = 0.05;
+
     public static final Map<String, String> reusableStrings;
 
     static {
@@ -30,8 +32,11 @@ public class GeneralReusables {
         reusableStrings.put("invalid-transaction-id", "1000");
         reusableStrings.put("wrong-id-error", "");
         reusableStrings.put("wrong-amount-error", "");
-        reusableStrings.put("wrong-username-error", "");
-        reusableStrings.put("access-denied-error", "");
+        reusableStrings.put("invalid-username-error", "");
+        reusableStrings.put("invalid-first-name-error", "");
+        reusableStrings.put("invalid-family-name-error", "");
+        reusableStrings.put("invalid-phone-number-error", "");
+        reusableStrings.put("invalid-account-number-error", "");
         reusableStrings.put("no-such-user-error", "");
         reusableStrings.put("done-transaction", "");
         reusableStrings.put("pending-transaction", "");
@@ -44,12 +49,7 @@ public class GeneralReusables {
     public static String WRONG_ID_ERROR;
     public static String SUCCESSFULLY_SENT;
     public static String WRONG_USERNAME_ERROR;
-    public static String ACCESS_DENIED_ERROR;
-    public static String NO_SUCH_USER_ERROR;
     public static String REPORTED_TRANSACTION;
-    public static String DONE_TRANSACTION;
-    public static String PENDING_TRANSACTION;
-    public static String FAILED_TRANSACTION;
 
 
     public static void setUpToHomepage(WebDriver driver) {
