@@ -20,8 +20,8 @@ public class CustomerReusables {
             case "foreign-payment":
                 createNewForeignPayment(driver);
                 break;
-            case "language-exam-registration":
-                createNewLanguageExamRegistration(driver);
+            case "reverse-charge":
+                createNewReverseCharge(driver);
                 break;
             case "anonymous-payment":
                 creteNewAnonymousPayment(driver);
@@ -66,8 +66,13 @@ public class CustomerReusables {
         driver.navigate().back();
     }
 
-    private static void createNewLanguageExamRegistration(WebDriver driver) {
+    private static void createNewReverseCharge(WebDriver driver) {
+        WebElement amount = driver.findElement(By.name("amount"));
+        amount.clear();
+        amount.sendKeys("1000");
 
+        WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
     }
 
     private static void createNewForeignPayment(WebDriver driver) {
