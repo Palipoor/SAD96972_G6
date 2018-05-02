@@ -6,35 +6,35 @@
     </a>
     <ul class="treeview-menu">
         <li class="active">
-            <a href='{% static "panel/pages/manager/company_settings.html" %}'>
+            <a href='{%  url "manager:settings" %}'>
                 <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/manager/password_change.html" %}'>
+            <a href='{%  url "manager:change_password" %}'>
                 <i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور مدیریت</a>
         </li>
     </ul>
 </li>
 <li>
-    <a href='{% static "panel/pages/manager/transaction_details.html" %}' name="transactions">
+    <a href='{% url "manager:transaction_details" "123" %}' name="transactions">
         <em class="glyphicon glyphicon-credit-card"></em>
         <span>تراکنش‌های موسسه</span>
     </a>
 </li>
 <li>
-    <a href='{% static "panel/pages/manager/people.html" %}' name="employee">
+    <a href='{% url "manager:users" "-1" %}' name="employee">
         <em class="fa fa-users"></em>
         <span>کارمندان</span>
     </a>
 </li>
 <li>
-    <a href='{% static "panel/pages/manager/customers.html" %}' name="customers">
+    <a href='{% url "manager:users" "-2" %}' name="customers">
         <em class="fa fa-users"></em>
         <span>مشتریان</span>
     </a>
 </li>
 <li>
-    <a href='{% static "panel/pages/manager/transaction_details.html" %}' name="requests">
+    <a href='{% url "manager:transaction_details" "-1" %}' name="requests">
         <em class="fa fa-comments"></em>
         <span>درخواست‌های تاییدنشده</span>
     </a>
@@ -46,15 +46,15 @@
     </a>
     <ul class="treeview-menu">
         <li>
-            <a href='{% static "panel/pages/manager/wallet_rial.html" %}'>
+            <a href='{% url "manager:wallet" "rial" %}'>
                 <i class="glyphicon glyphicon-chevron-left" name="rial-wallet"></i> کیف پول ریال</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/manager/wallet_euro.html" %}'>
+            <a href='{% url "manager:wallet" "euro" %}'>
                 <i class="glyphicon glyphicon-chevron-left" name = "euro-wallet"></i> کیف پول یورو</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/manager/wallet_dollar.html" %}'>
+            <a href='{% url "manager:wallet" "dollar" %}'>
                 <i class="glyphicon glyphicon-chevron-left" name = "dollar-wallet"></i> کیف پول دلار</a>
         </li>
     </ul>

@@ -12,9 +12,9 @@ class User(models.Model):
     password = models.CharField(max_length=50)
     photo = models.ImageField()
     english_first_name = models.CharField(max_length=50)
-    english_first_last = models.CharField(max_length=50)
+    english_last_name = models.CharField(max_length=50)
     persian_first_name = models.CharField(max_length=50)
-    persian_first_last = models.CharField(max_length=50)
+    persian_last_name = models.CharField(max_length=50)
     user_type = models.IntegerField(choices=types)
     email = models.EmailField(max_length=70, unique=True, null = False)
     active = models.BooleanField()
@@ -38,10 +38,20 @@ class Transaction(models.Model):
         (0, 'accepted'),
         (1, 'rejected'),
         (2, 'pending'),
+        (3, 'reported'),
     )
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    currency = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
+    )
+    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING)
     status = models.IntegerField(choices=statuses)
+    currency = models.IntegerField(choices=currency)
     destination = models.IntegerField()
+    amount = models.IntegerField()
+    profit = models.IntegerField()
+    #this is in riaaal, always? always
 
 
 class notication(models.Model):
@@ -81,17 +91,18 @@ class Employee_review(models.Model):
 
 class Report(models.Model):
     transaction = models.ForeignKey("Transaction", on_delete=models.DO_NOTHING)
+    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
     description = models.TextField(max_length=300)
 
     
 class User_Status(models.Model):
     manager = models.ForeignKey("Manager", on_delete=models.DO_NOTHING)
-    User = models.ForeignKey("User", on_delete=models.DO_NOTHING)
+    user = models.ForeignKey("User", on_delete=models.DO_NOTHING)
     status = models.BooleanField()
 
 
 class Salary(models.Model):
-    Employee = models.ForeignKey("User", on_delete=models.DO_NOTHING)
+    employee = models.ForeignKey("User", on_delete=models.DO_NOTHING)
     salary = models.IntegerField()
 
 

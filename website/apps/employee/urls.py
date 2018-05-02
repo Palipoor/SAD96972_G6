@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from apps.employee.views import dashboard, change_password, settings, transaction_details, customer_details
 urlpatterns = [
-    path('dashboard', dashboard), 
-    path('change_password', change_password),
-    path('settings', settings),
-    path('transaction_details', transaction_details),
-    path('settings/', settings),
-    path('<user_id>_customer_details/', customer_details),
+    path('dashboard', dashboard, name='dashboard'),
+    path('change_password', change_password, name='change_password'),
+    path('settings', settings, name='settings'),
+    path('<transaction_id>_transaction_details', transaction_details, name='transaction_details'),
+    path('settings/', settings, name='settings'),
+    path('<user_id>_customer_details/', customer_details, name='customer_details'),
 ]
