@@ -1,0 +1,21 @@
+{% extends "manager/mother_panel.html" %}
+{% load static staticfiles %}
+
+ {% block title %} 
+اعلان‌ها
+ {% endblock title %}
+
+
+{% block content_header_text %}
+<h1>اعلان‌ها</h1>
+{{ block.super }}
+{% endblock content_header_text %}
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active">اعلان‌ها</li>
+{% endblock content_header_link %} 
+
+{% block main_content %}
+{% include "notifications.html" %}
+{% endblock main_content %}

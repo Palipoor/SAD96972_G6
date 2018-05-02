@@ -9,6 +9,9 @@ def dashboard(request):
     template = loader.get_template("customer/dashboard.html")
     return HttpResponse(template.render())
 
+def notifications(request):
+    template = loader.get_template("customer/notifications.html")
+    return HttpResponse(template.render())
 
 def change_password(request):
     template = loader.get_template("customer/change_password.html")
@@ -25,7 +28,7 @@ def mytransactions(request):
     return HttpResponse(template.render())
 
 
-def transaction_details(request):
+def transaction_details(request,id):
     template = loader.get_template("customer/transaction_details.html")
     return HttpResponse(template.render())
 

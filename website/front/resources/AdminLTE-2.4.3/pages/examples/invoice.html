@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +7,16 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap/dist/css/bootstrap.min.css" %}' >
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/font-awesome/css/font-awesome.min.css" %}' >
+  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/Ionicons/css/ionicons.min.css" %}' >
+  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/dist/css/AdminLTE.min.css" %}' >
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/dist/css/skins/_all-skins.min.css" %}' >
+  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +33,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href = '{% static "resources/AdminLTE-2.4.3/index2.html" %}'  class="logo">
+    <a href="../../index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -43,7 +42,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -54,7 +53,7 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
             </a>
@@ -64,9 +63,9 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li><!-- start message -->
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <div class="pull-left">
-                        <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
+                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -77,9 +76,9 @@
                   </li>
                   <!-- end message -->
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <div class="pull-left">
-                        <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user3-128x128.jpg" %}'  class="img-circle" alt="User Image">
+                        <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -89,9 +88,9 @@
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <div class="pull-left">
-                        <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user4-128x128.jpg" %}'  class="img-circle" alt="User Image">
+                        <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -101,9 +100,9 @@
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <div class="pull-left">
-                        <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user3-128x128.jpg" %}'  class="img-circle" alt="User Image">
+                        <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -113,9 +112,9 @@
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <div class="pull-left">
-                        <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user4-128x128.jpg" %}'  class="img-circle" alt="User Image">
+                        <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -126,12 +125,12 @@
                   </li>
                 </ul>
               </li>
-              <li class="footer"><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >See All Messages</a></li>
+              <li class="footer"><a href="#">See All Messages</a></li>
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning">10</span>
             </a>
@@ -141,39 +140,39 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
                       page and may cause design problems
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <i class="fa fa-users text-red"></i> 5 new members joined
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <i class="fa fa-shopping-cart text-green"></i> 25 sales made
                     </a>
                   </li>
                   <li>
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <i class="fa fa-user text-red"></i> You changed your username
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="footer"><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >View all</a></li>
+              <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
               <span class="label label-danger">9</span>
             </a>
@@ -183,7 +182,7 @@
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li><!-- Task item -->
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <h3>
                         Design some buttons
                         <small class="pull-right">20%</small>
@@ -197,7 +196,7 @@
                   </li>
                   <!-- end task item -->
                   <li><!-- Task item -->
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <h3>
                         Create a nice theme
                         <small class="pull-right">40%</small>
@@ -211,7 +210,7 @@
                   </li>
                   <!-- end task item -->
                   <li><!-- Task item -->
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <h3>
                         Some task I need to do
                         <small class="pull-right">60%</small>
@@ -225,7 +224,7 @@
                   </li>
                   <!-- end task item -->
                   <li><!-- Task item -->
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+                    <a href="#">
                       <h3>
                         Make beautiful transitions
                         <small class="pull-right">80%</small>
@@ -241,20 +240,20 @@
                 </ul>
               </li>
               <li class="footer">
-                <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >View all tasks</a>
+                <a href="#">View all tasks</a>
               </li>
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
-              <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
+                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -265,13 +264,13 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >Followers</a>
+                    <a href="#">Followers</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >Sales</a>
+                    <a href="#">Sales</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >Friends</a>
+                    <a href="#">Friends</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -279,17 +278,17 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  class="btn btn-default btn-flat">Sign out</a>
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}'  data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
@@ -302,11 +301,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- search form -->
@@ -324,19 +323,19 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/index.html" %}' ><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/index2.html" %}' ><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Layout Options</span>
             <span class="pull-right-container">
@@ -344,14 +343,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/layout/top-nav.html" %}' ><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/layout/boxed.html" %}' ><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/layout/fixed.html" %}' ><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/layout/collapsed-sidebar.html" %}' ><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
           </ul>
         </li>
         <li>
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/widgets.html" %}' >
+          <a href="../widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -359,7 +358,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Charts</span>
             <span class="pull-right-container">
@@ -367,14 +366,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/charts/chartjs.html" %}' ><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/charts/morris.html" %}' ><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/charts/flot.html" %}' ><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/charts/inline.html" %}' ><i class="fa fa-circle-o"></i> Inline charts</a></li>
+            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-laptop"></i>
             <span>UI Elements</span>
             <span class="pull-right-container">
@@ -382,40 +381,40 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/UI/general.html" %}' ><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/UI/icons.html" %}' ><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/UI/buttons.html" %}' ><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/UI/sliders.html" %}' ><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/UI/modals.html" %}' ><i class="fa fa-circle-o"></i> Modals</a></li>
+            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-edit"></i> <span>Forms</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/forms/general.html" %}' ><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/forms/advanced.html" %}' ><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/forms/editors.html" %}' ><i class="fa fa-circle-o"></i> Editors</a></li>
+            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-table"></i> <span>Tables</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/tables/simple.html" %}' ><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/tables/data.html" %}' ><i class="fa fa-circle-o"></i> Data tables</a></li>
+            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
           </ul>
         </li>
         <li>
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/calendar.html" %}' >
+          <a href="../calendar.html">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-red">3</small>
@@ -424,7 +423,7 @@
           </a>
         </li>
         <li>
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/mailbox/mailbox.html" %}' >
+          <a href="../mailbox/mailbox.html">
             <i class="fa fa-envelope"></i> <span>Mailbox</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
@@ -434,62 +433,62 @@
           </a>
         </li>
         <li class="treeview active">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-folder"></i> <span>Examples</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/invoice.html" %}' ><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/profile.html" %}' ><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/login.html" %}' ><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/register.html" %}' ><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/lockscreen.html" %}' ><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/404.html" %}' ><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/500.html" %}' ><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/blank.html" %}' ><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/pace.html" %}' ><i class="fa fa-circle-o"></i> Pace Page</a></li>
+            <li class="active"><a href="invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+            <li><a href="profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+            <li><a href="login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+            <li><a href="register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+            <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+            <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+            <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+            <li><a href="blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+            <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >
+          <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level One
+              <a href="#"><i class="fa fa-circle-o"></i> Level One
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
                 <li class="treeview">
-                  <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Two
+                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -504,8 +503,8 @@
         <small>#007612</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#" %}' >Examples</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
         <li class="active">Invoice</li>
       </ol>
     </section>
@@ -617,10 +616,10 @@
         <!-- accepted payments column -->
         <div class="col-xs-6">
           <p class="lead">Payment Methods:</p>
-          <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/credit/visa.png" %}'  alt="Visa">
-          <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/credit/mastercard.png" %}'  alt="Mastercard">
-          <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/credit/american-express.png" %}'  alt="American Express">
-          <img src = '{% static "resources/AdminLTE-2.4.3/dist/img/credit/paypal2.png" %}'  alt="Paypal">
+          <img src="../../dist/img/credit/visa.png" alt="Visa">
+          <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+          <img src="../../dist/img/credit/american-express.png" alt="American Express">
+          <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
             Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
@@ -659,7 +658,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/invoice-print.html" %}'  target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
@@ -684,8 +683,8 @@
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#control-sidebar-home-tab" %}'  data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/#control-sidebar-settings-tab" %}'  data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -694,7 +693,7 @@
         <h3 class="control-sidebar-heading">Recent Activity</h3>
         <ul class="control-sidebar-menu">
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
               <div class="menu-info">
@@ -705,7 +704,7 @@
             </a>
           </li>
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <i class="menu-icon fa fa-user bg-yellow"></i>
 
               <div class="menu-info">
@@ -716,7 +715,7 @@
             </a>
           </li>
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
               <div class="menu-info">
@@ -727,7 +726,7 @@
             </a>
           </li>
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <i class="menu-icon fa fa-file-code-o bg-green"></i>
 
               <div class="menu-info">
@@ -743,7 +742,7 @@
         <h3 class="control-sidebar-heading">Tasks Progress</h3>
         <ul class="control-sidebar-menu">
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
                 Custom Template Design
                 <span class="label label-danger pull-right">70%</span>
@@ -755,7 +754,7 @@
             </a>
           </li>
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
                 Update Resume
                 <span class="label label-success pull-right">95%</span>
@@ -767,7 +766,7 @@
             </a>
           </li>
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
                 Laravel Integration
                 <span class="label label-warning pull-right">50%</span>
@@ -779,7 +778,7 @@
             </a>
           </li>
           <li>
-            <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}' >
+            <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
                 Back End Framework
                 <span class="label label-primary pull-right">68%</span>
@@ -860,7 +859,7 @@
           <div class="form-group">
             <label class="control-sidebar-subheading">
               Delete chat history
-              <a href = '{% static "resources/AdminLTE-2.4.3/pages/examples/javascript:void(0)" %}'  class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
             </label>
           </div>
           <!-- /.form-group -->
@@ -877,14 +876,14 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/jquery/dist/jquery.min.js" %}' ></script>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/bootstrap/dist/js/bootstrap.min.js" %}' ></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/fastclick/lib/fastclick.js" %}' ></script>
+<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src = '{% static "resources/AdminLTE-2.4.3/dist/js/adminlte.min.js" %}' ></script>
+<script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src = '{% static "resources/AdminLTE-2.4.3/dist/js/demo.js" %}' ></script>
+<script src="../../dist/js/demo.js"></script>
 </body>
 </html>

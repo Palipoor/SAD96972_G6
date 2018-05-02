@@ -1,5 +1,10 @@
 {% extends "user_panel.html" %}
 {% load static staticfiles %}
+
+{% block notifications %}
+'{% url "customer:notifications" %}'
+{% endblock notifications %}
+
 {% block content_header_text %}
 <h1>
     <small>پنل مشتری</small>
