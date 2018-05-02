@@ -5,12 +5,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Golpar on 4/19/2018 AD.
  */
 public class ManagerReusables {
+
+    public static final Map<String, String> reusableStrings;
+
+    static {
+        reusableStrings = new HashMap<String, String>();
+        reusableStrings.put("employees-page-title", "پنل مدیریت | کارمندان");
+        reusableStrings.put("customers-page-title", "پنل مدیریت | مشتریان");
+    }
 
     public static String EMPLOYEES_PAGE_TITLE = "پنل مدیریت | کارمندان";
     public static String CUSTOMERS_PAGE_TITLE = "پنل مدیریت | مشتریان";

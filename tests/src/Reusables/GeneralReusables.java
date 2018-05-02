@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,6 +22,22 @@ import java.util.concurrent.TimeUnit;
 public class GeneralReusables {
 
     //todo درست کردن این فیلدها
+
+    public static final Map<String, String> reusableStrings;
+
+    static {
+        reusableStrings = new HashMap<String, String>();
+        reusableStrings.put("invalid-transaction-id", "1000");
+        reusableStrings.put("wrong-id-error", "");
+        reusableStrings.put("wrong-amount-error", "");
+        reusableStrings.put("wrong-username-error", "");
+        reusableStrings.put("access-denied-error", "");
+        reusableStrings.put("no-such-user-error", "");
+        reusableStrings.put("done-transaction", "");
+        reusableStrings.put("pending-transaction", "");
+        reusableStrings.put("failed-transaction", "");
+        reusableStrings.put("reported-transaction", "");
+    }
 
     public static CharSequence INVALID_TRANSACTION_ID = "10000";
     public static String PANEL_TITLE = "پنل مدیریت";
