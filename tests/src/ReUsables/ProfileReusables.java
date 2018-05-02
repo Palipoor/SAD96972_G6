@@ -14,6 +14,8 @@ public class ProfileReusables {
     public static String SignUpTitle = "سپاا | ثبت‌ نام";
     public static String logInTitle = "ورود";
     public static String passwordChangeTitle = "تغییر رمز عبور";
+    public static String userDetailTitle = "مشخصات کاربری";
+
 
 
     public static String firstName1 = "Dorna";
@@ -25,6 +27,8 @@ public class ProfileReusables {
     public static String password1 = "12345Dorna";
 
     public static String notRegisteredEmail = "dorna.gmail.com";
+    public static String invalidEmail = "dorna";
+
     public static String wrongPassword = "duck";
     public static String invalidPassword = "";//TODO
     public static String notMatchedPassword = "somethingElse";
@@ -47,6 +51,7 @@ public class ProfileReusables {
     public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
     public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
     public static String panelAddress = ""; //TODO:
+
 
 
     public static void signUpUser1(WebDriver driver) {
