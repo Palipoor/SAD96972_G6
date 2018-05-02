@@ -14,38 +14,53 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
 public class SignUp {
-    private WebDriver driver;
+    private static WebDriver driver ;
+
+    public static void goToSignupPage(){
+        GeneralReusables.setUpToHomepage(driver);
+        // Go to Sign up page
+        String linkToOpen= driver.findElement(By.name("sign up")).getAttribute("href");
+        driver.get(linkToOpen);
+    }
+
+    String successTitle = "" ; //TODO:
 
 
 
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         // Initialize the WebDriver
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //for checking already registered info
         ProfileReusables.signUpUser1(driver);
-        GeneralReusables.setUpToHomepage(driver);
-        // Go to Sign up page
-        WebElement signUpButton = driver.findElement(By.name("sign-up")); //TODO: !!!!!!!!!!!!
-        signUpButton.click();
+        goToSignupPage();
+
 
     }
 
 
-    @Test
+   /* @Test
     public void preConditionTest() {
+        // Initialize the WebDriver
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        //for checking already registered info
+        ProfileReusables.signUpUser1(driver);
+        goToSignupPage();
         String title = driver.getTitle();
-        assertEquals(title, ProfileReusables.SignUpTitle);
-    }
+        //assertEquals(title, ProfileReusables.SignUpTitle);
+    }*/
 
 
     @Test
-    public void invalidFirstName() throws Exception{
+    public void invalidFirstName(){
+
+        goToSignupPage();
 
         WebElement firstName = driver.findElement(By.name("first name"));
-        firstName.sendKeys("");   //wrong format //TODO
+        firstName.sendKeys(ProfileReusables.invalidName);
 
         ProfileReusables.enterValidFamilyName(driver);
         ProfileReusables.enterValidUsername(driver);
@@ -60,18 +75,23 @@ public class SignUp {
         ProfileReusables.clickForSignUp(driver);
 
         //  Verify that error message is displayed for authentication failure.
-        String firstNameErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(firstNameErrorText, ProfileReusables.invalidFirstNameError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+
+        assertEquals(errorText, ProfileReusables.invalidFirstNameError);
     }
 
     @Test
-    public void invalidFamilyName() throws Exception{
+    public void invalidFamilyName() {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
 
         WebElement familyName = driver.findElement(By.name("family name"));
         familyName.clear();
-        familyName.sendKeys("");   //wrong format //TODO
+        familyName.sendKeys(ProfileReusables.invalidName);
 
         ProfileReusables.enterValidUsername(driver);
         ProfileReusables.enterValidEmail(driver);
@@ -85,12 +105,17 @@ public class SignUp {
         ProfileReusables.clickForSignUp(driver);
 
         //  Verify that error message is displayed for authentication failure.
-        String firstNameErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(firstNameErrorText, ProfileReusables.invalidFirstNameError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+
+        assertEquals(errorText, ProfileReusables.invalidFamilyNameError);
     }
 
     @Test
-    public void invalidEmail() throws Exception{
+    public void invalidEmail(){
+        goToSignupPage();
 
 
         ProfileReusables.enterValidFirstName(driver);
@@ -112,13 +137,17 @@ public class SignUp {
 
         ProfileReusables.clickForSignUp(driver);
 
-        //  Verify that error message is displayed for authentication failure.
-        String emailErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(emailErrorText, ProfileReusables.invalidEmailError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+
+        assertEquals(errorText, ProfileReusables.invalidEmailError);
     }
 
     @Test
-    public void registeredEmail()  throws Exception{
+    public void registeredEmail()  {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -138,12 +167,17 @@ public class SignUp {
         ProfileReusables.clickForSignUp(driver);
 
         //  Verify that error message is displayed for authentication failure.
-        String emailErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(emailErrorText, ProfileReusables.alreadyRegisteredEmailError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+
+        assertEquals(errorText, ProfileReusables.alreadyRegisteredEmailError);
     }
 
     @Test
-    public void invalidUsername() throws Exception{
+    public void invalidUsername() {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -151,7 +185,7 @@ public class SignUp {
         //invalid username
         WebElement username = driver.findElement(By.name("username"));
         username.clear();
-        username.sendKeys("");  //wrong format //TODO
+        username.sendKeys(ProfileReusables.invalidName);
 
 
         ProfileReusables.enterValidEmail(driver);
@@ -162,15 +196,19 @@ public class SignUp {
 
 
 
-       ProfileReusables.clickForSignUp(driver);
+        ProfileReusables.clickForSignUp(driver);
 
-        //    Verify that error message is displayed for authentication failure.
-        String usernameErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(usernameErrorText, ProfileReusables.invalidUsernameError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.invalidUsernameError);
     }
 
     @Test
-    public void registeredUsername()   throws Exception{
+    public void registeredUsername()   {
+
+        goToSignupPage();
 
 
         ProfileReusables.enterValidFirstName(driver);
@@ -189,13 +227,16 @@ public class SignUp {
 
         ProfileReusables.clickForSignUp(driver);
 
-        //  Verify that error message is displayed for authentication failure.
-        String usernameErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(usernameErrorText, ProfileReusables.alreadyRegisteredUsernameError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.alreadyRegisteredUsernameError);
     }
 
     @Test
-    public void invalidPhoneNumber()  throws Exception {
+    public void invalidPhoneNumber()  {
+        goToSignupPage();
 
 
         ProfileReusables.enterValidFirstName(driver);
@@ -205,7 +246,7 @@ public class SignUp {
 
         WebElement phoneNumber = driver.findElement(By.name("contact number"));
         phoneNumber.clear();
-        phoneNumber.sendKeys("");  // wrong format //TODO
+        phoneNumber.sendKeys(ProfileReusables.invalidPhoneNumber);
 
 
         ProfileReusables.enterValidAccountNumber(driver);
@@ -216,15 +257,17 @@ public class SignUp {
         ProfileReusables.clickForSignUp(driver);
 
 
-        //    Verify that error message is displayed for authentication failure.
-        String phoneNumberErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(phoneNumberErrorText, ProfileReusables.invalidPhoneNumberError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.invalidPhoneNumberError);
     }
 
 
     @Test
-    public void invalidAccountNumber()  throws Exception{
-
+    public void invalidAccountNumber() {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -235,20 +278,24 @@ public class SignUp {
 
         WebElement accountNumber = driver.findElement(By.name("account number"));
         accountNumber.clear();
-        accountNumber.sendKeys("");  //wrong format //TODO
+        accountNumber.sendKeys(ProfileReusables.invalidAccountNumber);
 
         ProfileReusables.enterValidPassword(driver);
         ProfileReusables.repeatValidPassword(driver);
 
         ProfileReusables.clickForSignUp(driver);
 
-        //    Verify that error message is displayed for authentication failure.
-        String accountNumberErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(accountNumberErrorText, ProfileReusables.invalidAccountNumberError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.invalidAccountNumberError);
     }
 
     @Test
-    public void registeredAccountNumber()  throws Exception{
+    public void registeredAccountNumber()  {
+        goToSignupPage();
+
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -267,14 +314,18 @@ public class SignUp {
         ProfileReusables.clickForSignUp(driver);
 
         //    Verify that error message is displayed for authentication failure.
-        String accountNumberErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(accountNumberErrorText, ProfileReusables.alreadyRegisteredAccountNumberError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.alreadyRegisteredAccountNumberError);
     }
 
 
 
     @Test
-    public void invalidPassword()  throws Exception {
+    public void invalidPassword()   {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -295,12 +346,16 @@ public class SignUp {
 
 
         //    Verify that error message is displayed for authentication failure.
-        String passwordErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(passwordErrorText, ProfileReusables.invalidPasswordError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.invalidPasswordError);
     }
 
     @Test
-    public void invalidRepeatPassword()  throws Exception {
+    public void invalidRepeatPassword()  {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -322,13 +377,17 @@ public class SignUp {
 
 
         //    Verify that error message is displayed for authentication failure.
-        String passwordErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(passwordErrorText, ProfileReusables.invalidPasswordRepaetError);
+        String errorText = "";
+        if(  driver.getTitle()==ProfileReusables.SignUpTitle){
+            errorText = driver.findElement(By.name("not valid")).getText();
+        }
+        assertEquals(errorText, ProfileReusables.invalidPasswordRepaetError);
     }
 
 
     @Test
-    public void validSignUp() throws Exception {
+    public void validSignUp() {
+        goToSignupPage();
 
         ProfileReusables.enterValidFirstName(driver);
         ProfileReusables.enterValidFamilyName(driver);
@@ -343,10 +402,12 @@ public class SignUp {
         ProfileReusables.clickForSignUp(driver);
 
 
-        String successMessage = driver.findElement(By.name("success message")).getText();
 
 
-        assertEquals(successMessage, ProfileReusables.successMessage);
+        //assertEquals(driver.getTitle(), successTitle);
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.login(driver,ProfileReusables.email1, ProfileReusables.password1);
+        assertEquals(driver.getTitle(), GeneralReusables.PANEL_TITLE);
 
 
 
@@ -355,7 +416,8 @@ public class SignUp {
 
 
     @AfterClass
-    public void tearDown() {
+    public static void tearDown() {
+        driver.close();
         // TODO : dummy account should be deleted???
 
     }
