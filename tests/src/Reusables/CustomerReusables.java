@@ -12,11 +12,39 @@ import java.util.List;
  */
 public class CustomerReusables {
 
-    public static String createNewTransaction() { //requests a new transaction and returns its id
+    public static String createNewTransaction(String type) { //requests a new transaction and returns its id
         WebDriver driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
+        switch (type) {
+            case "foreign-payment":
+                createNewForeignPayment(driver);
+                break;
+            case "language-exam-registration":
+                createNewLanguageExamRegistration(driver);
+                break;
+            case "anonymous-payment":
+                creteNewAnonymousPayment(driver);
+                break;
+        }
 
+
+        WebElement newestTransactions = driver.findElement(By.name("new-transactions"));
+        List<WebElement> tableHeader = newestTransactions.findElements(By.xpath("//thead//tr"));
+        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+        int idIndex = 0;
+        for (int i = 0; i < headerTitles.size(); i++) {
+            if (headerTitles.get(i).getText().equals("شناسه تراکنش")) {
+                idIndex = i;
+            }
+        }
+        List<WebElement> tableRows = newestTransactions.findElements(By.xpath("//tbody//tr"));
+        driver.close();
+        return tableRows.get(0).findElements(By.xpath("//td")).get(idIndex).getText();
+
+    }
+
+    private static void creteNewAnonymousPayment(WebDriver driver) {
         WebElement paymentForm = driver.findElement(By.name("anonymous-payment"));
         paymentForm.click();
 
@@ -36,18 +64,25 @@ public class CustomerReusables {
         submit.click();
 
         driver.navigate().back();
+    }
 
-        WebElement newestTransactions = driver.findElement(By.name("newest-transactions"));
-        List<WebElement> tableHeader = newestTransactions.findElements(By.xpath("//thead//tr"));
-        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
-        int idIndex = 0;
-        for (int i = 0; i < headerTitles.size(); i++) {
-            if (headerTitles.get(i).getText().equals("شناسه تراکنش")) {
-                idIndex = i;
-            }
-        }
-        List<WebElement> tableRows = newestTransactions.findElements(By.xpath("//tbody//tr"));
-        return tableRows.get(0).findElements(By.xpath("//td")).get(idIndex).getText();
+    private static void createNewLanguageExamRegistration(WebDriver driver) {
 
+    }
+
+    private static void createNewForeignPayment(WebDriver driver) {
+        WebElement amount = driver.findElement(By.name("amount"));
+        amount.clear();
+        amount.sendKeys("10");
+
+        WebElement currency = driver.findElement(By.name("dollar-radio"));
+        currency.click();
+
+        WebElement accountNumber = driver.findElement(By.name("destination"));
+        accountNumber.clear();
+        accountNumber.sendKeys("1234567890");
+
+        WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
     }
 }
