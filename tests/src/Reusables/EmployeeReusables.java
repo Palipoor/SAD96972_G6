@@ -30,7 +30,6 @@ public class EmployeeReusables {
         List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
         List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
         transactionDetails.get(idIndex).click();
-
     }
 
     public static void acceptTransaction(String transactionId) {

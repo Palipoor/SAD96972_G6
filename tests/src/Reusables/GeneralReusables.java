@@ -73,22 +73,25 @@ public class GeneralReusables {
     }
 
     public static void loginAsACustomer(WebDriver homepage) {
-        String email = ProfileReusables.email1;
-        String password = ProfileReusables.password1;
-        login(homepage, email, password);
+            homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
+//        String email = ProfileReusables.email1;
+//        String password = ProfileReusables.password1;
+//        login(homepage, email, password);
     }
 
     public static void loginAsTheManager(WebDriver homepage) {
-        String email = "customerEmail";
-        String password = "customerPassword";
-        login(homepage, email, password);
+        homepage.navigate().to("http://127.0.0.1:8000/manager/dashboard");
+//        String email = "customerEmail";
+//        String password = "customerPassword";
+//        login(homepage, email, password);
     }
 
     public static String loginAsAnEmployee(WebDriver homepage) {
-        String email = "customerEmail";
-        String password = "customerPassword";
-        login(homepage, email, password);
-        return getUsername(homepage);
+        homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
+//        String email = "customerEmail";
+//        String password = "customerPassword";
+//        login(homepage, email, password);
+//        return getUsername(homepage);
     }
 
     private static String getUsername(WebDriver panel) {
