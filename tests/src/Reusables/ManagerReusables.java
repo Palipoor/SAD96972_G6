@@ -106,6 +106,9 @@ public class ManagerReusables {
         WebElement salary = theForm.findElement(By.id("salary"));
         salary.clear();
         salary.sendKeys("100000");
+
+        WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
         GeneralReusables.logout(driver);
         return newUsername;
     }
