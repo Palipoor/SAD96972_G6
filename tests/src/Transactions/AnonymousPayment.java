@@ -106,10 +106,8 @@ public class AnonymousPayment {
         WebElement submit = driver.findElement(By.name("submit-button"));
         submit.click();
 
-        double newDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
         double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         double newCompanyRialCredit = ManagerReusables.getCompanyCredit("rial");
-        double newCompanyDollarCredit = ManagerReusables.getCompanyCredit("dollar");
 
         assertEquals(newRialCredit, rialCredit - karmozdValue - 1000.0, GeneralReusables.delta);
         assertEquals(newCompanyRialCredit, companyRialCredit + karmozdValue + 1000.0, GeneralReusables.delta);
