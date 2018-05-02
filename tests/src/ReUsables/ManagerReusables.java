@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by Golpar on 4/19/2018 AD.
  */
@@ -265,8 +267,28 @@ public class ManagerReusables {
         return transactionDetails.get(statusIndex).getText();
     }
 
-    public int getNewestTransactionId() {
-        return 0;
+    public int getNewestTransactionId(WebDriver driver) {
+            return 0;
+
+
+    }
+    public static WebElement getNewestRequest(WebDriver driver) {
+        WebElement firstCell=null;
+        WebElement transactionsTable = driver.findElement(By.name("transactions-table"));
+        WebElement searchBox = transactionsTable.findElement(By.name("وضعیت"));
+        searchBox.clear();
+        searchBox.sendKeys(reusableStrings.get("request-status"));//TODO
+        WebElement table = driver.findElement(By.id("table"));
+        List<WebElement> allRows = table.findElements(By.tagName("tr"));
+        if(allRows.size()!=0){
+            firstCell = table.findElement(By.tagName("td"));
+
+
+
+        }
+        return firstCell;
+
+
     }
 
 }

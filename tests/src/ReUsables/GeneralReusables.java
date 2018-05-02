@@ -37,6 +37,9 @@ public class GeneralReusables {
         reusableStrings.put("pending-transaction", "");
         reusableStrings.put("failed-transaction", "");
         reusableStrings.put("reported-transaction", "");
+        reusableStrings.put("request-status", "");
+
+
     }
 
     public static CharSequence INVALID_TRANSACTION_ID = "10000";

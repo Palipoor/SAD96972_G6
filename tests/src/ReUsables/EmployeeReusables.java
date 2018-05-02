@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class EmployeeReusables {
 
-    private static void bringMeTheDetails(String transactionId, WebDriver driver) {
+    public static void bringMeTheDetails(String transactionId, WebDriver driver) {
         WebElement theTable = driver.findElement(By.name("transactions-table"));
         WebElement searchBox = theTable.findElement(By.name("شناسه تراکنش"));
         searchBox.clear();
