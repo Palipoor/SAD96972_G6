@@ -49,7 +49,7 @@ public class ManagerReusables {
         return (tableRows.size() > 0);
     }
 
-    public static String getAnEmployee() {
+    public static String getAnEmployee() { // returns the username
         WebDriver driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
@@ -100,7 +100,7 @@ public class ManagerReusables {
         return newUsername;
     }
 
-    public static String getACustomerId() { // چک می‌کنه اگر کاستومر داشتیم آیدیش رو می‌ده وگرنه یکی می‌سازه.
+    public static String getACustomerUsername() {
         WebDriver driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
@@ -168,61 +168,9 @@ public class ManagerReusables {
         signupButton = driver.findElement(By.name("sign up"));
         signupButton.click();
         GeneralReusables.logout(driver);
-        return getCustomerIdByUsername(newUsername);
+        return newUsername;
     }
 
-    private static String getCustomerIdByUsername(String theUsername) {
-        WebDriver driver = new ChromeDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsTheManager(driver);
-
-        WebElement customers = driver.findElement(By.name("customers"));
-        customers.click();
-        WebElement customersTable = driver.findElement(By.name("customers-table"));
-        WebElement usernameSearchBox = customersTable.findElement(By.name("نام کاربری"));
-        usernameSearchBox.clear();
-        usernameSearchBox.sendKeys(theUsername);
-        List<WebElement> tableRows = customersTable.findElements(By.xpath("//tbody//tr"));
-
-        List<WebElement> tableHeader = customersTable.findElements(By.xpath("//thead//tr"));
-        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
-        int idIndex = 0;
-        for (int i = 0; i < headerTitles.size(); i++) {
-            if (headerTitles.get(i).getText().equals("شناسه مشتری")) {
-                idIndex = i;
-            }
-        }
-        List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        GeneralReusables.logout(driver);
-        return employeeDetails.get(idIndex).getText();
-    }
-
-
-    public static String getACustomerUsernameById(String Id) {
-        WebDriver driver = new ChromeDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsTheManager(driver);
-
-        WebElement customers = driver.findElement(By.name("customers"));
-        customers.click();
-        WebElement customersTable = driver.findElement(By.name("customers-table"));
-        WebElement idSearchBox = customersTable.findElement(By.name("شناسه مشتری"));
-        idSearchBox.clear();
-        idSearchBox.sendKeys(Id);
-        List<WebElement> tableRows = customersTable.findElements(By.xpath("//tbody//tr"));
-
-        List<WebElement> tableHeader = customersTable.findElements(By.xpath("//thead//tr"));
-        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
-        int usernameIndex = 0;
-        for (int i = 0; i < headerTitles.size(); i++) {
-            if (headerTitles.get(i).getText().equals("نام کاربری")) {
-                usernameIndex = i;
-            }
-        }
-        List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        GeneralReusables.logout(driver);
-        return employeeDetails.get(usernameIndex).getText();
-    }
 
     public static int getSalary(String employeeUsername) {
         WebDriver driver = new ChromeDriver();
