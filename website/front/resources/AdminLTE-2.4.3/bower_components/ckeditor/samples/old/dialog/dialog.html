@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
@@ -8,8 +7,8 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 <head>
 	<meta charset="utf-8">
 	<title>Using API to Customize Dialog Windows &mdash; CKEditor Sample</title>
-	<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js" %}' ></script>
-	<link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/sample.css" %}' >
+	<script src="../../../ckeditor.js"></script>
+	<link rel="stylesheet" href="../../../samples/old/sample.css">
 	<meta name="ckeditor-sample-name" content="Using the JavaScript API to customize dialog windows">
 	<meta name="ckeditor-sample-group" content="Advanced Samples">
 	<meta name="ckeditor-sample-description" content="Using the dialog windows API to customize dialog windows without changing the original editor code.">
@@ -135,7 +134,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 </head>
 <body>
 	<h1 class="samples">
-		<a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/index.html" %}' >CKEditor Samples</a> &raquo; Using CKEditor Dialog API
+		<a href="../../../samples/old/index.html">CKEditor Samples</a> &raquo; Using CKEditor Dialog API
 	</h1>
 	<div class="warning deprecated">
 		This sample is not maintained anymore. Check out the <a href="https://sdk.ckeditor.com/">brand new samples in CKEditor SDK</a>.
@@ -151,7 +150,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 			For details on how to create this setup check the source code of this sample page.
 		</p>
 	</div>
-	<p>A custom dialog is added to the editors using the <code>pluginsLoaded</code> event, from an external <a target="_blank" href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/dialog/assets/my_dialog.js" %}' >dialog definition file</a>:</p>
+	<p>A custom dialog is added to the editors using the <code>pluginsLoaded</code> event, from an external <a target="_blank" href="assets/my_dialog.js">dialog definition file</a>:</p>
 	<ol>
 		<li><strong>Creating a custom dialog window</strong> &ndash; "My Dialog" dialog window opened with the "My Dialog" toolbar button.</li>
 		<li><strong>Creating a custom button</strong> &ndash; Add button to open the dialog with "My Dialog" toolbar button.</li>

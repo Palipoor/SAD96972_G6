@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,18 +6,18 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/bootstrap/css/bootstrap.min.css" %}' >
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/dist/css/AdminLTE.min.css" %}' >
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- Theme of profil page -->
-    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/dist/css/profile.css" %}' >
+    <link rel="stylesheet" href="../../dist/css/profile.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/dist/css/skins/_all-skins.min.css" %}' >
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,7 +37,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href = '{% static "resources/AdminLTE-RTL/index2.html" %}'  class="logo">
+        <a href="../../index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
@@ -47,7 +46,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -57,7 +56,7 @@
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
                 </a>
@@ -67,9 +66,9 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- start message -->
-                        <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+                        <a href="#">
                           <div class="pull-left">
-                            <img src = '{% static "resources/AdminLTE-RTL/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
+                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Support Team
@@ -80,12 +79,12 @@
                       </li><!-- end message -->
                     </ul>
                   </li>
-                  <li class="footer"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >See All Messages</a></li>
+                  <li class="footer"><a href="#">See All Messages</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
                   <span class="label label-warning">10</span>
                 </a>
@@ -95,18 +94,18 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-                        <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+                        <a href="#">
                           <i class="fa fa-users text-aqua"></i> 5 new members joined today
                         </a>
                       </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >View all</a></li>
+                  <li class="footer"><a href="#">View all</a></li>
                 </ul>
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">9</span>
                 </a>
@@ -116,7 +115,7 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- Task item -->
-                        <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+                        <a href="#">
                           <h3>
                             Design some buttons
                             <small class="pull-right">20%</small>
@@ -131,20 +130,20 @@
                     </ul>
                   </li>
                   <li class="footer">
-                    <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >View all tasks</a>
+                    <a href="#">View all tasks</a>
                   </li>
                 </ul>
               </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
-                  <img src = '{% static "resources/AdminLTE-RTL/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src = '{% static "resources/AdminLTE-RTL/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
+                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -153,29 +152,29 @@
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Followers</a>
+                      <a href="#">Followers</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Sales</a>
+                      <a href="#">Sales</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Friends</a>
+                      <a href="#">Friends</a>
                     </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="btn btn-default btn-flat">Profile</a>
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="btn btn-default btn-flat">Sign out</a>
+                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
               </li>
             </ul>
           </div>
@@ -191,11 +190,11 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src = '{% static "resources/AdminLTE-RTL/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
+              <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
           <!-- search form -->
@@ -212,137 +211,137 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/index.html" %}' ><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/index2.html" %}' ><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
               </ul>
             </li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Layout Options</span>
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/layout/top-nav.html" %}' ><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/layout/boxed.html" %}' ><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/layout/fixed.html" %}' ><i class="fa fa-circle-o"></i> Fixed</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/layout/collapsed-sidebar.html" %}' ><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
               </ul>
             </li>
             <li>
-              <a href = '{% static "resources/AdminLTE-RTL/pages/widgets.html" %}' >
+              <a href="../widgets.html">
                 <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">Hot</small>
               </a>
             </li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-pie-chart"></i>
                 <span>Charts</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/charts/chartjs.html" %}' ><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/charts/morris.html" %}' ><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/charts/flot.html" %}' ><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/charts/inline.html" %}' ><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+                <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+                <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
               </ul>
             </li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>UI Elements</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/UI/general.html" %}' ><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/UI/icons.html" %}' ><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/UI/buttons.html" %}' ><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/UI/sliders.html" %}' ><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/UI/timeline.html" %}' ><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/UI/modals.html" %}' ><i class="fa fa-circle-o"></i> Modals</a></li>
+                <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+                <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+                <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
               </ul>
             </li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-edit"></i> <span>Forms</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/forms/general.html" %}' ><i class="fa fa-circle-o"></i> General Elements</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/forms/advanced.html" %}' ><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/forms/editors.html" %}' ><i class="fa fa-circle-o"></i> Editors</a></li>
+                <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
               </ul>
             </li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-table"></i> <span>Tables</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/tables/simple.html" %}' ><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/tables/data.html" %}' ><i class="fa fa-circle-o"></i> Data tables</a></li>
+                <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
               </ul>
             </li>
             <li>
-              <a href = '{% static "resources/AdminLTE-RTL/pages/calendar.html" %}' >
+              <a href="../calendar.html">
                 <i class="fa fa-calendar"></i> <span>Calendar</span>
                 <small class="label pull-right bg-red">3</small>
               </a>
             </li>
             <li>
-              <a href = '{% static "resources/AdminLTE-RTL/pages/mailbox/mailbox.html" %}' >
+              <a href="../mailbox/mailbox.html">
                 <i class="fa fa-envelope"></i> <span>Mailbox</span>
                 <small class="label pull-right bg-yellow">12</small>
               </a>
             </li>
             <li class="treeview active">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-folder"></i> <span>Examples</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/invoice.html" %}' ><i class="fa fa-circle-o"></i> Invoice</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/login.html" %}' ><i class="fa fa-circle-o"></i> Login</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/register.html" %}' ><i class="fa fa-circle-o"></i> Register</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/lockscreen.html" %}' ><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/404.html" %}' ><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/500.html" %}' ><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                <li class="active"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/blank.html" %}' ><i class="fa fa-circle-o"></i> Blank Page</a></li>
-		<li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/profile.html" %}' ><i class="fa fa-circle-o"></i> <span>Profil<small class="label bg-red">جديد</small></a></li>
+                <li><a href="invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                <li><a href="login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+                <li><a href="register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+                <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                <li class="active"><a href="blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+		<li><a href="profile.html"><i class="fa fa-circle-o"></i> <span>Profil<small class="label bg-red">جديد</small></a></li>
               </ul>
             </li>
             <li class="treeview">
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >
+              <a href="#">
                 <i class="fa fa-share"></i> <span>Multilevel</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level One</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                 <li>
-                  <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                  <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
-                    <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Two</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
                     <li>
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                      <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
                       <ul class="treeview-menu">
-                        <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Three</a></li>
-                        <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level Three</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
-                <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o"></i> Level One</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
               </ul>
             </li>
-            <li><a href = '{% static "resources/AdminLTE-RTL/documentation/index.html" %}' ><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             <li class="header">LABELS</li>
-            <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -358,8 +357,8 @@
         الملف الشخصي
       </h1>
       <ol class="breadcrumb">
-        <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' ><i class="fa fa-dashboard"></i> الصفحة الرسمية</a></li>
-        <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >نمادج</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> الصفحة الرسمية</a></li>
+        <li><a href="#">نمادج</a></li>
         <li class="active">الملف الشخصي</li>
       </ol>
     </section>
@@ -371,19 +370,19 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#activity" %}'  data-toggle="tab">الخدمات</a></li>
-              <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#timeline" %}'  data-toggle="tab">السلم الزمني</a></li>
-              <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#settings" %}'  data-toggle="tab">الاعدادات</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">الخدمات</a></li>
+              <li><a href="#timeline" data-toggle="tab">السلم الزمني</a></li>
+              <li><a href="#settings" data-toggle="tab">الاعدادات</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src = '{% static "resources/AdminLTE-RTL/dist/img/user1-128x128.jpg" %}'  alt="user image">
+                    <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
                         <span class="username">
-                          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >احمد كمال</a>
-                          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                          <a href="#">احمد كمال</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">نشر - 7:30 PM اليوم</span>
                   </div>
@@ -392,11 +391,11 @@
                     كرة اليد التي تعرف أيضًا بHandball هي رياضة جماعية يتبارى فيها فريقان لكل منهما 7 لاعبين (6 لاعبين بحارس مرمى). يمرر اللاعبون الكرة فيما بينهم ليحاولوا رميها داخل مرمى الخصم لإحراز هدف. وتتألف المباراة من شوطين مدة كل منهما 30 دقيقةً، والفريق الذي يتمكن من تسجيل أكبر عدد من الأهداف في مرمى الخصم في نهاية شوطي المباراة هو الفريق الفائز. (wikipedia - libre)
                   </p>
                   <ul class="list-inline">
-                    <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> نشر</a></li>
-                    <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> اعجاب</a>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> نشر</a></li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> اعجاب</a>
                     </li>
                     <li class="pull-right">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> تعليقات
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> تعليقات
                         (5)</a></li>
                   </ul>
 
@@ -407,10 +406,10 @@
                 <!-- Post -->
                 <div class="post clearfix">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src = '{% static "resources/AdminLTE-RTL/dist/img/user7-128x128.jpg" %}'  alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
                         <span class="username">
-                          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Sarah Ross</a>
-                          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                          <a href="#">Sarah Ross</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Sent you a message - 3 days ago</span>
                   </div>
@@ -439,31 +438,31 @@
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src = '{% static "resources/AdminLTE-RTL/dist/img/user6-128x128.jpg" %}'  alt="User Image">
+                    <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
                         <span class="username">
-                          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Adam Jones</a>
-                          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                          <a href="#">Adam Jones</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
                     <span class="description">Posted 5 photos - 5 days ago</span>
                   </div>
                   <!-- /.user-block -->
                   <div class="row margin-bottom">
                     <div class="col-sm-6">
-                      <img class="img-responsive" src = '{% static "resources/AdminLTE-RTL/dist/img/photo1.png" %}'  alt="Photo">
+                      <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                     </div>
                     <!-- /.col -->
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-6">
-                          <img class="img-responsive" src = '{% static "resources/AdminLTE-RTL/dist/img/photo2.png" %}'  alt="Photo">
+                          <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
                           <br>
-                          <img class="img-responsive" src = '{% static "resources/AdminLTE-RTL/dist/img/photo3.jpg" %}'  alt="Photo">
+                          <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
-                          <img class="img-responsive" src = '{% static "resources/AdminLTE-RTL/dist/img/photo4.jpg" %}'  alt="Photo">
+                          <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
                           <br>
-                          <img class="img-responsive" src = '{% static "resources/AdminLTE-RTL/dist/img/photo1.png" %}'  alt="Photo">
+                          <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                         </div>
                         <!-- /.col -->
                       </div>
@@ -474,11 +473,11 @@
                   <!-- /.row -->
 
                   <ul class="list-inline">
-                    <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                    <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
                     </li>
                     <li class="pull-right">
-                      <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
+                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
                         (5)</a></li>
                   </ul>
 
@@ -504,7 +503,7 @@
                     <div class="timeline-item">
                       <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
-                      <h3 class="timeline-header"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >فريق الصيانة</a> ارسل اليك رسالة الكترونية امال</h3>
+                      <h3 class="timeline-header"><a href="#">فريق الصيانة</a> ارسل اليك رسالة الكترونية امال</h3>
 
                       <div class="timeline-body"> 
                           كرة اليد التي تعرف أيضًا بHandball هي رياضة جماعية يتبارى فيها فريقان لكل منهما 7 لاعبين (6 لاعبين بحارس مرمى). يمرر اللاعبون الكرة فيما بينهم ليحاولوا رميها داخل مرمى الخصم لإحراز هدف. وتتألف المباراة من شوطين مدة كل منهما 30 دقيقةً، والفريق الذي يتمكن من تسجيل أكبر عدد من الأهداف في مرمى الخصم في نهاية شوطي المباراة هو الفريق الفائز. (wikipedia - libre)
@@ -524,7 +523,7 @@
                     <div class="timeline-item">
                       <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
 
-                      <h3 class="timeline-header no-border"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Sarah Young</a> accepted your friend request
+                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
                       </h3>
                     </div>
                   </li>
@@ -536,7 +535,7 @@
                     <div class="timeline-item">
                       <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                      <h3 class="timeline-header"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Jay White</a> commented on your post</h3>
+                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
 
                       <div class="timeline-body">
                         Take me to your leader!
@@ -563,7 +562,7 @@
                     <div class="timeline-item">
                       <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
 
-                      <h3 class="timeline-header"><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >Mina Lee</a> uploaded new photos</h3>
+                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
 
                       <div class="timeline-body">
                         <img src="http://placehold.it/150x100" alt="..." class="margin">
@@ -622,7 +621,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                       <div class="checkbox">
                         <label>
-                          <input type="checkbox"> I agree to the <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >terms and conditions</a>
+                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
                         </label>
                       </div>
                     </div>
@@ -646,7 +645,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-                <img class="profile-user-img img-responsive img-circle" src = '{% static "resources/AdminLTE-RTL/dist/img/user4-128x128.jpg" %}'  alt="User profile picture">
+                <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
 
               <h3 class="profile-username text-center">اميرة امل</h3>
 
@@ -664,7 +663,7 @@
                 </li>
               </ul>
 
-              <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="btn btn-primary btn-block"><b>تابع</b></a>
+              <a href="#" class="btn btn-primary btn-block"><b>تابع</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -732,9 +731,9 @@
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-          <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#control-sidebar-home-tab" %}'  data-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
 
-          <li><a href = '{% static "resources/AdminLTE-RTL/pages/examples/#control-sidebar-settings-tab" %}'  data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -743,7 +742,7 @@
             <h3 class="control-sidebar-heading">Recent Activity</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <i class="menu-icon fa fa-birthday-cake bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
@@ -752,7 +751,7 @@
                 </a>
               </li>
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <i class="menu-icon fa fa-user bg-yellow"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
@@ -761,7 +760,7 @@
                 </a>
               </li>
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
@@ -770,7 +769,7 @@
                 </a>
               </li>
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <i class="menu-icon fa fa-file-code-o bg-green"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
@@ -783,7 +782,7 @@
             <h3 class="control-sidebar-heading">Tasks Progress</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <h4 class="control-sidebar-subheading">
                     Custom Template Design
                     <span class="label label-danger pull-right">70%</span>
@@ -794,7 +793,7 @@
                 </a>
               </li>
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <h4 class="control-sidebar-subheading">
                     Update Resume
                     <span class="label label-success pull-right">95%</span>
@@ -805,7 +804,7 @@
                 </a>
               </li>
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <h4 class="control-sidebar-subheading">
                     Laravel Integration
                     <span class="label label-warning pull-right">50%</span>
@@ -816,7 +815,7 @@
                 </a>
               </li>
               <li>
-                <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}' >
+                <a href="javascript::;">
                   <h4 class="control-sidebar-subheading">
                     Back End Framework
                     <span class="label label-primary pull-right">68%</span>
@@ -884,7 +883,7 @@
               <div class="form-group">
                 <label class="control-sidebar-subheading">
                   Delete chat history
-                  <a href = '{% static "resources/AdminLTE-RTL/pages/examples/javascript::;" %}'  class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                  <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
                 </label>
               </div><!-- /.form-group -->
             </form>
@@ -897,16 +896,16 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src = '{% static "resources/AdminLTE-RTL/plugins/jQuery/jQuery-2.1.4.min.js" %}' ></script>
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.4 -->
-    <script src = '{% static "resources/AdminLTE-RTL/bootstrap/js/bootstrap.min.js" %}' ></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->
-    <script src = '{% static "resources/AdminLTE-RTL/plugins/slimScroll/jquery.slimscroll.min.js" %}' ></script>
+    <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
-    <script src = '{% static "resources/AdminLTE-RTL/plugins/fastclick/fastclick.min.js" %}' ></script>
+    <script src="../../plugins/fastclick/fastclick.min.js"></script>
     <!-- AdminLTE App -->
-    <script src = '{% static "resources/AdminLTE-RTL/dist/js/app.min.js" %}' ></script>
+    <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src = '{% static "resources/AdminLTE-RTL/dist/js/demo.js" %}' ></script>
+    <script src="../../dist/js/demo.js"></script>
   </body>
 </html>

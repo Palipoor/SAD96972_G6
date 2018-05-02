@@ -1,15 +1,14 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.css" %}' >
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.js" %}' ></script>
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
+	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
 
 	<title>Scroller examples - Scroller examples</title>
 </head>
@@ -28,10 +27,11 @@
 				page. The scrolling container is forced to the height it would be for the full table display using an
 				extra element.</p>
 
-				<p>Scroller is initialised by simply including the letter <code>S</code> in the <a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/datatables.net/reference/option/dom" %}' ><code class="option" title=
+				<p>Scroller is initialised by simply including the letter <code>S</code> in the <a href=
+				"//datatables.net/reference/option/dom"><code class="option" title=
 				"DataTables initialisation option">dom<span>DT</span></code></a> for the table you want to have this
 				feature enabled on. Note that the <code>S</code> must come after the <code>t</code> parameter in
-				<a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/datatables.net/reference/option/dom" %}' ><code class="option" title=
+				<a href="//datatables.net/reference/option/dom"><code class="option" title=
 				"DataTables initialisation option">dom<span>DT</span></code></a>.</p>
 
 				<p>Key features include:</p>
@@ -53,14 +53,14 @@
 			<div class="liner">
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/index.html" %}' >Examples</a></h3>
+						<h3><a href="./index.html">Examples</a></h3>
 						<ul class="toc">
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/simple.html" %}' >Basic initialisation</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/state_saving.html" %}' >State saving</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/large_js_source.html" %}' >Client-side data source (50,000 rows)</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/server-side_processing.html" %}' >Server-side processing (5,000,000
+							<li><a href="./simple.html">Basic initialisation</a></li>
+							<li><a href="./state_saving.html">State saving</a></li>
+							<li><a href="./large_js_source.html">Client-side data source (50,000 rows)</a></li>
+							<li><a href="./server-side_processing.html">Server-side processing (5,000,000
 							rows)</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Scroller/examples/api_scrolling.html" %}' >API</a></li>
+							<li><a href="./api_scrolling.html">API</a></li>
 						</ul>
 					</div>
 				</div>

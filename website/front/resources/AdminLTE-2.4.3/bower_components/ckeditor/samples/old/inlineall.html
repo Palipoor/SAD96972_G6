@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
@@ -8,7 +7,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 <head>
 	<meta charset="utf-8">
 	<title>Massive inline editing &mdash; CKEditor Sample</title>
-	<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js" %}' ></script>
+	<script src="../../ckeditor.js"></script>
 	<script>
 
 		// This code is generally not necessary, but it is here to demonstrate
@@ -47,7 +46,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 		});
 
 	</script>
-	<link href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/sample.css" %}'  rel="stylesheet">
+	<link href="sample.css" rel="stylesheet">
 	<style>
 
 		/* The following styles are just to make the page look nice. */
@@ -193,7 +192,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 </head>
 <body>
 <div>
-	<h1 class="samples"><a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/index.html" %}' >CKEditor Samples</a> &raquo; Massive inline editing</h1>
+	<h1 class="samples"><a href="index.html">CKEditor Samples</a> &raquo; Massive inline editing</h1>
 	<div class="warning deprecated">
 		This sample is not maintained anymore. Check out its <a href="https://sdk.ckeditor.com/samples/inline.html">brand new version in CKEditor SDK</a>.
 	</div>
@@ -276,7 +275,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 		<div id="column3">
 			<div contenteditable="true">
 				<p>
-					<img src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/assets/inlineall/logo.png" %}'  alt="CKEditor logo" style="float:left">
+					<img src="assets/inlineall/logo.png" alt="CKEditor logo" style="float:left">
 				</p>
 				<p>Quisque justo neque, mattis sed, fermentum ultrices <strong>posuere cubilia Curae</strong>, Vestibulum elit metus, quis placerat ut, lectus. Ut sagittis, nunc libero, egestas consequat lobortis velit rutrum ut, faucibus turpis. Fusce porttitor, nulla quis turpis. Nullam laoreet vel, consectetuer tellus suscipit ultricies, hendrerit wisi. Donec odio nec velit ac nunc sit amet, accumsan cursus aliquet. Vestibulum ante sit amet sagittis mi.</p>
 				<h3>

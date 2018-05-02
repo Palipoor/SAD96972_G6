@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +6,15 @@
   <title>AdminLTE 2 | Documentation</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/documentation/bower_components/bootstrap/dist/css/bootstrap.min.css" %}' >
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/documentation/bower_components/font-awesome/css/font-awesome.min.css" %}' >
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/documentation/bower_components/Ionicons/c/css/ionicons.min.css" %}' >
+  <link rel="stylesheet" href="../bower_components/Ionicons/c/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/documentation/dist/css/AdminLTE.min.css" %}' >
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/documentation/dist/css/skins/_all-skins.min.css" %}' >
-  <link rel="stylesheet" href = '{% static "resources/AdminLTE-2.4.3/documentation/build/style.css" %}' >
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="style.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +32,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href = '{% static "resources/AdminLTE-2.4.3/documentation/index2.html" %}'  class="logo">
+    <a href="../index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -42,7 +41,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#" %}'  class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
@@ -62,29 +61,29 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="nav sidebar-menu">
         <li class="header">TABLE OF CONTENTS</li>
-        <li class="active"><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#introduction" %}' ><i class="fa fa-circle-o"></i> Introduction</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#download" %}' ><i class="fa fa-circle-o"></i> Download</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#dependencies" %}' ><i class="fa fa-circle-o"></i> Dependencies</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#advice" %}' ><i class="fa fa-circle-o"></i> Advice</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#layout" %}' ><i class="fa fa-circle-o"></i> Layout</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#adminlte-options" %}' ><i class="fa fa-circle-o"></i> Javascript Options</a></li>
+        <li class="active"><a href="#introduction"><i class="fa fa-circle-o"></i> Introduction</a></li>
+        <li><a href="#download"><i class="fa fa-circle-o"></i> Download</a></li>
+        <li><a href="#dependencies"><i class="fa fa-circle-o"></i> Dependencies</a></li>
+        <li><a href="#advice"><i class="fa fa-circle-o"></i> Advice</a></li>
+        <li><a href="#layout"><i class="fa fa-circle-o"></i> Layout</a></li>
+        <li><a href="#adminlte-options"><i class="fa fa-circle-o"></i> Javascript Options</a></li>
         <li class="treeview" id="scrollspy-components">
-          <a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/javascript:void(0)" %}' ><i class="fa fa-circle-o"></i> Components</a>
+          <a href="javascript:void(0)"><i class="fa fa-circle-o"></i> Components</a>
           <ul class="nav treeview-menu">
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#component-main-header" %}' >Main Header</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#component-sidebar" %}' >Sidebar</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#component-control-sidebar" %}' >Control Sidebar</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#component-info-box" %}' >Info Box</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#component-box" %}' >Boxes</a></li>
-            <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#component-direct-chat" %}' >Direct Chat</a></li>
+            <li><a href="#component-main-header">Main Header</a></li>
+            <li><a href="#component-sidebar">Sidebar</a></li>
+            <li><a href="#component-control-sidebar">Control Sidebar</a></li>
+            <li><a href="#component-info-box">Info Box</a></li>
+            <li><a href="#component-box">Boxes</a></li>
+            <li><a href="#component-direct-chat">Direct Chat</a></li>
           </ul>
         </li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#plugins" %}' ><i class="fa fa-circle-o"></i> Plugins</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#browsers" %}' ><i class="fa fa-circle-o"></i> Browser Support</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#upgrade" %}' ><i class="fa fa-circle-o"></i> Upgrade Guide</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#implementations" %}' ><i class="fa fa-circle-o"></i> Implementations</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#faq" %}' ><i class="fa fa-circle-o"></i> FAQ</a></li>
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#license" %}' ><i class="fa fa-circle-o"></i> License</a></li>
+        <li><a href="#plugins"><i class="fa fa-circle-o"></i> Plugins</a></li>
+        <li><a href="#browsers"><i class="fa fa-circle-o"></i> Browser Support</a></li>
+        <li><a href="#upgrade"><i class="fa fa-circle-o"></i> Upgrade Guide</a></li>
+        <li><a href="#implementations"><i class="fa fa-circle-o"></i> Implementations</a></li>
+        <li><a href="#faq"><i class="fa fa-circle-o"></i> FAQ</a></li>
+        <li><a href="#license"><i class="fa fa-circle-o"></i> License</a></li>
       </ul>
     </div>
     <!-- /.sidebar -->
@@ -99,7 +98,7 @@
         <small>Version 2.3</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href = '{% static "resources/AdminLTE-2.4.3/documentation/build/#" %}' ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Documentation</li>
       </ol>
     </div>
@@ -187,16 +186,16 @@
 </div><!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src = '{% static "resources/AdminLTE-2.4.3/documentation/bower_components/jquery/dist/jquery.min.js" %}' ></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src = '{% static "resources/AdminLTE-2.4.3/documentation/bower_components/bootstrap/dist/js/bootstrap.min.js" %}' ></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src = '{% static "resources/AdminLTE-2.4.3/documentation/plugins/fastclick/fastclick.min.js" %}' ></script>
+<script src="../plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->
-<script src = '{% static "resources/AdminLTE-2.4.3/documentation/dist/js/adminlte.min.js" %}' ></script>
+<script src="../dist/js/adminlte.min.js"></script>
 <!-- SlimScroll -->
-<script src = '{% static "resources/AdminLTE-2.4.3/documentation/bower_components/jquery-slimscroll/jquery.slimscroll.min.js" %}' ></script>
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-<script src = '{% static "resources/AdminLTE-2.4.3/documentation/build/docs.js" %}' ></script>
+<script src="docs.js"></script>
 </body>
 </html>

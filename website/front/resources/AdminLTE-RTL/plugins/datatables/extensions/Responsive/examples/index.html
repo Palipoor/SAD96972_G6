@@ -1,14 +1,13 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.css" %}' >
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.js" %}' ></script>
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
 
 	<title>Responsive examples - Responsive DataTables</title>
 </head>
@@ -29,45 +28,45 @@
 			<div class="liner">
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/initialisation/index.html" %}' >Basic initialisation</a></h3>
+						<h3><a href="./initialisation/index.html">Basic initialisation</a></h3>
 						<ul class="toc">
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/initialisation/className.html" %}' >Class name</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/initialisation/option.html" %}' >Configuration option</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/initialisation/new.html" %}' >`new` constructor</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/initialisation/ajax.html" %}' >Ajax data</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/initialisation/default.html" %}' >Default initialisation</a></li>
+							<li><a href="./initialisation/className.html">Class name</a></li>
+							<li><a href="./initialisation/option.html">Configuration option</a></li>
+							<li><a href="./initialisation/new.html">`new` constructor</a></li>
+							<li><a href="./initialisation/ajax.html">Ajax data</a></li>
+							<li><a href="./initialisation/default.html">Default initialisation</a></li>
 						</ul>
 					</div>
 
 					<div class="toc-group">
-						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/styling/index.html" %}' >Styling</a></h3>
+						<h3><a href="./styling/index.html">Styling</a></h3>
 						<ul class="toc">
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/styling/bootstrap.html" %}' >Bootstrap styling</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/styling/foundation.html" %}' >Foundation styling</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/styling/scrolling.html" %}' >Vertical scrolling</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/styling/compact.html" %}' >Compact styling</a></li>
+							<li><a href="./styling/bootstrap.html">Bootstrap styling</a></li>
+							<li><a href="./styling/foundation.html">Foundation styling</a></li>
+							<li><a href="./styling/scrolling.html">Vertical scrolling</a></li>
+							<li><a href="./styling/compact.html">Compact styling</a></li>
 						</ul>
 					</div>
 
 					<div class="toc-group">
-						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/display-control/index.html" %}' >Display control</a></h3>
+						<h3><a href="./display-control/index.html">Display control</a></h3>
 						<ul class="toc">
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/display-control/auto.html" %}' >Automatic column hiding</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/display-control/classes.html" %}' >Class control</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/display-control/init-classes.html" %}' >Assigned class control</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/display-control/fixedHeader.html" %}' >With FixedHeader</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/display-control/complexHeader.html" %}' >Complex headers (rowspan / colspan)</a></li>
+							<li><a href="./display-control/auto.html">Automatic column hiding</a></li>
+							<li><a href="./display-control/classes.html">Class control</a></li>
+							<li><a href="./display-control/init-classes.html">Assigned class control</a></li>
+							<li><a href="./display-control/fixedHeader.html">With FixedHeader</a></li>
+							<li><a href="./display-control/complexHeader.html">Complex headers (rowspan / colspan)</a></li>
 						</ul>
 					</div>
 
 					<div class="toc-group">
-						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/child-rows/index.html" %}' >Child rows</a></h3>
+						<h3><a href="./child-rows/index.html">Child rows</a></h3>
 						<ul class="toc">
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/child-rows/disable-child-rows.html" %}' >Disable child rows</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/child-rows/column-control.html" %}' >Column controlled child rows</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/child-rows/right-column.html" %}' >Column control - right</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/child-rows/whole-row-control.html" %}' >Whole row child row control</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/Responsive/examples/child-rows/custom-renderer.html" %}' >Custom child row renderer</a></li>
+							<li><a href="./child-rows/disable-child-rows.html">Disable child rows</a></li>
+							<li><a href="./child-rows/column-control.html">Column controlled child rows</a></li>
+							<li><a href="./child-rows/right-column.html">Column control - right</a></li>
+							<li><a href="./child-rows/whole-row-control.html">Whole row child row control</a></li>
+							<li><a href="./child-rows/custom-renderer.html">Custom child row renderer</a></li>
 						</ul>
 					</div>
 				</div>

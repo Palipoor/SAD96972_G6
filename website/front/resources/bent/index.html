@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <!--
@@ -17,32 +16,32 @@
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
     <!-- Bootstrap -->
-    <link href = '{% static "resources/bent/css/bootstrap.min.css" %}'  rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Owl Carousel Assets -->
-    <link href = '{% static "resources/bent/css/owl.carousel.css" %}'  rel="stylesheet">
-    <link href = '{% static "resources/bent/css/owl.theme.css" %}'  rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.css" rel="stylesheet">
 
 
     <!-- Pixeden Icon Font -->
-    <link rel="stylesheet" href = '{% static "resources/bent/css/Pe-icon-7-stroke.css" %}' >
+    <link rel="stylesheet" href="css/Pe-icon-7-stroke.css">
 
     <!-- Font Awesome -->
-    <link href = '{% static "resources/bent/css/font-awesome.min.css" %}'  rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 
 
     <!-- PrettyPhoto -->
-    <link href = '{% static "resources/bent/css/prettyPhoto.css" %}'  rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href = '{% static "resources/bent/favicon.ico" %}'  />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
     <!-- Style -->
-    <link href = '{% static "resources/bent/css/style.css" %}'  rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-    <link href = '{% static "resources/bent/css/animate.css" %}'  rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
     <!-- Responsive CSS -->
-    <link href = '{% static "resources/bent/css/responsive.css" %}'  rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -79,20 +78,20 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href = '{% static "resources/bent/#" %}' >
-                            <img src = '{% static "resources/bent/images/logo.png" %}'  alt="Logo">
+                        <a class="navbar-brand" href="#">
+                            <img src="images/logo.png" alt="Logo">
                         </a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
-                            <li><a href = '{% static "resources/bent/#HOME" %}' >HOME</a> </li>
-                            <li><a href = '{% static "resources/bent/#ABOUT" %}' >ABOUT </a> </li>
-                            <li><a href = '{% static "resources/bent/#FEATURES" %}' >FEATURES</a></li>
-                            <li><a href = '{% static "resources/bent/#SCREENS" %}' >SCREENS</a> </li>
-                            <li><a href = '{% static "resources/bent/#DOWNLOAD" %}' >DOWNLOAD </a> </li>
-                            <li><a href = '{% static "resources/bent/#CONTACT" %}' >CONTACT </a> </li>
+                            <li><a href="#HOME">HOME</a> </li>
+                            <li><a href="#ABOUT">ABOUT </a> </li>
+                            <li><a href="#FEATURES">FEATURES</a></li>
+                            <li><a href="#SCREENS">SCREENS</a> </li>
+                            <li><a href="#DOWNLOAD">DOWNLOAD </a> </li>
+                            <li><a href="#CONTACT">CONTACT </a> </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -105,7 +104,7 @@
                     <div class="col-md-12">
                         <div class="logo text-center">
                                 <!-- LOGO -->
-                            <img width="125" height="55" src = '{% static "resources/bent/images/logo.png" %}'  alt="">
+                            <img width="125" height="55" src="images/logo.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -118,14 +117,14 @@
 
                             <div class="download-btn">
                             <!-- BUTTON -->
-                                <a class="btn home-btn wow fadeInLeft" href = '{% static "resources/bent/#DOWNLOAD" %}' >Download</a>
-                                <a class="tuor btn wow fadeInRight" href = '{% static "resources/bent/#ABOUT" %}' >Take a tour <i class="fa fa-angle-down"></i></a>
+                                <a class="btn home-btn wow fadeInLeft" href="#DOWNLOAD">Download</a>
+                                <a class="tuor btn wow fadeInRight" href="#ABOUT">Take a tour <i class="fa fa-angle-down"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-md-offset-1 col-sm-4">
                         <div class="home-iphone">
-                            <img src = '{% static "resources/bent/images/iPhone_Home.png" %}'  alt="">
+                            <img src="images/iPhone_Home.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -162,7 +161,7 @@
                     <div class="col-md-6">
                         <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- PHONE -->
-                            <img src = '{% static "resources/bent/images/about_iphone.png" %}'  alt="">
+                            <img src="images/about_iphone.png" alt="">
                         </div>
                     </div>
                     <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -222,7 +221,7 @@
                         </div>
                         <div class="video-button">
                             <!-- BUTTON -->
-                            <a class="btn btn-primary btn-video" href = '{% static "resources/bent/#FEATURES" %}'  role="button">Features</a>
+                            <a class="btn btn-primary btn-video" href="#FEATURES" role="button">Features</a>
                         </div>
                     </div>
                     <div class="col-md-6 wow fadeInRightBig">
@@ -264,7 +263,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                 <!-- IMAGE -->
-                                                <img src = '{% static "resources/bent/images/client_1.png" %}'  alt="">
+                                                <img src="images/client_1.png" alt="">
                                                 <div class="testimonial_caption">
                                                    <!-- DESCRIPTION -->  
                                                     <h2>Dan Harmon</h2>
@@ -280,7 +279,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                  <!-- IMAGE -->
-                                                <img src = '{% static "resources/bent/images/client_2.png" %}'  alt="">
+                                                <img src="images/client_2.png" alt="">
                                                 <div class="testimonial_caption">
                                                 <!-- DESCRIPTION --> 
                                                     <h2>Allie Kingsley</h2>
@@ -296,7 +295,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                 <!-- IMAGE -->
-                                                <img src = '{% static "resources/bent/images/client_3.png" %}'  alt="">
+                                                <img src="images/client_3.png" alt="">
                                                 <div class="testimonial_caption">
                                                 <!-- DESCRIPTION --> 
                                                     <h2>Joel Mchale</h2>
@@ -383,7 +382,7 @@
                     <div class="col-md-4">
                         <div class="feature_iphone">
                             <!-- FEATURE PHONE IMAGE -->
-                            <img class="wow bounceIn" data-wow-duration="1s" src = '{% static "resources/bent/images/iPhone02.png" %}'  alt="">
+                            <img class="wow bounceIn" data-wow-duration="1s" src="images/iPhone02.png" alt="">
                         </div>
                     </div>
                     <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
@@ -441,7 +440,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-primary btn-action" href = '{% static "resources/bent/#" %}'  role="button">Download Now</a>
+                    <a class="btn btn-primary btn-action" href="#" role="button">Download Now</a>
                 </div>
             </div>
         </div>
@@ -473,22 +472,22 @@
 
                     <!-- APPS SCREEN IMAGES -->
                     <div class="item">
-                    <a href = '{% static "resources/bent/images/screens/iPhone04.png" %}'  rel="prettyPhoto[pp_gal]"><img src = '{% static "resources/bent/images/iPhone04.png" %}'  width="60" height="60" alt="APPS SCREEN" /></a>
+                    <a href="images/screens/iPhone04.png" rel="prettyPhoto[pp_gal]"><img src="images/iPhone04.png" width="60" height="60" alt="APPS SCREEN" /></a>
                     </div>
                     <div class="item">
-                        <a href = '{% static "resources/bent/images/screens/iPhone05.png" %}'  rel="prettyPhoto[pp_gal]"><img src = '{% static "resources/bent/images/iPhone05.png" %}'  width="60" height="60" alt="APPS SCREEN" /></a>
+                        <a href="images/screens/iPhone05.png" rel="prettyPhoto[pp_gal]"><img src="images/iPhone05.png" width="60" height="60" alt="APPS SCREEN" /></a>
                     </div>
                     <div class="item">
-                        <a href = '{% static "resources/bent/images/screens/iPhone06.png" %}'  rel="prettyPhoto[pp_gal]"><img src = '{% static "resources/bent/images/iPhone06.png" %}'  width="60" height="60" alt="APPS SCREEN" /></a>
+                        <a href="images/screens/iPhone06.png" rel="prettyPhoto[pp_gal]"><img src="images/iPhone06.png" width="60" height="60" alt="APPS SCREEN" /></a>
                     </div>
                     <div class="item">
-                        <a href = '{% static "resources/bent/images/screens/iPhone07.png" %}'  rel="prettyPhoto[pp_gal]"><img src = '{% static "resources/bent/images/iPhone07.png" %}'  width="60" height="60" alt="APPS SCREEN" /></a>
+                        <a href="images/screens/iPhone07.png" rel="prettyPhoto[pp_gal]"><img src="images/iPhone07.png" width="60" height="60" alt="APPS SCREEN" /></a>
                     </div>
                     <div class="item">
-                        <a href = '{% static "resources/bent/images/screens/iPhone08.png" %}'  rel="prettyPhoto[pp_gal]"><img src = '{% static "resources/bent/images/iPhone08.png" %}'  width="60" height="60" alt="APPS SCREEN" /></a>
+                        <a href="images/screens/iPhone08.png" rel="prettyPhoto[pp_gal]"><img src="images/iPhone08.png" width="60" height="60" alt="APPS SCREEN" /></a>
                     </div>
                     <div class="item">
-                        <a href = '{% static "resources/bent/images/screens/iPhone09.png" %}'  rel="prettyPhoto[pp_gal]"><img src = '{% static "resources/bent/images/iPhone09.png" %}'  width="60" height="60" alt="APPS SCREEN" /></a>
+                        <a href="images/screens/iPhone09.png" rel="prettyPhoto[pp_gal]"><img src="images/iPhone09.png" width="60" height="60" alt="APPS SCREEN" /></a>
                     </div>
                 </div>
             </div>
@@ -571,7 +570,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="download_screen text-center wow fadeInUp" data-wow-duration="1s">
-                        <img src = '{% static "resources/bent/images/download_screen.png" %}'  alt="">
+                        <img src="images/download_screen.png" alt="">
                     </div>
                 </div>
             </div>
@@ -589,7 +588,7 @@
                 <!-- DOWNLOADABLE STORE -->
                 <div class="col-md-6">
                     <div class="row">
-                        <a href = '{% static "resources/bent" %}' >
+                        <a href="">
                             <div class="col-md-4 no_padding">
                                 <div class="single_store">
                                     <i class="fa fa-apple"></i>
@@ -600,7 +599,7 @@
                             </div>
                         </a>
                         <div class="col-md-4 no_padding">
-                            <a href = '{% static "resources/bent" %}' >
+                            <a href="">
                                 <div class="single_store">
                                     <i class="fa fa-android"></i>
                                     <div class="store_inner">
@@ -610,7 +609,7 @@
                             </a>
                         </div>
                         <div class="col-md-4 no_padding">
-                            <a href = '{% static "resources/bent" %}' >
+                            <a href="">
                                 <div class="single_store last">
                                     <i class="fa fa-windows"></i>
                                     <div class="store_inner">
@@ -680,15 +679,15 @@
                     <div class="col-md-12 wow bounceInLeft">
                         <div class="social_icons">
                             <ul>
-                                <li><a href = '{% static "resources/bent" %}' ><i class="fa fa-facebook"></i></a>
+                                <li><a href=""><i class="fa fa-facebook"></i></a>
                                 </li>
-                                <li><a href = '{% static "resources/bent" %}' ><i class="fa fa-twitter"></i></a>
+                                <li><a href=""><i class="fa fa-twitter"></i></a>
                                 </li>
-                                <li><a href = '{% static "resources/bent" %}' ><i class="fa fa-dribbble"></i></a>
+                                <li><a href=""><i class="fa fa-dribbble"></i></a>
                                 </li>
-                                <li><a href = '{% static "resources/bent" %}' ><i class="fa fa-behance"></i></a>
+                                <li><a href=""><i class="fa fa-behance"></i></a>
                                 </li>
-                                <li><a href = '{% static "resources/bent" %}' ><i class="fa fa-youtube-play"></i></a>
+                                <li><a href=""><i class="fa fa-youtube-play"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -768,7 +767,7 @@
 
                 <div class="col-md-6">
                     <div class="scroll_top">
-                        <a href = '{% static "resources/bent/#HOME" %}' ><i class="fa fa-angle-up"></i></a>
+                        <a href="#HOME"><i class="fa fa-angle-up"></i></a>
                     </div>
                 </div>
             </div>
@@ -782,19 +781,19 @@
 ============================== -->
 
 
-    <script src = '{% static "resources/bent/js/jquery.min.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/bootstrap.min.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/owl.carousel.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/jquery.fitvids.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/smoothscroll.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/jquery.parallax-1.1.3.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/jquery.prettyPhoto.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/jquery.ajaxchimp.min.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/jquery.ajaxchimp.langs.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/wow.min.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/waypoints.min.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/jquery.counterup.min.js" %}' ></script>
-    <script src = '{% static "resources/bent/js/script.js" %}' ></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/jquery.fitvids.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <script src="js/jquery.parallax-1.1.3.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.ajaxchimp.langs.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/script.js"></script>
 
 
 </body>
