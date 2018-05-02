@@ -13,17 +13,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Golpar on 4/12/2018 AD.
+ * Created by Golpar on 4/27/2018 AD.
  */
-public class EuroChargeCustomer {
+public class EuroChargeManager {
     private static WebDriver driver;
-    private  static String amount = "1";
+    private static String amount = "1";
 
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
+        GeneralReusables.loginAsTheManager(driver);
         WalletUsersReusables.navigateToWallet(driver, "euro");
     }
 

@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,6 +22,22 @@ import java.util.concurrent.TimeUnit;
 public class GeneralReusables {
 
     //todo درست کردن این فیلدها
+
+    public static final Map<String, String> reusableStrings;
+
+    static {
+        reusableStrings = new HashMap<String, String>();
+        reusableStrings.put("invalid-transaction-id", "1000");
+        reusableStrings.put("wrong-id-error", "");
+        reusableStrings.put("wrong-amount-error", "");
+        reusableStrings.put("wrong-username-error", "");
+        reusableStrings.put("access-denied-error", "");
+        reusableStrings.put("no-such-user-error", "");
+        reusableStrings.put("done-transaction", "");
+        reusableStrings.put("pending-transaction", "");
+        reusableStrings.put("failed-transaction", "");
+        reusableStrings.put("reported-transaction", "");
+    }
 
     public static CharSequence INVALID_TRANSACTION_ID = "10000";
     public static String PANEL_TITLE = "پنل مدیریت";
@@ -43,7 +61,7 @@ public class GeneralReusables {
     public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
         GeneralReusables.setUpToHomepage(homepage);
         // Go to Sign up page
-        String linkToOpen= homepage.findElement(By.name("log in")).getAttribute("href");
+        String linkToOpen = homepage.findElement(By.name("log in")).getAttribute("href");
         homepage.get(linkToOpen);
         WebElement emailField = homepage.findElement(By.name("email"));
         emailField.sendKeys(email);
@@ -55,21 +73,25 @@ public class GeneralReusables {
     }
 
     public static void loginAsACustomer(WebDriver homepage) {
-        String email = ProfileReusables.email1;
-        String password = ProfileReusables.password1;
-        login(homepage, email, password);
+        homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
+//        String email = ProfileReusables.email1;
+//        String password = ProfileReusables.password1;
+//        login(homepage, email, password);
     }
 
     public static void loginAsTheManager(WebDriver homepage) {
-        String email = "customerEmail";
-        String password = "customerPassword";
-        login(homepage, email, password);
+        homepage.navigate().to("http://127.0.0.1:8000/manager/dashboard");
+//        String email = "customerEmail";
+//        String password = "customerPassword";
+//        login(homepage, email, password);
     }
 
     public static String loginAsAnEmployee(WebDriver homepage) {
-        String email = "customerEmail";
-        String password = "customerPassword";
-        login(homepage, email, password);
+        homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
+//        String email = "customerEmail";
+//        String password = "customerPassword";
+//        login(homepage, email, password);
+//        return getUsername(homepage);
         return getUsername(homepage);
     }
 

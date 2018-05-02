@@ -1,7 +1,9 @@
 package Wallet;
 
 import Reusables.GeneralReusables;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,9 +15,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Created by Golpar on 4/12/2018 AD.
+ * Created by Golpar on 4/27/2018 AD.
  */
-public class WalletExistenceCustomer {
+public class WalletExistenceManager {
 
     private static WebDriver driver;
 
@@ -23,7 +25,7 @@ public class WalletExistenceCustomer {
     public static void setUp() {
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
+        GeneralReusables.loginAsTheManager(driver);
     }
 
     @Test
@@ -56,3 +58,4 @@ public class WalletExistenceCustomer {
     }
 
 }
+

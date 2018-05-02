@@ -38,7 +38,7 @@ public class ShowingEmployeesList {
     }
 
     @Test
-    public void tearDown() {
+    public static void tearDown() {
         GeneralReusables.logout(driver);
     }
 }

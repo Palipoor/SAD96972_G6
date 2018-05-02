@@ -11,10 +11,9 @@ import org.openqa.selenium.WebElement;
 public class ProfileReusables {
 
     //TODO
-
-    public static  String SignUpTitle= "سپاا | ثبت‌ نام";
-    public static  String logInTitle= "ورود";
-    public static  String passwordChangeTitle= "تغییر رمز عبور";
+    public static String SignUpTitle = "سپاا | ثبت‌ نام";
+    public static String logInTitle = "ورود";
+    public static String passwordChangeTitle = "تغییر رمز عبور";
 
 
     public static String firstName1 = "Dorna";
@@ -33,9 +32,6 @@ public class ProfileReusables {
     public static String invalidPhoneNumber = "1";
     public static String invalidAccountNumber = "1";
 
-
-
-
     public static String invalidFirstNameError = "نام وارد شده معتبر نیست.";
     public static String invalidFamilyNameError = "نام خانوادگی وارد شده معتبر نیست.";
     public static String invalidUsernameError = "نام کاربری وارد شده معتبر نیست.";
@@ -50,27 +46,13 @@ public class ProfileReusables {
     public static String successMessage = "ثبت نام با موفقیت انجام شد.";
     public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
     public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
-
-
-
-
-
-
     public static String panelAddress = ""; //TODO:
 
 
-
-
-
-
-
-
-    public static void signUpUser1(WebDriver driver){
+    public static void signUpUser1(WebDriver driver) {
         GeneralReusables.setUpToHomepage(driver);
-        String linkToOpen= driver.findElement(By.name("sign up")).getAttribute("href");
+        String linkToOpen = driver.findElement(By.name("sign up")).getAttribute("href");
         driver.get(linkToOpen);
-
-
 
         enterValidFirstName(driver);
         enterValidFamilyName(driver);
@@ -94,70 +76,73 @@ public class ProfileReusables {
 
     }
 
-
-    public static void enterValidFirstName(WebDriver driver){
+    public static void enterValidFirstName(WebDriver driver) {
         WebElement email = driver.findElement(By.name("first name"));
         email.clear();
         email.sendKeys(firstName1);
 
     }
 
-    public static void enterValidFamilyName(WebDriver driver){
+    public static void enterValidFamilyName(WebDriver driver) {
         WebElement email = driver.findElement(By.name("family name"));
         email.clear();
         email.sendKeys(surName1);
 
     }
 
-    public static void enterValidUsername(WebDriver driver){
+    public static void enterValidUsername(WebDriver driver) {
         WebElement username = driver.findElement(By.name("username"));
         username.clear();
-        username.sendKeys("dorna"+ System.currentTimeMillis());  //TODO
+        username.sendKeys("dorna" + System.currentTimeMillis());  //TODO
 
     }
-    public static void enterValidEmail(WebDriver driver){
+
+    public static void enterValidEmail(WebDriver driver) {
         WebElement email = driver.findElement(By.name("email"));
         email.clear();
-        email.sendKeys("dorna"+ System.currentTimeMillis()+"@gmail.com");  //TODO
+        email.sendKeys("dorna" + System.currentTimeMillis() + "@gmail.com");  //TODO
 
     }
-    public static void enterValidPhoneNumber(WebDriver driver){
+
+
+    public static void enterValidPhoneNumber(WebDriver driver) {
         WebElement phoneNumber = driver.findElement(By.name("contact number"));
         phoneNumber.clear();
         phoneNumber.sendKeys(ProfileReusables.phoneNumber1);
     }
 
-    public static void enterValidAccountNumber(WebDriver driver){
+    public static void enterValidAccountNumber(WebDriver driver) {
         WebElement shomareHesab = driver.findElement(By.name("account number"));
         shomareHesab.clear();
         shomareHesab.sendKeys(accountNumber1);
     }
 
-    public static void enterValidPassword(WebDriver driver){
+    public static void enterValidPassword(WebDriver driver) {
         WebElement password = driver.findElement(By.name("password"));
         password.clear();
         password.sendKeys(ProfileReusables.password1);
     }
 
-    public static void repeatValidPassword(WebDriver driver){
+
+    public static void repeatValidPassword(WebDriver driver) {
+
         WebElement password = driver.findElement(By.name("password repeat"));
         password.clear();
         password.sendKeys(ProfileReusables.password1);
     }
 
-    public static void clickForSignUp(WebDriver driver){
+
+    public static void clickForSignUp(WebDriver driver) {
+
         WebElement submitButton = driver.findElement(By.name("sign up"));
         submitButton.click();
     }
 
 
-    public static void clickForLogIn(WebDriver driver){
+    public static void clickForLogIn(WebDriver driver) {
         WebElement submitButton = driver.findElement(By.name("log in button"));
         submitButton.click();
     }
-
-
-
 
     public static void navigateToWallet(WebDriver panel, String currency) {
         WebElement wallet = panel.findElement(By.name(currency + "-wallet"));
@@ -169,6 +154,4 @@ public class ProfileReusables {
         //// TODO: 4/12/2018 AD implement this
     }
 }
-
-
 
