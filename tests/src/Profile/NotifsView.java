@@ -2,57 +2,52 @@ package Profile;
 
 import Reusables.GeneralReusables;
 import Reusables.ProfileReusables;
-import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-public class LogOut {
-    private static WebDriver driver;
+@RunWith(Reusables.OrderedRunner.class)
+public class NotifsView {
+    static WebDriver driver;
 
 
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-       // GeneralReusables.loginAsACustomer(driver); //TODO:!!!!!!!!!!!!!
-        GeneralReusables.login(driver, ProfileReusables.email1, ProfileReusables.password1);
+        GeneralReusables.loginAsACustomer(driver);
+
     }
 
     @Test
+    @Order(order = 1)
     public void preConditionTest() {
         String title = driver.getTitle();
         assertEquals(title, GeneralReusables.PANEL_TITLE);
     }
 
     @Test
-    public void signOut() {
-
-        WebElement logout = driver.findElement(By.name("logout"));
-        logout.click();
-
-       //TODO: finally, how to check?
-
-
-
+    public void viewNotifs() {
+        List<WebElement> notifs = driver.findElements(By.name("notifications menu"));
+        assertNotEquals(notifs.size(), 0);// exists such element in the page
     }
-
 
     @AfterClass
     public static void tearDown() {
+        GeneralReusables.logout(driver);
         driver.close();
     }
-
-
-
 
 }

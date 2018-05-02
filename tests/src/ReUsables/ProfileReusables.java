@@ -12,7 +12,7 @@ public class ProfileReusables {
 
     //TODO
 
-    public static  String SignUpTitle= "ثبت‌ نام";
+    public static  String SignUpTitle= "سپاا | ثبت‌ نام";
     public static  String logInTitle= "ورود";
     public static  String passwordChangeTitle= "تغییر رمز عبور";
 
@@ -29,6 +29,9 @@ public class ProfileReusables {
     public static String wrongPassword = "duck";
     public static String invalidPassword = "";//TODO
     public static String notMatchedPassword = "somethingElse";
+    public static String invalidName = "!";
+    public static String invalidPhoneNumber = "1";
+    public static String invalidAccountNumber = "1";
 
 
 
@@ -64,8 +67,9 @@ public class ProfileReusables {
 
     public static void signUpUser1(WebDriver driver){
         GeneralReusables.setUpToHomepage(driver);
-        WebElement signUpButton = driver.findElement(By.name("sign-up"));  //TODO :!!!!!!!!!!!!!!!!!!!!!!!
-        signUpButton.click();
+        String linkToOpen= driver.findElement(By.name("sign up")).getAttribute("href");
+        driver.get(linkToOpen);
+
 
 
         enterValidFirstName(driver);
@@ -114,7 +118,7 @@ public class ProfileReusables {
     public static void enterValidEmail(WebDriver driver){
         WebElement email = driver.findElement(By.name("email"));
         email.clear();
-        email.sendKeys("dorna"+ System.currentTimeMillis()+"gmail.com");  //TODO
+        email.sendKeys("dorna"+ System.currentTimeMillis()+"@gmail.com");  //TODO
 
     }
     public static void enterValidPhoneNumber(WebDriver driver){
@@ -126,7 +130,7 @@ public class ProfileReusables {
     public static void enterValidAccountNumber(WebDriver driver){
         WebElement shomareHesab = driver.findElement(By.name("account number"));
         shomareHesab.clear();
-        shomareHesab.sendKeys(""); //TODO : shomare hesab ya shomare card???
+        shomareHesab.sendKeys(accountNumber1);
     }
 
     public static void enterValidPassword(WebDriver driver){
