@@ -290,5 +290,17 @@ public class ManagerReusables {
 
 
     }
+    public static double getCompanyCredit(String currency) {
+        WebDriver driver = new ChromeDriver();
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.loginAsTheManager(driver);
+        //driver.close();
+        double credit = WalletUsersReusables.getWalletCredit(driver, currency);
+        GeneralReusables.logout(driver);
+        driver.close();
+        return credit;
+
+
+    }
 
 }

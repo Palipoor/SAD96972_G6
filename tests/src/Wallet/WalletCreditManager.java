@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by Golpar on 4/27/2018 AD.
  */
-public class WalletCreditManager {
+public class   WalletCreditManager {
     private static WebDriver driver;
 
     @BeforeClass
