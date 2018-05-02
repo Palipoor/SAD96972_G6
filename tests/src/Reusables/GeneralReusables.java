@@ -53,14 +53,16 @@ public class GeneralReusables {
 
 
     public static void setUpToHomepage(WebDriver driver) {
-        String homePageAddress = "homePageAddress"; //// TODO: 4/12/2018 AD درست کردن این ادرس
+        String homePageAddress = "http://127.0.0.1:8000/"; //// TODO: 4/12/2018 AD درست کردن این ادرس
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(homePageAddress);
     }
 
     public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
-        WebElement loginButton = homepage.findElement(By.name("log in"));
-        loginButton.click();
+        GeneralReusables.setUpToHomepage(homepage);
+        // Go to Sign up page
+        String linkToOpen= homepage.findElement(By.name("log in")).getAttribute("href");
+        homepage.get(linkToOpen);
         WebElement emailField = homepage.findElement(By.name("email"));
         emailField.sendKeys(email);
         WebElement passwordField = homepage.findElement(By.name("password"));
@@ -71,8 +73,8 @@ public class GeneralReusables {
     }
 
     public static void loginAsACustomer(WebDriver homepage) {
-        String email = "customerEmail";
-        String password = "customerPassword";
+        String email = ProfileReusables.email1;
+        String password = ProfileReusables.password1;
         login(homepage, email, password);
     }
 
@@ -102,6 +104,7 @@ public class GeneralReusables {
         WebElement logoutButton = panel.findElement(By.name("logout"));
         logoutButton.click();
         panel.close();
+
     }
 
     public static int getPrice(String currency) {

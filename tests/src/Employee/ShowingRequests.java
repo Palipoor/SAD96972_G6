@@ -1,7 +1,6 @@
-package Management;
+package Employee;
 
 import Reusables.GeneralReusables;
-import Reusables.ManagerReusables;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -9,12 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static junit.framework.TestCase.assertEquals;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Golpar on 4/19/2018 AD.
+ * Created by Golpar on 4/26/2018 AD.
  */
-public class RemoveAccess {
+public class ShowingRequests {
     private static WebDriver driver;
 
     @BeforeClass
@@ -25,13 +26,15 @@ public class RemoveAccess {
     }
 
     @Test
-    public void preConditionTest() {
-        WebElement employee = driver.findElement(By.name("customers"));
-        employee.click();
-        assertEquals(driver.getTitle(), ManagerReusables.CUSTOMERS_PAGE_TITLE);
+    public void employeesListExistsTest() {
+        WebElement transactionsTable = driver.findElement(By.name("transactions-table"));
+        WebElement searchBox = transactionsTable.findElement(By.name("وضعیت"));
+        searchBox.clear();
+        searchBox.sendKeys("");
     }
 
     @Test
-    public void formFillingForCustomerTest(){
+    public void tearDown() {
+        GeneralReusables.logout(driver);
     }
 }
