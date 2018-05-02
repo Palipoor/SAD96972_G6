@@ -31,8 +31,9 @@ public class GeneralReusables {
         reusableStrings = new HashMap<String, String>();
         reusableStrings.put("invalid-transaction-id", "1000");
         reusableStrings.put("wrong-id-error", "");
-        reusableStrings.put("wrong-amount-error", "");
+        reusableStrings.put("invalid-amount-error", "");
         reusableStrings.put("invalid-username-error", "");
+        reusableStrings.put("invalid-email-error", "");
         reusableStrings.put("invalid-first-name-error", "");
         reusableStrings.put("invalid-family-name-error", "");
         reusableStrings.put("invalid-phone-number-error", "");
@@ -95,7 +96,7 @@ public class GeneralReusables {
         return getUsername(homepage);
     }
 
-    private static String getUsername(WebDriver panel) {
+    public static String getUsername(WebDriver panel) {
         WebElement userDetails = panel.findElement(By.name("user-details"));
         userDetails.click();
         WebElement usernameElement = panel.findElement(By.name("my-username"));
