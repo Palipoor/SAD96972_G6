@@ -1,6 +1,7 @@
 package CustomersTransactions;
 
 import Reusables.GeneralReusables;
+import Reusables.Order;
 import Reusables.ProfileReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -32,13 +33,14 @@ public class TransactionsView {
     }
 
     @Test
-    //@Order(order = 1)
+    @Reusables.Order(order = 1)
     public void preConditionTest() {
         String title = driver.getTitle();
         assertEquals(title, GeneralReusables.PANEL_TITLE);
     }
 
     @Test
+    @Order(order = 2)
     public void transaction() {
         WebElement myTransactions= driver.findElement(By.name("my transactions"));
         myTransactions.click();

@@ -20,7 +20,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class SeeProfileCustomer {
     static WebDriver driver;
-    static String userDetailTitle = "مشخصات کاربری";
 
 
     @BeforeClass
@@ -37,7 +36,7 @@ public class SeeProfileCustomer {
     @Test
     public void userDetailsExistence() {
         String title = driver.getTitle();
-        assertEquals(title, userDetailTitle);
+        assertEquals(title, ProfileReusables.userDetailTitle);
     }
 
     @AfterClass
