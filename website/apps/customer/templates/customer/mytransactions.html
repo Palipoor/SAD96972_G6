@@ -1,0 +1,201 @@
+{% extends "customer/mother_panel.html" %} 
+{% load static staticfiles %} 
+{% block title %}
+ تراکنش‌های من
+{% endblock title %} 
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href='{% static "panel/plugins/datatables/dataTables.bootstrap.css" %}'>
+{% endblock head %}
+
+{% block content_header_text %}
+<h1>تراکنش‌های من</h1>
+{{ block.super }} 
+{% endblock content_header_text %} 
+
+{% block content_header_link %}
+ {{ block.super }}
+<li class="active">تراکنش‌های من </li>
+{% endblock content_header_link %} 
+
+
+{% block main_content %}
+  <!-- Main content -->
+        <section class="content">
+          <!-- Small boxes (Stat box) -->
+          <!-- Main row -->
+          <div class="row">
+            <!-- Left col -->
+            <div class="col-md-12 connectedSortable">
+              <!-- Custom tabs (Charts with tabs)-->
+      
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">تراکنش‌ها و درخواست‌های تراکنش</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <table id="table" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>شناسه تراکنش</th>
+                        <th>نوع تراکنش</th>
+                        <th>تاریخ تراکنش </th>
+                        <th>مبلغ</th>
+                        <th>وضعیت</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <a href='{% static "panel/pages/customer/transaction_details.html" %}'>921112</a>
+                        </td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>
+                          <span class="label label-danger">کنسل شده</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href='{% static "panel/pages/customer/transaction_details.html" %}'>921112</a>
+                        </td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>
+                          <span class="label label-danger">کنسل شده</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href='{% static "panel/pages/customer/transaction_details.html" %}'>921112</a>
+                        </td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>
+                          <span class="label label-danger">کنسل شده</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href='{% static "panel/pages/customer/transaction_details.html" %}'>921112</a>
+                        </td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>
+                          <span class="label label-danger">کنسل شده</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href='{% static "panel/pages/customer/transaction_details.html" %}'>921112</a>
+                        </td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>
+                          <span class="label label-danger">کنسل شده</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href='{% static "panel/pages/customer/transaction_details.html" %}'>921112</a>
+                        </td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>blah</td>
+                        <td>
+                          <span class="label label-success">تایید</span>
+                        </td>
+                      </tr>
+      
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>شناسه تراکنش</th>
+                        <th>نوع تراکنش</th>
+                        <th>تاریخ تراکنش </th>
+                        <th>مبلغ</th>
+                        <th>وضعیت</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+      
+              <!-- /.table-responsive -->
+            </div>
+      
+        </section>
+      
+      
+      
+        <!-- /.nav-tabs-custom -->
+      
+      
+      
+      
+      
+      
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        </div>
+      
+      </div>
+      <!-- /.row (main row) -->
+      
+      </section>
+      <!-- /.content -->
+
+{% endblock main_content %}
+
+{% block scripts %}
+    <script src='{% static "panel/plugins/jQuery/jQuery-2.1.4.min.js" %}'></script>
+    <!-- Bootstrap 3.3.4 -->
+    <script src='{% static "panel/bootstrap/js/bootstrap.min.js" %}'></script>
+    <!-- DataTables -->
+    <script src='{% static "panel/plugins/datatables/jquery.dataTables.min.js" %}'></script>
+    <script src='{% static "panel/plugins/datatables/dataTables.bootstrap.min.js" %}'></script>
+    <!-- SlimScroll -->
+    <script src='{% static "panel/plugins/slimScroll/jquery.slimscroll.min.js" %}'></script>
+    <!-- FastClick -->
+    <script src='{% static "panel/plugins/fastclick/fastclick.min.js" %}'></script>
+    <!-- AdminLTE App -->
+    <script src='{% static "panel/dist/js/app.min.js" %}'></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src='{% static "panel/dist/js/demo.js" %}'></script>
+    <!-- page script -->
+    <script>
+      $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#table tfoot th').each(function () {
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+
+        // DataTable
+        var table = $('#table').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+          var that = this;
+
+          $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this.value) {
+              that
+                .search(this.value)
+                .draw();
+            }
+          });
+        });
+      });
+    </script>
+{% endblock scripts %}

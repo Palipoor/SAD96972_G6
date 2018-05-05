@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,32 +7,32 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = '{% static "panel/bootstrap/css/bootstrap.min.css" %}' >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons 2.0.0 -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/css/AdminLTE.min.css" %}' >
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/css/skins/_all-skins.min.css" %}' >
     <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/iCheck/flat/blue.css" %}' >
     <!-- Morris chart -->
-    <link rel="stylesheet" href="plugins/morris/morris.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/morris/morris.css" %}' >
     <!-- jvectormap -->
-    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/jvectormap/jquery-jvectormap-1.2.2.css" %}' >
     <!-- Date Picker -->
-    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/datepicker/datepicker3.css" %}' >
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/daterangepicker/daterangepicker-bs3.css" %}' >
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href = '{% static "panel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" %}' >
 
-    <link rel="stylesheet" href="dist/fonts/fonts-fa.css">
-    <link rel="stylesheet" href="dist/css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" href="dist/css/rtl.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/fonts/fonts-fa.css" %}' >
+    <link rel="stylesheet" href = '{% static "panel/dist/css/bootstrap-rtl.min.css" %}' >
+    <link rel="stylesheet" href = '{% static "panel/dist/css/rtl.css" %}' >
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,22 +45,23 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href = '{% static "panel/index2.html" %}'  class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
-          <!-- logo for regular state and mobile devices --><strong>پنل مدیریت مشتری</strong><br>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href = '{% static "panel/#" %}'  class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href = '{% static "panel/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
                 </a>
@@ -69,9 +71,9 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- start message -->
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <div class="pull-right">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Support Team
@@ -81,9 +83,9 @@
                         </a>
                       </li><!-- end message -->
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <div class="pull-right">
-                            <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -93,9 +95,9 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <div class="pull-right">
-                            <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user4-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Developers
@@ -105,9 +107,9 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <div class="pull-right">
-                            <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Sales Department
@@ -117,9 +119,9 @@
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <div class="pull-right">
-                            <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user4-128x128.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Reviewers
@@ -130,12 +132,12 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
+                  <li class="footer"><a href = '{% static "panel/#" %}' >See All Messages</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href = '{% static "panel/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
                   <span class="label label-warning">۱۰</span>
                 </a>
@@ -145,38 +147,38 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <i class="fa fa-users text-aqua"></i> 5 new members joined today
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the page and may cause design problems
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <i class="fa fa-users text-red"></i> 5 new members joined
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <i class="fa fa-shopping-cart text-green"></i> 25 sales made
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <i class="fa fa-user text-red"></i> You changed your username
                         </a>
                       </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">View all</a></li>
+                  <li class="footer"><a href = '{% static "panel/#" %}' >View all</a></li>
                 </ul>
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href = '{% static "panel/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">۹</span>
                 </a>
@@ -186,7 +188,7 @@
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- Task item -->
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <h3>
                             Design some buttons
                             <small class="pull-left">20%</small>
@@ -199,7 +201,7 @@
                         </a>
                       </li><!-- end task item -->
                       <li><!-- Task item -->
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <h3>
                             Create a nice theme
                             <small class="pull-left">40%</small>
@@ -212,7 +214,7 @@
                         </a>
                       </li><!-- end task item -->
                       <li><!-- Task item -->
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <h3>
                             Some task I need to do
                             <small class="pull-left">60%</small>
@@ -225,7 +227,7 @@
                         </a>
                       </li><!-- end task item -->
                       <li><!-- Task item -->
-                        <a href="#">
+                        <a href = '{% static "panel/#" %}' >
                           <h3>
                             Make beautiful transitions
                             <small class="pull-left">80%</small>
@@ -240,20 +242,20 @@
                     </ul>
                   </li>
                   <li class="footer">
-                    <a href="#">View all tasks</a>
+                    <a href = '{% static "panel/#" %}' >View all tasks</a>
                   </li>
                 </ul>
               </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <a href = '{% static "panel/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+                  <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
                   <span class="hidden-xs">محمد شریفی</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                     <p>
                      محمد شریفی - توسعه دهنده سمت کاربر
                       <small>Member since Nov. 2012</small>
@@ -262,29 +264,29 @@
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
+                      <a href = '{% static "panel/#" %}' >Followers</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
+                      <a href = '{% static "panel/#" %}' >Sales</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
+                      <a href = '{% static "panel/#" %}' >Friends</a>
                     </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href = '{% static "panel/#" %}'  class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href = '{% static "panel/#" %}'  class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <a href = '{% static "panel/#" %}'  data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
               </li>
             </ul>
           </div>
@@ -297,36 +299,158 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-right image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>محمد شریفی</p>
+              <a href = '{% static "panel/#" %}' ><i class="fa fa-circle text-success"></i> آنلاین</a>
             </div>
           </div>
-          <!-- deleted "search form" -->
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="جستوجو ...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
+            <li class="header">ناوبری اصلی</li>
             <li class="active treeview">
-              <a href="#">
-              <i class="glyphicon glyphicon-user"></i> <span>ویرایش مشخصات کاربری</span> <i class="fa fa-angle-left pull-left"></i>
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-dashboard"></i> <span>پیشخوان</span> <i class="fa fa-angle-left pull-left"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a></li>
-                <li><a href="index.html"><i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a></li>
+                <li class="active"><a href = '{% static "panel/index.html" %}' ><i class="fa fa-circle-o"></i> پیشخوان v1</a></li>
+                <li><a href = '{% static "panel/index2.html" %}' ><i class="fa fa-circle-o"></i> پیشخوان v2</a></li>
               </ul>
             </li>
-            <li> <a href="pages/customer/mytransactions.html"> <em class="glyphicon glyphicon-credit-card"></em> <span>تراکنش‌های من</span> </a> </li>
             <li class="treeview">
-              <a href="#">
-              <i class="fa fa-money"></i>
-                <span>کیف پول‌های من</span>
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-files-o"></i>
+                <span>Layout Options</span>
+                <span class="label label-primary pull-left">۴</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/layout/top-nav.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a></li>
-                <li><a href="pages/layout/boxed.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a></li>
-                <li><a href="pages/layout/fixed.html"><i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a></li>
+                <li><a href = '{% static "panel/pages/layout/top-nav.html" %}' ><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href = '{% static "panel/pages/layout/boxed.html" %}' ><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href = '{% static "panel/pages/layout/fixed.html" %}' ><i class="fa fa-circle-o"></i> Fixed</a></li>
+                <li><a href = '{% static "panel/pages/layout/collapsed-sidebar.html" %}' ><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
               </ul>
             </li>
+            <li>
+              <a href = '{% static "panel/pages/widgets.html" %}' >
+                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-left bg-green">new</small>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-pie-chart"></i>
+                <span>Charts</span>
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href = '{% static "panel/pages/charts/chartjs.html" %}' ><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                <li><a href = '{% static "panel/pages/charts/morris.html" %}' ><i class="fa fa-circle-o"></i> Morris</a></li>
+                <li><a href = '{% static "panel/pages/charts/flot.html" %}' ><i class="fa fa-circle-o"></i> Flot</a></li>
+                <li><a href = '{% static "panel/pages/charts/inline.html" %}' ><i class="fa fa-circle-o"></i> Inline charts</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-laptop"></i>
+                <span>UI Elements</span>
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href = '{% static "panel/pages/UI/general.html" %}' ><i class="fa fa-circle-o"></i> General</a></li>
+                <li><a href = '{% static "panel/pages/UI/icons.html" %}' ><i class="fa fa-circle-o"></i> Icons</a></li>
+                <li><a href = '{% static "panel/pages/UI/buttons.html" %}' ><i class="fa fa-circle-o"></i> Buttons</a></li>
+                <li><a href = '{% static "panel/pages/UI/sliders.html" %}' ><i class="fa fa-circle-o"></i> Sliders</a></li>
+                <li><a href = '{% static "panel/pages/UI/timeline.html" %}' ><i class="fa fa-circle-o"></i> Timeline</a></li>
+                <li><a href = '{% static "panel/pages/UI/modals.html" %}' ><i class="fa fa-circle-o"></i> Modals</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-edit"></i> <span>Forms</span>
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href = '{% static "panel/pages/forms/general.html" %}' ><i class="fa fa-circle-o"></i> General Elements</a></li>
+                <li><a href = '{% static "panel/pages/forms/advanced.html" %}' ><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                <li><a href = '{% static "panel/pages/forms/editors.html" %}' ><i class="fa fa-circle-o"></i> Editors</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-table"></i> <span>Tables</span>
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href = '{% static "panel/pages/tables/simple.html" %}' ><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                <li><a href = '{% static "panel/pages/tables/data.html" %}' ><i class="fa fa-circle-o"></i> Data tables</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href = '{% static "panel/pages/calendar.html" %}' >
+                <i class="fa fa-calendar"></i> <span>Calendar</span>
+                <small class="label pull-left bg-red">3</small>
+              </a>
+            </li>
+            <li>
+              <a href = '{% static "panel/pages/mailbox/mailbox.html" %}' >
+                <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                <small class="label pull-left bg-yellow">12</small>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-folder"></i> <span>Examples</span>
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href = '{% static "panel/pages/examples/invoice.html" %}' ><i class="fa fa-circle-o"></i> Invoice</a></li>
+                <li><a href = '{% static "panel/pages/examples/login.html" %}' ><i class="fa fa-circle-o"></i> Login</a></li>
+                <li><a href = '{% static "panel/pages/examples/register.html" %}' ><i class="fa fa-circle-o"></i> Register</a></li>
+                <li><a href = '{% static "panel/pages/examples/lockscreen.html" %}' ><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                <li><a href = '{% static "panel/pages/examples/404.html" %}' ><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                <li><a href = '{% static "panel/pages/examples/500.html" %}' ><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                <li><a href = '{% static "panel/pages/examples/blank.html" %}' ><i class="fa fa-circle-o"></i> Blank Page</a></li>
+		<li><a href = '{% static "panel/pages/examples/profile.html" %}' ><i class="fa fa-circle-o"></i> <span>Profil<small class="label bg-red">جديد</small></a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href = '{% static "panel/#" %}' >
+                <i class="fa fa-share"></i> <span>Multilevel</span>
+                <i class="fa fa-angle-left pull-left"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level One</a></li>
+                <li>
+                  <a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-left"></i></a>
+                  <ul class="treeview-menu">
+                    <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level Two</a></li>
+                    <li>
+                      <a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-left"></i></a>
+                      <ul class="treeview-menu">
+                        <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level Three</a></li>
+                        <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level Three</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o"></i> Level One</a></li>
+              </ul>
+            </li>
+            <li><a href = '{% static "panel/documentation/index.html" %}' ><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li class="header">LABELS</li>
+            <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+            <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+            <li><a href = '{% static "panel/#" %}' ><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -341,7 +465,7 @@
             <small>پنل مدیریت</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+            <li><a href = '{% static "panel/#" %}' ><i class="fa fa-dashboard"></i> خانه</a></li>
             <li class="active">پیشخوان</li>
           </ol>
         </section>
@@ -360,7 +484,7 @@
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                <a href = '{% static "panel/#" %}'  class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -373,7 +497,7 @@
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                <a href = '{% static "panel/#" %}'  class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -386,7 +510,7 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                <a href = '{% static "panel/#" %}'  class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -399,7 +523,7 @@
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                <a href = '{% static "panel/#" %}'  class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->
@@ -411,8 +535,8 @@
               <div class="nav-tabs-custom">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right">
-                  <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                  <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
+                  <li class="active"><a href = '{% static "panel/#revenue-chart" %}'  data-toggle="tab">Area</a></li>
+                  <li><a href = '{% static "panel/#sales-chart" %}'  data-toggle="tab">Donut</a></li>
                   <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
                 </ul>
                 <div class="tab-content no-padding">
@@ -437,9 +561,9 @@
                 <div class="box-body chat" id="chat-box">
                   <!-- chat item -->
                   <div class="item">
-                    <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
+                    <img src = '{% static "panel/dist/img/user4-128x128.jpg" %}'  alt="user image" class="online">
                     <p class="message">
-                      <a href="#" class="name">
+                      <a href = '{% static "panel/#" %}'  class="name">
                         <small class="text-muted pull-left"><i class="fa fa-clock-o"></i> 2:15</small>
                         Mike Doe
                       </a>
@@ -459,9 +583,9 @@
                   </div><!-- /.item -->
                   <!-- chat item -->
                   <div class="item">
-                    <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
+                    <img src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="user image" class="offline">
                     <p class="message">
-                      <a href="#" class="name">
+                      <a href = '{% static "panel/#" %}'  class="name">
                         <small class="text-muted pull-left"><i class="fa fa-clock-o"></i> 5:15</small>
                         محمد شریفی
                       </a>
@@ -472,9 +596,9 @@
                   </div><!-- /.item -->
                   <!-- chat item -->
                   <div class="item">
-                    <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
+                    <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  alt="user image" class="offline">
                     <p class="message">
-                      <a href="#" class="name">
+                      <a href = '{% static "panel/#" %}'  class="name">
                         <small class="text-muted pull-left"><i class="fa fa-clock-o"></i> 5:30</small>
                         Susan Doe
                       </a>
@@ -501,11 +625,11 @@
                   <h3 class="box-title">To Do List</h3>
                   <div class="box-tools pull-left">
                     <ul class="pagination pagination-sm inline">
-                      <li><a href="#">&laquo;</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">&raquo;</a></li>
+                      <li><a href = '{% static "panel/#" %}' >&laquo;</a></li>
+                      <li><a href = '{% static "panel/#" %}' >1</a></li>
+                      <li><a href = '{% static "panel/#" %}' >2</a></li>
+                      <li><a href = '{% static "panel/#" %}' >3</a></li>
+                      <li><a href = '{% static "panel/#" %}' >&raquo;</a></li>
                     </ul>
                   </div>
                 </div><!-- /.box-header -->
@@ -711,10 +835,10 @@
                     <div class="btn-group">
                       <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
                       <ul class="dropdown-menu pull-left" role="menu">
-                        <li><a href="#">Add new event</a></li>
-                        <li><a href="#">Clear events</a></li>
+                        <li><a href = '{% static "panel/#" %}' >Add new event</a></li>
+                        <li><a href = '{% static "panel/#" %}' >Clear events</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">View calendar</a></li>
+                        <li><a href = '{% static "panel/#" %}' >View calendar</a></li>
                       </ul>
                     </div>
                     <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -782,8 +906,8 @@
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+          <li><a href = '{% static "panel/#control-sidebar-home-tab" %}'  data-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href = '{% static "panel/#control-sidebar-settings-tab" %}'  data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -792,7 +916,7 @@
             <h3 class="control-sidebar-heading">Recent Activity</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <i class="menu-icon fa fa-birthday-cake bg-red"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
@@ -801,7 +925,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <i class="menu-icon fa fa-user bg-yellow"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
@@ -810,7 +934,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
@@ -819,7 +943,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <i class="menu-icon fa fa-file-code-o bg-green"></i>
                   <div class="menu-info">
                     <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
@@ -832,7 +956,7 @@
             <h3 class="control-sidebar-heading">Tasks Progress</h3>
             <ul class="control-sidebar-menu">
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Custom Template Design
                     <span class="label label-danger pull-left">70%</span>
@@ -843,7 +967,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Update Resume
                     <span class="label label-success pull-left">95%</span>
@@ -854,7 +978,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Laravel Integration
                     <span class="label label-warning pull-left">50%</span>
@@ -865,7 +989,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript::;">
+                <a href = '{% static "panel/javascript::;" %}' >
                   <h4 class="control-sidebar-subheading">
                     Back End Framework
                     <span class="label label-primary pull-left">68%</span>
@@ -933,7 +1057,7 @@
               <div class="form-group">
                 <label class="control-sidebar-subheading">
                   Delete chat history
-                  <a href="javascript::;" class="text-red pull-left"><i class="fa fa-trash-o"></i></a>
+                  <a href = '{% static "panel/javascript::;" %}'  class="text-red pull-left"><i class="fa fa-trash-o"></i></a>
                 </label>
               </div><!-- /.form-group -->
             </form>
@@ -946,7 +1070,7 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src = '{% static "panel/plugins/jQuery/jQuery-2.1.4.min.js" %}' ></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -954,33 +1078,33 @@
       $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.4 -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src = '{% static "panel/bootstrap/js/bootstrap.min.js" %}' ></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="plugins/morris/morris.min.js"></script>
+    <script src = '{% static "panel/plugins/morris/morris.min.js" %}' ></script>
     <!-- Sparkline -->
-    <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src = '{% static "panel/plugins/sparkline/jquery.sparkline.min.js" %}' ></script>
     <!-- jvectormap -->
-    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src = '{% static "panel/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" %}' ></script>
+    <script src = '{% static "panel/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" %}' ></script>
     <!-- jQuery Knob Chart -->
-    <script src="plugins/knob/jquery.knob.js"></script>
+    <script src = '{% static "panel/plugins/knob/jquery.knob.js" %}' ></script>
     <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <script src = '{% static "panel/plugins/daterangepicker/daterangepicker.js" %}' ></script>
     <!-- datepicker -->
-    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src = '{% static "panel/plugins/datepicker/bootstrap-datepicker.js" %}' ></script>
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src = '{% static "panel/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" %}' ></script>
     <!-- Slimscroll -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src = '{% static "panel/plugins/slimScroll/jquery.slimscroll.min.js" %}' ></script>
     <!-- FastClick -->
-    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <script src = '{% static "panel/plugins/fastclick/fastclick.min.js" %}' ></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js"></script>
+    <script src = '{% static "panel/dist/js/app.min.js" %}' ></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
+    <script src = '{% static "panel/dist/js/pages/dashboard.js" %}' ></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
+    <script src = '{% static "panel/dist/js/demo.js" %}' ></script>
   </body>
 </html>

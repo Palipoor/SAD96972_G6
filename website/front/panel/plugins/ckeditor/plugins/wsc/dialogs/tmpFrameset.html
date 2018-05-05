@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <!--
 Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
@@ -44,9 +45,9 @@ function tryLoad()
 </head>
 
 <frameset id="itFrameset" onload="tryLoad();" border="0" rows="30,*,*,0">
-    <frame scrolling="no" framespacing="0" frameborder="0" noresize="noresize" marginheight="0" marginwidth="2" src="" name="navbar"></frame>
-    <frame scrolling="auto" framespacing="0" frameborder="0" noresize="noresize" marginheight="0" marginwidth="0" src="" name="mid"></frame>
-    <frame scrolling="no" framespacing="0" frameborder="0" noresize="noresize" marginheight="1" marginwidth="1" src="" name="bot"></frame>
-    <frame scrolling="no" framespacing="0" frameborder="0" noresize="noresize" marginheight="1" marginwidth="1" src="" name="spellsuggestall"></frame>
+    <frame scrolling="no" framespacing="0" frameborder="0" noresize="noresize" marginheight="0" marginwidth="2" src = '{% static "panel/plugins/ckeditor/plugins/wsc/dialogs" %}'  name="navbar"></frame>
+    <frame scrolling="auto" framespacing="0" frameborder="0" noresize="noresize" marginheight="0" marginwidth="0" src = '{% static "panel/plugins/ckeditor/plugins/wsc/dialogs" %}'  name="mid"></frame>
+    <frame scrolling="no" framespacing="0" frameborder="0" noresize="noresize" marginheight="1" marginwidth="1" src = '{% static "panel/plugins/ckeditor/plugins/wsc/dialogs" %}'  name="bot"></frame>
+    <frame scrolling="no" framespacing="0" frameborder="0" noresize="noresize" marginheight="1" marginwidth="1" src = '{% static "panel/plugins/ckeditor/plugins/wsc/dialogs" %}'  name="spellsuggestall"></frame>
 </frameset>
 </html>

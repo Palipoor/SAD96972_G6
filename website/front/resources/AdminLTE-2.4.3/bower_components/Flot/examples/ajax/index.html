@@ -1,12 +1,13 @@
+{% load static staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Flot Examples: AJAX</title>
-	<link href="../examples.css" rel="stylesheet" type="text/css">
-	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../../excanvas.min.js"></script><![endif]-->
-	<script language="javascript" type="text/javascript" src="../../jquery.js"></script>
-	<script language="javascript" type="text/javascript" src="../../jquery.flot.js"></script>
+	<link href = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/examples/examples.css" %}'  rel="stylesheet" type="text/css">
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/excanvas.min.js" %}' ></script><![endif]-->
+	<script language="javascript" type="text/javascript" src = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/jquery.js" %}' ></script>
+	<script language="javascript" type="text/javascript" src = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/jquery.flot.js" %}' ></script>
 	<script type="text/javascript">
 
 	$(function() {
@@ -141,19 +142,19 @@
 
 		<p>
 			<button class="fetchSeries">First dataset</button>
-			[ <a href="data-eu-gdp-growth.json">see data</a> ]
+			[ <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/examples/ajax/data-eu-gdp-growth.json" %}' >see data</a> ]
 			<span></span>
 		</p>
 
 		<p>
 			<button class="fetchSeries">Second dataset</button>
-			[ <a href="data-japan-gdp-growth.json">see data</a> ]
+			[ <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/examples/ajax/data-japan-gdp-growth.json" %}' >see data</a> ]
 			<span></span>
 		</p>
 
 		<p>
 			<button class="fetchSeries">Third dataset</button>
-			[ <a href="data-usa-gdp-growth.json">see data</a> ]
+			[ <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/Flot/examples/ajax/data-usa-gdp-growth.json" %}' >see data</a> ]
 			<span></span>
 		</p>
 

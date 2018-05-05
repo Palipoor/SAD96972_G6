@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <!--
 Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
@@ -10,20 +11,20 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 	<meta name="ckeditor-sample-name" content="Toolbar Configurations">
 	<meta name="ckeditor-sample-group" content="Advanced Samples">
 	<meta name="ckeditor-sample-description" content="Configuring CKEditor to display full or custom toolbar layout.">
-	<script src="../../../ckeditor.js"></script>
-	<link href="../../../samples/old/sample.css" rel="stylesheet">
+	<script src = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/ckeditor.js" %}' ></script>
+	<link href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/sample.css" %}'  rel="stylesheet">
 </head>
 <body>
 	<h1 class="samples">
-		<a href="../../../samples/old/index.html">CKEditor Samples</a> &raquo; Toolbar Configuration
+		<a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/index.html" %}' >CKEditor Samples</a> &raquo; Toolbar Configuration
 	</h1>
 	<div class="warning deprecated">
-		This sample is not maintained anymore. Check out the <a href="../../../samples/toolbarconfigurator/index.html#basic">brand new CKEditor Toolbar Configurator</a>.
+		This sample is not maintained anymore. Check out the <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/toolbarconfigurator/index.html#basic" %}' >brand new CKEditor Toolbar Configurator</a>.
 	</div>
 	<div class="description">
 		<p>
-			This sample page demonstrates editor with loaded <a href="#fullToolbar">full toolbar</a> (all registered buttons) and, if
-			current editor's configuration modifies default settings, also editor with <a href="#currentToolbar">modified toolbar</a>.
+			This sample page demonstrates editor with loaded <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/toolbar/#fullToolbar" %}' >full toolbar</a> (all registered buttons) and, if
+			current editor's configuration modifies default settings, also editor with <a href = '{% static "resources/AdminLTE-2.4.3/bower_components/ckeditor/samples/old/toolbar/#currentToolbar" %}' >modified toolbar</a>.
 		</p>
 
 		<p>Since CKEditor 4 there are two ways to configure toolbar buttons.</p>

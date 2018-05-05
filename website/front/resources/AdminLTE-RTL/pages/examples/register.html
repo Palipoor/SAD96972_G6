@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,13 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/bootstrap/css/bootstrap.min.css" %}' >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/dist/css/AdminLTE.min.css" %}' >
     <!-- iCheck -->
-    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href = '{% static "resources/AdminLTE-RTL/plugins/iCheck/square/blue.css" %}' >
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,7 +25,7 @@
   <body class="register-page">
     <div class="register-box">
       <div class="register-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a href = '{% static "resources/AdminLTE-RTL/index2.html" %}' ><b>Admin</b>LTE</a>
       </div>
 
       <div class="register-box-body">
@@ -50,7 +51,7 @@
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
-                  <input type="checkbox"> I agree to the <a href="#">terms</a>
+                  <input type="checkbox"> I agree to the <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}' >terms</a>
                 </label>
               </div>
             </div><!-- /.col -->
@@ -62,20 +63,20 @@
 
         <div class="social-auth-links text-center">
           <p>- OR -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
+          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
+          <a href = '{% static "resources/AdminLTE-RTL/pages/examples/#" %}'  class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
         </div>
 
-        <a href="login.html" class="text-center">I already have a membership</a>
+        <a href = '{% static "resources/AdminLTE-RTL/pages/examples/login.html" %}'  class="text-center">I already have a membership</a>
       </div><!-- /.form-box -->
     </div><!-- /.register-box -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src = '{% static "resources/AdminLTE-RTL/plugins/jQuery/jQuery-2.1.4.min.js" %}' ></script>
     <!-- Bootstrap 3.3.4 -->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src = '{% static "resources/AdminLTE-RTL/bootstrap/js/bootstrap.min.js" %}' ></script>
     <!-- iCheck -->
-    <script src="../../plugins/iCheck/icheck.min.js"></script>
+    <script src = '{% static "resources/AdminLTE-RTL/plugins/iCheck/icheck.min.js" %}' ></script>
     <script>
       $(function () {
         $('input').iCheck({

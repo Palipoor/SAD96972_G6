@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,15 +7,15 @@
     <title>AdminLTE 2 | Documentation</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href = '{% static "panel/bootstrap/css/bootstrap.min.css" %}' >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href = '{% static "panel/dist/css/AdminLTE.min.css" %}' >
+    <link rel="stylesheet" href = '{% static "panel/dist/css/skins/_all-skins.min.css" %}' >
+    <link rel="stylesheet" href = '{% static "panel/documentation/style.css" %}' >
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +30,7 @@
       <header class="main-header">
         <!-- Logo -->
         <!-- Logo -->
-        <a href="../index2.html" class="logo">
+        <a href = '{% static "panel/index2.html" %}'  class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
@@ -38,7 +39,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href = '{% static "panel/documentation/#" %}'  class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <!-- Navbar Right Menu -->
@@ -58,29 +59,29 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="nav sidebar-menu">
             <li class="header">TABLE OF CONTENTS</li>
-            <li class="active"><a href="#introduction"><i class="fa fa-circle-o"></i> Introduction</a></li>
-            <li><a href="#download"><i class="fa fa-circle-o"></i> Download</a></li>
-            <li><a href="#dependencies"><i class="fa fa-circle-o"></i> Dependencies</a></li>
-            <li><a href="#advice"><i class="fa fa-circle-o"></i> Advice</a></li>
-            <li><a href="#layout"><i class="fa fa-circle-o"></i> Layout</a></li>
-            <li><a href="#adminlte-options"><i class="fa fa-circle-o"></i> Javascript Options</a></li>
+            <li class="active"><a href = '{% static "panel/documentation/#introduction" %}' ><i class="fa fa-circle-o"></i> Introduction</a></li>
+            <li><a href = '{% static "panel/documentation/#download" %}' ><i class="fa fa-circle-o"></i> Download</a></li>
+            <li><a href = '{% static "panel/documentation/#dependencies" %}' ><i class="fa fa-circle-o"></i> Dependencies</a></li>
+            <li><a href = '{% static "panel/documentation/#advice" %}' ><i class="fa fa-circle-o"></i> Advice</a></li>
+            <li><a href = '{% static "panel/documentation/#layout" %}' ><i class="fa fa-circle-o"></i> Layout</a></li>
+            <li><a href = '{% static "panel/documentation/#adminlte-options" %}' ><i class="fa fa-circle-o"></i> Javascript Options</a></li>
             <li class="treeview" id="scrollspy-components">
-              <a href="javascript::;"><i class="fa fa-circle-o"></i> Components</a>
+              <a href = '{% static "panel/documentation/javascript::;" %}' ><i class="fa fa-circle-o"></i> Components</a>
               <ul class="nav treeview-menu">
-                <li><a href="#component-main-header">Main Header</a></li>
-                <li><a href="#component-sidebar">Sidebar</a></li>
-                <li><a href="#component-control-sidebar">Control Sidebar</a></li>
-                <li><a href="#component-info-box">Info Box</a></li>
-                <li><a href="#component-box">Boxes</a></li>
-                <li><a href="#component-direct-chat">Direct Chat</a></li>
+                <li><a href = '{% static "panel/documentation/#component-main-header" %}' >Main Header</a></li>
+                <li><a href = '{% static "panel/documentation/#component-sidebar" %}' >Sidebar</a></li>
+                <li><a href = '{% static "panel/documentation/#component-control-sidebar" %}' >Control Sidebar</a></li>
+                <li><a href = '{% static "panel/documentation/#component-info-box" %}' >Info Box</a></li>
+                <li><a href = '{% static "panel/documentation/#component-box" %}' >Boxes</a></li>
+                <li><a href = '{% static "panel/documentation/#component-direct-chat" %}' >Direct Chat</a></li>
               </ul>
             </li>
-            <li><a href="#plugins"><i class="fa fa-circle-o"></i> Plugins</a></li>
-            <li><a href="#browsers"><i class="fa fa-circle-o"></i> Browser Support</a></li>
-            <li><a href="#upgrade"><i class="fa fa-circle-o"></i> Upgrade Guide</a></li>
-            <li><a href="#implementations"><i class="fa fa-circle-o"></i> Implementations</a></li>
-            <li><a href="#faq"><i class="fa fa-circle-o"></i> FAQ</a></li>
-            <li><a href="#license"><i class="fa fa-circle-o"></i> License</a></li>
+            <li><a href = '{% static "panel/documentation/#plugins" %}' ><i class="fa fa-circle-o"></i> Plugins</a></li>
+            <li><a href = '{% static "panel/documentation/#browsers" %}' ><i class="fa fa-circle-o"></i> Browser Support</a></li>
+            <li><a href = '{% static "panel/documentation/#upgrade" %}' ><i class="fa fa-circle-o"></i> Upgrade Guide</a></li>
+            <li><a href = '{% static "panel/documentation/#implementations" %}' ><i class="fa fa-circle-o"></i> Implementations</a></li>
+            <li><a href = '{% static "panel/documentation/#faq" %}' ><i class="fa fa-circle-o"></i> FAQ</a></li>
+            <li><a href = '{% static "panel/documentation/#license" %}' ><i class="fa fa-circle-o"></i> License</a></li>
           </ul>
         </div>
         <!-- /.sidebar -->
@@ -95,7 +96,7 @@
             <small>Current version 2.1.0</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href = '{% static "panel/documentation/#" %}' ><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Documentation</li>
           </ol>
         </div>
@@ -104,7 +105,7 @@
         <div class="content body">
 
 <section id="introduction">
-  <h2 class="page-header"><a href="#introduction">Introduction</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#introduction" %}' >Introduction</a></h2>
   <p class="lead">
     <b>AdminLTE</b> is a popular open source WebApp template for admin dashboards and control panels.
     It is a responsive HTML template that is based on the CSS framework Bootstrap 3.
@@ -120,7 +121,7 @@
 <!-- ============================================================= -->
 
 <section id="download">
-  <h2 class="page-header"><a href="#download">Download</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#download" %}' >Download</a></h2>
   <p class="lead">
     AdminLTE can be downloaded in two different versions, each appealing to different skill levels and use case.
   </p>
@@ -172,20 +173,20 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="dependencies">
-  <h2 class="page-header"><a href="#dependencies">Dependencies</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#dependencies" %}' >Dependencies</a></h2>
   <p class="lead">AdminLTE depends on two main frameworks.
     The downloadable package contains both of these libraries, so you don't have to manually download them.</p>
   <ul class="bring-up">
     <li><a href="http://getbootstrap.com" target="_blank">Bootstrap 3</a></li>
     <li><a href="http://jquery.com/" target="_blank">jQuery 1.11+</a></li>
-    <li><a href="#plugins">All other plugins are listed below</a></li>
+    <li><a href = '{% static "panel/documentation/#plugins" %}' >All other plugins are listed below</a></li>
   </ul>
 </section>
 
 <!-- ============================================================= -->
 
 <section id="advice">
-  <h2 class="page-header"><a href="#advice">A Word of Advice</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#advice" %}' >A Word of Advice</a></h2>
   <p class="lead">
     Before you go to see your new awesome theme, here are few tips on how to familiarize yourself with it:
   </p>
@@ -193,7 +194,7 @@ AdminLTE/
   <ul>
     <li><b>AdminLTE is based on <a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a>.</b> If you are unfamiliar with Bootstrap, visit their website and read through the documentation. All of Bootstrap components have been modified to fit the style of AdminLTE and provide a consistent look throughout the template. This way, we guarantee you will get the best of AdminLTE.</li>
     <li><b>Go through the pages that are bundled with the theme.</b> Most of the template example pages contain quick tips on how to create or use a component which can be really helpful when you need to create something on the fly.</li>
-    <li><b>Documentation.</b> We are trying our best to make your experience with AdminLTE be smooth. One way to achieve that is to provide documentation and support. If you think that something is missing from the documentation, please do not hesitate to create an issue to tell us about it. Also, if you would like to contribute, email the support team at <a href="mailto:support@almsaeedstudio.com">support@almsaeedstudio.com</a>.</li>
+    <li><b>Documentation.</b> We are trying our best to make your experience with AdminLTE be smooth. One way to achieve that is to provide documentation and support. If you think that something is missing from the documentation, please do not hesitate to create an issue to tell us about it. Also, if you would like to contribute, email the support team at <a href = '{% static "panel/documentation/mailto:support@almsaeedstudio.com" %}' >support@almsaeedstudio.com</a>.</li>
     <li><b>Built with <a href="http://lesscss.org/" target="_blank">LESS</a>.</b> This theme uses the LESS compiler to make it easier to customize and use. LESS is easy to learn if you know CSS or SASS. It is not necessary to learn LESS but it will benefit you a lot in the future.</li>
     <li><b>Hosted on <a href="https://github.com/almasaeed2010/AdminLTE/" target="_blank">GitHub</a>.</b> Visit our GitHub repository to view issues, make requests, or contribute to the project.</li>
   </ul>
@@ -206,7 +207,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="layout">
-  <h2 class="page-header"><a href="#layout">Layout</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#layout" %}' >Layout</a></h2>
   <p class="lead">The layout consists of four major parts:</p>
   <ul>
     <li>Wrapper <code>.wrapper</code>. A div that wraps the whole site.</li>
@@ -216,7 +217,7 @@ AdminLTE/
   </ul>
   <div class="callout callout-danger lead">
     <h4>Tip!</h4>
-    <p>The <a href="../starter.html">starter page</a> is a good place to start building your app if you'd like to start from scratch.</p>
+    <p>The <a href = '{% static "panel/starter.html" %}' >starter page</a> is a good place to start building your app if you'd like to start from scratch.</p>
   </div>
 
   <h3>Layout Options</h3>
@@ -246,51 +247,51 @@ AdminLTE/
         <tbody>
           <tr>
             <td><code>skin-blue</code></td>
-            <td><a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-blue" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-blue-light</code></td>
-            <td><a href="#" data-skin="skin-blue-light" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-blue-light" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-yellow</code></td>
-            <td><a href="#" data-skin="skin-yellow" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-yellow" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-yellow-light</code></td>
-            <td><a href="#" data-skin="skin-yellow-light" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-yellow-light" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-green</code></td>
-            <td><a href="#" data-skin="skin-green" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-green" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-green-light</code></td>
-            <td><a href="#" data-skin="skin-green-light" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-green-light" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-purple</code></td>
-            <td><a href="#" data-skin="skin-purple" class="btn bg-purple btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-purple" class="btn bg-purple btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-purple-light</code></td>
-            <td><a href="#" data-skin="skin-purple-light" class="btn bg-purple btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-purple-light" class="btn bg-purple btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-red</code></td>
-            <td><a href="#" data-skin="skin-red" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-red" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-red-light</code></td>
-            <td><a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-red-light" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-black</code></td>
-            <td><a href="#" data-skin="skin-black" class="btn bg-black btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-black" class="btn bg-black btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
           <tr>
             <td><code>skin-black-light</code></td>
-            <td><a href="#" data-skin="skin-black-light" class="btn bg-black btn-xs"><i class="fa fa-eye"></i></a></td>
+            <td><a href = '{% static "panel/documentation/#" %}'  data-skin="skin-black-light" class="btn bg-black btn-xs"><i class="fa fa-eye"></i></a></td>
           </tr>
         </tbody>
       </table>
@@ -302,7 +303,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="adminlte-options">
-  <h2 class="page-header"><a href="#adminlte-options">AdminLTE Javascript Options</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#adminlte-options" %}' >AdminLTE Javascript Options</a></h2>
   <p class="lead">Modifying the options of AdminLTE's app.js can be done using one of the following ways.</p>
 
   <h3>Editing app.js</h3>
@@ -323,7 +324,7 @@ AdminLTE/
     enableBSToppltip: true
   };
 &LT;/script>
-&LT;script src="dist/js/app.js" type="text/javascript">&LT;/script></code></pre>
+&LT;script src = '{% static "panel/documentation/dist/js/app.js" %}'  type="text/javascript">&LT;/script></code></pre>
 
   <h3>Available AdminLTE Options</h3>
   <pre class="prettyprint"><code class="javascript">{
@@ -429,7 +430,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="components" data-spy="scroll" data-target="#scrollspy-components">
-  <h2 class="page-header"><a href="#components">Components</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#components" %}' >Components</a></h2>
   <div class="callout callout-info lead">
     <h4>Reminder!</h4>
     <p>
@@ -456,11 +457,11 @@ AdminLTE/
       <span class="eg">Main Header Example</span>
       <header class="main-header" style="position: relative;">
         <!-- Logo -->
-        <a href="index2.html" class="logo" style="position: relative;"><b>Admin</b>LTE</a>
+        <a href = '{% static "panel/documentation/index2.html" %}'  class="logo" style="position: relative;"><b>Admin</b>LTE</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar" role="navigation" style="border: 0;max-height: 50px;">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" role="button">
+          <a href = '{% static "panel/documentation/#" %}'  class="sidebar-toggle" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <!-- Navbar Right Menu -->
@@ -468,7 +469,7 @@ AdminLTE/
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
                 </a>
@@ -478,9 +479,9 @@ AdminLTE/
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- start message -->
-                        <a href="#">
+                        <a href = '{% static "panel/documentation/#" %}' >
                           <div class="pull-left">
-                            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Support Team
@@ -491,12 +492,12 @@ AdminLTE/
                       </li><!-- end message -->
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
+                  <li class="footer"><a href = '{% static "panel/documentation/#" %}' >See All Messages</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
                   <span class="label label-warning">10</span>
                 </a>
@@ -506,18 +507,18 @@ AdminLTE/
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-                        <a href="#">
+                        <a href = '{% static "panel/documentation/#" %}' >
                           <i class="fa fa-users text-aqua"></i> 5 new members joined today
                         </a>
                       </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">View all</a></li>
+                  <li class="footer"><a href = '{% static "panel/documentation/#" %}' >View all</a></li>
                 </ul>
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">9</span>
                 </a>
@@ -527,7 +528,7 @@ AdminLTE/
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- Task item -->
-                        <a href="#">
+                        <a href = '{% static "panel/documentation/#" %}' >
                           <h3>
                             Design some buttons
                             <small class="pull-right">20%</small>
@@ -542,20 +543,20 @@ AdminLTE/
                     </ul>
                   </li>
                   <li class="footer">
-                    <a href="#">View all tasks</a>
+                    <a href = '{% static "panel/documentation/#" %}' >View all tasks</a>
                   </li>
                 </ul>
               </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+                  <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -564,22 +565,22 @@ AdminLTE/
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
+                      <a href = '{% static "panel/documentation/#" %}' >Followers</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
+                      <a href = '{% static "panel/documentation/#" %}' >Sales</a>
                     </div>
                     <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
+                      <a href = '{% static "panel/documentation/#" %}' >Friends</a>
                     </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href = '{% static "panel/documentation/#" %}'  class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href = '{% static "panel/documentation/#" %}'  class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -591,7 +592,7 @@ AdminLTE/
     </div>
   </div>
   <pre class="prettyprint">&LT;header class="main-header">
-  &LT;a href="../../index2.html" class="logo">
+  &LT;a href = '{% static "index2.html" %}'  class="logo">
     &LT;!-- LOGO -->
     AdminLTE
   &LT;/a>
@@ -602,7 +603,7 @@ AdminLTE/
       &LT;ul class="nav navbar-nav">
         &LT;!-- Messages: style can be found in dropdown.less-->
         &LT;li class="dropdown messages-menu">
-          &LT;a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          &LT;a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
             &LT;i class="fa fa-envelope-o">&LT;/i>
             &LT;span class="label label-success">4&LT;/span>
           &LT;/a>
@@ -612,9 +613,9 @@ AdminLTE/
               &LT;!-- inner menu: contains the actual data -->
               &LT;ul class="menu">
                 &LT;li>&LT;!-- start message -->
-                  &LT;a href="#">
+                  &LT;a href = '{% static "panel/documentation/#" %}' >
                     &LT;div class="pull-left">
-                      &LT;img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      &LT;img src = '{% static "panel/documentation/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                     &LT;/div>
                     &LT;h4>
                       Sender Name
@@ -626,12 +627,12 @@ AdminLTE/
                 ...
               &LT;/ul>
             &LT;/li>
-            &LT;li class="footer">&LT;a href="#">See All Messages&LT;/a>&LT;/li>
+            &LT;li class="footer">&LT;a href = '{% static "panel/documentation/#" %}' >See All Messages&LT;/a>&LT;/li>
           &LT;/ul>
         &LT;/li>
         &LT;!-- Notifications: style can be found in dropdown.less -->
         &LT;li class="dropdown notifications-menu">
-          &LT;a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          &LT;a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
             &LT;i class="fa fa-bell-o">&LT;/i>
             &LT;span class="label label-warning">10&LT;/span>
           &LT;/a>
@@ -641,19 +642,19 @@ AdminLTE/
               &LT;!-- inner menu: contains the actual data -->
               &LT;ul class="menu">
                 &LT;li>
-                  &LT;a href="#">
+                  &LT;a href = '{% static "panel/documentation/#" %}' >
                     &LT;i class="ion ion-ios-people info">&LT;/i> Notification title
                   &LT;/a>
                 &LT;/li>
                 ...
               &LT;/ul>
             &LT;/li>
-            &LT;li class="footer">&LT;a href="#">View all&LT;/a>&LT;/li>
+            &LT;li class="footer">&LT;a href = '{% static "panel/documentation/#" %}' >View all&LT;/a>&LT;/li>
           &LT;/ul>
         &LT;/li>
         &LT;!-- Tasks: style can be found in dropdown.less -->
         &LT;li class="dropdown tasks-menu">
-          &LT;a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          &LT;a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
             &LT;i class="fa fa-flag-o">&LT;/i>
             &LT;span class="label label-danger">9&LT;/span>
           &LT;/a>
@@ -663,7 +664,7 @@ AdminLTE/
               &LT;!-- inner menu: contains the actual data -->
               &LT;ul class="menu">
                 &LT;li>&LT;!-- Task item -->
-                  &LT;a href="#">
+                  &LT;a href = '{% static "panel/documentation/#" %}' >
                     &LT;h3>
                       Design some buttons
                       &LT;small class="pull-right">20%&LT;/small>
@@ -679,20 +680,20 @@ AdminLTE/
               &LT;/ul>
             &LT;/li>
             &LT;li class="footer">
-              &LT;a href="#">View all tasks&LT;/a>
+              &LT;a href = '{% static "panel/documentation/#" %}' >View all tasks&LT;/a>
             &LT;/li>
           &LT;/ul>
         &LT;/li>
         &LT;!-- User Account: style can be found in dropdown.less -->
         &LT;li class="dropdown user user-menu">
-          &LT;a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            &LT;img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+          &LT;a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
+            &LT;img src = '{% static "panel/documentation/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
             &LT;span class="hidden-xs">Alexander Pierce&LT;/span>
           &LT;/a>
           &LT;ul class="dropdown-menu">
             &LT;!-- User image -->
             &LT;li class="user-header">
-              &LT;img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              &LT;img src = '{% static "panel/documentation/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
               &LT;p>
                 Alexander Pierce - Web Developer
                 &LT;small>Member since Nov. 2012&LT;/small>
@@ -701,22 +702,22 @@ AdminLTE/
             &LT;!-- Menu Body -->
             &LT;li class="user-body">
               &LT;div class="col-xs-4 text-center">
-                &LT;a href="#">Followers&LT;/a>
+                &LT;a href = '{% static "panel/documentation/#" %}' >Followers&LT;/a>
               &LT;/div>
               &LT;div class="col-xs-4 text-center">
-                &LT;a href="#">Sales&LT;/a>
+                &LT;a href = '{% static "panel/documentation/#" %}' >Sales&LT;/a>
               &LT;/div>
               &LT;div class="col-xs-4 text-center">
-                &LT;a href="#">Friends&LT;/a>
+                &LT;a href = '{% static "panel/documentation/#" %}' >Friends&LT;/a>
               &LT;/div>
             &LT;/li>
             &LT;!-- Menu Footer-->
             &LT;li class="user-footer">
               &LT;div class="pull-left">
-                &LT;a href="#" class="btn btn-default btn-flat">Profile&LT;/a>
+                &LT;a href = '{% static "panel/documentation/#" %}'  class="btn btn-default btn-flat">Profile&LT;/a>
               &LT;/div>
               &LT;div class="pull-right">
-                &LT;a href="#" class="btn btn-default btn-flat">Sign out&LT;/a>
+                &LT;a href = '{% static "panel/documentation/#" %}'  class="btn btn-default btn-flat">Sign out&LT;/a>
               &LT;/div>
             &LT;/li>
           &LT;/ul>
@@ -737,7 +738,7 @@ AdminLTE/
         <nav class="navbar navbar-static-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a href="../../index2.html" class="navbar-brand"><b>Admin</b>LTE</a>
+              <a href = '{% static "index2.html" %}'  class="navbar-brand"><b>Admin</b>LTE</a>
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <i class="fa fa-bars"></i>
               </button>
@@ -746,18 +747,18 @@ AdminLTE/
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li class="active"><a href = '{% static "panel/documentation/#" %}' >Link <span class="sr-only">(current)</span></a></li>
+                <li><a href = '{% static "panel/documentation/#" %}' >Link</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                  <a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Action</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Another action</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Something else here</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Separated link</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >One more separated link</a></li>
                   </ul>
                 </li>
               </ul>
@@ -767,15 +768,15 @@ AdminLTE/
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+                <li><a href = '{% static "panel/documentation/#" %}' >Link</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                  <a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Action</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Another action</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Something else here</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href = '{% static "panel/documentation/#" %}' >Separated link</a></li>
                   </ul>
                 </li>
               </ul>
@@ -790,7 +791,7 @@ AdminLTE/
   &LT;nav class="navbar navbar-static-top">
     &LT;div class="container-fluid">
     &LT;div class="navbar-header">
-      &LT;a href="../../index2.html" class="navbar-brand">&LT;b>Admin&LT;/b>LTE&LT;/a>
+      &LT;a href = '{% static "index2.html" %}'  class="navbar-brand">&LT;b>Admin&LT;/b>LTE&LT;/a>
       &LT;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
         &LT;i class="fa fa-bars">&LT;/i>
       &LT;/button>
@@ -799,18 +800,18 @@ AdminLTE/
     &LT;!-- Collect the nav links, forms, and other content for toggling -->
     &LT;div class="collapse navbar-collapse" id="navbar-collapse">
       &LT;ul class="nav navbar-nav">
-        &LT;li class="active">&LT;a href="#">Link &LT;span class="sr-only">(current)&LT;/span>&LT;/a>&LT;/li>
-        &LT;li>&LT;a href="#">Link&LT;/a>&LT;/li>
+        &LT;li class="active">&LT;a href = '{% static "panel/documentation/#" %}' >Link &LT;span class="sr-only">(current)&LT;/span>&LT;/a>&LT;/li>
+        &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Link&LT;/a>&LT;/li>
         &LT;li class="dropdown">
-          &LT;a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown &LT;span class="caret">&LT;/span>&LT;/a>
+          &LT;a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">Dropdown &LT;span class="caret">&LT;/span>&LT;/a>
           &LT;ul class="dropdown-menu" role="menu">
-            &LT;li>&LT;a href="#">Action&LT;/a>&LT;/li>
-            &LT;li>&LT;a href="#">Another action&LT;/a>&LT;/li>
-            &LT;li>&LT;a href="#">Something else here&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Action&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Another action&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Something else here&LT;/a>&LT;/li>
             &LT;li class="divider">&LT;/li>
-            &LT;li>&LT;a href="#">Separated link&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Separated link&LT;/a>&LT;/li>
             &LT;li class="divider">&LT;/li>
-            &LT;li>&LT;a href="#">One more separated link&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >One more separated link&LT;/a>&LT;/li>
           &LT;/ul>
         &LT;/li>
       &LT;/ul>
@@ -820,15 +821,15 @@ AdminLTE/
         &LT;/div>
       &LT;/form>
       &LT;ul class="nav navbar-nav navbar-right">
-        &LT;li>&LT;a href="#">Link&LT;/a>&LT;/li>
+        &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Link&LT;/a>&LT;/li>
         &LT;li class="dropdown">
-          &LT;a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown &LT;span class="caret">&LT;/span>&LT;/a>
+          &LT;a href = '{% static "panel/documentation/#" %}'  class="dropdown-toggle" data-toggle="dropdown">Dropdown &LT;span class="caret">&LT;/span>&LT;/a>
           &LT;ul class="dropdown-menu" role="menu">
-            &LT;li>&LT;a href="#">Action&LT;/a>&LT;/li>
-            &LT;li>&LT;a href="#">Another action&LT;/a>&LT;/li>
-            &LT;li>&LT;a href="#">Something else here&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Action&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Another action&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Something else here&LT;/a>&LT;/li>
             &LT;li class="divider">&LT;/li>
-            &LT;li>&LT;a href="#">Separated link&LT;/a>&LT;/li>
+            &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Separated link&LT;/a>&LT;/li>
           &LT;/ul>
         &LT;/li>
       &LT;/ul>
@@ -851,12 +852,12 @@ AdminLTE/
     &LT;!-- user panel (Optional) -->
     &LT;div class="user-panel">
       &LT;div class="pull-left image">
-        &LT;img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        &LT;img src = '{% static "panel/documentation/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
       &LT;/div>
       &LT;div class="pull-left info">
         &LT;p>User Name&LT;/p>
 
-        &LT;a href="#">&LT;i class="fa fa-circle text-success">&LT;/i> Online&LT;/a>
+        &LT;a href = '{% static "panel/documentation/#" %}' >&LT;i class="fa fa-circle text-success">&LT;/i> Online&LT;/a>
       &LT;/div>
     &LT;/div>&LT;!-- /.user-panel -->
 
@@ -874,13 +875,13 @@ AdminLTE/
     &LT;ul class="sidebar-menu">
       &LT;li class="header">HEADER&LT;/li>
       &LT;!-- Optionally, you can add icons to the links -->
-      &LT;li class="active">&LT;a href="#">&LT;span>Link&LT;/span>&LT;/a>&LT;&LT;/li>
-      &LT;li>&LT;a href="#">&LT;span>Another Link&LT;/span>&LT;/a>&LT;/li>
+      &LT;li class="active">&LT;a href = '{% static "panel/documentation/#" %}' >&LT;span>Link&LT;/span>&LT;/a>&LT;&LT;/li>
+      &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >&LT;span>Another Link&LT;/span>&LT;/a>&LT;/li>
       &LT;li class="treeview">
-        &LT;a href="#">&LT;span>Multilevel&LT;/span> &LT;i class="fa fa-angle-left pull-right">&LT;/i>&LT;/a>
+        &LT;a href = '{% static "panel/documentation/#" %}' >&LT;span>Multilevel&LT;/span> &LT;i class="fa fa-angle-left pull-right">&LT;/i>&LT;/a>
         &LT;ul class="treeview-menu">
-          &LT;li>&LT;a href="#">Link in level 2&LT;/a>&LT;/li>
-          &LT;li>&LT;a href="#">Link in level 2&LT;/a>&LT;/li>
+          &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Link in level 2&LT;/a>&LT;/li>
+          &LT;li>&LT;a href = '{% static "panel/documentation/#" %}' >Link in level 2&LT;/a>&LT;/li>
         &LT;/ul>
       &LT;/li>
     &LT;/ul>&LT;!-- /.sidebar-menu -->
@@ -892,7 +893,7 @@ AdminLTE/
   <p class="lead">Control sidebar is the right side bar. It can be used for many purposes and is extremely easy
     to create. The sidebar ships with two different show/hide styles. The first allows the sidebar to
   slide over the content. The second pushes the content to make space for the sidebar. Either of
-  these methods can be set through the <a href="#adminlte-options">Javascript options</a>.</p>
+  these methods can be set through the <a href = '{% static "panel/documentation/#adminlte-options" %}' >Javascript options</a>.</p>
   <p class="lead">The following code should be placed within the <code>.wrapper</code> div. I prefer
   to place it right after the footer.</p>
   <p class="lead">Dark Sidebar Markup</p>
@@ -1490,7 +1491,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-left">Alexander Pierce</span>
                 <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 Is this template really for free? That's unbelievable!
               </div><!-- /.direct-chat-text -->
@@ -1502,7 +1503,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-right">Sarah Bullock</span>
                 <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 You better believe it!
               </div><!-- /.direct-chat-text -->
@@ -1513,8 +1514,8 @@ AdminLTE/
           <div class="direct-chat-contacts">
             <ul class="contacts-list">
               <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+                <a href = '{% static "panel/documentation/#" %}' >
+                  <img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
                   <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       Count Dracula
@@ -1561,7 +1562,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-left">Alexander Pierce</span>
                 <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 Is this template really for free? That's unbelievable!
               </div><!-- /.direct-chat-text -->
@@ -1573,7 +1574,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-right">Sarah Bullock</span>
                 <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 You better believe it!
               </div><!-- /.direct-chat-text -->
@@ -1584,8 +1585,8 @@ AdminLTE/
           <div class="direct-chat-contacts">
             <ul class="contacts-list">
               <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+                <a href = '{% static "panel/documentation/#" %}' >
+                  <img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
                   <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       Count Dracula
@@ -1632,7 +1633,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-left">Alexander Pierce</span>
                 <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 Is this template really for free? That's unbelievable!
               </div><!-- /.direct-chat-text -->
@@ -1644,7 +1645,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-right">Sarah Bullock</span>
                 <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 You better believe it!
               </div><!-- /.direct-chat-text -->
@@ -1655,8 +1656,8 @@ AdminLTE/
           <div class="direct-chat-contacts">
             <ul class="contacts-list">
               <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+                <a href = '{% static "panel/documentation/#" %}' >
+                  <img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
                   <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       Count Dracula
@@ -1703,7 +1704,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-left">Alexander Pierce</span>
                 <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 Is this template really for free? That's unbelievable!
               </div><!-- /.direct-chat-text -->
@@ -1715,7 +1716,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-right">Sarah Bullock</span>
                 <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 You better believe it!
               </div><!-- /.direct-chat-text -->
@@ -1726,8 +1727,8 @@ AdminLTE/
           <div class="direct-chat-contacts">
             <ul class="contacts-list">
               <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+                <a href = '{% static "panel/documentation/#" %}' >
+                  <img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
                   <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       Count Dracula
@@ -1778,7 +1779,7 @@ AdminLTE/
           &LT;span class="direct-chat-name pull-left">Alexander Pierce&LT;/span>
           &LT;span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm&LT;/span>
         &LT;/div>&LT;!-- /.direct-chat-info -->
-        &LT;img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image">&LT;!-- /.direct-chat-img -->
+        &LT;img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image">&LT;!-- /.direct-chat-img -->
         &LT;div class="direct-chat-text">
           Is this template really for free? That's unbelievable!
         &LT;/div>&LT;!-- /.direct-chat-text -->
@@ -1790,7 +1791,7 @@ AdminLTE/
           &LT;span class="direct-chat-name pull-right">Sarah Bullock&LT;/span>
           &LT;span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm&LT;/span>
         &LT;/div>&LT;!-- /.direct-chat-info -->
-        &LT;img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image">&LT;!-- /.direct-chat-img -->
+        &LT;img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image">&LT;!-- /.direct-chat-img -->
         &LT;div class="direct-chat-text">
           You better believe it!
         &LT;/div>&LT;!-- /.direct-chat-text -->
@@ -1801,8 +1802,8 @@ AdminLTE/
     &LT;div class="direct-chat-contacts">
       &LT;ul class="contacts-list">
         &LT;li>
-          &LT;a href="#">
-            &LT;img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+          &LT;a href = '{% static "panel/documentation/#" %}' >
+            &LT;img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
             &LT;div class="contacts-list-info">
               &LT;span class="contacts-list-name">
                 Count Dracula
@@ -1851,7 +1852,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-left">Alexander Pierce</span>
                 <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 Is this template really for free? That's unbelievable!
               </div><!-- /.direct-chat-text -->
@@ -1863,7 +1864,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-right">Sarah Bullock</span>
                 <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 You better believe it!
               </div><!-- /.direct-chat-text -->
@@ -1874,8 +1875,8 @@ AdminLTE/
           <div class="direct-chat-contacts">
             <ul class="contacts-list">
               <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+                <a href = '{% static "panel/documentation/#" %}' >
+                  <img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
                   <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       Count Dracula
@@ -1922,7 +1923,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-left">Alexander Pierce</span>
                 <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 Is this template really for free? That's unbelievable!
               </div><!-- /.direct-chat-text -->
@@ -1934,7 +1935,7 @@ AdminLTE/
                 <span class="direct-chat-name pull-right">Sarah Bullock</span>
                 <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
               </div><!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+              <img class="direct-chat-img" src = '{% static "panel/dist/img/user3-128x128.jpg" %}'  alt="message user image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 You better believe it!
               </div><!-- /.direct-chat-text -->
@@ -1945,8 +1946,8 @@ AdminLTE/
           <div class="direct-chat-contacts">
             <ul class="contacts-list">
               <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="Contact Avatar">
+                <a href = '{% static "panel/documentation/#" %}' >
+                  <img class="contacts-list-img" src = '{% static "panel/dist/img/user1-128x128.jpg" %}'  alt="Contact Avatar">
                   <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       Count Dracula
@@ -1978,7 +1979,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="plugins">
-  <h2 class="page-header"><a href="#plugins">Plugins</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#plugins" %}' >Plugins</a></h2>
   <p class="lead">AdminLTE makes use of the following plugins. For documentation, updates or license information, please visit the provided links.</p>
   <div class="row bring-up">
     <div class="col-sm-3">
@@ -2029,7 +2030,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="browsers">
-  <h2 class="page-header"><a href="#browsers">Browser Support</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#browsers" %}' >Browser Support</a></h2>
   <p class="lead">AdminLTE supports the following browsers:</p>
   <ul>
     <li>IE9+</li>
@@ -2045,7 +2046,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="upgrade">
-  <h2 class="page-header"><a href="#upgrade">Upgrade Guide</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#upgrade" %}' >Upgrade Guide</a></h2>
   <p class="lead">To upgrade from version 1.x to the lateset version, follow this guide.</p>
   <h3>New Files</h3>
   <p>Make sure you update all CSS and JS files that are related to AdminLTE. Otherwise, the layout will not
@@ -2075,7 +2076,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="implementations">
-  <h2 class="page-header"><a href="#implementations">Implementations</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#implementations" %}' >Implementations</a></h2>
   <p class="lead">Thanks to many of AdminLTE users, there are multiple implementations of the template
   for easy integration with back-end frameworks. The following are some of them:</p>
 
@@ -2095,7 +2096,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="faq">
-  <h2 class="page-header"><a href="#faq">FAQ</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#faq" %}' >FAQ</a></h2>
   <h3>Can AdminLTE be used with Wordpress?</h3>
   <p class="lead">AdminLTE is an HTML template that can be used for any purpose. However, it is not made to be easily installed on Wordpress. It will require some effort and enough knowledge of the Wordpress script to do so.</p>
 
@@ -2111,7 +2112,7 @@ AdminLTE/
 <!-- ============================================================= -->
 
 <section id="license">
-  <h2 class="page-header"><a href="#license">License</a></h2>
+  <h2 class="page-header"><a href = '{% static "panel/documentation/#license" %}' >License</a></h2>
   <h3>AdminLTE</h3>
   <p class="lead">
     AdminLTE is an open source project that is licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.
@@ -2146,16 +2147,16 @@ AdminLTE/
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src = '{% static "panel/plugins/jQuery/jQuery-2.1.4.min.js" %}' ></script>
     <!-- Bootstrap 3.3.4 -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src = '{% static "panel/bootstrap/js/bootstrap.min.js" %}' ></script>
     <!-- FastClick -->
-    <script src="../plugins/fastclick/fastclick.min.js"></script>
+    <script src = '{% static "panel/plugins/fastclick/fastclick.min.js" %}' ></script>
     <!-- AdminLTE App -->
-    <script src="../dist/js/app.min.js"></script>
+    <script src = '{% static "panel/dist/js/app.min.js" %}' ></script>
     <!-- SlimScroll 1.3.0 -->
-    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src = '{% static "panel/plugins/slimScroll/jquery.slimscroll.min.js" %}' ></script>
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-    <script src="docs.js"></script>
+    <script src = '{% static "panel/documentation/docs.js" %}' ></script>
   </body>
 </html>
