@@ -126,7 +126,7 @@ public class SignUp {
         // Enter an invalid email
         WebElement email = driver.findElement(By.name("email"));
         email.clear();
-        email.sendKeys("email.com");   //wrong format
+        email.sendKeys(ProfileReusables.invalidEmail);
 
         ProfileReusables.enterValidPhoneNumber(driver);
         ProfileReusables.enterValidAccountNumber(driver);

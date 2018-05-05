@@ -4,6 +4,7 @@ import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import Reusables.WalletUsersReusables;
 import junit.framework.Assert;
+import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -59,6 +60,7 @@ public class ApplicationFee {
 
         WebElement error = driver.findElement(By.name("amount-error"));
         assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-amount-error"));
+
     }
 
     @Test
@@ -85,6 +87,7 @@ public class ApplicationFee {
         double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         double companyRialCredit = ManagerReusables.getCompanyCredit("rial");
         double companyDollarCredit = ManagerReusables.getCompanyCredit("dollar");
+
         WebElement amount = driver.findElement(By.name("amount"));
         amount.clear();
         amount.sendKeys(paymentAmount);
@@ -112,6 +115,23 @@ public class ApplicationFee {
         String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
 
         assertEquals(otherUsername, myUsername);
+        WebElement currency = driver.findElement(By.name("dollar-radio"));
+        currency.click();
+
+        WebElement link = driver.findElement(By.name("link"));
+        link.clear();
+        link.sendKeys("www.ethz.ch");
+
+        WebElement username = driver.findElement(By.name("username"));
+        username.clear();
+        username.sendKeys("myusername");
+
+        WebElement password = driver.findElement(By.name("password"));
+        password.clear();
+        password.sendKeys("myusername");
+
+        WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
     }
 
     @AfterClass

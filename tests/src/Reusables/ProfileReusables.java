@@ -13,12 +13,11 @@ import java.util.Map;
  */
 public class ProfileReusables {
 
-
     public static final Map<String, String> reusableStrings;
 
     static {
         reusableStrings = new HashMap<String, String>();
-        reusableStrings.put("sign-up-title",  "سپاا | ثبت‌ نام");
+        reusableStrings.put("sign-up-title", "سپاا | ثبت‌ نام");
         reusableStrings.put("log-in-title", "ورود");
         reusableStrings.put("first-name", "");
         reusableStrings.put("sur-name", "");
@@ -37,11 +36,10 @@ public class ProfileReusables {
 
     }
 
-    //TODO
     public static String SignUpTitle = "سپاا | ثبت‌ نام";
     public static String logInTitle = "ورود";
     public static String passwordChangeTitle = "تغییر رمز عبور";
-
+    public static String userDetailTitle = "مشخصات کاربری";
 
     public static String firstName1 = "Dorna";
     public static String surName1 = "Abdolazimi";
@@ -52,6 +50,8 @@ public class ProfileReusables {
     public static String password1 = "12345Dorna";
 
     public static String notRegisteredEmail = "dorna.gmail.com";
+    public static String invalidEmail = "dorna";
+
     public static String wrongPassword = "duck";
     public static String invalidPassword = "";//TODO
     public static String notMatchedPassword = "somethingElse";
@@ -73,6 +73,7 @@ public class ProfileReusables {
     public static String successMessage = "ثبت نام با موفقیت انجام شد.";
     public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
     public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
+
     public static String panelAddress = ""; //TODO:
 
 
@@ -171,14 +172,5 @@ public class ProfileReusables {
         submitButton.click();
     }
 
-    public static void navigateToWallet(WebDriver panel, String currency) {
-        WebElement wallet = panel.findElement(By.name(currency + "-wallet"));
-        wallet.click();
-    }
-
-    public static int getWalletCredit(WebDriver panel, String currency) { // currency parameter could be "dollar" or "euro" or "rial"
-        return 0;//حواست باشه بک بزنی وقتی می‌ری تو صفحات دیگر.
-        //// TODO: 4/12/2018 AD implement this
-    }
 }
 

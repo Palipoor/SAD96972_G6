@@ -38,12 +38,16 @@ public class GeneralReusables {
         reusableStrings.put("invalid-family-name-error", "");
         reusableStrings.put("invalid-phone-number-error", "");
         reusableStrings.put("invalid-account-number-error", "");
+        reusableStrings.put("wrong-amount-error", "");
+        reusableStrings.put("wrong-username-error", "");
+        reusableStrings.put("access-denied-error", "");
         reusableStrings.put("no-such-user-error", "");
         reusableStrings.put("done-transaction", "");
         reusableStrings.put("pending-transaction", "");
         reusableStrings.put("failed-transaction", "");
         reusableStrings.put("reported-transaction", "");
         reusableStrings.put("username-exists", "");
+        reusableStrings.put("request-status", "");
     }
 
     public static CharSequence INVALID_TRANSACTION_ID = "10000";
