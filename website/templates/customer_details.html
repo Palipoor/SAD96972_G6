@@ -1,5 +1,6 @@
+<!--customer : customer -->
+<!-- customer's transactions : transactions-->
 {% load static staticfiles %}
-
         <!-- Main content -->
         <section class="content">
           <!-- Small boxes (Stat box) -->
@@ -14,23 +15,23 @@
                   </div>
                   <div class = "box-body">
                     <h4>نام</h4>
-                    <small name="name">محمد</small>
+                    <small name="name">{{customer.persian_first_name}}</small>
               </div>
               <div class = "box-body">
                   <h4>نام خانوادگی</h4>
-                  <small name="family-name">شریفی</small>
+                  <small name="family-name">{{customer.persian_last_name}}</small>
             </div>
             <div class = "box-body">
-                <h4 name="english-name">نام لاتین</h4>
-                <small>Mohammad</small>
+                <h4 name=>نام لاتین</h4>
+                <small "english-name">{{customer.english_first_name}}</small>
             </div>
             <div class = "box-body">
-                <h4 name="english-family-name">نام خانوادگی لاتین</h4>
-                <small>Sharifi</small>
+                <h4 name=>نام خانوادگی لاتین</h4>
+                <small "english-family-name">{{customer.english_last_name}}</small>
               </div>
               <div class = "box-body">
                 <h4 name="username">نام کاربری</h4>
-                <small>@customerusername</small>
+                <small>{{customer.username}}</small>
             </div>
             </div>
             </div>
@@ -41,11 +42,11 @@
                      </div>
                       <div class = "box-body">
                        <h4>آدرس ایمیل</h4>
-                       <small name="email">useremai@gmail.com</small>
+                       <small name="email">{{customer.email}}</small>
                       </div>
                       <div class = "box-body">
                           <h4>شمارهٔ تماس</h4>
-                          <small name="phone">09379605628</small>
+                          <small name="phone">{{customer.phone}}</small>
                          </div>
                    </div>
                   <div class = "box" allign = "center">
@@ -54,7 +55,7 @@
                     </div><!--box header-->
                      <div class = "box-body">
                       <h4>شمارهٔ حساب</h4>
-                      <small name = "account-number">100200 - 3040 - 50</small>
+                      <small name = "account-number">{{customer.account}}</small>
                      </div>
                   </div>
                 </div>
@@ -73,21 +74,13 @@
                                   </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td><a href = '{% static "panel/pages/manager/transaction_details.html" %}' >102030</a></td>
-                                <td>واریز به حساب خارجی</td>
-                                <td>1395 - 05 - 05</td>
-                              </tr>
-                            <tr>
-                                <td><a href = '{% static "panel/pages/manager/transaction_details.html" %}' >102030</a></td>
-                                <td>واریز به حساب خارجی</td>
-                                <td>1395 - 05 - 05</td>
-                              </tr>
-                              <tr>
-                                  <td><a href = '{% static "panel/pages/manager/transaction_details.html" %}' >102030</a></td>
-                                  <td>واریز به حساب خارجی</td>
-                                  <td>1395 - 05 - 05</td>
+                                {% for transaction in new_transactions %}
+                                <tr>
+                                    <td><a href= {{transaction.id}}+"_transaction_details">{{transaction.id}}</a></td>
+                                    <td>{{transaction.type}}</td>
+                                    <td>{{transaction.time}}</td>
                                 </tr>
+                              {% endfor %}
                               </tbody>
                               <tfoot>
                                   <tr>

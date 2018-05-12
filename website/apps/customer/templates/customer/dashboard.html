@@ -1,3 +1,6 @@
+<!-- wallet credits : currency_credit -->
+<!-- number of customer's pending transactions : pending_transactions_length -->
+<!-- recent 5 customer's transactions : new_transactions -->
 {% extends "customer/mother_panel.html" %}
 {% load static staticfiles %}
 
@@ -18,8 +21,8 @@
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
-        <h3>۱۵۰</h3>
-        <p>موجودی حساب ریالی</p>
+        <h3>{{rial_credit}}</h3>
+        <p>موجودی کیف پول ریالی</p>
       </div>
       <div class="icon">
         <i class="ion ion-bag"></i>
@@ -31,10 +34,8 @@
     <!-- small box -->
     <div class="small-box bg-green">
       <div class="inner">
-        <h3>۵۳
-          <sup style="font-size: 20px">%</sup>
-        </h3>
-        <p>موجودی حساب دلاری</p>
+        <h3>{{ dollar_credit }}</h3>
+        <p>موجودی کیف پول دلاری</p>
       </div>
       <div class="icon">
         <i class="ion ion-stats-bars"></i>
@@ -46,8 +47,8 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
-        <h3>۴۴</h3>
-        <p>موجودی حساب یورویی</p>
+        <h3>{{euro_credit}}</h3>
+        <p>موجودی کیف پول یورویی</p>
       </div>
       <div class="icon">
         <i class="ion ion-person-add"></i>
@@ -59,7 +60,7 @@
     <!-- small box -->
     <div class="small-box bg-red">
       <div class="inner">
-        <h3>۶۵</h3>
+        <h3>{{pending_transactions_length}}</h3>
         <p>تراکنش‌های تایید نشده</p>
       </div>
       <div class="icon">
@@ -83,45 +84,34 @@
       <!-- /.box-header -->
       <div class="box-body table-responsive no-padding" name = "new-transactions">
         <table class="table table-hover">
-          <tbody>
+          <thead>
             <tr>
               <th>شناسه تراکنش</th>
               <th>نوع تراکنش</th>
               <th>تاریخ</th>
               <th>وضعیت</th>
             </tr>
-            <tr>
-              <td>OR9842</td>
-              <td>پرداخت ارزی</td>
-              <td>11-7-2014</td>
-              <td>
-                <span class="label label-success">Approved</span>
-              </td>
-            </tr>
-            <tr>
-              <td>OR9842</td>
-              <td>پرداخت ارزی</td>
-              <td>11-7-2014</td>
-              <td>
-                <span class="label label-warning">Pending</span>
-              </td>
-            </tr>
-            <tr>
-              <td>OR9842</td>
-              <td>ثبت نام TOFEL</td>
-              <td>11-7-2014</td>
-              <td>
-                <span class="label label-primary">Approved</span>
-              </td>
-            </tr>
-            <tr>
-              <td>OR9842</td>
-              <td>پرداخت ناشناس</td>
-              <td>11-7-2014</td>
-              <td>
-                <span class="label label-danger">Denied</span>
-              </td>
-            </tr>
+          </thead>
+            <tbody>
+            {% for transaction in new_transactions %}
+                <tr>
+                  <td>{{transaction.id}}</td>
+                  <td>{{transaction.type}}</td>
+                  <td>{{transaction.time}}</td>
+                  {%if transaction.status == 'pending' %}
+                    <td>
+                      <span class="label label-warning">transaction.status</span>
+                    </td>
+                  {% elif transaction.status == 'accepted' %}
+                    <td>
+                      <span class="label label-success">transaction.status</span>
+                    </td>
+                  {% elif transaction.status == 'rejected' or transaction.status == 'reported' %}
+                    <td>
+                      <span class="label label-danger">transaction.status</span>
+                    </td>
+                </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>

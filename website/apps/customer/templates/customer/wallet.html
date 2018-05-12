@@ -1,3 +1,5 @@
+<!-- credit : credit-->
+<!-- transactions which match in currency with the wallet : transactions-->
 {% extends "customer/mother_panel.html" %}
 {% load static staticfiles %}
 
@@ -49,7 +51,7 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
               <div class="inner">
-                <h3 name = "credit">150</h3>
+                <h3 name = "credit">{{credit}}</h3>
                 <p>موجودی  کیف پول</p>
               </div>
               <div class="icon">
@@ -78,47 +80,27 @@
                 </div><!-- /.box-header -->
                 <div class = "box-body">
                   <table class="table table-bordered table-striped" id = "table">
-                    <tbody>
+                    <thead>
                       <tr>
                       <th>شناسه تراکنش مربوط</th>
-                      <th>ساعت</th>
                       <th>تاریخ</th>
                       <th>مبلغ ( {{currency}})</th>
                       <th>نوع</th>
                       </tr>
-                    <tr>
-                      <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-success">واریز</span></td>
-                    </tr>
-                    <tr>
-                       <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-success">واریز</span></td>
-                    </tr>
-                    <tr>
-                       <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-success">واریز</span></td>
-                    </tr>
-                    <tr>
-                      <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-danger">برداشت</span></td>
-                    </tr>
+                      </thead>
+                      <tbody>
+                      {% for transaction in new_transactions %}
+                      <tr>
+                          <td><a href= {{transaction.id}}+"_transaction_details">{{transaction.id}}</a></td>
+                          <td>{{transaction.time}}</td>
+                          <td>{{transaction.amount}}</td>
+                          <td>{{transaction.type}}</td>
+                      </tr>
+                    {% endfor %}
                   </tbody>
                   <tfoot>
                       <tr>
                           <th>شناسه تراکنش مربوط</th>
-                          <th>ساعت</th>
                           <th>تاریخ</th>
                           <th>مبلغ ( {{currency}})</th>
                           <th>نوع</th>
