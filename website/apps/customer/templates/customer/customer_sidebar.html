@@ -7,17 +7,17 @@
     </a>
     <ul class="treeview-menu">
         <li class="active">
-            <a href='{% static "panel/pages/customer/user_settings.html" %}'>
+            <a href='{% url "customer:settings" %}' name = "user-settings">
                 <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/customer/password_change.html" %}'>
+            <a href='{% url "customer:change_password" %}' name = "password-change">
                 <i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a>
         </li>
     </ul>
 </li>
 <li>
-    <a href='{% static "panel/pages/customer/mytransactions.html" %}'>
+    <a href='{% url "customer:mytransactions" %}' name = "my-transactions">
         <em class="glyphicon glyphicon-credit-card"></em>
         <span>تراکنش‌های من</span>
     </a>
@@ -29,15 +29,15 @@
     </a>
     <ul class="treeview-menu">
         <li>
-            <a href='{% static "panel/pages/customer/wallet_rial.html" %}' name="rial-wallet">
+            <a href='{% url "customer:wallet"  "rial" %}' name="rial-wallet">
                 <i class="glyphicon glyphicon-chevron-left"></i> کیف پول ریال</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/customer/wallet_euro.html" %}' name="euro-wallet">
+            <a href='{% url "customer:wallet" "euro" %}' name="euro-wallet">
                 <i class="glyphicon glyphicon-chevron-left"></i> کیف پول یورو</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/customer/wallet_dollar.html" %}' name="dollar-wallet">
+            <a href='{% url "customer:wallet" "dollar" %}' name="dollar-wallet">
                 <i class="glyphicon glyphicon-chevron-left"></i> کیف پول دلار</a>
         </li>
     </ul>

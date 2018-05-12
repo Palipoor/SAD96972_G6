@@ -1,4 +1,3 @@
-{% load static staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +6,18 @@
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
 
 	<title>KeyTable example - Plain HTML table</title>
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/css/jquery.dataTables.css" %}' >
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/css/dataTables.keyTable.css" %}' >
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.css" %}' >
-	<link rel="stylesheet" type="text/css" href = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.css" %}' >
+	<link rel="stylesheet" type="text/css" href="../../../media/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.keyTable.css">
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/syntax/shCore.css">
+	<link rel="stylesheet" type="text/css" href="../../../examples/resources/demo.css">
 	<style type="text/css" class="init">
 
 	</style>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.dataTables.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/js/dataTables.keyTable.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/syntax/shCore.js" %}' ></script>
-	<script type="text/javascript" language="javascript" src = '{% static "resources/AdminLTE-RTL/plugins/datatables/examples/resources/demo.js" %}' ></script>
+	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../media/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/dataTables.keyTable.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/syntax/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="../../../examples/resources/demo.js"></script>
 	<script type="text/javascript" language="javascript" class="init">
 
 
@@ -547,9 +546,10 @@ $(document).ready(function() {
 					example:</p>
 
 					<ul>
-						<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.js" %}' >../../../media/js/jquery.js</a></li>
-						<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/js/jquery.dataTables.js" %}' >../../../media/js/jquery.dataTables.js</a></li>
-						<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/js/dataTables.keyTable.js" %}' >../js/dataTables.keyTable.js</a></li>
+						<li><a href="../../../media/js/jquery.js">../../../media/js/jquery.js</a></li>
+						<li><a href=
+						"../../../media/js/jquery.dataTables.js">../../../media/js/jquery.dataTables.js</a></li>
+						<li><a href="../js/dataTables.keyTable.js">../js/dataTables.keyTable.js</a></li>
 					</ul>
 				</div>
 
@@ -569,8 +569,9 @@ $(document).ready(function() {
 					table:</p>
 
 					<ul>
-						<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/media/css/jquery.dataTables.css" %}' >../../../media/css/jquery.dataTables.css</a></li>
-						<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/css/dataTables.keyTable.css" %}' >../css/dataTables.keyTable.css</a></li>
+						<li><a href=
+						"../../../media/css/jquery.dataTables.css">../../../media/css/jquery.dataTables.css</a></li>
+						<li><a href="../css/dataTables.keyTable.css">../css/dataTables.keyTable.css</a></li>
 					</ul>
 				</div>
 
@@ -582,7 +583,7 @@ $(document).ready(function() {
 				<div class="php">
 					<p>The script used to perform the server-side processing for this table is shown below. Please note
 					that this is just an example script using PHP. Server-side processing scripts can be written in any
-					language, using <a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/datatables.net/manual/server-side" %}' >the protocol described in the
+					language, using <a href="//datatables.net/manual/server-side">the protocol described in the
 					DataTables documentation</a>.</p>
 				</div>
 			</div>
@@ -598,12 +599,12 @@ $(document).ready(function() {
 
 				<div class="toc">
 					<div class="toc-group">
-						<h3><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/index.html" %}' >Examples</a></h3>
+						<h3><a href="./index.html">Examples</a></h3>
 						<ul class="toc active">
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/simple.html" %}' >Basic initialisation</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/events.html" %}' >Events</a></li>
-							<li><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/scrolling.html" %}' >Scrolling table</a></li>
-							<li class="active"><a href = '{% static "resources/AdminLTE-RTL/plugins/datatables/extensions/KeyTable/examples/html.html" %}' >Plain HTML table</a></li>
+							<li><a href="./simple.html">Basic initialisation</a></li>
+							<li><a href="./events.html">Events</a></li>
+							<li><a href="./scrolling.html">Scrolling table</a></li>
+							<li class="active"><a href="./html.html">Plain HTML table</a></li>
 						</ul>
 					</div>
 				</div>

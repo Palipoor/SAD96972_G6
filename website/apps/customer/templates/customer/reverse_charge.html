@@ -26,9 +26,10 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label>مبلغ</label>
-                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder=" مبلغ درخواستی به واحد ریال">
+                      <input type="number" class="form-control" name="amount" id="exampleInputPassword1" placeholder=" مبلغ درخواستی به واحد ریال">
                     </div>
-                      <p name="karmozd">مبلغ کارمزد:   ۱۰۰۰۰ ریال</p>
+                    <p>کارمزد</p>
+                      <p name="karmozd">1000</p>
                     <div class="form-group">
                         <label>شماره حساب</label>
                         <input type="text" class="form-control" placeholder="101-10203040" disabled>
@@ -36,7 +37,8 @@
                   </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">ثبت درخواست</button>
+                    <button type="submit" class="btn btn-primary" name="submit-button">ثبت درخواست</button>
+                    <p name = "error">این جا ارور می‌آید.</p>
                   </div>
                 </form>
           </div><!-- nav-tabs-custom -->

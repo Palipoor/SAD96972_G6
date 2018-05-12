@@ -20,8 +20,7 @@ def settings(request):
     return HttpResponse(template.render())
 
 
-
-def transaction_details(request):
+def transaction_details(request, transaction_id):
     template = loader.get_template("employee/transaction_details.html")
     return HttpResponse(template.render())
 
@@ -31,3 +30,6 @@ def customer_details(request, user_id):
     return HttpResponse(template.render())
 
 
+def notifications(request):
+    template = loader.get_template("employee/notifications.html")
+    return HttpResponse(template.render())

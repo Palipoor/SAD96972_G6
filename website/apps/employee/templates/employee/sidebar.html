@@ -6,12 +6,12 @@
     </a>
     <ul class="treeview-menu">
         <li class="active">
-            <a href='{% static "panel/pages/employee/user_settings.html" %}'>
-                <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
+            <a href='{% url "employee:settings" %}'>
+                <i class="glyphicon glyphicon-chevron-left" name="user-settings"></i> ویرایش مشخصات</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/employee/password_change.html" %}'>
-                <i class="glyphicon glyphicon-chevron-left"></i> تغییر رمز عبور</a>
+            <a href='{% url "employee:change_password" %}'>
+                <i class="glyphicon glyphicon-chevron-left" name="password-change"></i> تغییر رمز عبور</a>
         </li>
     </ul>
 </li>
@@ -22,12 +22,12 @@
     </a>
     <ul class="treeview-menu">
         <li>
-            <a href='{% static "panel/pages/employee/transaction_details.html" %}'>
-                <i class="glyphicon glyphicon-chevron-left"></i> مشاهده تراکنش‌ها</a>
+            <a href='{% url "employee:transaction_details" "12" %}'>
+                <i class="glyphicon glyphicon-chevron-left" name="transactions"></i> مشاهده تراکنش‌ها</a>
         </li>
         <li>
-            <a href='{% static "panel/pages/employee/transaction_details.html" %}'>
-                <i class="glyphicon glyphicon-chevron-left"></i> مشاهده درخواست‌ها</a>
+            <a href='{% url "employee:transaction_details" "12" %}'>
+                <i class="glyphicon glyphicon-chevron-left" name="requests"></i> مشاهده درخواست‌ها</a>
         </li>
     </ul>
 </li>

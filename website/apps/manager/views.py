@@ -24,7 +24,8 @@ def transaction_details(request,id):
     return HttpResponse(template.render({"id": id, "type": "mammad"}))
 
 
-def users(request, user_type):
+def users(request, id):
+    user_type = "customer"
     if user_type == "customer":
         user_type = "مشتری"
     else:
@@ -40,4 +41,20 @@ def customer_details(request, user_id):
 
 def employee_details(request, employee_id):
     template = loader.get_template("manager/employee_details.html")
+    return HttpResponse(template.render())
+
+
+def wallet(request, currency):
+    if currency == "dollar":
+        currency = "دلار"
+    elif currency == "euro":
+        currency = "یورو"
+    elif currency == "rial":
+        currency = "ریال"
+    template = loader.get_template("customer/wallet.html")
+    return HttpResponse(template.render({"currency": currency}))
+
+
+def notifications(request):
+    template = loader.get_template("manager/notifications.html")
     return HttpResponse(template.render())
