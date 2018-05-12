@@ -76,5 +76,7 @@ modules.xml
 !.vscode/extensions.json
 .history
 
+#selenium
+chromedriver
 
 # End of https://www.gitignore.io/api/intellij+all,visualstudiocode
