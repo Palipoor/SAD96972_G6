@@ -1,3 +1,4 @@
+<!-- users: users-->
 {% extends "manager/mother_panel.html" %} 
 {% load static staticfiles %} 
 
@@ -36,46 +37,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
+                            {% for user in users %}
+                                <tr>
+                                    {% if {{type}} == 'کارمند'%}
+                                    <td>
+                                            <a href='{% static "panel/pages/manager/employee_details.html" %}'>{{user.id}}</a>
+                                    </td>
+                                    {% else %} <!--todo dorost shavad! link ha-->
+                                    <td>
+                                            <a href='{% static "panel/pages/manager/customer_details.html" %}'>{{user.id}}</a>
+                                    </td>
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.persian_last_name}}</td>
+                                    <td>{{user.persian_first_name}}{{transaction.currency}}</td>
+                                </tr>
+                                {% endfor %}
                         </tbody>
                         <tfoot>
                             <tr>

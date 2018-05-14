@@ -1,3 +1,4 @@
+<!-- english_first_name and english_last_name-->
 {% extends "customer/mother_panel.html" %} 
 {% load static staticfiles %} 
 
@@ -23,11 +24,11 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label> نام لاتین</label>
-                      <input type="text" class="form-control" placeholder="Mahdi" disabled>
+                      <input type="text" class="form-control" placeholder="{{english_first_name}}" disabled>
                     </div>
                     <div class="form-group">
                         <label>نام خانوادگی لاتین</label>
-                        <input type="text" class="form-control" placeholder="Sharifi" disabled>
+                        <input type="text" class="form-control" placeholder="{{english_last_name}}" disabled>
                       </div>
                     <div class="form-group">
                       <label>نام کامل دانشگاه</label>

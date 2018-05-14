@@ -1,3 +1,4 @@
+<!--employee : employee-->
 {% load static staticfiles %}
         <!-- Main content -->
         <section class="content">
@@ -10,19 +11,19 @@
                   </div>
                   <div class = "box-body">
                       <h4>نام</h4>
-                      <small name="name">کارمند</small>
+                      <small name="name">{{employee.persian_first_name}}</small>
                 </div>
                 <div class = "box-body">
                     <h4>نام خانوادگی</h4>
-                    <small name = "family-name">خسته</small>
+                    <small name = "family-name">{{employee.persian_last_name}}</small>
               </div>
               <div class = "box-body">
                   <h4>نام کاربری</h4>
-                  <small name = "username">@username</small>
+                  <small name = "username">{{employee.username}}</small>
             </div>
             <div class = "box-body">
                 <h4>حقوق پایه</h4>
-                <small name = "salary">500000</small><small>ریال</small>
+                <small name = "salary">{{employee.salary}}</small><small>ریال</small>
           </div>
             </div>
             </div>
