@@ -1,3 +1,4 @@
+<!-- transactions : transactions -->
 {% extends "employee/mother_panel.html" %}
 {% load static staticfiles %}
 
@@ -27,98 +28,34 @@
               <th>شناسه تراکنش</th>
               <th>نوع تراکنش</th>
               <th>تاریخ تراکنش </th>
-              <th>شناسه درخواست دهنده</th>
+              <th>نام کاربری درخواست دهنده</th>
               <th>مبلغ</th>
               <th>وضعیت</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/employee/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-success">تایید</span>
-              </td>
-            </tr>
-
-          </tbody>
+            {% for transaction in new_transactions %}
+          <tr>
+              <td><a href= {{transaction.id}}+"_transaction_details">{{transaction.id}}</a></td>
+              <td>{{transaction.type}}</td>
+              <td>{{transaction.time}}</td>
+              <td>{{transaction.customer.username}}</td>
+              <td>{{transaction.amount}}{{transaction.currency}}</td>
+              {%if transaction.status == 'pending' %}
+            <td>
+                  <span class="label label-warning">transaction.status</span>
+            </td>
+              {% elif transaction.status == 'accepted' %}
+            <td>
+                  <span class="label label-success">transaction.status</span>
+            </td>
+              {% elif transaction.status == 'rejected' or transaction.status == 'reported' %}
+            <td>
+                  <span class="label label-danger">transaction.status</span>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
           <tfoot>
             <tr>
               <th>شناسه تراکنش</th>
