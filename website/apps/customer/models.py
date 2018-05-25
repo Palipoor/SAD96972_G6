@@ -1,9 +1,9 @@
 from django.db import models
-from apps import main
+from apps.main import models
 # Create your models here.
 
 
-class Customer(main.User):
+class Customer(models.User):
     rial_credit = models.IntegerField()
     dollar_cent_credit = models.IntegerField()
     euro_cent_credit = models.IntegerField()
@@ -13,7 +13,6 @@ class Customer(main.User):
 class Transaction(models.Model): #???
     class Meta:
         abstract = True
-
     '''statuses = (
         (0, 'accepted'),
         (1, 'rejected'),
@@ -35,7 +34,7 @@ class Transaction(models.Model): #???
     #this is in riaaal, always? always
 
 
-class Transaction_Type(models.Model): #???
+class TransactionType(models.Model): #???
     currency = (
            (0, 'rial'),
            (1, 'dollar'),
@@ -44,5 +43,34 @@ class Transaction_Type(models.Model): #???
     title = models.IntegerField()
     profit = models.IntegerField()
     currency = models.IntegerField(choices=currency)
+
+
+class TestTrans(Transaction):
+        class Meta:
+            abstract = True
+
+        username = models.CharField(max_length=100)
+        password = models.CharField(max_length=50)
+
+
+class IBT(TestTrans):
+    class Meta:
+        abstract = True
+
+    test_center_name = models.CharField(max_length=100)
+    test_center_code = models.IntegerField(max_length=50)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    date = models.DateTimeField()
+
+
+class TOEFL(IBT):
+    reasons = (
+        (0, 'blah'),
+        (1, 'blah'),
+        (2, 'blah'),
+    )
+    
+    reason = models.IntegerField(choices=reasons)
 
 
