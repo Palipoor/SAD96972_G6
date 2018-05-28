@@ -4,10 +4,6 @@ from django.template import Context, loader
 import os
 # Create your views here.
 
-class IsEmployeeView(AccessMixin):
-     def dispatch(self, request, *args, **kwargs):
-        ''' authenticate the user as an employee (could be an employee or the manager!) '''
-
 def dashboard(request):
     template = loader.get_template("employee/dashboard.html")
     return HttpResponse(template.render())

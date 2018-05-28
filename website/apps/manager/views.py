@@ -45,7 +45,9 @@ def employee_details(request, employee_id):
     template = loader.get_template("manager/employee_details.html")
     return HttpResponse(template.render())
 
-
+class WalletView(IsWalletUserView, FormView):
+    ""
+    
 def wallet(request, currency):
     if currency == "dollar":
         currency = "دلار"

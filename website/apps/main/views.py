@@ -20,7 +20,7 @@ class IsCustomerView(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
                 ''' authenticate the user as a customer'''
                 
-class IsAWalletUserView():
+class IsWalletUserView(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         '''authenticate the user as a wallet user'''
 
