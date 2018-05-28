@@ -4,6 +4,25 @@ from django.template import Context, loader
 import os
 # Create your views here.
 
+class IsLoggedInView(LoginRequiredMixin):
+    '''is the user logged in'''
+    ''' baraye redirect kardan be login url'''
+
+class IsManagerView(LoginRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        ''' authenticate the user as the manager '''
+
+class IsEmployeeView(LoginRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        ''' authenticate the user as an employee (could be an employee or the manager!) '''
+
+class IsCustomerView(LoginRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+                ''' authenticate the user as a customer'''
+                
+class IsAWalletUserView():
+    def dispatch(self, request, *args, **kwargs):
+        '''authenticate the user as a wallet user'''
 
 def index(request):
     template = loader.get_template("main/index.html")
@@ -24,6 +43,6 @@ def register_success(request):
     return HttpResponse(template.render())
 
 
-def user_panel(request):
+def user_panel(request): #in bayad be jaye dorost bere.
     template = loader.get_template("user_panel.html")
     return HttpResponse(template.render())
