@@ -23,7 +23,9 @@ def transaction_details(request,id):
     template = loader.get_template("manager/transaction_details.html")
     return HttpResponse(template.render({"id": id, "type": "mammad"}))
 
-
+class UsersManagementView(IsManagerView, MultiFormsView):
+    ""
+    
 def users(request, id):
     user_type = "customer"
     if user_type == "customer":
@@ -51,7 +53,7 @@ def wallet(request, currency):
         currency = "یورو"
     elif currency == "rial":
         currency = "ریال"
-    template = loader.get_template("customer/wallet.html")
+    template = loader.get_template("manager/wallet.html")
     return HttpResponse(template.render({"currency": currency}))
 
 
