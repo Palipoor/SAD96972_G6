@@ -1,18 +1,18 @@
-{% extends "manager/mother_panel.html" %} 
-{% load static staticfiles %} 
+{% extends "manager/mother_panel.html" %}
+{% load static staticfiles %}
 
-{% block title %} 
+{% block title %}
 {{type}}ان
-{% endblock title %} 
+{% endblock title %}
 
 {% block content_header_text %}
 <h1>{{type}}ان</h1>
-{{ block.super }} 
-{% endblock content_header_text %} 
+{{ block.super }}
+{% endblock content_header_text %}
 
 {% block content_header_link %}
 {{ block.super }}
-<li class="active">{{type}}ان </li>
+<li class="active">{{type}}ان</li>
 {% endblock content_header_link %}
 
 {% block main_content %}
@@ -28,62 +28,62 @@
                 <div class="box-body">
                     <table id="table" class="table table-bordered table-striped" name="customers-table">
                         <thead>
-                            <tr>
-                                <th>شناسه {{type}}</th>
-                                <th>نام کاربری</th>
-                                <th>نام خانوادگی</th>
-                                <th>نام </th>
-                            </tr>
+                        <tr>
+                            <th>شناسه {{type}}</th>
+                            <th>نام کاربری</th>
+                            <th>نام خانوادگی</th>
+                            <th>نام</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                                </td>
-                                <td>@blahblah</td>
-                                <td>blah</td>
-                                <td>
-                                    blah
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                            </td>
+                            <td>@blahblah</td>
+                            <td>blah</td>
+                            <td>
+                                blah
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                            </td>
+                            <td>@blahblah</td>
+                            <td>blah</td>
+                            <td>
+                                blah
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                            </td>
+                            <td>@blahblah</td>
+                            <td>blah</td>
+                            <td>
+                                blah
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
+                            </td>
+                            <td>@blahblah</td>
+                            <td>blah</td>
+                            <td>
+                                blah
+                            </td>
+                        </tr>
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>شناسهٔ {{type}}</th>
-                                <th>نام کاربری</th>
-                                <th>نام خانوادگی</th>
-                                <th>نام </th>
-                            </tr>
+                        <tr>
+                            <th>شناسهٔ {{type}}</th>
+                            <th>نام کاربری</th>
+                            <th>نام خانوادگی</th>
+                            <th>نام</th>
+                        </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -237,7 +237,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit"  name = "submit-button"class="btn btn-info pull-right">افزودن</button>
+                        <button type="submit" name="submit-button" class="btn btn-info pull-right">افزودن</button>
                         <div class="col-md-5">
                             <p name="error">این جا پیام خطا می‌آید.</p>
                         </div>
@@ -248,10 +248,10 @@
         </div>
     </div>
     </div>
-    
+
     </div>
     <!-- /.row (main row) -->
-    
+
     {% endif %}
     </div>
     </div>
@@ -300,5 +300,6 @@
             });
         });
     });
+
 </script>
 {% endblock scripts %}

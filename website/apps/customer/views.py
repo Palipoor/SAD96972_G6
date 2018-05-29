@@ -1,8 +1,29 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
+from django.views.generic import CreateView
+from django.views.generic.list import MultipleObjectTemplateResponseMixin
+
+from apps.main.views import IsCustomerView, IsLoggedInView
+
+
+class TransactionCreationView(IsCustomerView, PermissionRequiredMixin, CreateView):
+    ""
+class ReverseChargeCreationView(TransactionCreationView):
+    ""
+class ForeignPaymentCreationView(TransactionCreationView):
+    ""
+class AnonymousPaymentCreationView(TransactionCreationView):
+    ""
+class ApplicationFeeCreationView(TransactionCreationView):
+    ""
+#todo add other forms as well
+
+class MyTransactionsView(IsLoggedInView, PermissionRequiredMixin, MultipleObjectTemplateResponseMixin):
+    ""
 
 def dashboard(request):
     template = loader.get_template("customer/dashboard.html")

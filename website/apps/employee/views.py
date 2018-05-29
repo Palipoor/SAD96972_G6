@@ -13,7 +13,6 @@ def change_password(request):
     template = loader.get_template("employee/change_password.html")
     return HttpResponse(template.render())
 
-
 def settings(request):
     template = loader.get_template("employee/settings.html")
     return HttpResponse(template.render())
@@ -32,3 +31,4 @@ def customer_details(request, user_id):
 def notifications(request):
     template = loader.get_template("employee/notifications.html")
     return HttpResponse(template.render())
+

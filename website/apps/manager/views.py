@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
+from django.views.generic.list import MultipleObjectTemplateResponseMixin
+
+from apps.main.MultiForm import MultiFormsView
+from apps.main.views import IsManagerView
 
 
 def dashboard(request):
@@ -23,7 +27,7 @@ def transaction_details(request,id):
     template = loader.get_template("manager/transaction_details.html")
     return HttpResponse(template.render({"id": id, "type": "mammad"}))
 
-class UsersManagementView(IsManagerView, MultiFormsView):
+class UsersManagementView(IsManagerView, MultiFormsView, MultipleObjectTemplateResponseMixin):
     ""
     
 def users(request, id):
@@ -45,9 +49,6 @@ def employee_details(request, employee_id):
     template = loader.get_template("manager/employee_details.html")
     return HttpResponse(template.render())
 
-class WalletView(IsWalletUserView, FormView):
-    ""
-    
 def wallet(request, currency):
     if currency == "dollar":
         currency = "دلار"
