@@ -6,11 +6,8 @@ from django.template import Context, loader
 import os
 # Create your views here.
 from django.views.generic import UpdateView, ListView
-from django.views.generic.list import MultipleObjectTemplateResponseMixin
 
-from apps.main.MultiForm import MultiFormsView
 from apps.main.views import IsLoggedInView, DetailsView
-from apps.manager import models
 from apps.manager.models import Company, Customer
 
 
@@ -24,11 +21,6 @@ class ManagerPasswordChangeView(PasswordChangeView):
         return 'manager/change_password.html'
 
 
-def transaction_details(request, id):
-    template = loader.get_template("manager/transaction_details.html")
-    return HttpResponse(template.render({"id": id, "type": "mammad"}))
-
-
 class CompanySettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
     model = Company
     template_name = "manager/settings.html"
@@ -36,14 +28,25 @@ class CompanySettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
     # todo incomplete
 
 
+class UsersListView(IsLoggedInView, PermissionRequiredMixin, ListView):
+    user_type = ""
+
+
+class CustomersListView(UsersListView):
+    ""
+
+
+class EmployeeListView(UsersListView):
+    ""
+
+
 def users(request, id):
     user_type = "customer"
     if user_type == "customer":
-        user_type = "مشتری"
+        return CustomersListView.as_view()
     else:
-        user_type = "کارمند"
-    template = loader.get_template("manager/users.html")
-    return HttpResponse(template.render({"type": user_type}))
+        return EmployeeListView.as_view()
+        # return HttpResponse(template.render({"type": user_type}))
 
 
 class CustomerDetailsView(DetailsView, ListView):
@@ -53,28 +56,5 @@ class CustomerDetailsView(DetailsView, ListView):
     context_object_name = 'transactions'
     template_name = 'manager/customer_details'
 
-    #todo az koja username ro biarim? :(
-
     def get_context_data(self, **kwargs):
-        return [] #todo query bezan transaction haye user e marboot ro biar
-
-
-def employee_details(request, employee_id):
-    template = loader.get_template("manager/employee_details.html")
-    return HttpResponse(template.render())
-
-
-def wallet(request, currency):
-    if currency == "dollar":
-        currency = "دلار"
-    elif currency == "euro":
-        currency = "یورو"
-    elif currency == "rial":
-        currency = "ریال"
-    template = loader.get_template("manager/wallet.html")
-    return HttpResponse(template.render({"currency": currency}))
-
-
-def notifications(request):
-    template = loader.get_template("manager/notifications.html")
-    return HttpResponse(template.render())
+        return []  # todo query bezan transaction haye user e marboot ro biar

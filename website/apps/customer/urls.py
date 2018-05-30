@@ -15,22 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.customer.views import dashboard, mytransactions, transaction_details, wallet, \
-    reverse_charge, foreign_payment, application_fee, anonymous_payment, notifications, \
-    CustomerPasswordChangeView, CustomerSettingsView
-from apps.main.views import WalletView
+from apps.customer.views import dashboard, mytransactions, CustomerPasswordChangeView, CustomerSettingsView, \
+    ReverseChargeCreationView, ForeignPaymentCreationView, \
+    ApplicationFeeCreationView, AnonymousPaymentCreationView
+from apps.main.views import WalletView, TransactionDetailsView, NotificationsView
 
 urlpatterns = [
     path('dashboard', dashboard, name='dashboard'),
     path('change_password', CustomerPasswordChangeView.as_view, name='change_password'),
     path('settings', CustomerSettingsView.as_view, name='settings'),
     path('mytransactions', mytransactions, name='mytransactions'),
-    path('<id>_transaction_details', transaction_details, name='transaction_details'),
+    path('<id>_transaction_details', TransactionDetailsView.as_view, name='transaction_details'),
     path('settings/', CustomerSettingsView.as_view, name='settings'),
-    path('reverse_charge/', reverse_charge, name='reverse_charge'),
-    path('foreign_payment/', foreign_payment, name='foreign_payment'),
-    path('application_fee/', application_fee, name='application_fee'),
-    path('anonymous_payment/', anonymous_payment, name='anonymous_payment'),
+    path('reverse_charge/', ReverseChargeCreationView.as_view, name='reverse_charge'),
+    path('foreign_payment/', ForeignPaymentCreationView.as_view, name='foreign_payment'),
+    path('application_fee/', ApplicationFeeCreationView.as_view, name='application_fee'),
+    path('anonymous_payment/', AnonymousPaymentCreationView.as_view, name='anonymous_payment'),
     path('<currency>_wallet/', WalletView.as_view, name='wallet'),
-    path('notifications/', notifications, name='notifications'),
+    path('notifications/', NotificationsView.as_view, name='notifications'),
 ]

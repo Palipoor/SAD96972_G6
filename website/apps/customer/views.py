@@ -11,24 +11,28 @@ from apps.main.views import IsLoggedInView
 from apps.manager.models import Customer
 
 
-class TransactionCreationView(IsLoggedInView, PermissionRequiredMixin, CreateView):
+class TransactionCreationView(IsLoggedInView, CreateView):
     ""
 
 
 class ReverseChargeCreationView(TransactionCreationView):
-    ""
+    template_name = "customer/reverse_charge.html"
+    #todo incomplete
 
 
 class ForeignPaymentCreationView(TransactionCreationView):
-    ""
+    template_name = "customer/foreign_payment.html"
+    #todo incomplete
 
 
 class AnonymousPaymentCreationView(TransactionCreationView):
-    ""
+    template_name = "customer/anonymous_payment.html"
+    #todo incomplete
 
 
 class ApplicationFeeCreationView(TransactionCreationView):
-    ""
+    template_name = "customer/application_fee.html"
+    #todo incomplete
 
 
 # todo add other forms as well
@@ -36,11 +40,6 @@ class ApplicationFeeCreationView(TransactionCreationView):
 
 def dashboard(request):
     template = loader.get_template("customer/dashboard.html")
-    return HttpResponse(template.render())
-
-
-def notifications(request):
-    template = loader.get_template("customer/notifications.html")
     return HttpResponse(template.render())
 
 
@@ -61,29 +60,4 @@ class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
 
 def mytransactions(request):
     template = loader.get_template("customer/mytransactions.html")
-    return HttpResponse(template.render())
-
-
-def transaction_details(request, id):
-    template = loader.get_template("customer/transaction_details.html")
-    return HttpResponse(template.render())
-
-
-def reverse_charge(request):
-    template = loader.get_template("customer/reverse_charge.html")
-    return HttpResponse(template.render())
-
-
-def foreign_payment(request):
-    template = loader.get_template("customer/foreign_payment.html")
-    return HttpResponse(template.render())
-
-
-def application_fee(request):
-    template = loader.get_template("customer/application_fee.html")
-    return HttpResponse(template.render())
-
-
-def anonymous_payment(request):
-    template = loader.get_template("customer/anonymous_payment.html")
     return HttpResponse(template.render())

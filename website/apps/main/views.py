@@ -12,7 +12,7 @@ from django.views.generic.edit import FormMixin
 from django.views.generic.list import MultipleObjectTemplateResponseMixin
 
 from apps.main.Forms import SignUpForm
-from apps.manager.models import WebsiteUser, Customer
+from apps.manager.models import WebsiteUser, Customer, Transaction, Employee
 
 
 class IsLoggedInView(LoginRequiredMixin):
@@ -24,6 +24,8 @@ class IsLoggedInView(LoginRequiredMixin):
 
 
 class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
+    def has_permission(self):
+        return self.request.user.user_type == 'customer' or self.request.user.user_type == 'manager'
 
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']
@@ -58,11 +60,26 @@ class DetailsView(IsLoggedInView, PermissionRequiredMixin, SingleObjectMixin):
 
 
 class EmployeeDetailsView(DetailsView):
-    ""  # todo undone
+    def has_permission(self):
+        return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee' and self.request.user.id == self.employee_id
+
+    model = Employee
+
+    def dispatch(self, request, *args, **kwargs):
+        self.employee_id = kwargs['employee_id']
+        # todo incomplete
 
 
 class TransactionDetailsView(DetailsView):
-    ""  # todo undone
+    def has_permission(self):
+        return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee'
+
+    model = Transaction
+    # todo incomplete
+
+
+class NotificationsView(IsLoggedInView, PermissionRequiredMixin, ListView):
+    ""
 
 
 def index(request):
