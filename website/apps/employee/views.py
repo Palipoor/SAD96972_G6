@@ -1,3 +1,4 @@
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
@@ -8,6 +9,9 @@ def dashboard(request):
     template = loader.get_template("employee/dashboard.html")
     return HttpResponse(template.render())
 
+class EmployeePasswordChangeView(PasswordChangeView):
+    def get_template_names(self):
+        return 'employee/change_password.html'
 
 def change_password(request):
     template = loader.get_template("employee/change_password.html")

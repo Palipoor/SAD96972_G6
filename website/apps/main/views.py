@@ -39,7 +39,6 @@ class IsCustomerView(IsLoggedInView):
 class UserSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
     ""  # todo undone
 
-
 class WalletView(IsLoggedInView, PermissionRequiredMixin, FormView):
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']

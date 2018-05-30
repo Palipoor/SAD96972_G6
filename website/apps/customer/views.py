@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
@@ -33,9 +34,9 @@ def notifications(request):
     template = loader.get_template("customer/notifications.html")
     return HttpResponse(template.render())
 
-def change_password(request):
-    template = loader.get_template("customer/change_password.html")
-    return HttpResponse(template.render())
+class CustomerPasswordChangeView(PasswordChangeView):
+    def get_template_names(self):
+        return 'customer/change_password.html'
 
 
 def settings(request):

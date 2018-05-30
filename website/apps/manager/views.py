@@ -1,3 +1,4 @@
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
@@ -14,22 +15,25 @@ def dashboard(request):
     return HttpResponse(template.render())
 
 
-def change_password(request):
-    template = loader.get_template("manager/change_password.html")
-    return HttpResponse(template.render())
+class ManagerPasswordChangeView(PasswordChangeView):
+    def get_template_names(self):
+        return 'manager/change_password.html'
 
 
 def settings(request):
     template = loader.get_template("manager/settings.html")
     return HttpResponse(template.render())
 
-def transaction_details(request,id):
+
+def transaction_details(request, id):
     template = loader.get_template("manager/transaction_details.html")
     return HttpResponse(template.render({"id": id, "type": "mammad"}))
 
+
 class UsersManagementView(IsManagerView, MultiFormsView, MultipleObjectTemplateResponseMixin):
     ""
-    
+
+
 def users(request, id):
     user_type = "customer"
     if user_type == "customer":
@@ -48,6 +52,7 @@ def customer_details(request, user_id):
 def employee_details(request, employee_id):
     template = loader.get_template("manager/employee_details.html")
     return HttpResponse(template.render())
+
 
 def wallet(request, currency):
     if currency == "dollar":
