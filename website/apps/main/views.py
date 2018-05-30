@@ -6,11 +6,13 @@ import os
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import UpdateView, FormView
+from django.views.generic import UpdateView, FormView, ListView
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import FormMixin
 from django.views.generic.list import MultipleObjectTemplateResponseMixin
 
 from apps.main.Forms import SignUpForm
+from apps.manager.models import User, Customer
 
 
 class IsLoggedInView(LoginRequiredMixin):
@@ -36,10 +38,7 @@ class IsCustomerView(IsLoggedInView):
         ''' authenticate the user as a customer'''  # todo undone
 
 
-class UserSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
-    ""  # todo undone
-
-class WalletView(IsLoggedInView, PermissionRequiredMixin, FormView):
+class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']
         user_type = kwargs['user_type']
@@ -52,7 +51,8 @@ class WalletView(IsLoggedInView, PermissionRequiredMixin, FormView):
             return self.wallet(currency, username)
 
     # todo authenticate o ina!
-    #todo retrieve wallet credit and wallet transactions! give them as a context to render function!
+    #todo form
+    # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
     def wallet(self, currency, username):
         if currency == "dollar":
             currency = "دلار"
@@ -72,20 +72,12 @@ class DetailsView(IsLoggedInView, PermissionRequiredMixin, SingleObjectMixin):
     ""  # todo undone
 
 
-class CustomerDetailsView(DetailsView):
-    ""  # todo undone
-
-
 class EmployeeDetailsView(DetailsView):
     ""  # todo undone
 
 
 class TransactionDetailsView(DetailsView):
     ""  # todo undone
-
-
-class NotificationsView(IsLoggedInView, PermissionRequiredMixin, MultipleObjectTemplateResponseMixin):
-    ""
 
 
 def index(request):

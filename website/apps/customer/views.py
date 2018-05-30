@@ -5,43 +5,58 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
-from django.views.generic import CreateView
-from django.views.generic.list import MultipleObjectTemplateResponseMixin
+from django.views.generic import CreateView, UpdateView
 
 from apps.main.views import IsCustomerView, IsLoggedInView
+from apps.manager.models import Customer
 
 
 class TransactionCreationView(IsCustomerView, PermissionRequiredMixin, CreateView):
     ""
+
+
 class ReverseChargeCreationView(TransactionCreationView):
     ""
+
+
 class ForeignPaymentCreationView(TransactionCreationView):
     ""
+
+
 class AnonymousPaymentCreationView(TransactionCreationView):
     ""
+
+
 class ApplicationFeeCreationView(TransactionCreationView):
     ""
-#todo add other forms as well
 
-class MyTransactionsView(IsLoggedInView, PermissionRequiredMixin, MultipleObjectTemplateResponseMixin):
-    ""
+
+# todo add other forms as well
+
 
 def dashboard(request):
     template = loader.get_template("customer/dashboard.html")
     return HttpResponse(template.render())
 
+
 def notifications(request):
     template = loader.get_template("customer/notifications.html")
     return HttpResponse(template.render())
+
 
 class CustomerPasswordChangeView(PasswordChangeView):
     def get_template_names(self):
         return 'customer/change_password.html'
 
 
-def settings(request):
-    template = loader.get_template("customer/settings.html")
-    return HttpResponse(template.render())
+class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
+    model = Customer
+
+    def get_context_data(self, **kwargs):
+        return ""  # todo query bezan oon customer ro biab
+
+    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'email', 'phone',
+              'account-number', 'photo']
 
 
 def mytransactions(request):
@@ -49,20 +64,9 @@ def mytransactions(request):
     return HttpResponse(template.render())
 
 
-def transaction_details(request,id):
+def transaction_details(request, id):
     template = loader.get_template("customer/transaction_details.html")
     return HttpResponse(template.render())
-
-
-def wallet(request,currency):
-    if currency == "dollar":
-        currency = "دلار"
-    elif currency == "euro":
-        currency = "یورو"
-    elif currency == "rial":
-        currency = "ریال"
-    template = loader.get_template("customer/wallet.html")
-    return HttpResponse(template.render({"currency":currency}))
 
 def reverse_charge(request):
     template = loader.get_template("customer/reverse_charge.html")
