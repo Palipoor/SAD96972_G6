@@ -9,7 +9,7 @@ from django.views.generic import UpdateView, ListView
 from django.views.generic.list import MultipleObjectTemplateResponseMixin
 
 from apps.main.MultiForm import MultiFormsView
-from apps.main.views import IsManagerView, IsLoggedInView, DetailsView
+from apps.main.views import IsLoggedInView, DetailsView
 from apps.manager import models
 from apps.manager.models import Company, Customer
 

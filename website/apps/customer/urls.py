@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.customer.views import dashboard, change_password, mytransactions, transaction_details, wallet, \
+from apps.customer.views import dashboard, mytransactions, transaction_details, wallet, \
     reverse_charge, foreign_payment, application_fee, anonymous_payment, notifications, \
     CustomerPasswordChangeView, CustomerSettingsView
 from apps.main.views import WalletView
 
 urlpatterns = [
-    path('dashboard/(?P<username>[a-zA-Z0-9]+)$', dashboard, name='dashboard'),
+    path('dashboard', dashboard, name='dashboard'),
     path('change_password', CustomerPasswordChangeView.as_view, name='change_password'),
     path('settings', CustomerSettingsView.as_view, name='settings'),
     path('mytransactions', mytransactions, name='mytransactions'),

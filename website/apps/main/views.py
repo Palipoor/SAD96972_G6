@@ -12,7 +12,7 @@ from django.views.generic.edit import FormMixin
 from django.views.generic.list import MultipleObjectTemplateResponseMixin
 
 from apps.main.Forms import SignUpForm
-from apps.manager.models import User, Customer
+from apps.manager.models import WebsiteUser, Customer
 
 
 class IsLoggedInView(LoginRequiredMixin):
@@ -23,35 +23,20 @@ class IsLoggedInView(LoginRequiredMixin):
         return 'شما هنوز وارد سیستم نشده اید.'
 
 
-class IsManagerView(IsLoggedInView):
-    def dispatch(self, request, *args, **kwargs):
-        ''' authenticate the user as the manager '''  # todo undone
-
-
-class IsEmployeeView(IsLoggedInView):
-    def dispatch(self, request, *args, **kwargs):
-        ''' authenticate the user as an employee (could be an employee or the manager!) '''  # todo undone
-
-
-class IsCustomerView(IsLoggedInView):
-    def dispatch(self, request, *args, **kwargs):
-        ''' authenticate the user as a customer'''  # todo undone
-
-
 class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
+
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']
-        user_type = kwargs['user_type']
+        user = self.request.user
+        user_type = request.user.user_type
         if user_type == 'customer':
-            url = request.url
-            username = " parse username from url ! don't know how "  # todo
+            username = request.user.username
             return self.wallet(currency, username)
         else:
             username = ""
             return self.wallet(currency, username)
 
-    # todo authenticate o ina!
-    #todo form
+    # todo form
     # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
     def wallet(self, currency, username):
         if currency == "dollar":

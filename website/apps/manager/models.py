@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 
-class User(models.Model):
+class WebsiteUser(User):
     types = (
         (0, 'customer'),
         (1, 'employee'),
@@ -19,11 +20,11 @@ class User(models.Model):
     email = models.EmailField(max_length=70, unique=True, null = False)
     active = models.BooleanField()
 
-class Employee(User):
+class Employee(WebsiteUser):
     salary = models.IntegerField()
 
 
-class Customer(User):
+class Customer(WebsiteUser):
     rial_credit = models.IntegerField()
     dollar_cent_credit = models.IntegerField()
     euro_cent_credit = models.IntegerField()

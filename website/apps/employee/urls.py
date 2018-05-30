@@ -20,7 +20,7 @@ from apps.employee.views import dashboard, change_password, settings, transactio
     EmployeePasswordChangeView
 
 urlpatterns = [
-    path('dashboard/(?P<username>[a-zA-Z0-9]+)$', dashboard, name='dashboard'),
+    path('dashboard', dashboard, name='dashboard'),
     path('change_password', EmployeePasswordChangeView.as_view, name='change_password'),
     path('settings', settings, name='settings'),
     path('<transaction_id>_transaction_details', transaction_details, name='transaction_details'),

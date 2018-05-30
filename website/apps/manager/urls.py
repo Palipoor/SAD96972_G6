@@ -21,7 +21,7 @@ from apps.manager.views import dashboard, transaction_details, users, \
     employee_details, wallet, notifications, ManagerPasswordChangeView, CustomerDetailsView, CompanySettingsView
 
 urlpatterns = [
-    path('dashboard/manager', dashboard, name='dashboard'),
+    path('dashboard/', dashboard, name='dashboard'),
     path('change_password', ManagerPasswordChangeView.as_view, name='change_password'),
     path('settings', CompanySettingsView.as_view, name='settings'),
     path('<id>_transaction_details', transaction_details, name='transaction_details'),

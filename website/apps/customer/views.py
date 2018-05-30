@@ -7,11 +7,11 @@ import os
 # Create your views here.
 from django.views.generic import CreateView, UpdateView
 
-from apps.main.views import IsCustomerView, IsLoggedInView
+from apps.main.views import IsLoggedInView
 from apps.manager.models import Customer
 
 
-class TransactionCreationView(IsCustomerView, PermissionRequiredMixin, CreateView):
+class TransactionCreationView(IsLoggedInView, PermissionRequiredMixin, CreateView):
     ""
 
 
@@ -67,6 +67,7 @@ def mytransactions(request):
 def transaction_details(request, id):
     template = loader.get_template("customer/transaction_details.html")
     return HttpResponse(template.render())
+
 
 def reverse_charge(request):
     template = loader.get_template("customer/reverse_charge.html")
