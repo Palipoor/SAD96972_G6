@@ -6,7 +6,7 @@ import os
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import UpdateView, FormView, ListView
+from django.views.generic import UpdateView, FormView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
 from django.views.generic.list import MultipleObjectTemplateResponseMixin
@@ -55,7 +55,7 @@ class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
             return HttpResponse(template.render({"currency": currency}))
 
 
-class DetailsView(IsLoggedInView, PermissionRequiredMixin, SingleObjectMixin):
+class DetailsView(IsLoggedInView, PermissionRequiredMixin, DetailView):
     ""  # todo undone
 
 
@@ -64,6 +64,9 @@ class EmployeeDetailsView(DetailsView):
         return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee' and self.request.user.id == self.employee_id
 
     model = Employee
+
+    def get_object(self, queryset=None):
+        return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
 
     def dispatch(self, request, *args, **kwargs):
         self.employee_id = kwargs['employee_id']
@@ -75,10 +78,16 @@ class TransactionDetailsView(DetailsView):
         return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee'
 
     model = Transaction
-    # todo incomplete
+
+    def get_object(self, queryset=None):
+        return Transaction.objects.get(id=self.transaction_id)
+
+    def dispatch(self, request, *args, **kwargs):
+        self.transaction_id = kwargs['transaction_id']
+        # todo incomplete
 
 
-class NotificationsView(IsLoggedInView, PermissionRequiredMixin, ListView):
+class NotificationsView(IsLoggedInView, ListView):
     ""
 
 
