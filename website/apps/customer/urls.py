@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from apps.customer.views import dashboard, change_password, settings, mytransactions, transaction_details, wallet, reverse_charge, foreign_payment, application_fee, anonymous_payment,notifications
 urlpatterns = [
-    path('dashboard', dashboard , name = 'dashboard'), 
+    path('dashboard/(?P<username>[a-zA-Z0-9]+)$', dashboard , name = 'dashboard'),
     path('change_password', change_password, name='change_password'),
     path('settings', settings, name='settings'),
     path('mytransactions', mytransactions, name='mytransactions'),

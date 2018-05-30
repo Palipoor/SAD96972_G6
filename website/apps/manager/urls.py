@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from apps.manager.views import dashboard, change_password, settings, transaction_details, users, customer_details, employee_details, wallet, notifications
 urlpatterns = [
-    path('dashboard', dashboard, name = 'dashboard'), 
+    path('dashboard/manager', dashboard, name = 'dashboard'),
     path('change_password', change_password, name='change_password'),
     path('settings', settings, name='settings'),
     path('<id>_transaction_details', transaction_details, name='transaction_details'),
