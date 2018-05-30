@@ -6,6 +6,7 @@ from apps.manager.models import Customer
 
 
 class SignUpForm(UserCreationForm):
+
     email = forms.EmailField(max_length=70, unique=True, null=False)
     persian_first_name = forms.CharField(max_length=50, help_text='به زبان فارسی')
     persian_last_name = forms.CharField(max_length=50, help_text= 'به زبان فارسی')
