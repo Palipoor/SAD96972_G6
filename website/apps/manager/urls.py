@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from apps.main.views import WalletView, EmployeeDetailsView, NotificationsView, TransactionDetailsView
-from apps.manager.views import dashboard, users, ManagerPasswordChangeView, CustomerDetailsView, CompanySettingsView
+from apps.main.views import WalletView, EmployeeDetailsView, NotificationsView, TransactionDetailsView, \
+    CustomerDetailsView
+from apps.manager.views import, users, ManagerPasswordChangeView, CompanySettingsView, \
+    ManagerDashboardView
 
 urlpatterns = [
-    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/', ManagerDashboardView.as_view, name='dashboard'),
     path('change_password', ManagerPasswordChangeView.as_view, name='change_password'),
     path('settings', CompanySettingsView.as_view, name='settings'),
     path('<id>_transaction_details', TransactionDetailsView.as_view, name='transaction_details'),

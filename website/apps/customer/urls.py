@@ -15,16 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.customer.views import dashboard, mytransactions, CustomerPasswordChangeView, CustomerSettingsView, \
+from apps.customer.views import dashboard, CustomerPasswordChangeView, CustomerSettingsView, \
     ReverseChargeCreationView, ForeignPaymentCreationView, \
-    ApplicationFeeCreationView, AnonymousPaymentCreationView
+    ApplicationFeeCreationView, AnonymousPaymentCreationView, TransactionsListView, CustomerDashboardView
 from apps.main.views import WalletView, TransactionDetailsView, NotificationsView
 
 urlpatterns = [
-    path('dashboard', dashboard, name='dashboard'),
+    path('dashboard', CustomerDashboardView.as_view, name='dashboard'),
     path('change_password', CustomerPasswordChangeView.as_view, name='change_password'),
     path('settings', CustomerSettingsView.as_view, name='settings'),
-    path('mytransactions', mytransactions, name='mytransactions'),
+    path('mytransactions', TransactionsListView.as_view, name='mytransactions'),
     path('<id>_transaction_details', TransactionDetailsView.as_view, name='transaction_details'),
     path('settings/', CustomerSettingsView.as_view, name='settings'),
     path('reverse_charge/', ReverseChargeCreationView.as_view, name='reverse_charge'),

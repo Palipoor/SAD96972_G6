@@ -1,38 +1,23 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
+from django.views.generic import UpdateView, FormView, ListView
 
-def dashboard(request):
-    template = loader.get_template("employee/dashboard.html")
-    return HttpResponse(template.render())
+from apps.main.views import IsLoggedInView
+
+
+class EmployeeDashboardView(IsLoggedInView, PermissionRequiredMixin, ListView, FormView): #todo not sure if this works:/
+    ""
 
 class EmployeePasswordChangeView(PasswordChangeView):
     def get_template_names(self):
         return 'employee/change_password.html'
 
-def change_password(request):
-    template = loader.get_template("employee/change_password.html")
-    return HttpResponse(template.render())
 
-def settings(request):
-    template = loader.get_template("employee/settings.html")
-    return HttpResponse(template.render())
-
-
-def transaction_details(request, transaction_id):
-    template = loader.get_template("employee/transaction_details.html")
-    return HttpResponse(template.render())
-
-
-def customer_details(request, user_id):
-    template = loader.get_template("employee/customer_details.html")
-    return HttpResponse(template.render())
-
-
-def notifications(request):
-    template = loader.get_template("employee/notifications.html")
-    return HttpResponse(template.render())
-
+class EmployeeSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
+    template_name = 'employee/settings.html'
+    # todo incomplete

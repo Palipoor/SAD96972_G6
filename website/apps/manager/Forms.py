@@ -12,7 +12,7 @@ def copy_model_instance(obj):
     return obj.__class__(**initial)
 
 
-class EmployeeAccessRemovalForm(forms.Form):
+class AccessRemovalForm(forms.Form):
     username = forms.CharField(max_length=100, label='نام کاربری')
     reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
 
@@ -41,3 +41,8 @@ class EmployeeCreationForm(forms.ModelForm):
             )
         results.append(m_new)
         return results
+
+class ChangeSalaryForm(forms.ModelForm):
+    model = Employee
+    fields = ['username', 'salary']
+

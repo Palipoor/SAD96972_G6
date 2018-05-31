@@ -5,10 +5,14 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 
 from apps.main.views import IsLoggedInView
 from apps.manager.models import Customer
+
+
+class CustomerDashboardView(IsLoggedInView, PermissionRequiredMixin, ListView):
+    ""
 
 
 class TransactionCreationView(IsLoggedInView, CreateView):
@@ -17,30 +21,25 @@ class TransactionCreationView(IsLoggedInView, CreateView):
 
 class ReverseChargeCreationView(TransactionCreationView):
     template_name = "customer/reverse_charge.html"
-    #todo incomplete
+    # todo incomplete
 
 
 class ForeignPaymentCreationView(TransactionCreationView):
     template_name = "customer/foreign_payment.html"
-    #todo incomplete
+    # todo incomplete
 
 
 class AnonymousPaymentCreationView(TransactionCreationView):
     template_name = "customer/anonymous_payment.html"
-    #todo incomplete
+    # todo incomplete
 
 
 class ApplicationFeeCreationView(TransactionCreationView):
     template_name = "customer/application_fee.html"
-    #todo incomplete
+    # todo incomplete
 
 
 # todo add other forms as well
-
-
-def dashboard(request):
-    template = loader.get_template("customer/dashboard.html")
-    return HttpResponse(template.render())
 
 
 class CustomerPasswordChangeView(PasswordChangeView):
@@ -58,6 +57,5 @@ class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
               'account-number', 'photo']
 
 
-def mytransactions(request):
-    template = loader.get_template("customer/mytransactions.html")
-    return HttpResponse(template.render())
+class TransactionsListView(IsLoggedInView, PermissionRequiredMixin, ListView):
+    ""

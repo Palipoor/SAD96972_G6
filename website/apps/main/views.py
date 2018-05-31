@@ -91,6 +91,16 @@ class NotificationsView(IsLoggedInView, ListView):
     ""
 
 
+class CustomerDetailsView(DetailsView, ListView):
+    model = Customer
+    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'username', 'email',
+              'phone', 'account-number']
+    context_object_name = 'transactions'
+    template_name = 'manager/customer_details'
+
+    def get_context_data(self, **kwargs):
+        return []  # todo query bezan transaction haye user e marboot ro biar va khode adame ro.
+
 def index(request):
     template = loader.get_template("main/index.html")
     return HttpResponse(template.render())

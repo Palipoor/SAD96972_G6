@@ -5,17 +5,14 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
-from django.views.generic import UpdateView, ListView
+from django.views.generic import UpdateView, ListView, View
 
 from apps.main.MultiForm import MultiFormsView
 from apps.main.views import IsLoggedInView, DetailsView
 from apps.manager.models import Company, Customer
 
-
-def dashboard(request):
-    template = loader.get_template("manager/dashboard.html")
-    return HttpResponse(template.render())
-
+class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):
+    ""
 
 class ManagerPasswordChangeView(PasswordChangeView):
     def get_template_names(self):
@@ -58,13 +55,3 @@ def users(request, id, user_type):
     else:
         return EmployeeListView.as_view()
 
-
-class CustomerDetailsView(DetailsView, ListView):
-    model = Customer
-    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'username', 'email',
-              'phone', 'account-number']
-    context_object_name = 'transactions'
-    template_name = 'manager/customer_details'
-
-    def get_context_data(self, **kwargs):
-        return []  # todo query bezan transaction haye user e marboot ro biar va khode adame ro.
