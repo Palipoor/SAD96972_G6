@@ -7,6 +7,7 @@ import os
 # Create your views here.
 from django.views.generic import UpdateView, ListView
 
+from apps.main.MultiForm import MultiFormsView
 from apps.main.views import IsLoggedInView, DetailsView
 from apps.manager.models import Company, Customer
 
@@ -33,20 +34,29 @@ class UsersListView(IsLoggedInView, PermissionRequiredMixin, ListView):
 
 
 class CustomersListView(UsersListView):
-    ""
+    template_name = "manager/users.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(CustomersListView, self).get_context_data(**kwargs)
+        context['type'] = "مشتری"
+        return context
+        #todo incomplete
 
-class EmployeeListView(UsersListView):
-    ""
+class EmployeeListView(UsersListView, MultiFormsView):
+    template_name = "manager/users.html"
+    form_classes = {'add_employee':"",'remove_access':"",'change_salary':""}
+    
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeListView, self).get_context_data(**kwargs)
+        context['type'] = "کارمند"
+        return context
+        #todo incomplete
 
-
-def users(request, id):
-    user_type = "customer"
+def users(request, id, user_type):
     if user_type == "customer":
         return CustomersListView.as_view()
     else:
         return EmployeeListView.as_view()
-        # return HttpResponse(template.render({"type": user_type}))
 
 
 class CustomerDetailsView(DetailsView, ListView):
@@ -57,4 +67,4 @@ class CustomerDetailsView(DetailsView, ListView):
     template_name = 'manager/customer_details'
 
     def get_context_data(self, **kwargs):
-        return []  # todo query bezan transaction haye user e marboot ro biar
+        return []  # todo query bezan transaction haye user e marboot ro biar va khode adame ro.
