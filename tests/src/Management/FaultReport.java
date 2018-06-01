@@ -25,7 +25,7 @@ public class FaultReport {
 
     @BeforeClass
     public static void setUp() {
-        transactionId = CustomerReusables.createNewTransaction("foreign-payment");
+        transactionId = CustomerReusables.createNewTransaction();
         driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         employeeUsername = GeneralReusables.loginAsAnEmployee(driver);

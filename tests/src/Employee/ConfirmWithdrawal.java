@@ -24,11 +24,6 @@ public class ConfirmWithdrawal {
     static WebDriver driver;
     static double rialDeposit;
 
-
-
-
-
-
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
@@ -40,17 +35,12 @@ public class ConfirmWithdrawal {
         WebElement cell = ManagerReusables.getNewestRequest(driver);
         WebElement link = cell.findElement(By.tagName("a"));
         link.click();
-
-
-
-
     }
 
     @Test
     @Order(order = 1)
     public void preConditionTest() {
         assertEquals(driver.getTitle(), EmployeeReusables.transactionDetailTitle);
-
     }
 
     @Test
@@ -63,8 +53,6 @@ public class ConfirmWithdrawal {
         //TODO: how much does it change?
 
         assertEquals( ManagerReusables.getCompanyCredit("dollar"), rialDeposit, 1);
-
-
     }
 
     //TODO: write test for invalid case

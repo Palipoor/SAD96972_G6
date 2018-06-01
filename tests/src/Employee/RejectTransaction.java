@@ -44,9 +44,9 @@ public class RejectTransaction {
         GeneralReusables.setUpToHomepage(driver);
 
         GeneralReusables.loginAsAnEmployee(driver);
-        WebElement cell = ManagerReusables.getNewestRequest(driver);
-        WebElement link = cell.findElement(By.tagName("a"));
-        link.click();
+//        WebElement cell = ManagerReusables.getNewestRequest(driver);
+//        WebElement link = cell.findElement(By.tagName("a"));
+//        link.click();
 
 
     }

@@ -122,8 +122,16 @@ public class GeneralReusables {
         WebDriver homepage = new ChromeDriver();
         setUpToHomepage(homepage);
         WebElement priceElement = homepage.findElement(By.name(elementName));
+        homepage.close();
         return Integer.valueOf(priceElement.getText());
     }
 
+    public static void waitForSeconds(int seconds){
+        try {
+            Thread.sleep(seconds*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

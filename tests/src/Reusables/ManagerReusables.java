@@ -324,4 +324,7 @@ public class ManagerReusables {
         return WalletUsersReusables.getWalletCredit(driver, currency);
     }
 
+    public static WebElement getNewestRequest(WebDriver driver){ // TODO: 6/1/2018 AD dorost kon! alan yadam nemiad :))
+        return null;
+    }
 }

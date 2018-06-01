@@ -24,11 +24,6 @@ public class ConfirmForeign {
     static WebDriver driver;
     static double dollarDeposit;
 
-
-
-
-
-
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
@@ -40,10 +35,6 @@ public class ConfirmForeign {
         WebElement cell = ManagerReusables.getNewestRequest(driver);
         WebElement link = cell.findElement(By.tagName("a"));
         link.click();
-
-
-
-
     }
 
     @Test

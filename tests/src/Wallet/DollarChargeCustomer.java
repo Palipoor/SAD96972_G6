@@ -74,7 +74,7 @@ public class DollarChargeCustomer {
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
         WebElement errorMessage = driver.findElement(By.name("error"));
-        assertEquals(errorMessage.getText(), WalletUsersReusables.NOT_ENOUGH_ERROR_MESSAGE);// ارور خالی نباشد!
+        assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));// ارور خالی نباشد!
     }
 
 

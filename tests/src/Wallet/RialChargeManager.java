@@ -1,10 +1,12 @@
 package Wallet;
 
 import Reusables.GeneralReusables;
+import Reusables.Order;
 import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Golpar on 4/27/2018 AD.
  */
+@RunWith(Reusables.OrderedRunner.class)
 public class RialChargeManager {
     private static WebDriver driver;
 
@@ -27,12 +30,14 @@ public class RialChargeManager {
     }
 
     @Test
+    @Order(order=1)
     public void preCondtionTest() {
         String title = driver.getTitle();
-        assertEquals(title, WalletUsersReusables.RIAL_WALLET_TITLE);
+        assertEquals(title, WalletUsersReusables.reusableStrings.get("rial-wallet-title"));
     }
 
     @Test
+    @Order(order=2)
     public void rialWalletCharge() {
         double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         WebElement amountBox = driver.findElement(By.name("desired-amount"));

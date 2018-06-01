@@ -30,7 +30,7 @@ public class RialChargeCustomer {
     @Test
     public void preCondtionTest() {
         String title = driver.getTitle();
-        assertEquals(title, WalletUsersReusables.RIAL_WALLET_TITLE);
+        assertEquals(title, WalletUsersReusables.reusableStrings.get("rial-wallet-title"));
     }
 
     @Test
