@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
-class User(models.Model):
+class GenUser(User):
     class Meta:
         abstract = True
     '''types = (
@@ -11,12 +12,12 @@ class User(models.Model):
         (1, 'employee'),
         (2, 'manager'),
     )'''
-    username = models.CharField(max_length=100, primary_key=True)
+    '''username = models.CharField(max_length=100, primary_key=True)
     password = models.CharField(max_length=50)
-    email = models.EmailField(max_length=70, unique=True, null=False)
+    email = models.EmailField(max_length=70, unique=True, null=False)''' #are email and username unique in Django User? fix if they are not.
     photo = models.ImageField()
-    english_first_name = models.CharField(max_length=50)
-    english_last_name = models.CharField(max_length=50)
+    '''english_first_name = models.CharField(max_length=50)
+    english_last_name = models.CharField(max_length=50)'''
     persian_first_name = models.CharField(max_length=50)
     persian_last_name = models.CharField(max_length=50)
     #user_type = models.IntegerField(choices=types)
@@ -35,7 +36,7 @@ class Notification(models.Model):
         (2, 'blah  blah'),
     )
     # todo handle correct types
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey('apps.main.models.GenUser', on_delete=models.CASCADE)
     text = models.IntegerField(max_length=500)
     type = models.IntegerField(choices=types)
     status = models.IntegerField(choices=statuses)
