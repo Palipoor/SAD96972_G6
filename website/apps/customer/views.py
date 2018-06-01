@@ -12,8 +12,7 @@ from apps.manager.models import Customer
 
 
 class CustomerDashboardView(IsLoggedInView, PermissionRequiredMixin, ListView):
-    ""
-
+    template_name = "customer/dashboard.html"
 
 class TransactionCreationView(IsLoggedInView, CreateView):
     ""
@@ -49,7 +48,7 @@ class CustomerPasswordChangeView(PasswordChangeView):
 
 class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
     model = Customer
-
+    template_name = 'customer/settings.html'
     def get_context_data(self, **kwargs):
         return ""  # todo query bezan oon customer ro biab
 
@@ -58,4 +57,4 @@ class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
 
 
 class TransactionsListView(IsLoggedInView, PermissionRequiredMixin, ListView):
-    ""
+    template_name = 'customer/mytransactions.html'

@@ -18,7 +18,7 @@ from django.urls import path
 
 from apps.main.views import WalletView, EmployeeDetailsView, NotificationsView, TransactionDetailsView, \
     CustomerDetailsView
-from apps.manager.views import, users, ManagerPasswordChangeView, CompanySettingsView, \
+from apps.manager.views import users, ManagerPasswordChangeView, CompanySettingsView, \
     ManagerDashboardView
 
 urlpatterns = [

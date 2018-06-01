@@ -1,15 +1,14 @@
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
-from django.template import Context, loader
-import os
+from django.template import loader
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import UpdateView, FormView, ListView, DetailView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import FormMixin
-from django.views.generic.list import MultipleObjectTemplateResponseMixin
 
 from apps.main.Forms import SignUpForm
 from apps.manager.models import WebsiteUser, Customer, Transaction, Employee
@@ -29,7 +28,6 @@ class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
 
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']
-        user = self.request.user
         user_type = request.user.user_type
         if user_type == 'customer':
             username = request.user.username
@@ -57,20 +55,6 @@ class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
 
 class DetailsView(IsLoggedInView, PermissionRequiredMixin, DetailView):
     ""  # todo undone
-
-
-class EmployeeDetailsView(DetailsView):
-    def has_permission(self):
-        return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee' and self.request.user.id == self.employee_id
-
-    model = Employee
-
-    def get_object(self, queryset=None):
-        return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
-
-    def dispatch(self, request, *args, **kwargs):
-        self.employee_id = kwargs['employee_id']
-        # todo incomplete
 
 
 class TransactionDetailsView(DetailsView):
@@ -101,20 +85,42 @@ class CustomerDetailsView(DetailsView, ListView):
     def get_context_data(self, **kwargs):
         return []  # todo query bezan transaction haye user e marboot ro biar va khode adame ro.
 
-def index(request):
-    template = loader.get_template("main/index.html")
-    return HttpResponse(template.render())
 
-
-def login(request):
-    template = loader.get_template("main/login.html")
-    return HttpResponse(template.render())
-
-
-class Register(generic.CreateView):
+class Register(FormView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'main/register.html'
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            new_user = Customer(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
+                                persian_first_name=form.cleaned_data['persian_first_name'],
+                                persian_last_name=form.cleaned_data['persian_last_name'],
+                                email=form.cleaned_data['email'], phone=form.cleaned_data['phone'],
+                                account=form.cleaned_data['account'])
+            new_user.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class Login(LoginView):
+    def get_success_url(self):
+        return self.request.user.user_type + "/dashboard"
+
+    def get_form(self, form_class=None):
+        self.form_class = AuthenticationForm
+        form = AuthenticationForm()
+        form.username.widget = forms.TextInput(attrs={'autofocus': True, 'name': 'username'})
+        form.username.label = 'نام کاربری'
+        form.password.widget = forms.PasswordInput(attrs={'name': 'password'})
+        form.password.label = 'کلمهٔ عبور'
+
+
+def index(request):
+    template = loader.get_template("main/index.html")
+    return HttpResponse(template.render())
 
 
 def register_success(request):
