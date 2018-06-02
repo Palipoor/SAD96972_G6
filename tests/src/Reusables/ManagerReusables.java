@@ -1,6 +1,7 @@
 package Reusables;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -124,7 +125,7 @@ public class ManagerReusables {
         List<WebElement> tableRows = customersTable.findElements(By.xpath("//tbody//tr"));
 
         if (tableRows.size() == 0) {
-            return createCustomer();
+            return createCustomer("desiredpassword");
         } else {
             List<WebElement> tableHeader = customersTable.findElements(By.xpath("//thead"));
             List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
@@ -140,7 +141,7 @@ public class ManagerReusables {
         }
     }
 
-    private static String createCustomer() {
+    public static String createCustomer(String desiredPassword) {
         long currentTime = System.currentTimeMillis();
         String currentTimeString = String.valueOf(currentTime);
         String newUsername = "test_customer_" + currentTimeString;
@@ -148,36 +149,39 @@ public class ManagerReusables {
 
         WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,100)");
+        GeneralReusables.waitForSeconds(5);
         WebElement signupButton = driver.findElement(By.name("sign up"));
         signupButton.click();
-
-        WebElement name = driver.findElement(By.id("first name"));
+        GeneralReusables.waitForSeconds(2);
+        WebElement name = driver.findElement(By.name("first name"));
         name.clear();
         name.sendKeys("تست نام");
-        WebElement familyname = driver.findElement(By.id("family name"));
+        WebElement familyname = driver.findElement(By.name("family name"));
         familyname.clear();
         familyname.sendKeys("تست نام خانوادگی");
-        WebElement username = driver.findElement(By.id("username"));
+        WebElement username = driver.findElement(By.name("username"));
         username.clear();
         username.sendKeys(newUsername);
-        WebElement email = driver.findElement(By.id("email"));
+        WebElement email = driver.findElement(By.name("email"));
         email.clear();
         email.sendKeys(newEmail);
-        WebElement number = driver.findElement(By.id("contact number"));
+        WebElement number = driver.findElement(By.name("contact number"));
         number.clear();
         number.sendKeys("09379605628");
-        WebElement account = driver.findElement(By.id("account number"));
+        WebElement account = driver.findElement(By.name("account number"));
         account.clear();
         account.sendKeys("10203040");
-        WebElement password = driver.findElement(By.id("password"));
+        WebElement password = driver.findElement(By.name("password"));
         password.clear();
-        password.sendKeys("passwordpassword");
-        WebElement passwordAgain = driver.findElement(By.id("password repeat"));
+        password.sendKeys(desiredPassword);
+        WebElement passwordAgain = driver.findElement(By.name("password repeat"));
         passwordAgain.clear();
-        passwordAgain.sendKeys("passwordpassword");
+        passwordAgain.sendKeys(desiredPassword);
 
-        WebElement iAgree = driver.findElement(By.name("i-agree"));
-        iAgree.click();
+//        WebElement iAgree = driver.findElement(By.name("i-agree"));
+//        iAgree.click();
 
         signupButton = driver.findElement(By.name("sign up"));
         signupButton.click();

@@ -52,8 +52,9 @@ public class ChangeSalary {
         WebElement setKey = salaryChangeBox.findElement(By.id("set-button"));
         setKey.click();
 
-        WebElement message = driver.findElement(By.name("message"));
-        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("invalid-username-error")));
+        WebElement message = driver.findElement(By.name("error-message-3"));
+        assertTrue(!message.getText().equals(""));
+        assertTrue(message.getText().equals(GeneralReusables.reusableStrings.get("invalid-username-error")));
     }
 
     @Test
