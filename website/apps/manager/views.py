@@ -25,7 +25,7 @@ def transaction_details(request,id):
 
 
 def users(request, id):
-    user_type = "customer"
+    user_type = "employee"
     if user_type == "customer":
         user_type = "مشتری"
     else:
