@@ -5,9 +5,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.FirefoxDriver()();
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,8 +21,11 @@ public class History {
     @BeforeClass
     public static void setUp() {
 
-        driver = new FirefoxDriver()()();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1500)");
+        GeneralReusables.waitForSeconds(5);
         WebElement history = driver.findElement(By.name("history"));
         history.click();
     }
@@ -30,7 +34,8 @@ public class History {
     public void containsText() {
         WebElement title = driver.findElement(By.name("history-header"));
         WebElement content = driver.findElement(By.name("history-content"));
-        assertTrue(!title.getText().equals("") && !content.getText().equals(""));
+        assertTrue(!title.getText().equals(""));
+        assertTrue(!content.getText().equals(""));
     }
 
     @AfterClass

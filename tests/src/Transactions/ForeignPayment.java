@@ -67,7 +67,7 @@ public class ForeignPayment {
         WebElement submit = driver.findElement(By.name("submit-button"));
         submit.click();
 
-        WebElement error = driver.findElement(By.name("amount-error"));
+        WebElement error = driver.findElement(By.name("account-error"));
         assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-account-number-error"));
     }
 

@@ -1,13 +1,15 @@
 package Nonmembers;
 
 import Reusables.GeneralReusables;
+import com.sun.tools.javac.jvm.Gen;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.FirefoxDriver()();
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,8 +21,11 @@ public class AboutUs {
 
     @BeforeClass
     public static void setUp() {
-        driver = new FirefoxDriver()()();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1500)");
+        GeneralReusables.waitForSeconds(5);
         WebElement about = driver.findElement(By.name("about"));
         about.click();
     }

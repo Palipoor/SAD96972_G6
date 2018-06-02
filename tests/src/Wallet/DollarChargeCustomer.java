@@ -6,7 +6,7 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.FirefoxDriver()();
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -20,7 +20,7 @@ public class DollarChargeCustomer {
 
     @BeforeClass
     public static void setUp() {
-        driver = new FirefoxDriver()()();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
         WalletUsersReusables.navigateToWallet(driver, "dollar");

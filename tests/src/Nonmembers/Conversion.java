@@ -5,6 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -27,6 +28,9 @@ public class Conversion {
     public static void setUp() {
         driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1500)");
+        GeneralReusables.waitForSeconds(5);
         WebElement prices = driver.findElement(By.name("prices"));
         prices.click();
         dropdown = new Select(driver.findElement(By.id("conversion-type")));
@@ -51,13 +55,13 @@ public class Conversion {
         int twoDollarsPrice = 2 * GeneralReusables.getPrice("dollar");
         valueBox.clear();
         valueBox.sendKeys(String.valueOf(twoDollarsPrice));
-        calculateButton.clear();
+        calculateButton.click();
         assertEquals(result.getText(), "2");
     }
 
     @Test
     public void euroToRial() {
-        dropdown.selectByValue("euro2Rial");
+        dropdown.selectByValue("euro2rial");
         int twoEurosPrice = 2 * GeneralReusables.getPrice("euro");
         valueBox.clear();
         valueBox.sendKeys("2");
@@ -71,7 +75,7 @@ public class Conversion {
         int threeEurosPrice = 3 * GeneralReusables.getPrice("euro");
         valueBox.clear();
         valueBox.sendKeys(String.valueOf(threeEurosPrice));
-        calculateButton.clear();
+        calculateButton.click();
         assertEquals(result.getText(), "3");
     }
 

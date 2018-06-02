@@ -117,8 +117,9 @@ public class GeneralReusables {
         WebDriver homepage = new FirefoxDriver();
         setUpToHomepage(homepage);
         WebElement priceElement = homepage.findElement(By.name(elementName));
+        int price = Integer.valueOf(priceElement.getText());
         homepage.close();
-        return Integer.valueOf(priceElement.getText());
+        return price;
     }
 
     public static void waitForSeconds(int seconds){

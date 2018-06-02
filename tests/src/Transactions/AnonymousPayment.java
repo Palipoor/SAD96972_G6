@@ -97,9 +97,8 @@ public class AnonymousPayment {
     }
 
     @Test
-    //@Order(order = 4)
-    @Ignore()
-    public void paymentsAreDone() {
+    @Order(order = 4)
+    public void paymentsAreDone() { //todo hesabe maghsadam check kone
 
         String paymentAmount = "1000";
         double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
@@ -122,7 +121,7 @@ public class AnonymousPayment {
     }
 
     @Test
-    @Order(order = 4)
+    @Order(order = 5)
     public void transactionIsAdded() {
         String myUsername = GeneralReusables.getUsername(driver);
         String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
