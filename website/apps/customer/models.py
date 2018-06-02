@@ -11,7 +11,7 @@ class Customer(main.models.GenUser):
     account_number = models.CharField(max_length=20, unique=True, null=False)
 
 
-class TransactionType(models.Model): #???
+class RequestType(models.Model): #???
     currency = (
            (0, 'rial'),
            (1, 'dollar'),
@@ -22,7 +22,7 @@ class TransactionType(models.Model): #???
     currency = models.IntegerField(choices=currency)
 
 
-class Transaction(models.Model): #???
+class Request(models.Model): #???
     class Meta:
         abstract = True
     statuses = (
@@ -49,7 +49,7 @@ class Transaction(models.Model): #???
 
 
 
-class TestTrans(Transaction):
+class TestTrans(Request):
         class Meta:
             abstract = True
 
@@ -131,7 +131,7 @@ class GRE(IBT):
     educational_status = models.IntegerField(choices=statuses, null=False)
 
 
-class UniversityTransaction(Transaction):
+class UniversityTrans(Request):
         types=(
             (0, 'Application Fee'),
             (1, 'Deposit Fee')
@@ -144,17 +144,17 @@ class UniversityTransaction(Transaction):
         guide = models.CharField(max_length=1000, null=False)
 
 
-class ForeignTrans(Transaction):
+class ForeignTrans(Request):
     account_number = models.CharField(max_length=20,  null=False)
     bank_name = models.CharField(max_length=50,  null=False)
 
 
-class InternalTrans(Transaction):
+class InternalTrans(Request):
     account_number = models.CharField(max_length=20)
     bank_name = models.CharField(max_length=50)
 
 
-class ForeignTrans(Transaction):
+class UnknownTrans(Request):
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
     email = models.EmailField()
