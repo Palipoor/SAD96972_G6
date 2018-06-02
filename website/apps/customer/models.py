@@ -167,7 +167,6 @@ class CustomerWalletTransfer(models.Model):
     destination = models.IntegerField(choices=wallets, null=False)
     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
     transfer_time = models.DateTimeField(null=False)
-    amount = models.IntegerField(null=False)
     profit = models.IntegerField(null=False)
     source_deposit_before = models.IntegerField(null=False)
     source_deposit_after = models.IntegerField(null=False)
@@ -180,7 +179,6 @@ class CustomerWalletTransfer(models.Model):
 class CustomerWalletCharge(models.Model):
     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
     charge_time = models.DateTimeField(null=False)
-    amount = models.IntegerField(null=False)
     deposit_before = models.IntegerField()
     deposit_after = models.IntegerField()
 

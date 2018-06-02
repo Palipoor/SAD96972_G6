@@ -25,7 +25,6 @@ class CompanyWalletTransfer(models.Model):
     source = models.IntegerField(choices=wallets, null=False)
     destination = models.IntegerField(choices=wallets, null=False)
     transfer_time = models.DateTimeField(null=False)
-    amount = models.IntegerField(null=False)
     source_deposit_before = models.IntegerField(null=False)
     source_deposit_after = models.IntegerField(null=False)
     destination_deposit_before = models.IntegerField(null=False)
@@ -40,7 +39,6 @@ class CompanyWalletCharge(models.Model):
     )
     destination = models.IntegerField(choices=wallets, null=False)
     charge_time = models.DateTimeField(null=False)
-    amount = models.IntegerField(null=False)
     deposit_before = models.IntegerField()
     deposit_after = models.IntegerField()
 
