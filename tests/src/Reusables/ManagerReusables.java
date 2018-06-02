@@ -32,7 +32,7 @@ public class ManagerReusables {
 
         WebElement customers = driver.findElement(By.name("customers"));
         customers.click();
-        WebElement customersTable = driver.findElement(By.name("customers-table"));
+        WebElement customersTable = driver.findElement(By.name("users-table"));
         WebElement usernameSearchBox = customersTable.findElement(By.name("نام کاربری"));
         usernameSearchBox.clear();
         usernameSearchBox.sendKeys(username);
@@ -49,7 +49,7 @@ public class ManagerReusables {
 
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
-        WebElement employeetable = driver.findElement(By.name("employees-table"));
+        WebElement employeetable = driver.findElement(By.name("users-table"));
         WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری"));
         usernameSearchBox.clear();
         usernameSearchBox.sendKeys(username);
@@ -65,7 +65,7 @@ public class ManagerReusables {
         GeneralReusables.loginAsTheManager(driver);
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
-        WebElement employeetable = driver.findElement(By.name("employees-table"));
+        WebElement employeetable = driver.findElement(By.name("users-table"));
         List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody//tr"));
 
         if (tableRows.size() == 0) {
@@ -80,8 +80,9 @@ public class ManagerReusables {
                 }
             }
             List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
+            String username = employeeDetails.get(usernameIndex).getText();
             GeneralReusables.logout(driver);
-            return employeeDetails.get(usernameIndex).getText();
+            return username;
         }
     }
 
@@ -119,7 +120,7 @@ public class ManagerReusables {
         GeneralReusables.loginAsTheManager(driver);
         WebElement customers = driver.findElement(By.name("customers"));
         customers.click();
-        WebElement customersTable = driver.findElement(By.name("customers-table"));
+        WebElement customersTable = driver.findElement(By.name("users-table"));
         List<WebElement> tableRows = customersTable.findElements(By.xpath("//tbody//tr"));
 
         if (tableRows.size() == 0) {
@@ -192,7 +193,7 @@ public class ManagerReusables {
 
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
-        WebElement employeetable = driver.findElement(By.name("employees-table"));
+        WebElement employeetable = driver.findElement(By.name("users-table"));
         WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری"));
         usernameSearchBox.clear();
         usernameSearchBox.sendKeys(employeeUsername);
@@ -206,9 +207,13 @@ public class ManagerReusables {
                 usernameIndex = i;
             }
         }
-        List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        GeneralReusables.logout(driver);
-        return Integer.valueOf(employeeDetails.get(usernameIndex).getText());
+        if (tableRows.size() > 0) {
+            List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
+            int salary = Integer.valueOf(employeeDetails.get(usernameIndex).getText());
+            GeneralReusables.logout(driver);
+            return salary;
+        }
+        return -1;
     }
 
     public static boolean reportExists(String id, String reason, String username) {
@@ -325,7 +330,7 @@ public class ManagerReusables {
         return credit;
     }
 
-    public static WebElement getNewestRequest(WebDriver driver){ // TODO: 6/1/2018 AD dorost kon! alan yadam nemiad :))
+    public static WebElement getNewestRequest(WebDriver driver) { // TODO: 6/1/2018 AD dorost kon! alan yadam nemiad :))
         return null;
     }
 }

@@ -2,9 +2,12 @@ package Management;
 
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
+import Reusables.Order;
+import Reusables.OrderedRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Golpar on 4/19/2018 AD.
  */
+@RunWith(OrderedRunner.class)
 public class ChangeSalary {
     private static WebDriver driver;
     private static String employeeUsername;
@@ -30,6 +34,7 @@ public class ChangeSalary {
     }
 
     @Test
+    @Order(order = 1)
     public void preConditionTest() {
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
@@ -37,9 +42,10 @@ public class ChangeSalary {
     }
 
     @Test
+    @Order(order = 2)
     public void invalidUsernameTest() {
         WebElement salaryChangeBox = driver.findElement(By.name("salary-change-box"));
-        WebElement usernameInput = salaryChangeBox.findElement(By.id("username"));
+        WebElement usernameInput = salaryChangeBox.findElement(By.id("employee-username-salary"));
         usernameInput.sendKeys("invalid_username");
         WebElement salaryInput = salaryChangeBox.findElement(By.id("salary"));
         salaryInput.sendKeys("10000");
@@ -51,10 +57,11 @@ public class ChangeSalary {
     }
 
     @Test
+    @Order(order = 3)
     public void changeSalaryTest() {
         WebElement salaryChangeBox = driver.findElement(By.name("salary-change-box"));
 
-        WebElement usernameInput = salaryChangeBox.findElement(By.id("username"));
+        WebElement usernameInput = salaryChangeBox.findElement(By.id("employee-username-salary"));
         usernameInput.clear();
         usernameInput.sendKeys(employeeUsername);
 

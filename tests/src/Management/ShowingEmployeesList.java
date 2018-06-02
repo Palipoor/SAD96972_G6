@@ -1,6 +1,7 @@
 package Management;
 
 import Reusables.GeneralReusables;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -27,17 +28,13 @@ public class ShowingEmployeesList {
 
     @Test
     public void employeesListExistsTest() {
+        WebElement employee = driver.findElement(By.name("employee"));
+        employee.click();
         List<WebElement> tables = driver.findElements(By.xpath("//table"));
-        boolean isthereAnyEmployeesTable = false;
-        for (WebElement table : tables) {
-            if (table.getAttribute("name").equals("employees")) {
-                isthereAnyEmployeesTable = true;
-            }
-        }
-        assertTrue(isthereAnyEmployeesTable);
+        assertTrue(tables.size() > 0);
     }
 
-    @Test
+    @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
     }

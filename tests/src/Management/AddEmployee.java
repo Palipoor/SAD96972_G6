@@ -1,11 +1,11 @@
 package Management;
 
-import Reusables.GeneralReusables;
-import Reusables.ManagerReusables;
-import Reusables.ProfileReusables;
+import Reusables.*;
 import junit.framework.Assert;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +17,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by Golpar on 5/2/2018 AD.
  */
+@RunWith(OrderedRunner.class)
 public class AddEmployee {
     private static WebDriver driver;
     private static String employeeUsername;
@@ -34,6 +35,7 @@ public class AddEmployee {
     }
 
     @Test
+    @Order(order = 1)
     public void invalidName() {
         WebElement theForm = driver.findElement(By.name("add-employee"));
 
@@ -45,7 +47,7 @@ public class AddEmployee {
         familyname.clear();
         familyname.sendKeys("تست نام خانوادگی");
 
-        WebElement username = theForm.findElement(By.id("employeeUsername"));
+        WebElement username = theForm.findElement(By.id("username"));
         username.clear();
         username.sendKeys(employeeUsername);
 
@@ -61,6 +63,7 @@ public class AddEmployee {
     }
 
     @Test
+    @Order(order = 2)
     public void invalidFamilyName() {
         WebElement theForm = driver.findElement(By.name("add-employee"));
 
@@ -81,6 +84,7 @@ public class AddEmployee {
     }
 
     @Test
+    @Order(order = 3)
     public void invalidUsername() {
         WebElement theForm = driver.findElement(By.name("add-employee"));
 
@@ -88,7 +92,7 @@ public class AddEmployee {
         familyname.clear();
         familyname.sendKeys("تست نام خانوادگی");
 
-        WebElement username = theForm.findElement(By.id("employeeUsername"));
+        WebElement username = theForm.findElement(By.id("username"));
         username.clear();
         username.sendKeys("!");
 
@@ -101,9 +105,10 @@ public class AddEmployee {
     }
 
     @Test
+    @Order(order = 4)
     public void invalidSalary() {
         WebElement theForm = driver.findElement(By.name("add-employee"));
-        WebElement username = theForm.findElement(By.id("employeeUsername"));
+        WebElement username = theForm.findElement(By.id("username"));
         username.clear();
         username.sendKeys(employeeUsername);
 
@@ -120,6 +125,7 @@ public class AddEmployee {
 
 
     @Test
+    @Order(order = 5)
     public void isEmployeeAdded() {
 
         WebElement theForm = driver.findElement(By.name("add-employee"));
@@ -136,6 +142,7 @@ public class AddEmployee {
     }
 
     @Test
+    @Order(order = 6)
     public void existingUsername() {
         WebElement theForm = driver.findElement(By.name("add-employee"));
 
@@ -147,7 +154,7 @@ public class AddEmployee {
         familyname.clear();
         familyname.sendKeys("تست نام خانوادگی");
 
-        WebElement username = theForm.findElement(By.id("employeeUsername"));
+        WebElement username = theForm.findElement(By.id("username"));
         username.clear();
         username.sendKeys(employeeUsername);
 
@@ -163,4 +170,8 @@ public class AddEmployee {
     }
 
 
+    @AfterClass
+    public static void TearDown() {
+        GeneralReusables.logout(driver);
+    }
 }
