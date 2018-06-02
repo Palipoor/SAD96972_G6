@@ -20,9 +20,11 @@ class GenUser(User):
     english_last_name = models.CharField(max_length=50)'''
     persian_first_name = models.CharField(max_length=50)
     persian_last_name = models.CharField(max_length=50)
+    phone_number_ = models.CharField(max_length=20)
     #user_type = models.IntegerField(choices=types)
     #online = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
+
 
     
 class Notification(models.Model):

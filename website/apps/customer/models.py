@@ -11,14 +11,26 @@ class Customer(main.models.GenUser):
     account_number = models.CharField(max_length=20, unique=True, null=False)
 
 
+class TransactionType(models.Model): #???
+    currency = (
+           (0, 'rial'),
+           (1, 'dollar'),
+           (2, 'euro'),
+    )
+    title = models.IntegerField()
+    profit = models.IntegerField()
+    currency = models.IntegerField(choices=currency)
+
+
 class Transaction(models.Model): #???
     class Meta:
         abstract = True
-    '''statuses = (
+    statuses = (
         (0, 'accepted'),
         (1, 'rejected'),
         (2, 'pending'),
-    )'''
+        (3, 'reported')
+    )
     currency = (
         (0, 'rial'),
         (1, 'dollar'),
@@ -29,21 +41,12 @@ class Transaction(models.Model): #???
     amount = models.IntegerField(null=False)
     request_time = models.DateTimeField(null=False)
     description = models.CharField(max_length=500)
-    #status = models.IntegerField(choices=statuses)
+    status = models.IntegerField(choices=statuses, default='pending');
+    profit = models.IntegerField()
     #destination = models.IntegerField()
-    #profit = models.IntegerField()
     #this is in riaaal, always? always
 
 
-class TransactionType(models.Model): #???
-    currency = (
-           (0, 'rial'),
-           (1, 'dollar'),
-           (2, 'euro'),
-    )
-    title = models.IntegerField()
-    profit = models.IntegerField()
-    currency = models.IntegerField(choices=currency)
 
 
 class TestTrans(Transaction):
@@ -149,3 +152,10 @@ class ForeignTrans(Transaction):
 class InternalTrans(Transaction):
     account_number = models.CharField(max_length=20)
     bank_name = models.CharField(max_length=50)
+
+
+class ForeignTrans(Transaction):
+    account_number = models.CharField(max_length=20, null=False)
+    bank_name = models.CharField(max_length=50, null=False)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
