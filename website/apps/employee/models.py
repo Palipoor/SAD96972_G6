@@ -1,23 +1,28 @@
 from django.db import models
-from apps import main
+from apps.customer import models as customer_models
+
 
 # Create your models here.
-class Employee(main.User):
+
+
+class Employee(customer_models.Request):
     salary = models.IntegerField()
 
+
 class Report(models.Model):
-    transaction = models.ForeignKey("apps.customer.models.Request", on_delete=models.DO_NOTHING)
+    transaction = models.ForeignKey("Request", on_delete=models.CASCADE)
     employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
     description = models.TextField(max_length=300)
 
-class Employee_review(models.Model):
+
+class EmployeeReview(models.Model):
     statuses = (
         (0, 'accept'),
         (1, 'reject'),
-        (2, 'report'),
     )
+    transaction = models.ForeignKey("Request", on_delete=models.CASCADE)
     employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
-    transaction = models.ForeignKey("apps.customer.models.Request", on_delete=models.DO_NOTHING)
+
 
 class Salary(models.Model):
     employee = models.ForeignKey("User", on_delete=models.DO_NOTHING)

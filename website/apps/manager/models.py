@@ -1,26 +1,37 @@
 from django.db import models
-from apps import main
-from apps import employee
+from apps.main import models as main_models
 # Create your models here.
 
 
-class Manager(employee.Employee):
-    a = 3
+class Manager(main_models.GenUser):
+    company_rial_credit = models.IntegerField()
+    company_dollar_cent_credit = models.IntegerField()
+    company_euro_cent_credit = models.IntegerField()
+    company_account_number = models.CharField(max_length=20, null=False)
 
 
-class Company(models.Model):
-    english_name = models.CharField(max_length=100)
-    persian_name = models.CharField(max_length=100)
-    account = models.IntegerField()
-    photo = models.ImageField()
-    rial_credit = models.IntegerField()
-    dollar_cent_credit = models.IntegerField()
-    euro_cent_credit = models.IntegerField()
-
-
-class User_Status(models.Model): #???
+'''class User_Status(models.Model): #???
     manager = models.ForeignKey("Manager", on_delete=models.DO_NOTHING) 
     user = models.ForeignKey("User", on_delete=models.DO_NOTHING)
-    status = models.BooleanField()
+    status = models.BooleanField()'''
 
 
+class ManagerWalletChanges(models.Model):
+    types = (
+        (0, 'wallet charge'),
+        (1, 'request submit'),
+        (2, 'request profit'),
+        (3, 'request failure'),  # rejected or failed
+        (4, 'request failure profit'),
+        (5, 'request accept')
+    )
+    wallet = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
+    )
+    type = models.IntegerField(choices=types)
+    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)  # if type is submitted failed or accepted request\profit
+    change_time = models.DateTimeField(null=False)
+    deposit_before = models.IntegerField()
+    deposit_after = models.IntegerField()

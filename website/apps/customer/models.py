@@ -1,35 +1,37 @@
-from apps import main
+from apps.main.models import GenUser
 from django.db import models
+
 
 # Create your models here.
 
 
-class Customer(main.models.GenUser):
+class Customer(GenUser):
     rial_credit = models.IntegerField()
     dollar_cent_credit = models.IntegerField()
     euro_cent_credit = models.IntegerField()
     account_number = models.CharField(max_length=20, unique=True, null=False)
 
 
-class RequestType(models.Model): #???
+class RequestType(models.Model):  # ???
     currency = (
            (0, 'rial'),
            (1, 'dollar'),
            (2, 'euro'),
     )
-    title = models.IntegerField()
+    title = models.CharField()
     profit = models.IntegerField()
     currency = models.IntegerField(choices=currency)
 
 
-class Request(models.Model): #???
+class Request(models.Model):  # ???
     class Meta:
         abstract = True
     statuses = (
         (0, 'accepted'),
         (1, 'rejected'),
         (2, 'pending'),
-        (3, 'reported')
+        (3, 'failed'),
+        # (3, 'reported'),   request can be failed and reported in the same time
     )
     currency = (
         (0, 'rial'),
@@ -41,12 +43,10 @@ class Request(models.Model): #???
     amount = models.IntegerField(null=False)
     request_time = models.DateTimeField(null=False)
     description = models.CharField(max_length=500)
-    status = models.IntegerField(choices=statuses, default='pending');
+    status = models.IntegerField(choices=statuses, default='pending')
     profit = models.IntegerField()
-    #destination = models.IntegerField()
-    #this is in riaaal, always? always
-
-
+    # destination = models.IntegerField()
+    # this is in riaaal, always? always
 
 
 class TestTrans(Request):
@@ -60,8 +60,6 @@ class TestTrans(Request):
 class IBT(TestTrans):
     class Meta:
         abstract = True
-
-
     test_center_name = models.CharField(max_length=100, null=False)
     test_center_code = models.IntegerField(max_length=50, null=False)
     city = models.CharField(max_length=100, null=False)
@@ -99,10 +97,8 @@ class TOEFL(IBT):
         (7, 'blah'),
         (8, 'blah'),
         (9, 'blah'),
-
     )
-
-    reason = models.IntegerField(choices=reasons, null=False) #handle several reasons
+    reason = models.IntegerField(choices=reasons, null=False)  # handle several reasons
     country_for_study = models.IntegerField(choices=countries_for_studying, null=False)  # handle several country
     id_type = models.IntegerField(choices=id_types, null=False)
     id = models.CharField(max_length=20)
@@ -127,14 +123,14 @@ class GRE(IBT):
     )
     major_filed_code = models.IntegerField(null=False)
     major_filed_name = models.CharField(max_length=50, null=False)
-    citizenship = models.IntegerField(choices= citizenships, null=False)
+    citizenship = models.IntegerField(choices=citizenships, null=False)
     educational_status = models.IntegerField(choices=statuses, null=False)
 
 
 class UniversityTrans(Request):
-        types=(
-            (0, 'Application Fee'),
-            (1, 'Deposit Fee')
+        types = (
+            (0, 'application fee'),
+            (1, 'deposit fee')
         )
         type = models.IntegerField(choices=types, null=False)
         university_name = models.CharField(max_length=50, null=False)
@@ -159,3 +155,25 @@ class UnknownTrans(Request):
     bank_name = models.CharField(max_length=50, null=False)
     email = models.EmailField()
     phone_number = models.CharField(max_length=20)
+
+
+class CustomerWalletChanges(models.Model):
+    types = (
+        (0, 'wallet charge'),
+        (1, 'request submit'),
+        (2, 'request profit'),
+        (3, 'request failure'),  # rejected or failed
+        (4, 'request failure profit'),
+    )
+    wallets = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
+    )
+    type = models.IntegerField(choices=types)
+    wallet = models.IntegerField(choices=wallets)
+    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING)
+    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)  # if type is submitted or failed request, or profit
+    change_time = models.DateTimeField(null=False)
+    deposit_before = models.IntegerField()
+    deposit_after = models.IntegerField()
