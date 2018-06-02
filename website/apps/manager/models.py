@@ -16,23 +16,51 @@ class Manager(main_models.GenUser):
     status = models.BooleanField()'''
 
 
-class ManagerWalletChanges(models.Model):
+class CompanyWalletTransfer(models.Model):
+    wallets = (
+        (0, 'rial wallet'),
+        (1, 'dollar wallet'),
+        (2, 'euro wallet'),
+    )
+    source = models.IntegerField(choices=wallets, null=False)
+    destination = models.IntegerField(choices=wallets, null=False)
+    transfer_time = models.DateTimeField(null=False)
+    amount = models.IntegerField(null=False)
+    source_deposit_before = models.IntegerField(null=False)
+    source_deposit_after = models.IntegerField(null=False)
+    destination_deposit_before = models.IntegerField(null=False)
+    destination_deposit_after = models.IntegerField(null=False)
+
+
+class CompanyWalletCharge(models.Model):
+    wallets = (
+        (0, 'rial wallet'),
+        (1, 'dollar wallet'),
+        (2, 'euro wallet'),
+    )
+    destination = models.IntegerField(choices=wallets, null=False)
+    charge_time = models.DateTimeField(null=False)
+    amount = models.IntegerField(null=False)
+    deposit_before = models.IntegerField()
+    deposit_after = models.IntegerField()
+
+
+class CompanyWalletChanges(models.Model):
     types = (
-        (0, 'wallet charge'),
         (1, 'request submit'),
         (2, 'request profit'),
         (3, 'request failure'),  # rejected or failed
         (4, 'request failure profit'),
-        (5, 'request accept')
+        (5, 'request accept'),
     )
-    wallet = (
+    wallets = (
         (0, 'rial'),
         (1, 'dollar'),
         (2, 'euro'),
     )
     type = models.IntegerField(choices=types)
-    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)
-    # if type is submitted failed or accepted request\profit
+    wallet = models.IntegerField(choices=wallets)
+    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=False)
     change_time = models.DateTimeField(null=False)
-    deposit_before = models.IntegerField()
-    deposit_after = models.IntegerField()
+    deposit_before = models.IntegerField(null=False)
+    deposit_after = models.IntegerField(null=False)

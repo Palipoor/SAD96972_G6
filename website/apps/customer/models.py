@@ -157,24 +157,51 @@ class UnknownTrans(Request):
     phone_number = models.CharField(max_length=20)
 
 
-class CustomerWalletChanges(models.Model):
-    types = (
-        (0, 'wallet charge'),
-        (1, 'request submit'),
-        (2, 'request profit'),
-        (3, 'request failure'),  # rejected or failed
-        (4, 'request failure profit'),
-    )
+class CustomerWalletTransfer(models.Model):
     wallets = (
-        (0, 'rial'),
-        (1, 'dollar'),
-        (2, 'euro'),
+        (0, 'rial wallet'),
+        (1, 'dollar wallet'),
+        (2, 'euro wallet'),
     )
-    type = models.IntegerField(choices=types)
-    wallet = models.IntegerField(choices=wallets)
-    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING)
-    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)
-    # if type is submitted or failed request, or profit
-    change_time = models.DateTimeField(null=False)
+    source = models.IntegerField(choices=wallets, null=False)
+    destination = models.IntegerField(choices=wallets, null=False)
+    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
+    transfer_time = models.DateTimeField(null=False)
+    amount = models.IntegerField(null=False)
+    profit = models.IntegerField(null=False)
+    source_deposit_before = models.IntegerField(null=False)
+    source_deposit_after = models.IntegerField(null=False)
+    destination_deposit_before = models.IntegerField(null=False)
+    destination_deposit_after = models.IntegerField(null=False)
+    rial_deposit_before_profit = models.IntegerField(null=False)
+    rial_deposit_after_profit = models.IntegerField(null=False)
+
+
+class CustomerWalletCharge(models.Model):
+    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
+    charge_time = models.DateTimeField(null=False)
+    amount = models.IntegerField(null=False)
     deposit_before = models.IntegerField()
     deposit_after = models.IntegerField()
+
+
+class CostumerWalletChanges(models.Model):
+        types = (
+            (1, 'request submit'),
+            (2, 'request profit'),
+            (3, 'request failure'),  # rejected or failed
+            (4, 'request failure profit'),
+        )
+        wallets = (
+            (0, 'rial'),
+            (1, 'dollar'),
+            (2, 'euro'),
+        )
+        type = models.IntegerField(choices=types)
+        wallet = models.IntegerField(choices=wallets)
+        request = models.ForeignKey('Request', on_delete=models.CASCADE, null=False)
+        change_time = models.DateTimeField(null=False)
+        deposit_before = models.IntegerField(null=False)
+        deposit_after = models.IntegerField(null=False)
+        rial_deposit_before_profit = models.IntegerField(null=False)
+        rial_deposit_after_profit = models.IntegerField(null=False)
