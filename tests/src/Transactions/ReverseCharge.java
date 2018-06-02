@@ -1,9 +1,6 @@
 package Transactions;
 
-import Reusables.GeneralReusables;
-import Reusables.Order;
-import Reusables.OrderedRunner;
-import Reusables.WalletUsersReusables;
+import Reusables.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -55,6 +52,10 @@ public class ReverseCharge {
         amount.clear();
         amount.sendKeys(amountValue);
 
+        WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
+
+
         WebElement error = driver.findElement(By.name("error"));
         assertEquals(error.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));
     }
@@ -62,7 +63,19 @@ public class ReverseCharge {
     @Test
     @Order(order = 3)
     public void paymentsAreDone(){
-        // TODO: 6/2/2018 AD
+        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        double lessThanCredit = rialCredit - 1;
+        String amountValue = String.valueOf(lessThanCredit);
+        WebElement amount = driver.findElement(By.name("amount"));
+        amount.clear();
+        amount.sendKeys(amountValue);
+
+        WebElement submit = driver.findElement(By.name("submit-button"));
+        submit.click();
+
+        double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+
+        assertEquals(newRialCredit, rialCredit - lessThanCredit, GeneralReusables.delta);
     }
 
     @AfterClass

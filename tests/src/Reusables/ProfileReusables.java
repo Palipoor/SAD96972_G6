@@ -46,7 +46,7 @@ public class ProfileReusables {
     public static String invalidEmail = "dorna";
 
     public static String wrongPassword = "duck";
-    public static String invalidPassword = "";//TODO
+    public static String invalidPassword = "";
     public static String notMatchedPassword = "somethingElse";
     public static String invalidName = "!";
     public static String invalidPhoneNumber = "1";

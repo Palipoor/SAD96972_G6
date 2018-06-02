@@ -23,7 +23,6 @@ public class ManagerReusables {
         reusableStrings.put("customers-page-title", "پنل مدیریت | مشتریان");
     }
 
-    public static String EMPLOYEES_PAGE_TITLE = "پنل مدیریت | کارمندان";
     public static String CUSTOMERS_PAGE_TITLE = "پنل مدیریت | مشتریان";
 
     public static boolean customerExists(String username) {
@@ -334,7 +333,7 @@ public class ManagerReusables {
         return credit;
     }
 
-    public static WebElement getNewestRequest(WebDriver driver) { // TODO: 6/1/2018 AD dorost kon! alan yadam nemiad :))
+    public static WebElement getNewestRequest(WebDriver driver) { // TODO
         return null;
     }
 }

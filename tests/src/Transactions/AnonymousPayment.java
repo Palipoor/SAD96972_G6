@@ -98,7 +98,7 @@ public class AnonymousPayment {
 
     @Test
     @Order(order = 4)
-    public void paymentsAreDone() { //todo hesabe maghsadam check kone
+    public void paymentsAreDone() {
 
         String paymentAmount = "1000";
         double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");

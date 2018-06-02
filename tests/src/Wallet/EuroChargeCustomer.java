@@ -35,7 +35,6 @@ public class EuroChargeCustomer {
 
     @Test
     public void conversionTest() {// مبلغی که نشون می‌ده برابر با مبلغ وارد شده ضربدر قیمت دلار باشه.
-        //todo ye kare behtari ba in kon
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(amount);
         double euroPrice = GeneralReusables.getPrice("euro");

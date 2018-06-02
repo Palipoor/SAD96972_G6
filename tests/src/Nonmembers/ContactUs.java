@@ -204,7 +204,6 @@ public class ContactUs {
 
         WebElement successMessage = driver.findElement(By.name("success"));
         assertFalse(successMessage.getText().equals(""));
-        //// TODO: 4/20/2018 AD find a way to login and check wether the email is received
     }
 
     @Test

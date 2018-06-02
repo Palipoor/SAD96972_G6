@@ -53,7 +53,7 @@ public class GeneralReusables {
     }
 
     public static void setUpToHomepage(WebDriver driver) {
-        String homePageAddress = "http://127.0.0.1:8000/"; //// TODO: 4/12/2018 AD درست کردن این ادرس
+        String homePageAddress = "http://127.0.0.1:8000/";
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(homePageAddress);
     }

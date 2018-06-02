@@ -38,7 +38,7 @@ public class ChangeSalary {
     public void preConditionTest() {
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
-        assertEquals(driver.getTitle(), ManagerReusables.EMPLOYEES_PAGE_TITLE);
+        assertEquals(driver.getTitle(), ManagerReusables.reusableStrings.get("employees-page-title"));
     }
 
     @Test

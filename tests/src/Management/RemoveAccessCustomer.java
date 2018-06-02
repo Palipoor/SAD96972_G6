@@ -39,7 +39,7 @@ public class RemoveAccessCustomer {
     public void preConditionTest() {
         WebElement employee = driver.findElement(By.name("customers"));
         employee.click();
-        assertEquals(driver.getTitle(), ManagerReusables.CUSTOMERS_PAGE_TITLE);
+        assertEquals(driver.getTitle(), ManagerReusables.reusableStrings.get("customers-page-title"));
     }
 
     @Test
