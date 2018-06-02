@@ -173,7 +173,8 @@ class CustomerWalletChanges(models.Model):
     type = models.IntegerField(choices=types)
     wallet = models.IntegerField(choices=wallets)
     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING)
-    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)  # if type is submitted or failed request, or profit
+    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)
+    # if type is submitted or failed request, or profit
     change_time = models.DateTimeField(null=False)
     deposit_before = models.IntegerField()
     deposit_after = models.IntegerField()

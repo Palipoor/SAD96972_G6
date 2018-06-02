@@ -31,7 +31,8 @@ class ManagerWalletChanges(models.Model):
         (2, 'euro'),
     )
     type = models.IntegerField(choices=types)
-    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)  # if type is submitted failed or accepted request\profit
+    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=True)
+    # if type is submitted failed or accepted request\profit
     change_time = models.DateTimeField(null=False)
     deposit_before = models.IntegerField()
     deposit_after = models.IntegerField()
