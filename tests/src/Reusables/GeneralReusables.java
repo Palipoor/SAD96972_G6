@@ -105,6 +105,7 @@ public class GeneralReusables {
         WebElement userDetails = panel.findElement(By.name("user-details"));
         userDetails.click();
         WebElement usernameElement = panel.findElement(By.name("my-username"));
+        panel.navigate().back();
         return usernameElement.getText();
     }
 

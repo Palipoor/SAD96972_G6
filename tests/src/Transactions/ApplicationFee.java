@@ -1,13 +1,12 @@
 package Transactions;
 
-import Reusables.GeneralReusables;
-import Reusables.ManagerReusables;
-import Reusables.WalletUsersReusables;
+import Reusables.*;
 import junit.framework.Assert;
 import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +17,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by Golpar on 5/2/2018 AD.
  */
+@RunWith(Reusables.OrderedRunner.class)
 public class ApplicationFee {
     private static WebDriver driver;
 
@@ -31,6 +31,7 @@ public class ApplicationFee {
     }
 
     @Test
+    @Order(order = 1)
     public void invalidAmount() {
         WebElement universityName = driver.findElement(By.name("university-name"));
         universityName.clear();
@@ -64,6 +65,7 @@ public class ApplicationFee {
     }
 
     @Test
+    @Order(order = 2)
     public void moreThanCredit() {
         double moreThanDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar") + 3;
         String paymentAmount = String.valueOf(moreThanDollarCredit);
@@ -80,6 +82,7 @@ public class ApplicationFee {
     }
 
     @Test
+    @Order(order = 3)
     public void paymentsAreDone() {
 
         String paymentAmount = "1";
@@ -110,6 +113,7 @@ public class ApplicationFee {
     }
 
     @Test
+    @Order(order = 4)
     public void transactionIsAdded() {
         String myUsername = GeneralReusables.getUsername(driver);
         String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());

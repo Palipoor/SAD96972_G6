@@ -71,7 +71,7 @@ public class ManagerReusables {
         if (tableRows.size() == 0) {
             return createEmployee(driver);
         } else {
-            List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead//tr"));
+            List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead"));
             List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
             int usernameIndex = 0;
             for (int i = 0; i < headerTitles.size(); i++) {
@@ -125,7 +125,7 @@ public class ManagerReusables {
         if (tableRows.size() == 0) {
             return createCustomer();
         } else {
-            List<WebElement> tableHeader = customersTable.findElements(By.xpath("//thead//tr"));
+            List<WebElement> tableHeader = customersTable.findElements(By.xpath("//thead"));
             List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
             int idIndex = 0;
             for (int i = 0; i < headerTitles.size(); i++) {
@@ -197,7 +197,7 @@ public class ManagerReusables {
         usernameSearchBox.clear();
         usernameSearchBox.sendKeys(employeeUsername);
 
-        List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody//tr"));
+        List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody"));
         List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead//tr"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int usernameIndex = 0;
@@ -221,7 +221,7 @@ public class ManagerReusables {
         idSearchBox.clear();
         idSearchBox.sendKeys(id);
 
-        List<WebElement> tableHeader = reportsTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> tableHeader = reportsTable.findElements(By.xpath("//thead"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int usernameIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {
@@ -249,7 +249,7 @@ public class ManagerReusables {
         GeneralReusables.loginAsTheManager(driver);
 
         WebElement theTable = driver.findElement(By.name("transactions-table"));
-        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int statusIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {
@@ -274,7 +274,7 @@ public class ManagerReusables {
         GeneralReusables.loginAsTheManager(driver);
 
         WebElement theTable = driver.findElement(By.name("transactions-table"));
-        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int usernameIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {
@@ -299,7 +299,7 @@ public class ManagerReusables {
         GeneralReusables.loginAsTheManager(driver);
 
         WebElement theTable = driver.findElement(By.name("transactions-table"));
-        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int idIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {
@@ -310,9 +310,9 @@ public class ManagerReusables {
                 headerTitles.get(i).click();// sort by time
             }
         }
-        GeneralReusables.logout(driver);
         WebElement tableRow = theTable.findElements(By.xpath("//tbody//tr")).get(0);
         List<WebElement> transactionDetails = tableRow.findElements(By.xpath("//td"));
+        GeneralReusables.logout(driver);
         return transactionDetails.get(idIndex).getText();
     }
 
@@ -320,8 +320,9 @@ public class ManagerReusables {
         WebDriver driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
+        double credit = WalletUsersReusables.getWalletCredit(driver, currency);
         driver.close();
-        return WalletUsersReusables.getWalletCredit(driver, currency);
+        return credit;
     }
 
     public static WebElement getNewestRequest(WebDriver driver){ // TODO: 6/1/2018 AD dorost kon! alan yadam nemiad :))

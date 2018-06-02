@@ -2,10 +2,13 @@ package Transactions;
 
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
+import Reusables.Order;
 import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +20,7 @@ import static junit.framework.TestCase.assertEquals;
 /**
  * Created by Golpar on 5/2/2018 AD.
  */
+@RunWith(Reusables.OrderedRunner.class)
 public class AnonymousPayment {
     private static WebDriver driver;
 
@@ -30,6 +34,7 @@ public class AnonymousPayment {
     }
 
     @Test
+    @Order(order = 1)
     public void invalidAmount() {
         WebElement amount = driver.findElement(By.name("amount"));
         amount.clear();
@@ -51,6 +56,7 @@ public class AnonymousPayment {
     }
 
     @Test
+    @Order(order = 2)
     public void invalidEmail() {
         WebElement amount = driver.findElement(By.name("amount"));
         amount.clear();
@@ -69,6 +75,7 @@ public class AnonymousPayment {
     }
 
     @Test
+    @Order(order = 3)
     public void moreThanCredit() {
         double moreThanRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial") + 200;
         String amountValue = String.valueOf(moreThanRialCredit);
@@ -91,6 +98,8 @@ public class AnonymousPayment {
     }
 
     @Test
+    //@Order(order = 4)
+    @Ignore()
     public void paymentsAreDone() {
 
         String paymentAmount = "1000";
@@ -114,6 +123,7 @@ public class AnonymousPayment {
     }
 
     @Test
+    @Order(order = 4)
     public void transactionIsAdded() {
         String myUsername = GeneralReusables.getUsername(driver);
         String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
