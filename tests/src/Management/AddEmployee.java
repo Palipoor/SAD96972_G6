@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
@@ -23,7 +23,7 @@ public class AddEmployee {
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
         WebElement employee = driver.findElement(By.name("employee"));

@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +26,7 @@ public class FaultReport {
     @BeforeClass
     public static void setUp() {
         transactionId = CustomerReusables.createNewTransaction();
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         employeeUsername = GeneralReusables.loginAsAnEmployee(driver);
     }
@@ -35,13 +35,13 @@ public class FaultReport {
     public void invalidIdTest() {
         WebElement idEntry = driver.findElement(By.id("transaction-id"));
         idEntry.clear();
-        idEntry.sendKeys(GeneralReusables.INVALID_TRANSACTION_ID);
+        idEntry.sendKeys(GeneralReusables.reusableStrings.get("invalid-transaction-id"));
         WebElement reasonEntry = driver.findElement(By.id("why"));
         reasonEntry.sendKeys(reason);
         WebElement sendButton = driver.findElement(By.name("send"));
         sendButton.click();
         WebElement message = driver.findElement(By.name("message"));
-        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.WRONG_ID_ERROR));
+        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("wrong-id-error")));
     }
 
     @Test
@@ -55,12 +55,12 @@ public class FaultReport {
         WebElement sendButton = driver.findElement(By.name("send"));
         sendButton.click();
         WebElement message = driver.findElement(By.name("message"));
-        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.SUCCESSFULLY_SENT));
+        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("successfully-sent")));
     }
 
     @Test
     public void successfulReceiveReportTest() {
-        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.REPORTED_TRANSACTION));
+        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.reusableStrings.get("reported-transaction")));
     }
 
 

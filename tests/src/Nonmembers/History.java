@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.FirefoxDriver()();
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +20,7 @@ public class History {
     @BeforeClass
     public static void setUp() {
 
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver()()();
         GeneralReusables.setUpToHomepage(driver);
         WebElement history = driver.findElement(By.name("history"));
         history.click();

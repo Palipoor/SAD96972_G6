@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +22,7 @@ public class ChangeSalary {
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -47,7 +47,7 @@ public class ChangeSalary {
         setKey.click();
 
         WebElement message = driver.findElement(By.name("message"));
-        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.WRONG_USERNAME_ERROR));
+        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("invalid-username-error")));
     }
 
     @Test

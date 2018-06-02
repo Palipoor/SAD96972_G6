@@ -1,25 +1,31 @@
 package Transactions;
 
 import Reusables.GeneralReusables;
+import Reusables.Order;
+import Reusables.OrderedRunner;
 import Reusables.WalletUsersReusables;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.TestCase.assertEquals;
 
 /**
  * Created by Golpar on 5/2/2018 AD.
  */
+@RunWith(Reusables.OrderedRunner.class)
 public class ReverseCharge {
     private static WebDriver driver;
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
         WebElement reverseCharge = driver.findElement(By.name("reverse-charge"));
@@ -27,6 +33,7 @@ public class ReverseCharge {
     }
 
     @Test
+    @Order(order = 1)
     public void invalidAmount() {
         WebElement amount = driver.findElement(By.name("amount"));
         amount.clear();
@@ -40,6 +47,7 @@ public class ReverseCharge {
     }
 
     @Test
+    @Order(order = 2)
     public void moreThanCredit() {
         double moreThanRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial") + 200;
         String amountValue = String.valueOf(moreThanRialCredit);
@@ -52,7 +60,13 @@ public class ReverseCharge {
     }
 
     @Test
+    @Order(order = 3)
     public void paymentsAreDone(){
+        // TODO: 6/2/2018 AD
+    }
 
+    @AfterClass
+    public static void tearDown(){
+        GeneralReusables.logout(driver);
     }
 }

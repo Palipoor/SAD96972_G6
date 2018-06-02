@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,17 +21,17 @@ public class LogOut {
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
        // GeneralReusables.loginAsACustomer(driver); //TODO:!!!!!!!!!!!!!
-        GeneralReusables.login(driver, ProfileReusables.email1, ProfileReusables.password1);
+        GeneralReusables.login(driver, ProfileReusables.reusableStrings.get("email"), ProfileReusables.password1);
     }
 
     @Test
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.PANEL_TITLE);
+        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
     }
 
     @Test

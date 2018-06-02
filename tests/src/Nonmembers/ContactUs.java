@@ -1,14 +1,16 @@
 package Nonmembers;
 
 import Reusables.GeneralReusables;
+import Reusables.Order;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Golpar on 4/20/2018 AD.
  */
+@RunWith(Reusables.OrderedRunner.class)
 public class ContactUs {
     private static WebDriver driver;
     private static WebElement theForm;
@@ -25,7 +28,7 @@ public class ContactUs {
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         WebElement contactUs = driver.findElement(By.name("contact"));
         contactUs.click();
@@ -33,6 +36,7 @@ public class ContactUs {
     }
 
     @Test
+    @Order(order = 1)
     public void emptyNameTest() {
         WebElement email = theForm.findElement(By.id("email"));
         email.clear();
@@ -57,6 +61,7 @@ public class ContactUs {
     }
 
     @Test
+    @Order(order = 2)
     public void emptyEmailTest() {
         WebElement email = theForm.findElement(By.id("email"));
         email.clear();
@@ -84,6 +89,7 @@ public class ContactUs {
     }
 
     @Test
+    @Order(order = 3)
     public void invalidEmailTest() {
         WebElement email = theForm.findElement(By.id("email"));
         email.clear();
@@ -112,6 +118,7 @@ public class ContactUs {
     }
 
     @Test
+    @Order(order = 4)
     public void emptyContentTest() {
         WebElement email = theForm.findElement(By.id("email"));
         email.clear();
@@ -139,6 +146,7 @@ public class ContactUs {
     }
 
     @Test
+    @Order(order = 5)
     public void everythingValidTest() {
         WebElement email = theForm.findElement(By.id("email"));
         email.clear();
@@ -168,6 +176,7 @@ public class ContactUs {
     }
 
     @Test
+    @Order(order = 6)
     public void isReceivedTest() {
         driver.get("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&hl=en&emr=1&elo=1");
         driver.findElement(By.id("Email")).sendKeys("palipoor976");

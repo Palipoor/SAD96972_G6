@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +28,7 @@ public class PasswordChange {
     }
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver); //TODO :       how to change in order to match for all kind of users????
@@ -41,7 +41,7 @@ public class PasswordChange {
     @Test
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, ProfileReusables.passwordChangeTitle);
+        assertEquals(title, ProfileReusables.reusableStrings.get("password-change-title"));
     }
 
 
@@ -123,7 +123,7 @@ public class PasswordChange {
         submit();
 
         GeneralReusables.logout(driver);
-        GeneralReusables.login(driver, ProfileReusables.email1, ProfileReusables.password1);
+        GeneralReusables.login(driver, ProfileReusables.reusableStrings.get("email"), ProfileReusables.password1);
 
         String passwordErrorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(passwordErrorText, ProfileReusables.wrongPasswordError);

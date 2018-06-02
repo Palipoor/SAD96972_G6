@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.FirefoxDriver()();
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +19,7 @@ public class AboutUs {
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver()()();
         GeneralReusables.setUpToHomepage(driver);
         WebElement about = driver.findElement(By.name("about"));
         about.click();

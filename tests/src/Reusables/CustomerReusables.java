@@ -3,7 +3,7 @@ package Reusables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class CustomerReusables {
 
     public static String createNewTransaction() { //requests a new transaction and returns its id
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
 
@@ -38,7 +38,7 @@ public class CustomerReusables {
         driver.navigate().back();
 
         WebElement newestTransactions = driver.findElement(By.name("newest-transactions"));
-        List<WebElement> tableHeader = newestTransactions.findElements(By.xpath("//thead//tr"));
+        List<WebElement> tableHeader = newestTransactions.findElements(By.xpath("//thead"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int idIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {

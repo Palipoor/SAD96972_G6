@@ -3,7 +3,7 @@ package Reusables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class EmployeeReusables {
         searchBox.clear();
         searchBox.sendKeys(transactionId);
 
-        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead//tr"));
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
         int idIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {
@@ -36,7 +36,7 @@ public class EmployeeReusables {
     }
 
     public static void acceptTransaction(String transactionId) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsAnEmployee(driver);
 
@@ -52,7 +52,7 @@ public class EmployeeReusables {
     }
 
     public static void rejectTransaction(String transactionId) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsAnEmployee(driver);
 

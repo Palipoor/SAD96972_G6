@@ -5,7 +5,7 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.FirefoxDriver()();
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class WalletExistenceCustomer {
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver()()();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
     }
@@ -29,7 +29,7 @@ public class WalletExistenceCustomer {
     @Test
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.PANEL_TITLE);
+        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
     }
 
     @Test

@@ -3,7 +3,7 @@ package Reusables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +29,7 @@ public class GeneralReusables {
 
     static {
         reusableStrings = new HashMap<String, String>();
+        reusableStrings.put("panel-title","پنل مدیریت");
         reusableStrings.put("invalid-transaction-id", "1000");
         reusableStrings.put("wrong-id-error", "");
         reusableStrings.put("invalid-amount-error", "");
@@ -48,15 +49,8 @@ public class GeneralReusables {
         reusableStrings.put("reported-transaction", "");
         reusableStrings.put("username-exists", "");
         reusableStrings.put("request-status", "");
+        reusableStrings.put("successfully-sent","");
     }
-
-    public static CharSequence INVALID_TRANSACTION_ID = "10000";
-    public static String PANEL_TITLE = "پنل مدیریت";
-    public static String WRONG_ID_ERROR;
-    public static String SUCCESSFULLY_SENT;
-    public static String WRONG_USERNAME_ERROR;
-    public static String REPORTED_TRANSACTION;
-
 
     public static void setUpToHomepage(WebDriver driver) {
         String homePageAddress = "http://127.0.0.1:8000/"; //// TODO: 4/12/2018 AD درست کردن این ادرس
@@ -120,7 +114,7 @@ public class GeneralReusables {
 
     public static int getPrice(String currency) {
         String elementName = currency + "-price";
-        WebDriver homepage = new ChromeDriver();
+        WebDriver homepage = new FirefoxDriver();
         setUpToHomepage(homepage);
         WebElement priceElement = homepage.findElement(By.name(elementName));
         homepage.close();

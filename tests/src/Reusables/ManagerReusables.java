@@ -3,7 +3,7 @@ package Reusables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ public class ManagerReusables {
     public static String CUSTOMERS_PAGE_TITLE = "پنل مدیریت | مشتریان";
 
     public static boolean customerExists(String username) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -43,7 +43,7 @@ public class ManagerReusables {
     }
 
     public static boolean employeeExists(String username) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -60,7 +60,7 @@ public class ManagerReusables {
     }
 
     public static String getAnEmployee() { // returns the username
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
         WebElement employee = driver.findElement(By.name("employee"));
@@ -114,7 +114,7 @@ public class ManagerReusables {
     }
 
     public static String getACustomerUsername() {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
         WebElement customers = driver.findElement(By.name("customers"));
@@ -145,7 +145,7 @@ public class ManagerReusables {
         String newUsername = "test_customer_" + currentTimeString;
         String newEmail = "test_customer_" + currentTimeString + "@gmail.com";
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         WebElement signupButton = driver.findElement(By.name("sign up"));
         signupButton.click();
@@ -186,7 +186,7 @@ public class ManagerReusables {
 
 
     public static int getSalary(String employeeUsername) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -212,7 +212,7 @@ public class ManagerReusables {
     }
 
     public static boolean reportExists(String id, String reason, String username) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -244,7 +244,7 @@ public class ManagerReusables {
     }
 
     public static String getTransactionStatus(String id) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -269,7 +269,7 @@ public class ManagerReusables {
     }
 
     public static String getTransactionsCustomerUsername(String transactionId) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -294,7 +294,7 @@ public class ManagerReusables {
     }
 
     public static String getNewestTransactionId() {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
 
@@ -317,7 +317,7 @@ public class ManagerReusables {
     }
 
     public static double getCompanyCredit(String currency) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
         double credit = WalletUsersReusables.getWalletCredit(driver, currency);

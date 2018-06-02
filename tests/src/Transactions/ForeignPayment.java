@@ -1,34 +1,36 @@
 package Transactions;
 
-import Reusables.GeneralReusables;
-import Reusables.ManagerReusables;
-import Reusables.WalletUsersReusables;
+import Reusables.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static junit.framework.TestCase.assertEquals;
 
 /**
  * Created by Golpar on 5/2/2018 AD.
  */
+@RunWith(Reusables.OrderedRunner.class)
 public class ForeignPayment {
     private static WebDriver driver;
 
     @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
         WebElement foreignPayment = driver.findElement(By.name("foreign-payment"));
         foreignPayment.click();
+
     }
 
     @Test
+    @Order(order = 1)
     public void invalidAmount() {
         WebElement amount = driver.findElement(By.name("amount"));
         amount.clear();
@@ -49,6 +51,7 @@ public class ForeignPayment {
     }
 
     @Test
+    @Order(order = 2)
     public void invalidDestination() {
         WebElement amount = driver.findElement(By.name("amount"));
         amount.clear();
@@ -69,6 +72,7 @@ public class ForeignPayment {
     }
 
     @Test
+    @Order(order = 3)
     public void moreThanCredit() {
         double moreThanDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar") + 3;
         String paymentAmount = String.valueOf(moreThanDollarCredit);
@@ -86,6 +90,7 @@ public class ForeignPayment {
     }
 
     @Test
+    @Order(order = 4)
     public void paymentsAreDone() {
         String paymentAmount = "1";
         double dollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");

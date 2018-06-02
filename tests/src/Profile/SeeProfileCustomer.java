@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +24,7 @@ public class SeeProfileCustomer {
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
@@ -36,7 +36,7 @@ public class SeeProfileCustomer {
     @Test
     public void userDetailsExistence() {
         String title = driver.getTitle();
-        assertEquals(title, ProfileReusables.userDetailTitle);
+        assertEquals(title, ProfileReusables.reusableStrings.get("user-details-title"));
     }
 
     @AfterClass

@@ -1,13 +1,12 @@
 package Profile;
 
-
 import Reusables.ProfileReusables;
 import Reusables.GeneralReusables;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +23,7 @@ public class LogIn {
     @BeforeClass
     public void setUp() {
         // Initialize the WebDriver
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         GeneralReusables.setUpToHomepage(driver);
@@ -38,7 +37,7 @@ public class LogIn {
     @Test
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, ProfileReusables.logInTitle);
+        assertEquals(title, ProfileReusables.reusableStrings.get("log-in-title"));
     }
 
     @Test
