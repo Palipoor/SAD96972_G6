@@ -4,9 +4,9 @@ from apps.main import models as main_models
 
 
 class Manager(main_models.GenUser):
-    company_rial_credit = models.IntegerField()
-    company_dollar_cent_credit = models.IntegerField()
-    company_euro_cent_credit = models.IntegerField()
+    company_rial_credit = models.FloatField()
+    company_dollar_cent_credit = models.FloatField()
+    company_euro_cent_credit = models.FloatField()
     company_account_number = models.CharField(max_length=20, null=False)
 
 
@@ -25,10 +25,10 @@ class CompanyWalletTransfer(models.Model):
     source = models.IntegerField(choices=wallets, null=False)
     destination = models.IntegerField(choices=wallets, null=False)
     transfer_time = models.DateTimeField(null=False)
-    source_deposit_before = models.IntegerField(null=False)
-    source_deposit_after = models.IntegerField(null=False)
-    destination_deposit_before = models.IntegerField(null=False)
-    destination_deposit_after = models.IntegerField(null=False)
+    source_deposit_before = models.FloatField(null=False)
+    source_deposit_after = models.FloatField(null=False)
+    destination_deposit_before = models.FloatField(null=False)
+    destination_deposit_after = models.FloatField(null=False)
 
 
 class CompanyWalletCharge(models.Model):
@@ -39,8 +39,8 @@ class CompanyWalletCharge(models.Model):
     )
     destination = models.IntegerField(choices=wallets, null=False)
     charge_time = models.DateTimeField(null=False)
-    deposit_before = models.IntegerField()
-    deposit_after = models.IntegerField()
+    deposit_before = models.FloatField()
+    deposit_after = models.FloatField()
 
 
 class CompanyWalletChanges(models.Model):
@@ -58,7 +58,7 @@ class CompanyWalletChanges(models.Model):
     )
     type = models.IntegerField(choices=types)
     wallet = models.IntegerField(choices=wallets)
-    request = models.ForeignKey('Request', on_delete=models.CASCADE, null=False)
+    request = models.ForeignKey('customer.Request', on_delete=models.CASCADE, null=False)
     change_time = models.DateTimeField(null=False)
-    deposit_before = models.IntegerField(null=False)
-    deposit_after = models.IntegerField(null=False)
+    deposit_before = models.FloatField(null=False)
+    deposit_after = models.FloatField(null=False)

@@ -1,17 +1,17 @@
 from django.db import models
-from apps.customer import models as customer_models
+from apps.main import models as main_models
 
 
 # Create your models here.
 
 
-class Employee(customer_models.Request):
-    salary = models.IntegerField()
+class Employee(main_models.GenUser):
+    current_salary = models.FloatField()
 
 
 class Report(models.Model):
-    transaction = models.ForeignKey("Request", on_delete=models.CASCADE)
-    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
+    transaction = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
+    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
     description = models.TextField(max_length=300)
 
 
@@ -20,10 +20,10 @@ class EmployeeReview(models.Model):
         (0, 'accept'),
         (1, 'reject'),
     )
-    transaction = models.ForeignKey("Request", on_delete=models.CASCADE)
-    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
+    request = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
+    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
 
 
 class Salary(models.Model):
-    employee = models.ForeignKey("User", on_delete=models.DO_NOTHING)
+    employee = models.ForeignKey("main.GenUser", on_delete=models.DO_NOTHING)
     salary = models.IntegerField()
