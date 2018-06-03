@@ -105,7 +105,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <form class="form-horizontal">
-                        <div class="box-body">
+                        <div class="box-body" name = "access-remove-box">
                             <div class="form-group">
                                 <label for="username" class="col-sm-2 control-label">نام کاربری</label>
                                 <div class="col-sm-6">
@@ -121,7 +121,7 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-info pull-right">قطع دسترسی</button>
+                            <button type="submit" name = "submit-button" class="btn btn-info pull-right">قطع دسترسی</button>
                             <div class="col-md-5">
                                 <p name="error-message-1">این جا پیام خطا می‌آید.</p>
                             </div>
@@ -138,12 +138,12 @@
             <!-- Horizontal Form -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> فرم قطع دسترسی کارمند</h3>
+                    <h3 class="box-title"> فرم قطع دسترسی {{type}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form class="form-horizontal">
-                    <div class="box-body">
+                    <div class="box-body" name = "access-remove-box">
                         <div class="form-group">
                             <label for="employee-username" class="col-sm-2 control-label">نام کاربری</label>
                             <div class="col-sm-6">
@@ -161,7 +161,7 @@
                     <div class="box-footer">
                         <button type="submit" class="btn btn-info pull-right">قطع دسترسی</button>
                         <div class="col-md-5">
-                            <p name="message">این جا پیام خطا می‌آید.</p>
+                            <p name="error-message-2">این جا پیام خطا می‌آید.</p>
                         </div>
                     </div>
                     <!-- /.box-footer -->
@@ -191,9 +191,9 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right" id="set-button">تغییر حقوق</button>
+                        <button type="submit" name = "submit-button" class="btn btn-info pull-right" id="set-button">تغییر حقوق</button>
                         <div class="col-md-5">
-                            <p name="message">این جا پیام خطا می‌آید.</p>
+                            <p name="error-message-3">این جا پیام خطا می‌آید.</p>
                         </div>
                     </div>
                     <!-- /.box-footer -->

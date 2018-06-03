@@ -136,7 +136,7 @@
                                 <br> توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه </p>
                             <small>
                                 <font color="white">عضو سامانه نیستید؟ می‌توانید از </font>
-                                <a href="{% url 'main:register' %}" style="color:orange">اینجا</a>
+                                <a href="{% url 'main:register' %}" name = "sign up"style="color:orange">اینجا</a>
                                 <font color="white"> ثبت نام کنید.</font>
                             </small>
                             <div class="download-btn">
@@ -500,7 +500,7 @@
                         aliquip.</p>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-primary btn-action" href='{% static "panel\pages\examples\register.html" %}' role="button" name="sign up">ثبت نام</a>
+                    <a class="btn btn-primary btn-action" href='{% url "main:register" %}' role="button">ثبت نام</a>
                 </div>
             </div>
         </div>
