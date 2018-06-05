@@ -61,3 +61,7 @@ def application_fee(request):
 def anonymous_payment(request):
     template = loader.get_template("customer/anonymous_payment.html")
     return HttpResponse(template.render())
+
+def profile(request):
+    template = loader.get_template("customer/profile.html")
+    return HttpResponse(template.render())
