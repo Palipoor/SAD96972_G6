@@ -1,109 +1,63 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from apps.main import models as main_models
 # Create your models here.
 
-class WebsiteUser(User):
+class Manager(main_models.GenUser):
+    company_rial_credit = models.FloatField()
+    company_dollar_cent_credit = models.FloatField()
+    company_euro_cent_credit = models.FloatField()
+    company_account_number = models.CharField(max_length=20, null=False)
+
+'''class User_Status(models.Model): #???
+    manager = models.ForeignKey("Manager", on_delete=models.DO_NOTHING) 
+    user = models.ForeignKey("User", on_delete=models.DO_NOTHING)
+    status = models.BooleanField()'''
+
+
+class CompanyWalletTransfer(models.Model):
+    wallets = (
+        (0, 'rial wallet'),
+        (1, 'dollar wallet'),
+        (2, 'euro wallet'),
+    )
+    source = models.IntegerField(choices=wallets, null=False)
+    destination = models.IntegerField(choices=wallets, null=False)
+    transfer_time = models.DateTimeField(null=False)
+    source_deposit_before = models.FloatField(null=False)
+    source_deposit_after = models.FloatField(null=False)
+    destination_deposit_before = models.FloatField(null=False)
+    destination_deposit_after = models.FloatField(null=False)
+
+
+class CompanyWalletCharge(models.Model):
+    wallets = (
+        (0, 'rial wallet'),
+        (1, 'dollar wallet'),
+        (2, 'euro wallet'),
+    )
+    destination = models.IntegerField(choices=wallets, null=False)
+    charge_time = models.DateTimeField(null=False)
+    deposit_before = models.FloatField()
+    deposit_after = models.FloatField()
+
+
+class CompanyWalletChanges(models.Model):
     types = (
-        (0, 'customer'),
-        (1, 'employee'),
-        (2, 'manager'),
+        (1, 'request submit'),
+        (2, 'request profit'),
+        (3, 'request failure'),  # rejected or failed
+        (4, 'request failure profit'),
+        (5, 'request accept'),
     )
-    username = models.CharField(max_length=100, primary_key=True)
-    password = models.CharField(max_length=50)
-    photo = models.ImageField()
-    english_first_name = models.CharField(max_length=50)
-    english_last_name = models.CharField(max_length=50)
-    persian_first_name = models.CharField(max_length=50)
-    persian_last_name = models.CharField(max_length=50)
-    user_type = models.IntegerField(choices=types)
-    email = models.EmailField(max_length=70, unique=True, null = False)
-    active = models.BooleanField()
-
-class Employee(WebsiteUser):
-    salary = models.IntegerField()
-
-
-class Customer(WebsiteUser):
-    rial_credit = models.IntegerField()
-    dollar_cent_credit = models.IntegerField()
-    euro_cent_credit = models.IntegerField()
-    account = models.IntegerField()
-
-class Manager(Employee):
-    a = 3
-
-
-class Transaction(models.Model):
-    statuses = (
-        (0, 'accepted'),
-        (1, 'rejected'),
-        (2, 'pending'),
-        (3, 'reported'),
-    )
-    currency = (
+    wallets = (
         (0, 'rial'),
         (1, 'dollar'),
         (2, 'euro'),
     )
-    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING)
-    status = models.IntegerField(choices=statuses)
-    currency = models.IntegerField(choices=currency)
-    destination = models.IntegerField()
-    amount = models.IntegerField()
-    profit = models.IntegerField()
-    #this is in riaaal, always? always
-
-
-class notication(models.Model):
-    statuses = (
-        (0, 'seen'),
-        (1, 'unseen'),
-    )
-    types = (
-        (0, 'message'),
-        (1, 'blah'),
-        (2, 'blah  blah'),
-    )
-    # todo handle correct types
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
-    text = models.IntegerField(max_length=500)
-
-
-
-class Company(models.Model):
-    english_name = models.CharField(max_length=100)
-    persian_name = models.CharField(max_length=100)
-    account = models.IntegerField()
-    photo = models.ImageField()
-    rial_credit = models.IntegerField()
-    dollar_cent_credit = models.IntegerField()
-    euro_cent_credit = models.IntegerField()
-
-class Employee_review(models.Model):
-    statuses = (
-        (0, 'accept'),
-        (1, 'reject'),
-        (2, 'report'),
-    )
-    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
-    transaction = models.ForeignKey("Transaction", on_delete=models.DO_NOTHING)
-
-
-class Report(models.Model):
-    transaction = models.ForeignKey("Transaction", on_delete=models.DO_NOTHING)
-    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING)
-    description = models.TextField(max_length=300)
-
-    
-class User_Status(models.Model):
-    manager = models.ForeignKey("Manager", on_delete=models.DO_NOTHING)
-    user = models.ForeignKey("User", on_delete=models.DO_NOTHING)
-    status = models.BooleanField()
-
-
-class Salary(models.Model):
-    employee = models.ForeignKey("User", on_delete=models.DO_NOTHING)
-    salary = models.IntegerField()
-
-
+    type = models.IntegerField(choices=types)
+    wallet = models.IntegerField(choices=wallets)
+    request = models.ForeignKey('customer.Request', on_delete=models.CASCADE, null=False)
+    change_time = models.DateTimeField(null=False)
+    deposit_before = models.FloatField(null=False)
+    deposit_after = models.FloatField(null=False)
