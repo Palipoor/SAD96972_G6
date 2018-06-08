@@ -9,7 +9,6 @@ from django.views.generic import UpdateView, ListView, View
 
 from apps.main.MultiForm import MultiFormsView
 from apps.main.views import IsLoggedInView, DetailsView
-from apps.manager.models import Company, Customer, Employee
 
 
 class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):

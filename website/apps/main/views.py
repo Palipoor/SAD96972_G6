@@ -11,7 +11,7 @@ from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import FormMixin
 
 from apps.main.Forms import SignUpForm
-from apps.manager.models import WebsiteUser, Customer, Transaction, Employee
+from apps.customer.models import Customer
 
 
 class IsLoggedInView(LoginRequiredMixin):

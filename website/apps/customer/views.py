@@ -8,7 +8,7 @@ import os
 from django.views.generic import CreateView, UpdateView, ListView
 
 from apps.main.views import IsLoggedInView
-from apps.manager.models import Customer
+from apps.customer.models import Customer
 
 
 class CustomerDashboardView(IsLoggedInView, PermissionRequiredMixin, ListView):
