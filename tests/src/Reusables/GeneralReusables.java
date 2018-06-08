@@ -111,8 +111,8 @@ public class GeneralReusables {
     }
 
     public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
-        //WebElement userMenu = panel.findElement(By.name("user menu"));
-        //userMenu.click();
+        WebElement userMenu = panel.findElement(By.name("user menu"));
+        userMenu.click();
         WebElement logoutButton = panel.findElement(By.name("logout"));
         logoutButton.click();
         panel.close();

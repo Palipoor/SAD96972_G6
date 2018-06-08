@@ -32,7 +32,7 @@ public class ConfirmForeign {
         dollarDeposit = ManagerReusables.getCompanyCredit("dollar");
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsAnEmployeeWithoutName(driver);
-        String transactionId = ManagerReusables.getNewestTransactionId();
+        String transactionId = EmployeeReusables.getNewestTransactionId(driver);
         EmployeeReusables.bringMeTheDetails(transactionId, driver);
 
     }
@@ -47,19 +47,16 @@ public class ConfirmForeign {
     @Test
     @Order(order = 2)
     public void confirm() {
-        //EmployeeReusables.acceptTransactionGivenDetailPage(driver); //TODO!!!
-        //TODO!!!: how much does it change?
+        //EmployeeReusables.acceptTransactionGivenDetailPage(driver); //TODO!!! it needs a confirm button
+        //TODO!!!: how much does it change? it needs to read the profit and amount of transaction
         assertEquals( ManagerReusables.getCompanyCredit("rial"), dollarDeposit, 1);
 
 
     }
 
-    //TODO: write test for invalid case
-
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        //driver.close();
     }
 }
 

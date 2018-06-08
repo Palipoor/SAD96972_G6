@@ -32,9 +32,29 @@ public class EmployeeReusables {
 
         List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
         List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        System.out.println(transactionDetails.get(idIndex).findElement(By.tagName("a")));
         transactionDetails.get(idIndex).findElement(By.tagName("a")).click();
     }
+
+    public static String getNewestTransactionId(WebDriver driver) {
+
+        WebElement theTable = driver.findElement(By.name("transactions-table"));
+
+
+        List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
+        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+        int idIndex = 0;
+        for (int i = 0; i < headerTitles.size(); i++) {
+            if (headerTitles.get(i).getText().equals("شناسه تراکنش")) {
+                idIndex = i;
+            }
+        }
+
+        List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
+        List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
+        return transactionDetails.get(idIndex).findElement(By.tagName("a")).getText();
+
+    }
+
 
     public static void acceptTransaction(String transactionId) {
         WebDriver driver = new FirefoxDriver();
