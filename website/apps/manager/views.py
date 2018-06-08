@@ -1,15 +1,12 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import Context, loader
 import os
 # Create your views here.
 from django.views.generic import UpdateView, ListView, View
 
 from apps.main.MultiForm import MultiFormsView
 from apps.main.views import IsLoggedInView, DetailsView
-
+from apps.manager.models import Company
 
 class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):
     template_name = "manager/dashboard.html"
