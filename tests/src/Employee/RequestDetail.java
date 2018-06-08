@@ -32,7 +32,7 @@ public class RequestDetail {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsAnEmployee(driver);
+        GeneralReusables.loginAsAnEmployeeWithoutName(driver);
 
     }
 
