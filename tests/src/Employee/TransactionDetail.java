@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Reusables.OrderedRunner.class)
 public class TransactionDetail {
     static WebDriver driver;
-    String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش";
+    String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش و درخواست";
 
 
 
@@ -29,8 +29,7 @@ public class TransactionDetail {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsAnEmployee(driver);
-
+        GeneralReusables.loginAsAnEmployeeWithoutName(driver);
     }
 
     @Test

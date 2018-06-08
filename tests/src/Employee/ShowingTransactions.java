@@ -23,7 +23,7 @@ public class ShowingTransactions {
     public static void setUp() {
         driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsAnEmployee(driver);
+        GeneralReusables.loginAsAnEmployeeWithoutName(driver);
     }
 
     @Test
