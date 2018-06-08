@@ -31,10 +31,10 @@ public class ConfirmForeign {
         //createNewTransaction(String type);   TODO
         dollarDeposit = ManagerReusables.getCompanyCredit("dollar");
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsAnEmployee(driver);
-        WebElement cell = ManagerReusables.getNewestRequest(driver);
-        WebElement link = cell.findElement(By.tagName("a"));
-        link.click();
+        GeneralReusables.loginAsAnEmployeeWithoutName(driver);
+        String transactionId = ManagerReusables.getNewestTransactionId();
+        EmployeeReusables.bringMeTheDetails(transactionId, driver);
+
     }
 
     @Test
@@ -47,11 +47,8 @@ public class ConfirmForeign {
     @Test
     @Order(order = 2)
     public void confirm() {
-        WebElement confirm = driver.findElement(By.name("confirm"));
-        confirm.submit();
-        //TODO: check the status.
-        GeneralReusables.logout(driver);
-        //TODO: how much does it change?
+        //EmployeeReusables.acceptTransactionGivenDetailPage(driver); //TODO!!!
+        //TODO!!!: how much does it change?
         assertEquals( ManagerReusables.getCompanyCredit("rial"), dollarDeposit, 1);
 
 

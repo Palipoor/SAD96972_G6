@@ -95,6 +95,13 @@ public class GeneralReusables {
         return getUsername(homepage);
     }
 
+    public static void loginAsAnEmployeeWithoutName(WebDriver homepage) {
+        homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
+//        String email = "customerEmail";
+//        String password = "customerPassword";
+//        login(homepage, email, password);
+    }
+
     public static String getUsername(WebDriver panel) {
         WebElement userDetails = panel.findElement(By.name("user-details"));
         userDetails.click();
@@ -104,8 +111,8 @@ public class GeneralReusables {
     }
 
     public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
-        WebElement userMenu = panel.findElement(By.name("user menu"));
-        userMenu.click();
+        //WebElement userMenu = panel.findElement(By.name("user menu"));
+        //userMenu.click();
         WebElement logoutButton = panel.findElement(By.name("logout"));
         logoutButton.click();
         panel.close();

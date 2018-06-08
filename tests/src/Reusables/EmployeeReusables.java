@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class EmployeeReusables {
 
-    public static String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش";
+    public static String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش و درخواست";
 
 
     public static void bringMeTheDetails(String transactionId, WebDriver driver) {
@@ -32,7 +32,8 @@ public class EmployeeReusables {
 
         List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
         List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
-        transactionDetails.get(idIndex).click();
+        System.out.println(transactionDetails.get(idIndex).findElement(By.tagName("a")));
+        transactionDetails.get(idIndex).findElement(By.tagName("a")).click();
     }
 
     public static void acceptTransaction(String transactionId) {
@@ -49,6 +50,12 @@ public class EmployeeReusables {
         WebElement done = driver.findElement(By.name("done"));
         done.click();
         GeneralReusables.logout(driver);
+    }
+    public static void acceptTransactionGivenDetailPage(WebDriver driver) { //TODO
+        WebElement accept = driver.findElement(By.name("accept"));
+        accept.click();
+        WebElement done = driver.findElement(By.name("done"));
+        done.click();
     }
 
     public static void rejectTransaction(String transactionId) {

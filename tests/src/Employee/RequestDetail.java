@@ -49,7 +49,7 @@ public class RequestDetail {
         assertTrue(isTherAnyTransactionsTable);
     }
 
-    @Test
+   /* @Test
     @Order(order = 2)
     public void transactionDetail() {
         WebElement cell = ManagerReusables.getNewestRequest(driver);
@@ -60,7 +60,7 @@ public class RequestDetail {
 
         }
 
-    }
+    }*/
 
     @AfterClass
     public static void tearDown() {
