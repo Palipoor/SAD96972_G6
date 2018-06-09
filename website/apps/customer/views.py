@@ -7,12 +7,13 @@ import os
 # Create your views here.
 from django.views.generic import CreateView, UpdateView, ListView
 
-from apps.main.views import IsLoggedInView
+from apps.main.views import IsLoggedInView, IsCustomer
 from apps.customer.models import Customer
 
 
-class CustomerDashboardView(IsLoggedInView, PermissionRequiredMixin, ListView):
+class CustomerDashboardView(IsLoggedInView, IsCustomer, ListView):
     template_name = "customer/dashboard.html"
+
 
 class TransactionCreationView(IsLoggedInView, CreateView):
     ""
@@ -41,14 +42,15 @@ class ApplicationFeeCreationView(TransactionCreationView):
 # todo add other forms as well
 
 
-class CustomerPasswordChangeView(PasswordChangeView):
+class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView):
     def get_template_names(self):
         return 'customer/change_password.html'
 
 
-class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
+class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
     model = Customer
     template_name = 'customer/settings.html'
+
     def get_context_data(self, **kwargs):
         return ""  # todo query bezan oon customer ro biab
 
@@ -56,5 +58,5 @@ class CustomerSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
               'account-number', 'photo']
 
 
-class TransactionsListView(IsLoggedInView, PermissionRequiredMixin, ListView):
+class TransactionsListView(IsLoggedInView, IsCustomer, ListView):
     template_name = 'customer/mytransactions.html'

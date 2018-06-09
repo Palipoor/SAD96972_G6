@@ -10,6 +10,7 @@ from django.views import generic
 from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin
 from django.shortcuts import redirect
+from braces.views import GroupRequiredMixin
 
 from apps.main.Forms import SignUpForm
 from apps.customer.models import Customer
@@ -23,7 +24,27 @@ class IsLoggedInView(LoginRequiredMixin):
         return 'شما هنوز وارد سیستم نشده اید.'
 
 
-class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
+class IsCustomer(GroupRequiredMixin):
+    group_required = u"Customer"
+
+
+class IsEmployee(GroupRequiredMixin):
+    group_required = u"Employee"
+
+
+class IsManager(GroupRequiredMixin):
+    group_required = u"Manager"
+
+
+class IsWalletUser(GroupRequiredMixin):
+    group_required = [u"Manager", u"Customer"]
+
+
+class HasAccessToTransactions(GroupRequiredMixin):
+    group_required = [u"Manager", u"Employee"]
+
+
+class WalletView(IsLoggedInView, IsWalletUser, FormMixin, ListView):
     def has_permission(self):
         return self.request.user.user_type == 'customer' or self.request.user.user_type == 'manager'
 
@@ -54,18 +75,11 @@ class WalletView(IsLoggedInView, PermissionRequiredMixin, FormMixin, ListView):
             return HttpResponse(template.render({"currency": currency}))
 
 
-class DetailsView(IsLoggedInView, PermissionRequiredMixin, DetailView):
+class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
 
 
 class TransactionDetailsView(DetailsView):
-    def has_permission(self):
-        return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee'
-
-        #   model = Transaction
-
-        #  def get_object(self, queryset=None):
-        #     return Transaction.objects.get(id=self.transaction_id)
 
     def dispatch(self, request, *args, **kwargs):
         self.transaction_id = kwargs['transaction_id']

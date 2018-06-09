@@ -7,17 +7,18 @@ import os
 # Create your views here.
 from django.views.generic import UpdateView, FormView, ListView
 
-from apps.main.views import IsLoggedInView
+from apps.main.views import IsLoggedInView, IsEmployee
 
 
-class EmployeeDashboardView(IsLoggedInView, PermissionRequiredMixin, ListView, FormView): #todo not sure if this works:/
+class EmployeeDashboardView(IsLoggedInView, IsEmployee, ListView, FormView):  # todo not sure if this works:/
     ""
 
-class EmployeePasswordChangeView(PasswordChangeView):
+
+class EmployeePasswordChangeView(PasswordChangeView, IsEmployee):
     def get_template_names(self):
         return 'employee/change_password.html'
 
 
-class EmployeeSettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
+class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
     template_name = 'employee/settings.html'
     # todo incomplete

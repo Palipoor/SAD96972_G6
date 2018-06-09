@@ -22,10 +22,10 @@ from apps.manager.views import users, ManagerPasswordChangeView, CompanySettings
     ManagerDashboardView, EmployeeDetailsView
 
 urlpatterns = [
-    path('dashboard/', ManagerDashboardView.as_view, name='dashboard'),
-    path('change_password', ManagerPasswordChangeView.as_view, name='change_password'),
-    path('settings', CompanySettingsView.as_view, name='settings'),
-    path('<id>_transaction_details', TransactionDetailsView.as_view, name='transaction_details'),
+    path('dashboard/', ManagerDashboardView.as_view(), name='dashboard'),
+    path('change_password', ManagerPasswordChangeView.as_view(), name='change_password'),
+    path('settings', CompanySettingsView.as_view(), name='settings'),
+    path('<id>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('<user_type>_users/', users, name='users'),
     path('<user_id>_customer_details/', CustomerDetailsView.as_view, name='customer_details'),
     path('<employee_id>_employee_details/', EmployeeDetailsView.as_view, name='employee_details'),

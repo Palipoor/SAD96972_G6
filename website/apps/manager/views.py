@@ -5,25 +5,26 @@ import os
 from django.views.generic import UpdateView, ListView, View
 
 from apps.main.MultiForm import MultiFormsView
-from apps.main.views import IsLoggedInView, DetailsView
+from apps.main.views import IsLoggedInView, DetailsView, IsManager
+
 
 class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):
     template_name = "manager/dashboard.html"
     ""
 
 
-class ManagerPasswordChangeView(PasswordChangeView):
+class ManagerPasswordChangeView(IsLoggedInView, IsManager,PasswordChangeView):
     template_name = 'manager/change_password.html'
 
 
-class CompanySettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
+class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
     #model = Company
     template_name = "manager/settings.html"
     fields = ['english_name', 'persian_name', 'account', 'photo']
     # todo incomplete
 
 
-class UsersListView(IsLoggedInView, PermissionRequiredMixin, ListView):
+class UsersListView(IsLoggedInView, IsManager, ListView):
     user_type = ""
 
 
