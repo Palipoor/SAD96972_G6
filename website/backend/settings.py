@@ -89,9 +89,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sadproject',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'mardechini',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -139,3 +139,6 @@ STATICFILES_DIRS = [
 ]
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'front')
+
+
+LOGIN_REDIRECT_URL = '/login_success'

@@ -6,7 +6,6 @@ from django.views.generic import UpdateView, ListView, View
 
 from apps.main.MultiForm import MultiFormsView
 from apps.main.views import IsLoggedInView, DetailsView
-from apps.manager.models import Company
 
 class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):
     template_name = "manager/dashboard.html"
@@ -18,7 +17,7 @@ class ManagerPasswordChangeView(PasswordChangeView):
 
 
 class CompanySettingsView(IsLoggedInView, PermissionRequiredMixin, UpdateView):
-    model = Company
+    #model = Company
     template_name = "manager/settings.html"
     fields = ['english_name', 'persian_name', 'account', 'photo']
     # todo incomplete
@@ -34,10 +33,10 @@ class EmployeeDetailsView(DetailsView):
     def has_permission(self):
         return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee' and self.request.user.id == self.employee_id
 
-    model = Employee
+    #model = Employee
 
-    def get_object(self, queryset=None):
-        return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
+    #def get_object(self, queryset=None):
+     #   return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
 
     def dispatch(self, request, *args, **kwargs):
         self.employee_id = kwargs['employee_id']

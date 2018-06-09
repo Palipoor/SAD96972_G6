@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from apps.main.views import WalletView, EmployeeDetailsView, NotificationsView, TransactionDetailsView, \
+from apps.main.views import WalletView, NotificationsView, TransactionDetailsView, \
     CustomerDetailsView
 from apps.manager.views import users, ManagerPasswordChangeView, CompanySettingsView, \
-    ManagerDashboardView
+    ManagerDashboardView, EmployeeDetailsView
 
 urlpatterns = [
     path('dashboard/', ManagerDashboardView.as_view, name='dashboard'),

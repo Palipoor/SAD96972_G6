@@ -7,8 +7,9 @@ from django.template import loader
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin
+from django.shortcuts import redirect
 
 from apps.main.Forms import SignUpForm
 from apps.customer.models import Customer
@@ -61,10 +62,10 @@ class TransactionDetailsView(DetailsView):
     def has_permission(self):
         return self.request.user.user_type == 'manager' or self.request.user.user_type == 'employee'
 
-    model = Transaction
+        #   model = Transaction
 
-    def get_object(self, queryset=None):
-        return Transaction.objects.get(id=self.transaction_id)
+        #  def get_object(self, queryset=None):
+        #     return Transaction.objects.get(id=self.transaction_id)
 
     def dispatch(self, request, *args, **kwargs):
         self.transaction_id = kwargs['transaction_id']
@@ -106,16 +107,16 @@ class Register(FormView):
 
 
 class Login(LoginView):
-    def get_success_url(self):
-        return self.request.user.user_type + "/dashboard"
+    template_name = 'main/login.html'
 
-    def get_form(self, form_class=None):
-        self.form_class = AuthenticationForm
-        form = AuthenticationForm()
-        form.username.widget = forms.TextInput(attrs={'autofocus': True, 'name': 'username'})
-        form.username.label = 'نام کاربری'
-        form.password.widget = forms.PasswordInput(attrs={'name': 'password'})
-        form.password.label = 'کلمهٔ عبور'
+
+def login_success(request):
+    if request.user.groups.filter(name="Manager").exists():
+        return redirect("manager/dashboard")
+    elif request.user.groups.filter(name='Employee').exists():
+        return redirect("employee/dashboard")
+    else:
+        return redirect("customer/dashboard")
 
 
 def index(request):

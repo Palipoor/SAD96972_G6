@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from apps.manager.models import Customer, WebsiteUser
+from apps.customer.models import Customer
+from apps.main.models import GenUser
 
 
 class SignUpForm(forms.Form):
@@ -22,7 +23,7 @@ class SignUpForm(forms.Form):
 
         try:
             user = User.objects.get(
-                    WebsiteUser(username=self.cleaned_data['username']))
+                    GenUser(username=self.cleaned_data['username']))
         except User.DoesNotExist:
             if self.cleaned_data['password'] != self.cleaned_data['password2']:
                 self._errors['repeat_not_match'] = 'تکرار رمز عبور با آن یکی نیست'

@@ -1,14 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from polymorphic.models import PolymorphicModel
 
 
 # Create your models here.
 class GenUser(User):
     types = (
-        (0, 'customer'),
-        (1, 'employee'),
-        (2, 'manager'),
+        (0, 'Customer'),
+        (1, 'Employee'),
+        (2, 'Manager'),
     )
     '''username = models.CharField(max_length=100, primary_key=True)
     password = models.CharField(max_length=50)
@@ -20,11 +20,17 @@ class GenUser(User):
     persian_first_name = models.CharField(max_length=50)
     persian_last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
-    # user_type = models.IntegerField(choices=types)
+    user_type = models.IntegerField(choices=types, default=0)
     # online = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
 
-    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        g = Group.objects.get(name = self.types[self.user_type][1])
+        self.groups.add(g)
+
+
+
 class Notification(models.Model):
     statuses = (
         (0, 'seen'),
