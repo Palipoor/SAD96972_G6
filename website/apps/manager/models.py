@@ -9,6 +9,11 @@ class Manager(main_models.GenUser):
     company_euro_cent_credit = models.FloatField()
     company_account_number = models.CharField(max_length=20, null=False)
 
+    def __init__(self, *args, **kwargs):
+        super(Manager, self).__init__( *args, **kwargs)
+        self.user_type = 2
+
+
 '''class User_Status(models.Model): #???
     manager = models.ForeignKey("Manager", on_delete=models.DO_NOTHING) 
     user = models.ForeignKey("User", on_delete=models.DO_NOTHING)

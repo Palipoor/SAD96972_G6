@@ -11,6 +11,10 @@ class Customer(GenUser):
     euro_cent_credit = models.FloatField(default=0)
     account_number = models.CharField(max_length=20, unique=True, null=False)
 
+    def __init__(self, *args, **kwargs):
+        super(Customer, self).__init__( *args, **kwargs)
+        self.user_type = 0
+
 
 class RequestType(models.Model):  # ???
     currency = (

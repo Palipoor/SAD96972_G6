@@ -103,17 +103,18 @@ class CustomerDetailsView(DetailsView, ListView):
 
 class Register(FormView):
     form_class = SignUpForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('main:login')
     template_name = 'main/register.html'
-
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-            new_user = Customer(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
+            new_user = Customer(username=form.cleaned_data['username'],
+                                first_name = form.cleaned_data["first_name"],last_name = form.cleaned_data["last_name"],
                                 persian_first_name=form.cleaned_data['persian_first_name'],
                                 persian_last_name=form.cleaned_data['persian_last_name'],
-                                email=form.cleaned_data['email'], phone=form.cleaned_data['phone'],
-                                account=form.cleaned_data['account'])
+                                email=form.cleaned_data['email'], phone_number=form.cleaned_data['phone_number'],
+                                account_number=form.cleaned_data['account_number'])
+            new_user.set_password(form.cleaned_data['password'])
             new_user.save()
             return self.form_valid(form)
         else:

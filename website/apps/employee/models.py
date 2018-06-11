@@ -8,6 +8,11 @@ from apps.main import models as main_models
 class Employee(main_models.GenUser):
     current_salary = models.FloatField()
 
+    def __init__(self, *args, **kwargs):
+        super(Employee, self).__init__( *args, **kwargs)
+        self.user_type = 1
+
+
 
 class Report(models.Model):
     transaction = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
