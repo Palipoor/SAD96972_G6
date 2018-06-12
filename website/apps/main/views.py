@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 # Create your views here.
 from django.urls import reverse_lazy
@@ -45,34 +45,30 @@ class HasAccessToTransactions(GroupRequiredMixin):
 
 
 class WalletView(IsLoggedInView, IsWalletUser, FormMixin, ListView):
-    def has_permission(self):
-        return self.request.user.user_type == 'customer' or self.request.user.user_type == 'manager'
-
+    user_type = ""
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']
-        user_type = request.user.user_type
-        if user_type == 'customer':
-            username = request.user.username
-            return self.wallet(currency, username)
+        user = request.user
+        isManager = user.groups.filter(name='Manager').exists()
+        isCustomer = user.groups.filter(name = 'Customer').exists()
+        if isManager and self.user_type == "Manager":
+            return self.wallet(currency, "manager")
+        elif isCustomer and self.user_type == "Customer" :
+            return self.wallet(currency, "customer")
         else:
-            username = ""
-            return self.wallet(currency, username)
+            return HttpResponseForbidden()
 
     # todo form
     # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
-    def wallet(self, currency, username):
+    def wallet(self, currency, user_type):
         if currency == "dollar":
             currency = "دلار"
         elif currency == "euro":
             currency = "یورو"
         elif currency == "rial":
             currency = "ریال"
-        if username != "":
-            template = loader.get_template("customer/" + username + "/wallet.html")
-            return HttpResponse(template.render({"currency": currency}))
-        else:
-            template = loader.get_template("manager/" + "/wallet.html")
-            return HttpResponse(template.render({"currency": currency}))
+        template = loader.get_template(user_type + "/wallet.html")
+        return HttpResponse(template.render({"currency": currency}))
 
 
 class DetailsView(IsLoggedInView, DetailView):
@@ -80,7 +76,6 @@ class DetailsView(IsLoggedInView, DetailView):
 
 
 class TransactionDetailsView(DetailsView):
-
     def dispatch(self, request, *args, **kwargs):
         self.transaction_id = kwargs['transaction_id']
         # todo incomplete
@@ -102,14 +97,16 @@ class CustomerDetailsView(DetailsView, ListView):
 
 
 class Register(FormView):
+    # todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
     form_class = SignUpForm
-    success_url = reverse_lazy('main:login')
+    success_url = reverse_lazy('main:register_success')
     template_name = 'main/register.html'
+
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
             new_user = Customer(username=form.cleaned_data['username'],
-                                first_name = form.cleaned_data["first_name"],last_name = form.cleaned_data["last_name"],
+                                first_name=form.cleaned_data["first_name"], last_name=form.cleaned_data["last_name"],
                                 persian_first_name=form.cleaned_data['persian_first_name'],
                                 persian_last_name=form.cleaned_data['persian_last_name'],
                                 email=form.cleaned_data['email'], phone_number=form.cleaned_data['phone_number'],

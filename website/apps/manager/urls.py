@@ -27,9 +27,9 @@ urlpatterns = [
     path('settings', CompanySettingsView.as_view(), name='settings'),
     path('<id>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('<user_type>_users/', users, name='users'),
-    path('<user_id>_customer_details/', CustomerDetailsView.as_view, name='customer_details'),
-    path('<employee_id>_employee_details/', EmployeeDetailsView.as_view, name='employee_details'),
-    path('<currency>_wallet/', WalletView.as_view, name='wallet'),
-    path('notifications/', NotificationsView.as_view, name='notifications'),
+    path('<user_id>_customer_details/', CustomerDetailsView.as_view(), name='customer_details'),
+    path('<employee_id>_employee_details/', EmployeeDetailsView.as_view(), name='employee_details'),
+    path('<currency>_wallet/', WalletView.as_view(user_type = "Manager"), name='wallet'),
+    path('notifications/', NotificationsView.as_view(), name='notifications'),
 
 ]

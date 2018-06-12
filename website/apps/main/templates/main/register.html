@@ -75,13 +75,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    {%if form.errors%}
-                    {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                    {% endfor %}
-                    {%endif%}
                     <label for="i_agree">مقررات را قبول می‌کنم</label>
                     {% render_field form.i_agree class="form-control" placeholder=form.i_agree.label %}
                 </div><!-- /.col -->
