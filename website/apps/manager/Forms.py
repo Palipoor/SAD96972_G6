@@ -7,19 +7,6 @@ from django.core.mail import send_mail
 from apps.main.models import GenUser
 
 
-def copy_model_instance(obj):
-    # copy kardam in code ro!
-    initial = dict([(f.name, getattr(obj, f.name)) for f in obj._meta.fields if
-                    not isinstance(f, AutoField) and not f in obj._meta.parents.values()])
-    return obj.__class__(**initial)
-
-
-class AccessRemovalForm(forms.Form):
-    username = forms.CharField(max_length=100, label='نام کاربری')
-    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
-
-    # todo complete
-
 
 class EmployeeCreationForm(forms.ModelForm):
     class Meta:
@@ -53,3 +40,18 @@ class ChangeSalaryForm(forms.Form):
 
         return True
 
+
+
+class AccessRemovalForm(forms.Form):
+    username = forms.CharField(max_length=100, required=True, label='نام کاربری')
+    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
+
+    def is_valid(self):
+        valid = super(AccessRemovalForm, self).is_valid()
+        if not valid:
+            return False
+        if not Employee.objects.filter(username=self.cleaned_data['username']).exists():
+            self.errors['username'] = 'چنین کارمندی وجود ندارد.'
+            return False
+
+        return True

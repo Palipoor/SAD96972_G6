@@ -83,3 +83,11 @@ class EmployeeListView(IsLoggedInView, IsManager, MultiFormsView):
         new_form = ChangeSalaryForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
         return self.render_to_response(context)
+
+    def remove_access_form_valid(self, form):
+        the_employee = Employee.objects.filter(username=form.cleaned_data['username'])[0]
+        the_employee.is_active = False
+        the_employee.save()
+        new_form = AccessRemovalForm()
+        context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
+        return self.render_to_response(context)

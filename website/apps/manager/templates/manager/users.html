@@ -117,24 +117,25 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
                     <div class="box-body">
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">نام کاربری</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="username">
+                                {% render_field forms.remove_access.username class="form-control" placeholder=forms.remove_access.username.label id="username"  name="username"%}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="why" class="col-sm-2 control-label">توضیح</label>
                             <div class="col-sm-6">
-                                <textarea id="why" class="form-control" placeholder="دلیل قطع دسترسی"></textarea>
+                                {% render_field forms.remove_access.reason class="form-control" placeholder=forms.remove_access.reason.label id="why"  name="why"%}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right">قطع دسترسی</button>
+                        <button type="submit" name = "action" value="remove_access" class="btn btn-info pull-right">قطع دسترسی</button>
                         <div class="col-md-5">
                             <p name="message">این جا پیام خطا می‌آید.</p>
                         </div>

@@ -22,7 +22,7 @@ class GenUser(User):
     phone_number = models.CharField(max_length=20)
     user_type = models.IntegerField(choices=types, default=0)
     # online = models.BooleanField(default=True)
-    active = models.BooleanField(default=True)
+    # active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
