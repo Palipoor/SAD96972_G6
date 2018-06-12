@@ -4,6 +4,8 @@ from apps.employee.models import Employee
 from django.db.models import AutoField
 from django.core.mail import send_mail
 
+from apps.main.models import GenUser
+
 
 def copy_model_instance(obj):
     # copy kardam in code ro!
@@ -20,29 +22,34 @@ class AccessRemovalForm(forms.Form):
 
 
 class EmployeeCreationForm(forms.ModelForm):
-    model = Employee
-    fields = ['username', 'salary', 'email']  # todo add this to tests.
+    class Meta:
+        model = Employee
+        fields = ['username', 'current_salary', 'email', 'persian_first_name',
+                  'persian_last_name']  # todo add this to tests.
 
-    def save(self, commit=True, *args, **kwargs):
-        m = super(EmployeeCreationForm, self).save(commit=False)
-        m_new = copy_model_instance(m)
-        password = "someRandomPassword"  # todo generate randomly
-        results = []
-        if commit:
-            m_new.set_password(password)
-            m_new.save()
-            message = 'رمز شما عبارت است از:' + password
-            send_mail(
-                    'کارمندی در سپاا',
-                    message,
-                    'info@sapaa.com',
-                    [m_new.email],
-                    fail_silently=True,
-            )
-        results.append(m_new)
-        return results
+    def is_valid(self):
+        valid = super(EmployeeCreationForm, self).is_valid()
+        if not valid:
+            return False
 
-class ChangeSalaryForm(forms.ModelForm):
-    model = Employee
-    fields = ['username', 'salary']
+        if GenUser.objects.filter(username=self.cleaned_data['username']).exists():
+            self.errors['username'] = 'کاربری با این نام کاربری وجود دارد'
+            return False
+
+        return True
+
+
+class ChangeSalaryForm(forms.Form):
+    username = forms.CharField(max_length=100, required=True, label='نام کاربری')
+    current_salary = forms.FloatField(required=True, label='حقوق جدید')
+
+    def is_valid(self):
+        valid = super(ChangeSalaryForm, self).is_valid()
+        if not valid:
+            return False
+        if not Employee.objects.filter(username=self.cleaned_data['username']).exists():
+            self.errors['username'] = 'چنین کارمندی وجود ندارد.'
+            return False
+
+        return True
 

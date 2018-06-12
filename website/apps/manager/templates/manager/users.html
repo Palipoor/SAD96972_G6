@@ -1,12 +1,12 @@
 {% extends "manager/mother_panel.html" %}
-{% load static staticfiles %}
+{% load static staticfiles  widget_tweaks %}
 
 {% block title %}
 {{type}}ان
 {% endblock title %}
 
 {% block content_header_text %}
-<h1>{{type}}ان</h1>
+<h1 xmlns="http://www.w3.org/1999/html">{{type}}ان</h1>
 {{ block.super }}
 {% endblock content_header_text %}
 
@@ -148,25 +148,25 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">نام کاربری کارمند</label>
+                            <label for="username-2" class="col-sm-2 control-label">نام کاربری کارمند</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="username-2">
+                                {% render_field forms.change_salary.username class="form-control" placeholder=forms.change_salary.username.label id="username-2"  name="username"%}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="salary" class="col-sm-2 control-label">حقوق جدید</label>
+                            <label for="new-salary" class="col-sm-2 control-label">حقوق جدید</label>
                             <div class="col-sm-6">
-                                <input type="number" id="salary-2" class="form-control">
-                                </textarea>
+                                {% render_field forms.change_salary.current_salary class="form-control" placeholder=forms.change_salary.current_salary.label id="new-salary" name="salary" %}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right" id="set-button">تغییر حقوق</button>
+                        <button type="submit" class="btn btn-info pull-right" name = "action" value="change_salary" id="set-button">تغییر حقوق</button>
                         <div class="col-md-5">
                             <p name="message">این جا پیام خطا می‌آید.</p>
                         </div>
@@ -183,36 +183,37 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">نام</label>
+                            <label for="persian_first_name" class="col-sm-2 control-label">نام به فارسی</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="name">
+                                {% render_field forms.add_employee.persian_first_name class="form-control" placeholder=forms.add_employee.persian_first_name.label id="persian_first_name" %}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="familyname" class="col-sm-2 control-label"> نام خانوادگی</label>
+                            <label for="persian_last_name" class="col-sm-2 control-label">نام خانوادگی به فارسی</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="familyname">
+                                {% render_field forms.add_employee.persian_last_name class="form-control" placeholder=forms.add_employee.persian_last_name.label id="persian_last_name" %}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">نام کاربری</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="username">
+                                {% render_field forms.add_employee.username class="form-control" placeholder=forms.add_employee.username.label id="username" %}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="salary" class="col-sm-2 control-label">میزان حقوق</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="salary">
+                                {% render_field forms.add_employee.current_salary class="form-control" placeholder=forms.add_employee.current_salary.label id="salary" %}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" name="submit-button" class="btn btn-info pull-right">افزودن</button>
+                        <button type="submit" name="action"  value="add_employee" class="btn btn-info pull-right">افزودن</button>
                         <div class="col-md-5">
                             <p name="error">این جا پیام خطا می‌آید.</p>
                         </div>
@@ -275,6 +276,7 @@
             });
         });
     });
+
 
 
 
