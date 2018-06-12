@@ -22,13 +22,13 @@
     </a>
 </li>
 <li>
-    <a href='{% url "manager:users" "-1" %}' name="employee">
+    <a href='{% url "manager:employee_users" %}' name="employee">
         <em class="fa fa-users"></em>
         <span>کارمندان</span>
     </a>
 </li>
 <li>
-    <a href='{% url "manager:users" "-2" %}' name="customers">
+    <a href='{% url "manager:customer_users" %}' name="customers">
         <em class="fa fa-users"></em>
         <span>مشتریان</span>
     </a>
@@ -51,11 +51,11 @@
         </li>
         <li>
             <a href='{% url "manager:wallet" "euro" %}'>
-                <i class="glyphicon glyphicon-chevron-left" name = "euro-wallet"></i> کیف پول یورو</a>
+                <i class="glyphicon glyphicon-chevron-left" name="euro-wallet"></i> کیف پول یورو</a>
         </li>
         <li>
             <a href='{% url "manager:wallet" "dollar" %}'>
-                <i class="glyphicon glyphicon-chevron-left" name = "dollar-wallet"></i> کیف پول دلار</a>
+                <i class="glyphicon glyphicon-chevron-left" name="dollar-wallet"></i> کیف پول دلار</a>
         </li>
     </ul>
 </li>

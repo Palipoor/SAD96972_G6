@@ -1,6 +1,6 @@
 import random
 from django import forms
-from apps.manager.models import Employee
+from apps.employee.models import Employee
 from django.db.models import AutoField
 from django.core.mail import send_mail
 
@@ -27,9 +27,9 @@ class EmployeeCreationForm(forms.ModelForm):
         m = super(EmployeeCreationForm, self).save(commit=False)
         m_new = copy_model_instance(m)
         password = "someRandomPassword"  # todo generate randomly
-        m_new.password = password
         results = []
         if commit:
+            m_new.set_password(password)
             m_new.save()
             message = 'رمز شما عبارت است از:' + password
             send_mail(

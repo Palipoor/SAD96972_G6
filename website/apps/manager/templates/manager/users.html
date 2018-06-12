@@ -29,58 +29,33 @@
                     <table id="table" class="table table-bordered table-striped" name="customers-table">
                         <thead>
                         <tr>
-                            <th>شناسه {{type}}</th>
-                            <th>نام کاربری</th>
+                            <th>نام کاربری {{type }}</th>
                             <th>نام خانوادگی</th>
                             <th>نام</th>
                         </tr>
                         </thead>
                         <tbody>
+                        {%if type == 'مشتری'%}
+                        {%for user in object_list%}
                         <tr>
-                            <td>
-                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                            </td>
-                            <td>@blahblah</td>
-                            <td>blah</td>
-                            <td>
-                                blah
-                            </td>
+                            <td><a href={{user.username}}+"_customer_details.html">{{user.username}}</a></td>
+                            <td>{{user.persian_last_name}}</td>
+                            <td>{{user.persian_first_name}}</td>
                         </tr>
+                        {%endfor%}
+                        {%else%}
+                        {%for user in object_list%}
                         <tr>
-                            <td>
-                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                            </td>
-                            <td>@blahblah</td>
-                            <td>blah</td>
-                            <td>
-                                blah
-                            </td>
+                            <td><a href={{user.username}}+"_employee_details.html">{{user.username}}</a></td>
+                            <td>{{user.persian_last_name}}</td>
+                            <td>{{user.persian_first_name}}</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                            </td>
-                            <td>@blahblah</td>
-                            <td>blah</td>
-                            <td>
-                                blah
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-                            </td>
-                            <td>@blahblah</td>
-                            <td>blah</td>
-                            <td>
-                                blah
-                            </td>
-                        </tr>
+                        {%endfor%}
+                        {%endif%}
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th>شناسهٔ {{type}}</th>
-                            <th>نام کاربری</th>
+                            <th>نام کاربری {{type }}</th>
                             <th>نام خانوادگی</th>
                             <th>نام</th>
                         </tr>
@@ -300,6 +275,8 @@
             });
         });
     });
+
+
 
 </script>
 {% endblock scripts %}

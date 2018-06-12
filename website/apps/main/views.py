@@ -44,6 +44,7 @@ class HasAccessToTransactions(GroupRequiredMixin):
     group_required = [u"Manager", u"Employee"]
 
 
+
 class WalletView(IsLoggedInView, IsWalletUser, FormView):
     user_type = ""
 
