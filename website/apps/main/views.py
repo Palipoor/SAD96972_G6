@@ -8,11 +8,11 @@ from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView, RedirectView
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, ProcessFormView
 from django.shortcuts import redirect
 from braces.views import GroupRequiredMixin
 
-from apps.main.Forms import SignUpForm
+from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm
 from apps.customer.models import Customer
 
 
@@ -44,19 +44,36 @@ class HasAccessToTransactions(GroupRequiredMixin):
     group_required = [u"Manager", u"Employee"]
 
 
-class WalletView(IsLoggedInView, IsWalletUser, FormMixin, ListView):
+class WalletView(IsLoggedInView, IsWalletUser, FormView):
     user_type = ""
+
+    def get_form_kwargs(self):
+        kwargs = super(WalletView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def dispatch(self, request, *args, **kwargs):
         currency = kwargs['currency']
         user = request.user
         isManager = user.groups.filter(name='Manager').exists()
-        isCustomer = user.groups.filter(name = 'Customer').exists()
+        isCustomer = user.groups.filter(name='Customer').exists()
         if isManager and self.user_type == "Manager":
-            return self.wallet(currency, "manager")
-        elif isCustomer and self.user_type == "Customer" :
-            return self.wallet(currency, "customer")
+            self.template_name = 'manager/wallet.html'
+        elif isCustomer and self.user_type == "Customer":
+            self.template_name = 'customer/wallet.html'
         else:
             return HttpResponseForbidden()
+
+        if currency == 'rial':
+            self.form_class = RialChargeForm
+        elif currency == 'dollar':
+            self.form_class = DollarChargeForm
+        else:
+            self.form_class = EuroChargeForm
+        if request.method == 'GET':
+            return self.get(request, *args, **kwargs)
+        else:
+            return self.post(request, *args, **kwargs)
 
     # todo form
     # todo retrieve wallet credit and wallet transactions! give them as a context to render function!

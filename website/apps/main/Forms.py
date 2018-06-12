@@ -57,6 +57,10 @@ class WalletChargeForm(forms.Form):
     amount = forms.IntegerField(min_value=1, label='مبلغ درخواستی',
                                 widget=forms.widgets.TextInput(attrs={'name': 'desired-amount'}))
 
+    def __init__(self, user, *args, **kwargs):
+        super(WalletChargeForm, self).__init__(*args, **kwargs)
+        self.user = user
+
     def is_valid(self):
         return super(WalletChargeForm, self).is_valid()
 
@@ -65,12 +69,12 @@ class EuroChargeForm(WalletChargeForm):
     def is_valid(self):
         euro_price = 5000  # todo retrieve it !
         flag = False
-        valid = super(SignUpForm, self).is_valid()
+        valid = super(EuroChargeForm, self).is_valid()
         if not valid:
             return False
-        user = self.request.user
+        user = self.user
         if user.user_type == 0:  # customer
-            the_customer = Customer.objects.filter(username=user.username)
+            the_customer = Customer.objects.get(username=user.username)
             rial_credit = the_customer.rial_credit
             converted_amount = int(self.cleaned_data['amount']) * euro_price
             if rial_credit < converted_amount:
@@ -81,7 +85,7 @@ class EuroChargeForm(WalletChargeForm):
                 the_customer.euro_credit = the_customer.euro_credit + converted_amount
             the_customer.save()
         else:  # manager
-            the_manager = Manager.objects.filter(username=user.username)
+            the_manager = Manager.objects.get(username=user.username)
             rial_credit = the_manager.company_rial_credit
             converted_amount = int(self.cleaned_data['amount']) * euro_price
             if rial_credit < converted_amount:
@@ -99,12 +103,12 @@ class DollarChargeForm(WalletChargeForm):
     def is_valid(self):
         dollar_price = 5000  # todo retrieve it !
         flag = False
-        valid = super(SignUpForm, self).is_valid()
+        valid = super(DollarChargeForm, self).is_valid()
         if not valid:
             return False
-        user = self.request.user
+        user = self.user
         if user.user_type == 0:  # customer
-            the_customer = Customer.objects.filter(username=user.username)
+            the_customer = Customer.objects.get(username=user.username)
             rial_credit = the_customer.rial_credit
             converted_amount = int(self.cleaned_data['amount']) * dollar_price
             if rial_credit < converted_amount:
@@ -115,7 +119,7 @@ class DollarChargeForm(WalletChargeForm):
                 the_customer.dollar_credit = the_customer.dollar_credit + converted_amount
                 the_customer.save()
         else:  # manager
-            the_manager = Manager.objects.filter(username=user.username)
+            the_manager = Manager.objects.get(username=user.username)
             rial_credit = the_manager.company_rial_credit
             converted_amount = int(self.cleaned_data['amount']) * dollar_price
             if rial_credit < converted_amount:
@@ -134,15 +138,15 @@ class RialChargeForm(WalletChargeForm):
         valid = super(RialChargeForm, self).is_valid()
         if not valid:
             return False
-        user = self.request.user
+        user = self.user
         charge_amount = int(self.cleaned_data['amount'])
-        if user.user_type == 0:  # customer
-            the_customer = Customer.objects.filter(username=user.username)
+        if user.groups.filter(name='Customer').exists():  # customer
+            the_customer = Customer.objects.get(username=user.username)
             the_customer.rial_credit = the_customer.rial_credit + charge_amount
             the_customer.save()
 
         else:  # manager
-            the_manager = Manager.objects.filter(username=user.username)
+            the_manager = Manager.objects.get(username=user.username)
             the_manager.company_rial_credit = the_manager.company_rial_credit + charge_amount
             the_manager.save()
 
