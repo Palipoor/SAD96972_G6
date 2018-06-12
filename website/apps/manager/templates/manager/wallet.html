@@ -3,147 +3,147 @@
 
 {% block title %}
 کیف پول {{currency}}
-{% endblock title %} 
+{% endblock title %}
 
 {% block content_header_text %}
 <h1>کیف پول {{currency}}</h1>
-{{ block.super }} 
+{{ block.super }}
 {% endblock content_header_text %}
 
 {% block content_header_link %}
 {{ block.super }}
-<li class="active">کیف پول {{currency}} </li>
+<li class="active">کیف پول {{currency}}</li>
 {% endblock content_header_link %}
 
 {% block main_content %}
-        <!-- Main content -->
-        <section class="content">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class = "col-lg-6 col-xs-6">
-            <div class = "box">
-           <div class="box-header with-border">
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-4 col-xs-4">
+            <div class="box">
+                <div class="box-header with-border">
                     <h3 class="box-title">شارژ کیف پول </h3>
-        </div><!--box header-->
-               <div class = "box-body">
-                 <form role="form">
-                   <div class = "form-group">
-                     <label>مبلغ مورد نظر</label>
-                     <input type="number" class="form-control" placeholder="مبلغ مورد نظر را به {{currency}} وارد کنید." name = "desired-amount">
-                    <small>معادل  </small><small name = "rial-amount">10000</small><small>ریال</small>
-                   </div>
-                 </form>
-               </div><!--box body-->
-               <div class="box-footer">
-                 <div class = "row">
-                 <div class = "col-md-1">
-                  <button type="submit" class="btn btn-primary" name = "charge-button">پرداخت و شارژ</button>
-           </div>
-           <small name = "error"> در این جا ارور احتمالی می‌آید. </button>
-                 <div class = "col-md-3"></div>
-          </div>
-                </div>
+                </div><!--box header-->
+                <div class="box-body">
+                    <form role="form" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{form.amount.label}}
+                            {{form.amount}}
+                            <div class="column">
+                                <small>معادل</small>
+                                <small name="rial-amount">10000</small>
+                                <small>ریال</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-primary" name="charge-button">پرداخت و شارژ</button>
+                            </div>
+                            <small name="error">error</small>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </form>
+                </div><!--box body-->
             </div>
-          </div>
-          <div class="col-lg-6 col-xs-6">
+        </div>
+        <div class="col-lg-6 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-aqua">
-              <div class="inner">
-                <h3 name = "credit">150</h3>
-                <p>موجودی  کیف پول</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
+                <div class="inner">
+                    <h3 name="credit">150</h3>
+                    <p>موجودی کیف پول</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
             </div>
-          </div><!-- ./col -->
-        </div><!-- /.row -->
-          <!-- Main row -->
-          <div class="row">
-            <!-- Left col -->
-            <div class="col-lg-8 connectedSortable">
-              <!-- Custom tabs (Charts with tabs)-->
-              
-              <div class="box">
+        </div><!-- ./col -->
+    </div><!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-lg-8 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+
+            <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">گردش کیف پول</h3>
-                  <div class="box-tools">
-                    <div class="input-group" style="width: 150px;">
-                      <input name="table_search" class="form-control input-sm pull-right" placeholder="جستجو در گردش کیف پول" type="text">
-                      <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                      </div>
+                    <h3 class="box-title">گردش کیف پول</h3>
+                    <div class="box-tools">
+                        <div class="input-group" style="width: 150px;">
+                            <input name="table_search" class="form-control input-sm pull-right"
+                                   placeholder="جستجو در گردش کیف پول" type="text">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div><!-- /.box-header -->
-                <div class = "box-body">
-                  <table class="table table-bordered table-striped" id = "table">
-                    <tbody>
-                      <tr>
-                      <th>شناسه تراکنش مربوط</th>
-                      <th>ساعت</th>
-                      <th>تاریخ</th>
-                      <th>مبلغ ( {{currency}})</th>
-                      <th>نوع</th>
-                      </tr>
-                    <tr>
-                      <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-success">واریز</span></td>
-                    </tr>
-                    <tr>
-                       <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-success">واریز</span></td>
-                    </tr>
-                    <tr>
-                       <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-success">واریز</span></td>
-                    </tr>
-                    <tr>
-                      <td><a href = '{% static "panel/pages/customer/transaction_details.html" %}' >OR9842</a></td>
-                      <td>22:10</td>
-                      <td>11-7-2014</td>
-                      <td>50000</td>
-                      <td><span class="label label-danger">برداشت</span></td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                      <tr>
-                          <th>شناسه تراکنش مربوط</th>
-                          <th>ساعت</th>
-                          <th>تاریخ</th>
-                          <th>مبلغ ( {{currency}})</th>
-                          <th>نوع</th>
-                      </tr>
-                    </tfoot>
-                </table>
-              </div>
-              </div><!-- /.box -->
-            
-              <!-- /.table-responsive -->
-              </div><!-- /.box-body -->
-                </section>
-              
-                  <!-- /.nav-tabs-custom -->
+                <div class="box-body">
+                    <table class="table table-bordered table-striped" id="table">
+                        <tbody>
+                        <tr>
+                            <th>شناسه تراکنش مربوط</th>
+                            <th>ساعت</th>
+                            <th>تاریخ</th>
+                            <th>مبلغ ( {{currency}})</th>
+                            <th>نوع</th>
+                        </tr>
+                        <tr>
+                            <td><a href='{% static "panel/pages/customer/transaction_details.html" %}'>OR9842</a></td>
+                            <td>22:10</td>
+                            <td>11-7-2014</td>
+                            <td>50000</td>
+                            <td><span class="label label-success">واریز</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href='{% static "panel/pages/customer/transaction_details.html" %}'>OR9842</a></td>
+                            <td>22:10</td>
+                            <td>11-7-2014</td>
+                            <td>50000</td>
+                            <td><span class="label label-success">واریز</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href='{% static "panel/pages/customer/transaction_details.html" %}'>OR9842</a></td>
+                            <td>22:10</td>
+                            <td>11-7-2014</td>
+                            <td>50000</td>
+                            <td><span class="label label-success">واریز</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href='{% static "panel/pages/customer/transaction_details.html" %}'>OR9842</a></td>
+                            <td>22:10</td>
+                            <td>11-7-2014</td>
+                            <td>50000</td>
+                            <td><span class="label label-danger">برداشت</span></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>شناسه تراکنش مربوط</th>
+                            <th>ساعت</th>
+                            <th>تاریخ</th>
+                            <th>مبلغ ( {{currency}})</th>
+                            <th>نوع</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div><!-- /.box -->
 
-              
-          
-             
+            <!-- /.table-responsive -->
+        </div><!-- /.box-body -->
+</section>
 
-            
-                </section><!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-          </div>
+<!-- /.nav-tabs-custom -->
 
-          </div><!-- /.row (main row) -->
 
-        </section><!-- /.content -->
+</section><!-- /.Left col -->
+<!-- right col (We are only adding the ID to make the widgets sortable)-->
+</div>
+
+</div><!-- /.row (main row) -->
+
+</section><!-- /.content -->
 {% endblock main_content %}
