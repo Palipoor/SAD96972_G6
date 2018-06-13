@@ -29,11 +29,6 @@
                     {% csrf_token %}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputFile">تصویر کاربری</label>
-                            <input type="file" id="exampleInputFile" name="profile-image">
-                            <p class="help-block">تصویر انتخابی نباید بزرگتر از یک مگابایت باشد.</p>
-                        </div>
-                        <div class="form-group">
                             <label>نام کاربری</label>
                             {% render_field form.username class="form-control" placeholder="نام کاربری جدید" %}
                         </div>
