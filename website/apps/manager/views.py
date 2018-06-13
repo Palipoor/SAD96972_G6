@@ -26,7 +26,7 @@ class ManagerPasswordChangeView(IsLoggedInView, IsManager, PasswordChangeView):
 
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
-    # model = Company
+    #model = Company
     template_name = "manager/settings.html"
     fields = ['english_name', 'persian_name', 'account', 'photo']
     # todo incomplete

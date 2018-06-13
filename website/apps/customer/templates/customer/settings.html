@@ -1,118 +1,113 @@
-{% extends "customer/mother_panel.html" %} 
-{% load static staticfiles %} 
+{% extends "customer/mother_panel.html" %}
+{% load static staticfiles widget_tweaks %}
 
-{% block title %} 
+{% block title %}
 ویرایش مشخصات کاربری
-{% endblock title %} 
+{% endblock title %}
 
 {% block content_header_text %}
 <h1>ویرایش مشخصات کاربری</h1>
-{{ block.super }} 
-{% endblock content_header_text %} 
+{{ block.super }}
+{% endblock content_header_text %}
 
 {% block content_header_link %}
 {{ block.super }}
-<li class="active"> ویرایش مشخصات کاربری </li>
+<li class="active"> ویرایش مشخصات کاربری</li>
 {% endblock content_header_link %}
 
 {% block main_content %}
 <section class="content">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="box">
-        <div class="box-header with-border">
-          <h4>مشخصات شخصی</h4>
-        </div>
-        <!--box header-->
-        <div class="box-body">
-          <form role="form">
-            <div class="form-group">
-              <label for="exampleInputFile">تصویر کاربری</label>
-              <input type="file" id="exampleInputFile">
-              <p class="help-block">تصویر انتخابی نباید بزرگتر از یک مگابایت باشد.</p>
+    <form role="form" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h4>مشخصات شخصی</h4>
+                    </div>
+                    <!--box header-->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>نام کاربری</label>
+                            {% render_field form.username class="form-control" placeholder="نام کاربری جدید" %}
+                        </div>
+                        <div class="form-group">
+                            <label>نام و نام خانوادگی</label>
+                            {% render_field form.persian_first_name class="form-control" placeholder="نام فارسی جدید" %}
+                        </div>
+                        <div class="form-group">
+                            {% render_field form.persian_last_name class="form-control" placeholder="نام خانوادگی فارسی جدید" %}
+                        </div>
+                        <div class="form-group">
+                            <label> نام و نام خانوادگی لاتین</label>
+                            {% render_field form.first_name class="form-control" placeholder="نام لاتین جدید" %}
+                        </div>
+                        <div class="form-group">
+                            {% render_field form.last_name class="form-control" placeholder="نام خانوادگی لاتین جدید" %}
+                        </div>
+                    </div>
+                    <div class="box-footer" allign="Left">
+                        <button type="submit" name="button_1" class="btn btn-primary">اعمال تغییرات</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label>نام کاربری</label>
-              <input type="text" class="form-control" placeholder="نام کاربری جدید">
+            <div class="col-lg-4 col-xs-4">
+                <div class="box" allign="center">
+                    <div class="box-header with-border">
+                        <h4>راه‌های ارتباطی</h4>
+                    </div>
+                    <!--box header-->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>آدرس ایمیل</label>
+                            {% render_field form.email class="form-control" placeholder="ایمیل جدید" %}
+                        </div>
+                        <div class="form-group">
+                            <label>شمارهٔ تماس</label>
+                            {% render_field form.phone_number class="form-control" placeholder="شماره تماس جدید" %}
+                        </div>
+                        <div class="form-group">
+                            <label>راه تماس</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="email" checked>ایمیل
+                                </label>
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="phone"> پیامک
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer" allign="Left">
+                        <button type="submit" name="button_2" class="btn btn-primary">اعمال تغییرات</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label>نام و نام خانوادگی</label>
-              <input type="text" class="form-control" placeholder="نام جدید">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="نام خانوادگی جدید">
-            </div>
-            <div class="form-group">
-              <label> نام و نام خانوادگی لاتین</label>
-              <input type="text" class="form-control" placeholder="Name">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Family Name">
-            </div>
-          </form>
-        </div>
-        <div class="box-footer" allign="Left">
-          <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-xs-4">
-      <div class="box" allign="center">
-        <div class="box-header with-border">
-          <h4>راه‌های ارتباطی</h4>
-        </div>
-        <!--box header-->
-        <div class="box-body">
-          <form role="form">
-            <div class="form-group">
-              <label>آدرس ایمیل</label>
-              <input type="email" class="form-control" placeholder="newemail@gmail.com">
-            </div>
-            <div class="form-group">
-              <label>شمارهٔ تماس</label>
-              <input type="text" class="form-control" placeholder="شماره تماس جدید">
-            </div>
-            <div class="form-group">
-              <label>راه تماس</label>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="email" checked> ایمیل
-                </label>
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="phone"> پیامک
-                </label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="box-footer" allign="Left">
-          <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-        </div>
-      </div>
-      <!--box body-->
 
-    </div>
-    <div class="col-lg-4 col-xs-4">
-      <div class="box" allign="center">
-        <div class="box-header with-border">
-          <h4>اطلاعات حساب</h4>
-        </div>
-        <!--box header-->
-        <div class="box-body">
-          <form role="form">
-            <div class="form-group">
-              <label>شمارهٔ حساب </label>
-              <input type="text" class="form-control" placeholder="شمارهٔ حساب جدید">
+            <div class="col-lg-4 col-xs-4">
+                <div class="box" allign="center">
+                    <div class="box-header with-border">
+                        <h4>اطلاعات حساب</h4>
+                    </div>
+                    <!--box header-->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>شمارهٔ حساب </label>
+                            {% render_field form.account_number class="form-control" placeholder="شمارهٔ حساب جدید" %}
+                        </div>
+                    </div>
+                    <!--box body-->
+                    <div class="box-footer" allign="Left">
+                        <button type="submit" name="button_3" class="btn btn-primary">اعمال تغییرات</button>
+                    </div>
+                </div>
             </div>
-          </form>
+
         </div>
-        <!--box body-->
-        <div class="box-footer" allign="Left">
-          <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-        </div>
-      </div>
+    </form>
     </div>
-  </div>
+    <!--box body-->
+
 </section>
 </div>
 </div>

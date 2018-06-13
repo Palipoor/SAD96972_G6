@@ -8,6 +8,7 @@ import os
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 
+from apps.customer.Forms import CustomerSettingsForm
 from apps.main.views import IsLoggedInView, IsCustomer
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
@@ -71,14 +72,19 @@ class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView)
 
 
 class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
-    model = Customer
+    form_class = CustomerSettingsForm
     template_name = 'customer/settings.html'
+    success_url = reverse_lazy('customer:settings')
 
-    def get_context_data(self, **kwargs):
-        return ""  # todo query bezan oon customer ro biab
+    def get_object(self, queryset=None):
+        username = self.request.user.username
+        return Customer.objects.get(username=username)
 
-    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'email', 'phone',
-              'account-number', 'photo']
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        context = {}
+        self.object = context.update(clean)
+        return super(CustomerSettingsView, self).form_valid(form)
 
 
 class TransactionsListView(IsLoggedInView, IsCustomer, ListView):
