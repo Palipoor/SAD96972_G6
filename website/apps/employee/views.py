@@ -5,8 +5,11 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
+from django.urls import reverse_lazy
 from django.views.generic import UpdateView, FormView, ListView
 
+from apps.employee.Forms import EmployeeSettingsForm
+from apps.employee.models import Employee
 from apps.main.views import IsLoggedInView, IsEmployee
 
 
@@ -20,5 +23,16 @@ class EmployeePasswordChangeView(PasswordChangeView, IsEmployee):
 
 
 class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
+    form_class = EmployeeSettingsForm
     template_name = 'employee/settings.html'
-    # todo incomplete
+    success_url = reverse_lazy('employee:settings')
+
+    def get_object(self, queryset=None):
+        username = self.request.user.username
+        return Employee.objects.get(username=username)
+
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        context = {}
+        self.object = context.update(clean)
+        return super(EmployeeSettingsView, self).form_valid(form)
