@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 
 from apps.customer.Forms import CustomerSettingsForm
-from apps.main.views import IsLoggedInView, IsCustomer
+from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
 
@@ -65,6 +65,8 @@ class GRECreationView(TransactionCreationView):
 
 # todo add other forms as well
 
+class CustomerProfile(IsCustomer, CustomerDetailsView):
+    ""
 
 class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView):
     success_url = reverse_lazy('customer:change_password')

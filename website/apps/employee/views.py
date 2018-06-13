@@ -10,16 +10,19 @@ from django.views.generic import UpdateView, FormView, ListView
 
 from apps.employee.Forms import EmployeeSettingsForm
 from apps.employee.models import Employee
-from apps.main.views import IsLoggedInView, IsEmployee
+from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView
 
 
 class EmployeeDashboardView(IsLoggedInView, IsEmployee, ListView, FormView):  # todo not sure if this works:/
     ""
 
 
+class EmployeeProfile(IsEmployee, EmployeeDetailsView):
+    ""
+
 class EmployeePasswordChangeView(PasswordChangeView, IsEmployee):
-    def get_template_names(self):
-        return 'employee/change_password.html'
+    success_url = reverse_lazy('employee:change_password')
+    template_name =  'employee/change_password.html'
 
 
 class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):

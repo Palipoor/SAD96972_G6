@@ -10,7 +10,7 @@ from django.views.generic.list import BaseListView, MultipleObjectMixin
 from apps.customer.models import Customer
 from apps.employee.models import Employee
 from apps.main.MultiForm import MultiFormsView
-from apps.main.views import IsLoggedInView, DetailsView, IsManager
+from apps.main.views import IsLoggedInView, DetailsView, IsManager, CustomerDetailsView, EmployeeDetailsView
 from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
     CustomerAccessRemovalForm
 
@@ -32,19 +32,11 @@ class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
     # todo incomplete
 
 
-class EmployeeDetailsView(DetailsView):
-    template_name = 'manageer/employee_details.html'
+class CustomerDetailsForManager(IsManager, CustomerDetailsView):
+    ""
 
-    # model = Employee
-
-    # def get_object(self, queryset=None):
-    #   return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
-
-    def dispatch(self, request, *args, **kwargs):
-        self.employee_id = kwargs['employee_id']
-        # todo incomplete
-
-
+class EmployeeDetailsForManager(IsManager, EmployeeDetailsView):
+    ""
 class CustomersListView(IsLoggedInView, IsManager, FormView):
     template_name = "manager/users.html"
     form_class = CustomerAccessRemovalForm
