@@ -15,12 +15,13 @@ from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, 
     CustomerAccessRemovalForm
 
 
-class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):
+class ManagerDashboardView(IsLoggedInView, IsManager, View):
     template_name = "manager/dashboard.html"
     ""
 
 
 class ManagerPasswordChangeView(IsLoggedInView, IsManager, PasswordChangeView):
+    success_url = reverse_lazy('manager:change_password')
     template_name = 'manager/change_password.html'
 
 

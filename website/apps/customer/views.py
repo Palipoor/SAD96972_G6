@@ -5,46 +5,69 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 
 from apps.main.views import IsLoggedInView, IsCustomer
-from apps.customer.models import Customer
+from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
 
 class CustomerDashboardView(IsLoggedInView, IsCustomer, ListView):
     template_name = "customer/dashboard.html"
 
 
-class TransactionCreationView(IsLoggedInView, CreateView):
+class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
     ""
 
 
 class ReverseChargeCreationView(TransactionCreationView):
     template_name = "customer/reverse_charge.html"
-    # todo incomplete
+
+    class Meta:
+        model = InternalTrans
+        # todo incomplete
 
 
 class ForeignPaymentCreationView(TransactionCreationView):
     template_name = "customer/foreign_payment.html"
-    # todo incomplete
+
+    class Meta:
+        model = ForeignTrans
+        # todo incomplete
 
 
 class AnonymousPaymentCreationView(TransactionCreationView):
     template_name = "customer/anonymous_payment.html"
-    # todo incomplete
+
+    class Meta:
+        model = UnknownTrans
+        # todo incomplete
 
 
 class ApplicationFeeCreationView(TransactionCreationView):
     template_name = "customer/application_fee.html"
-    # todo incomplete
+
+    class Meta:
+        model = UniversityTrans
+        # todo incomplete
+
+
+class TOFELCreationView(TransactionCreationView):
+    class Meta:
+        model = TOFEL
+
+
+class GRECreationView(TransactionCreationView):
+    class Meta:
+        model = GRE
 
 
 # todo add other forms as well
 
 
 class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView):
-    def get_template_names(self):
-        return 'customer/change_password.html'
+    success_url = reverse_lazy('customer:change_password')
+    template_name = 'customer/change_password.html'
 
 
 class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):

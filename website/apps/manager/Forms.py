@@ -9,7 +9,6 @@ from django.core.mail import send_mail
 from apps.main.models import GenUser
 
 
-
 class EmployeeCreationForm(forms.ModelForm):
     class Meta:
         model = Employee
@@ -41,7 +40,6 @@ class ChangeSalaryForm(forms.Form):
             return False
 
         return True
-
 
 
 class EmployeeAccessRemovalForm(forms.Form):
