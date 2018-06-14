@@ -11,7 +11,7 @@ from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin, ProcessFormView
 from django.shortcuts import redirect
 from braces.views import GroupRequiredMixin
-
+from views import Compilation
 from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm
 from apps.customer.models import Customer
 
@@ -47,6 +47,17 @@ class HasAccessToTransactions(GroupRequiredMixin):
 
 class WalletView(IsLoggedInView, IsWalletUser, FormView):
     user_type = ""
+    currency_type = {"rial":"ریال",
+                    "dollar":"دلار",
+                    "euro":"یورو",
+                    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['currency'] = self.currency_type[self.kwargs['currency']]
+        if (self.user_type == "Customer"):
+            context,user =  Compilation.get_customer_context_data(context, self.request.user.username) 
+        context['credit'] = context[self.kwargs['currency']+"_credit"]
+        return context
 
     def get_form_kwargs(self):
         kwargs = super(WalletView, self).get_form_kwargs()
@@ -78,15 +89,15 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
 
     # todo form
     # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
-    def wallet(self, currency, user_type):
-        if currency == "dollar":
-            currency = "دلار"
-        elif currency == "euro":
-            currency = "یورو"
-        elif currency == "rial":
-            currency = "ریال"
-        template = loader.get_template(user_type + "/wallet.html")
-        return HttpResponse(template.render({"currency": currency}))
+    # def wallet(self, currency, user_type):
+    #     if currency == "dollar":
+    #         currency = "دلار"
+    #     elif currency == "euro":
+    #         currency = "یورو"
+    #     elif currency == "rial":
+    #         currency = "ریال"
+    #     template = loader.get_template(user_type + "/wallet.html")
+    #     return HttpResponse(template.render({"currency": currency}))
 
 
 class DetailsView(IsLoggedInView, DetailView):
