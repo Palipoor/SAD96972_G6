@@ -5,20 +5,37 @@ from django.http import HttpResponse
 from django.template import Context, loader
 import os
 # Create your views here.
+from django.urls import reverse_lazy
 from django.views.generic import UpdateView, FormView, ListView
 
-from apps.main.views import IsLoggedInView, IsEmployee
+from apps.employee.Forms import EmployeeSettingsForm
+from apps.employee.models import Employee
+from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView
 
 
 class EmployeeDashboardView(IsLoggedInView, IsEmployee, ListView, FormView):  # todo not sure if this works:/
     ""
 
 
+class EmployeeProfile(IsEmployee, EmployeeDetailsView):
+    ""
+
 class EmployeePasswordChangeView(PasswordChangeView, IsEmployee):
-    def get_template_names(self):
-        return 'employee/change_password.html'
+    success_url = reverse_lazy('employee:change_password')
+    template_name =  'employee/change_password.html'
 
 
 class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
+    form_class = EmployeeSettingsForm
     template_name = 'employee/settings.html'
-    # todo incomplete
+    success_url = reverse_lazy('employee:settings')
+
+    def get_object(self, queryset=None):
+        username = self.request.user.username
+        return Employee.objects.get(username=username)
+
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        context = {}
+        self.object = context.update(clean)
+        return super(EmployeeSettingsView, self).form_valid(form)

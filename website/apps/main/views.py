@@ -14,6 +14,7 @@ from braces.views import GroupRequiredMixin
 from views import Compilation
 from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm
 from apps.customer.models import Customer
+from apps.manager.models import Manager
 
 
 class IsLoggedInView(LoginRequiredMixin):
@@ -44,8 +45,8 @@ class HasAccessToTransactions(GroupRequiredMixin):
     group_required = [u"Manager", u"Employee"]
 
 
-
 class WalletView(IsLoggedInView, IsWalletUser, FormView):
+    currency = ""
     user_type = ""
     currency_type = {"rial":"ریال",
                     "dollar":"دلار",
@@ -65,20 +66,22 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
         return kwargs
 
     def dispatch(self, request, *args, **kwargs):
-        currency = kwargs['currency']
-        user = request.user
-        isManager = user.groups.filter(name='Manager').exists()
-        isCustomer = user.groups.filter(name='Customer').exists()
+        self.currency = kwargs['currency']
+        self.user = request.user
+        isManager = self.user.groups.filter(name='Manager').exists()
+        isCustomer = self.user.groups.filter(name='Customer').exists()
         if isManager and self.user_type == "Manager":
             self.template_name = 'manager/wallet.html'
+            self.user_type = "Manager"
         elif isCustomer and self.user_type == "Customer":
             self.template_name = 'customer/wallet.html'
+            self.user_type = "Customer"
         else:
             return HttpResponseForbidden()
 
-        if currency == 'rial':
+        if self.currency == 'rial':
             self.form_class = RialChargeForm
-        elif currency == 'dollar':
+        elif self.currency == 'dollar':
             self.form_class = DollarChargeForm
         else:
             self.form_class = EuroChargeForm
@@ -99,6 +102,25 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
     #     template = loader.get_template(user_type + "/wallet.html")
     #     return HttpResponse(template.render({"currency": currency}))
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.currency == "rial":
+            if self.user_type == "Customer":
+                data['credit'] = Customer.objects.get(username=self.user.username).rial_credit
+            else:
+                data['credit'] = Manager.objects.get(username=self.user.username).company_rial_credit
+        elif self.currency == "dollar":
+            if self.user_type == "Customer":
+                data['credit'] = Customer.objects.get(username=self.user.username).dollar_credit
+            else:
+                data['credit'] = Manager.objects.get(username=self.user.username).company_dollar_credit
+        else:
+            if self.user_type == "Customer":
+                data['credit'] = Customer.objects.get(username=self.user.username).euro_credit
+            else:
+                data['credit'] = Manager.objects.get(username=self.user.username).company_euro_credit
+        return data
+
 
 class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
@@ -108,6 +130,10 @@ class TransactionDetailsView(DetailsView):
     def dispatch(self, request, *args, **kwargs):
         self.transaction_id = kwargs['transaction_id']
         # todo incomplete
+
+
+class AllTransactionDetails(HasAccessToTransactions, TransactionDetailsView):
+    ""
 
 
 class NotificationsView(IsLoggedInView, ListView):
@@ -123,6 +149,17 @@ class CustomerDetailsView(DetailsView, ListView):
 
     def get_context_data(self, **kwargs):
         return []  # todo query bezan transaction haye user e marboot ro biar va khode adame ro.
+
+
+class EmployeeDetailsView(DetailsView):
+    # model = Employee
+
+    # def get_object(self, queryset=None):
+    #   return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
+
+    def dispatch(self, request, *args, **kwargs):
+        self.employee_id = kwargs['employee_id']
+        # todo incomplete
 
 
 class Register(FormView):

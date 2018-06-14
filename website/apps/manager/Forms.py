@@ -1,11 +1,12 @@
 import random
 from django import forms
+
+from apps.customer.models import Customer
 from apps.employee.models import Employee
 from django.db.models import AutoField
 from django.core.mail import send_mail
 
 from apps.main.models import GenUser
-
 
 
 class EmployeeCreationForm(forms.ModelForm):
@@ -41,17 +42,31 @@ class ChangeSalaryForm(forms.Form):
         return True
 
 
-
-class AccessRemovalForm(forms.Form):
+class EmployeeAccessRemovalForm(forms.Form):
     username = forms.CharField(max_length=100, required=True, label='نام کاربری')
     reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
 
     def is_valid(self):
-        valid = super(AccessRemovalForm, self).is_valid()
+        valid = super(EmployeeAccessRemovalForm, self).is_valid()
         if not valid:
             return False
         if not Employee.objects.filter(username=self.cleaned_data['username']).exists():
             self.errors['username'] = 'چنین کارمندی وجود ندارد.'
+            return False
+
+        return True
+
+
+class CustomerAccessRemovalForm(forms.Form):
+    username = forms.CharField(max_length=100, required=True, label='نام کاربری')
+    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
+
+    def is_valid(self):
+        valid = super(CustomerAccessRemovalForm, self).is_valid()
+        if not valid:
+            return False
+        if not Customer.objects.filter(username=self.cleaned_data['username']).exists():
+            self.errors['username'] = 'چنین مشتری ای وجود ندارد'
             return False
 
         return True

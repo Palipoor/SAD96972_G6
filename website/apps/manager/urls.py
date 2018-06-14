@@ -19,7 +19,8 @@ from django.urls import path
 from apps.main.views import WalletView, NotificationsView, TransactionDetailsView, \
     CustomerDetailsView
 from apps.manager.views import ManagerPasswordChangeView, CompanySettingsView, \
-    ManagerDashboardView, EmployeeDetailsView, EmployeeListView, CustomersListView
+    ManagerDashboardView, EmployeeDetailsView, EmployeeListView, CustomersListView, EmployeeDetailsForManager, \
+    CustomerDetailsForManager
 
 urlpatterns = [
     path('dashboard/', ManagerDashboardView.as_view(), name='dashboard'),
@@ -28,8 +29,8 @@ urlpatterns = [
     path('<id>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('employee_users/', EmployeeListView.as_view(), name='employee_users'),
     path('customer_users/', CustomersListView.as_view(), name='customer_users'),
-    path('<user_id>_customer_details/', CustomerDetailsView.as_view(), name='customer_details'),
-    path('<employee_id>_employee_details/', EmployeeDetailsView.as_view(), name='employee_details'),
+    path('<user_id>_customer_details/', CustomerDetailsForManager.as_view(), name='customer_details'),
+    path('<employee_id>_employee_details/', EmployeeDetailsForManager.as_view(), name='employee_details'),
     path('<currency>_wallet/', WalletView.as_view(user_type = "Manager"), name='wallet'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),
 

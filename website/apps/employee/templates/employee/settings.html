@@ -1,57 +1,62 @@
-{% extends "employee/mother_panel.html" %} 
-{% load static staticfiles %} 
+{% extends "employee/mother_panel.html" %}
+{% load static staticfiles  widget_tweaks %}
 
-{% block title %} 
+{% block title %}
 ویرایش مشخصات کاربری
-{% endblock title %} 
+{% endblock title %}
 
 {% block content_header_text %}
 <h1>ویرایش مشخصات کاربری</h1>
-{{ block.super }} 
-{% endblock content_header_text %} 
+{{ block.super }}
+{% endblock content_header_text %}
 
 {% block content_header_link %}
 {{ block.super }}
-<li class="active"> ویرایش مشخصات کاربری </li>
+<li class="active"> ویرایش مشخصات کاربری</li>
 {% endblock content_header_link %}
 
 {% block main_content %}
 <section class="content">
-<!-- Small boxes (Stat box) -->
-<div class="row">
-  <div class="col-md-4">
-    <div class="box">
-      <div class="box-header with-border">
-        <h4>مشخصات شخصی</h4>
-      </div>
-      <!--box header-->
-      <div class="box-body">
-        <form role="form">
-          <div class="form-group">
-            <label for="exampleInputFile">تصویر کاربری</label>
-            <input type="file" id="exampleInputFile" name="profile-image">
-            <p class="help-block">تصویر انتخابی نباید بزرگتر از یک مگابایت باشد.</p>
-          </div>
-          <div class="form-group">
-            <label>نام کاربری</label>
-            <input type="text" name="username"class="form-control" placeholder="نام کاربری جدید">
-          </div>
-          <div class="form-group">
-            <label>نام و نام خانوادگی</label>
-            <input type="text" name="name" class="form-control" placeholder="نام">
-          </div>
-          <div class="form-group">
-            <input type="text"  name="family-name"class="form-control" placeholder="نام خانوادگی">
-          </div>
-        </form>
-      </div>
-      <div class="box-footer" allign="Left">
-        <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
-      </div>
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h4>مشخصات شخصی</h4>
+                </div>
+                <!--box header-->
+                <form role="form" method="POST">
+                    {% csrf_token %}
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>نام کاربری</label>
+                            {% render_field form.username class="form-control" placeholder="نام کاربری جدید" %}
+                        </div>
+                        <div class="form-group">
+                            <label>نام و نام خانوادگی</label>
+                            {% render_field form.persian_first_name class="form-control" placeholder="نام فارسی جدید" %}
+                        </div>
+                        <div class="form-group">
+                            {% render_field form.persian_last_name class="form-control" placeholer="نام خانوادگی فارسی جدید" %}
+                        </div>
+                        <div class="form-group">
+                            <label> نام و نام خانوادگی لاتین</label>
+                            {% render_field form.first_name class="form-control" placeholder="نام لاتین جدید" %}
+                        </div>
+                        <div class="form-group">
+                            {% render_field form.last_name class="form-control" placeholder="نام خانوادگی لاتین جدید" %}
+                        </div>
+                        <div class="box-footer" allign="Left">
+                            <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
-  </div>
-</div>
-<!-- /.row -->
+    </div>
+    <!-- /.row -->
 
 </section>
 {% endblock main_content %}

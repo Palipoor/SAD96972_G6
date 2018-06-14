@@ -10,13 +10,18 @@ from django.views.generic import CreateView, UpdateView, ListView,TemplateView
 from apps.main.views import IsLoggedInView, IsCustomer
 from apps.customer.models import Customer
 from views import Compilation
-
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, ListView
+from apps.customer.Forms import CustomerSettingsForm
+from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
+from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
 class CustomerTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
         context,customer = Compilation.get_customer_context_data(context, self.request.user.username)
         return context
+
 
 class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
     def get_context_data(self, **kwargs):
@@ -38,47 +43,76 @@ class CustomerDashboardView(CustomerTemplateView, IsLoggedInView, IsCustomer):
 
 
 
-class TransactionCreationView(IsLoggedInView, CreateView):
+class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
     ""
 
 
 class ReverseChargeCreationView(TransactionCreationView):
     template_name = "customer/reverse_charge.html"
-    # todo incomplete
+
+    class Meta:
+        model = InternalTrans
+        # todo incomplete
 
 
 class ForeignPaymentCreationView(TransactionCreationView):
     template_name = "customer/foreign_payment.html"
-    # todo incomplete
+
+    class Meta:
+        model = ForeignTrans
+        # todo incomplete
 
 
 class AnonymousPaymentCreationView(TransactionCreationView):
     template_name = "customer/anonymous_payment.html"
-    # todo incomplete
+
+    class Meta:
+        model = UnknownTrans
+        # todo incomplete
 
 
 class ApplicationFeeCreationView(TransactionCreationView):
     template_name = "customer/application_fee.html"
-    # todo incomplete
+
+    class Meta:
+        model = UniversityTrans
+        # todo incomplete
+
+
+class TOFELCreationView(TransactionCreationView):
+    class Meta:
+        model = TOFEL
+
+
+class GRECreationView(TransactionCreationView):
+    class Meta:
+        model = GRE
 
 
 # todo add other forms as well
 
+class CustomerProfile(IsCustomer, CustomerDetailsView):
+    ""
 
 class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView):
-    def get_template_names(self):
-        return 'customer/change_password.html'
+    success_url = reverse_lazy('customer:change_password')
+    template_name = 'customer/change_password.html'
 
 
 class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
-    model = Customer
+    form_class = CustomerSettingsForm
     template_name = 'customer/settings.html'
+    success_url = reverse_lazy('customer:settings')
 
-    def get_context_data(self, **kwargs):
-        return ""  # todo query bezan oon customer ro biab
+    def get_object(self, queryset=None):
+        username = self.request.user.username
+        return Customer.objects.get(username=username)
 
-    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'email', 'phone',
-              'account-number', 'photo']
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        context = {}
+        self.object = context.update(clean)
+        return super(CustomerSettingsView, self).form_valid(form)
 
 
 class TransactionsListView(IsLoggedInView, IsCustomer, ListView):

@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 import os
 # Create your views here.
+from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, View, FormView
 from django.views.generic.edit import ProcessFormView
 from django.views.generic.list import BaseListView, MultipleObjectMixin
@@ -9,46 +10,56 @@ from django.views.generic.list import BaseListView, MultipleObjectMixin
 from apps.customer.models import Customer
 from apps.employee.models import Employee
 from apps.main.MultiForm import MultiFormsView
-from apps.main.views import IsLoggedInView, DetailsView, IsManager
-from apps.manager.Forms import EmployeeCreationForm, AccessRemovalForm, ChangeSalaryForm
+from apps.main.views import IsLoggedInView, DetailsView, IsManager, CustomerDetailsView, EmployeeDetailsView
+from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
+    CustomerAccessRemovalForm
 
 
-class ManagerDashboardView(IsLoggedInView, PermissionRequiredMixin, View):
+class ManagerDashboardView(IsLoggedInView, IsManager, View):
     template_name = "manager/dashboard.html"
     ""
 
 
 class ManagerPasswordChangeView(IsLoggedInView, IsManager, PasswordChangeView):
+    success_url = reverse_lazy('manager:change_password')
     template_name = 'manager/change_password.html'
 
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
-    # model = Company
+    #model = Company
     template_name = "manager/settings.html"
     fields = ['english_name', 'persian_name', 'account', 'photo']
     # todo incomplete
 
 
-class EmployeeDetailsView(DetailsView):
-    template_name = 'manageer/employee_details.html'
+class CustomerDetailsForManager(IsManager, CustomerDetailsView):
+    ""
 
-    # model = Employee
-
-    # def get_object(self, queryset=None):
-    #   return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
-
-    def dispatch(self, request, *args, **kwargs):
-        self.employee_id = kwargs['employee_id']
-        # todo incomplete
-
-
-class CustomersListView(IsLoggedInView, IsManager, ListView, ProcessFormView):
+class EmployeeDetailsForManager(IsManager, EmployeeDetailsView):
+    ""
+class CustomersListView(IsLoggedInView, IsManager, FormView):
     template_name = "manager/users.html"
+    form_class = CustomerAccessRemovalForm
+    success_url = reverse_lazy("manager:customer_users")
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.form_class
+        form = self.get_form(form_class)
+        if form.is_valid():
+            the_customer = Customer.objects.filter(username=form.cleaned_data['username'])[0]
+            the_customer.is_active = False
+            the_customer.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
 
     def get_context_data(self, **kwargs):
         context = super(CustomersListView, self).get_context_data(**kwargs)
+        context['object_list'] = Customer.objects.all()
         context['type'] = "مشتری"
         return context
+
 
     def get_queryset(self):
         return Customer.objects.all()
@@ -56,7 +67,7 @@ class CustomersListView(IsLoggedInView, IsManager, ListView, ProcessFormView):
 
 class EmployeeListView(IsLoggedInView, IsManager, MultiFormsView):
     template_name = "manager/users.html"
-    form_classes = {'add_employee': EmployeeCreationForm, 'remove_access': AccessRemovalForm,
+    form_classes = {'add_employee': EmployeeCreationForm, 'remove_access': EmployeeAccessRemovalForm,
                     'change_salary': ChangeSalaryForm}
 
     def get_context_data(self, **kwargs):
@@ -88,6 +99,6 @@ class EmployeeListView(IsLoggedInView, IsManager, MultiFormsView):
         the_employee = Employee.objects.filter(username=form.cleaned_data['username'])[0]
         the_employee.is_active = False
         the_employee.save()
-        new_form = AccessRemovalForm()
+        new_form = EmployeeAccessRemovalForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
         return self.render_to_response(context)

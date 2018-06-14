@@ -62,7 +62,7 @@ class IBT(LangTest):
     date = models.DateTimeField(null=False)
 
 
-class TOEFL(IBT):
+class TOFEL(IBT):
     id_types = (
         (0, 'Passport'),
         (1, 'National ID'),
