@@ -102,24 +102,24 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
     #     template = loader.get_template(user_type + "/wallet.html")
     #     return HttpResponse(template.render({"currency": currency}))
 
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        if self.currency == "rial":
-            if self.user_type == "Customer":
-                data['credit'] = Customer.objects.get(username=self.user.username).rial_credit
-            else:
-                data['credit'] = Manager.objects.get(username=self.user.username).company_rial_credit
-        elif self.currency == "dollar":
-            if self.user_type == "Customer":
-                data['credit'] = Customer.objects.get(username=self.user.username).dollar_credit
-            else:
-                data['credit'] = Manager.objects.get(username=self.user.username).company_dollar_credit
-        else:
-            if self.user_type == "Customer":
-                data['credit'] = Customer.objects.get(username=self.user.username).euro_credit
-            else:
-                data['credit'] = Manager.objects.get(username=self.user.username).company_euro_credit
-        return data
+    # def get_context_data(self, **kwargs):
+    #     data = super().get_context_data(**kwargs)
+    #     if self.currency == "rial":
+    #         if self.user_type == "Customer":
+    #             data['credit'] = Customer.objects.get(username=self.user.username).rial_credit
+    #         else:
+    #             data['credit'] = Manager.objects.get(username=self.user.username).company_rial_credit
+    #     elif self.currency == "dollar":
+    #         if self.user_type == "Customer":
+    #             data['credit'] = Customer.objects.get(username=self.user.username).dollar_credit
+    #         else:
+    #             data['credit'] = Manager.objects.get(username=self.user.username).company_dollar_credit
+    #     else:
+    #         if self.user_type == "Customer":
+    #             data['credit'] = Customer.objects.get(username=self.user.username).euro_credit
+    #         else:
+    #             data['credit'] = Manager.objects.get(username=self.user.username).company_euro_credit
+    #     return data
 
 
 class DetailsView(IsLoggedInView, DetailView):
