@@ -52,21 +52,11 @@ public class ProfileReusables {
     public static String invalidPhoneNumber = "1";
     public static String invalidAccountNumber = "1";
 
-    public static String invalidFirstNameError = "نام وارد شده معتبر نیست.";
-    public static String invalidFamilyNameError = "نام خانوادگی وارد شده معتبر نیست.";
-    public static String invalidUsernameError = "نام کاربری وارد شده معتبر نیست.";
-    public static String alreadyRegisteredUsernameError = "نام کاربری وارد شده استفاده شده است.";
     public static String invalidEmailError = "ایمیل وارد شده معتبر نیست.";
-    public static String alreadyRegisteredEmailError = "ایمیل وارد شده استفاده شده‌ است.";
-    public static String invalidPhoneNumberError = "شماره تلفن وارد شده معتبر نیست.";
-    public static String invalidAccountNumberError = "شماره حساب وارد شده معتبر نیست.";
-    public static String alreadyRegisteredAccountNumberError = "شماره حساب وارد شده استفاده شده است.";
     public static String invalidPasswordError = "رمز عبور وارد شده معتبر نیست.";
     public static String invalidPasswordRepaetError = "رمز عبور ها مطابق نیستند.";
     public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
     public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
-
-    public static String panelAddress = ""; //TODO:
 
 
     public static void signUpUser1(WebDriver driver) {

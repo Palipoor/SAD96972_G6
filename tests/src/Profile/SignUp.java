@@ -78,7 +78,7 @@ public class SignUp {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
 
-        assertEquals(errorText, ProfileReusables.invalidFirstNameError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("invalid-first-name-error"));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class SignUp {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
 
-        assertEquals(errorText, ProfileReusables.invalidFamilyNameError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("invalid-family-name-error"));
     }
 
     @Test
@@ -168,7 +168,7 @@ public class SignUp {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
 
-        assertEquals(errorText, ProfileReusables.alreadyRegisteredEmailError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("username-exists"));
     }
 
     @Test
@@ -197,7 +197,7 @@ public class SignUp {
         if (Objects.equals(driver.getTitle(), ProfileReusables.reusableStrings.get("sign-up-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
-        assertEquals(errorText, ProfileReusables.invalidUsernameError);
+        assertEquals(errorText,GeneralReusables.reusableStrings.get("invalid-username-error"));
     }
 
     @Test
@@ -226,7 +226,7 @@ public class SignUp {
         if (Objects.equals(driver.getTitle(), ProfileReusables.reusableStrings.get("sign-up-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
-        assertEquals(errorText, ProfileReusables.alreadyRegisteredUsernameError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("username-exists"));
     }
 
     @Test
@@ -256,7 +256,7 @@ public class SignUp {
         if (Objects.equals(driver.getTitle(), ProfileReusables.reusableStrings.get("sign-up-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
-        assertEquals(errorText, ProfileReusables.invalidPhoneNumberError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("invalid-phone-number-error"));
     }
 
 
@@ -284,7 +284,7 @@ public class SignUp {
         if (driver.getTitle() == ProfileReusables.reusableStrings.get("sign-up-title")) {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
-        assertEquals(errorText, ProfileReusables.invalidAccountNumberError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("invalid-account-number-error"));
     }
 
     @Test
@@ -313,7 +313,7 @@ public class SignUp {
         if (Objects.equals(driver.getTitle(), ProfileReusables.reusableStrings.get("sign-up-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
         }
-        assertEquals(errorText, ProfileReusables.alreadyRegisteredAccountNumberError);
+        assertEquals(errorText, GeneralReusables.reusableStrings.get("username-exists"));
     }
 
 

@@ -23,7 +23,6 @@ public class ManagerReusables {
         reusableStrings.put("customers-page-title", "پنل مدیریت | مشتریان");
     }
 
-    public static String CUSTOMERS_PAGE_TITLE = "پنل مدیریت | مشتریان";
 
     public static boolean customerExists(String username) {
         WebDriver driver = new FirefoxDriver();

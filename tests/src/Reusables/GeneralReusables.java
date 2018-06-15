@@ -21,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralReusables {
 
-    //todo درست کردن این فیلدها
-
     public static double delta = 0.05;
 
     public static final Map<String, String> reusableStrings;
@@ -31,25 +29,23 @@ public class GeneralReusables {
         reusableStrings = new HashMap<String, String>();
         reusableStrings.put("panel-title","پنل مدیریت");
         reusableStrings.put("invalid-transaction-id", "1000");
-        reusableStrings.put("wrong-id-error", "");
-        reusableStrings.put("invalid-amount-error", "");
-        reusableStrings.put("invalid-username-error", "");
-        reusableStrings.put("invalid-email-error", "");
-        reusableStrings.put("invalid-first-name-error", "");
-        reusableStrings.put("invalid-family-name-error", "");
-        reusableStrings.put("invalid-phone-number-error", "");
-        reusableStrings.put("invalid-account-number-error", "");
-        reusableStrings.put("wrong-amount-error", "");
-        reusableStrings.put("wrong-username-error", "");
-        reusableStrings.put("access-denied-error", "");
-        reusableStrings.put("no-such-user-error", "");
-        reusableStrings.put("done-transaction", "");
-        reusableStrings.put("pending-transaction", "");
-        reusableStrings.put("failed-transaction", "");
-        reusableStrings.put("reported-transaction", "");
-        reusableStrings.put("username-exists", "");
-        reusableStrings.put("request-status", "");
-        reusableStrings.put("successfully-sent","");
+        reusableStrings.put("wrong-id-error", "شناسه تراکنش اشتباه است.");
+        reusableStrings.put("invalid-amount-error", "مبلغ وارد شده معتبر نیست.");
+        reusableStrings.put("invalid-username-error", "نام کاربری وارد شده معتبر نیست.");
+        reusableStrings.put("invalid-email-error", "لطفا یک ایمیل معتبر وارد کنید.");
+        reusableStrings.put("invalid-first-name-error", "نام وارد شده معتبر نیست.");
+        reusableStrings.put("invalid-family-name-error", "نام خانوادگی وارد شده معتبر نیست.");
+        reusableStrings.put("invalid-phone-number-error", "شماره تماس وارد شده معتبر نیست.");
+        reusableStrings.put("invalid-account-number-error", "شماره حساب وارد شده معتبر نیست");
+        reusableStrings.put("access-denied-error", "شما به این صفحه دسترسی ندارید.");
+        reusableStrings.put("no-such-user-error", "کاربری با این مشخصات وجود ندارد.");
+        reusableStrings.put("done-transaction", "انجام شده");
+        reusableStrings.put("pending-transaction", "در انتظار");
+        reusableStrings.put("failed-transaction", "ناموفق");
+        reusableStrings.put("reported-transaction", "گزارش شده");
+        reusableStrings.put("username-exists", "کاربری با این نام کاربری قبلا ثبت شده است.");
+        reusableStrings.put("request-status", "شرایط درخواست");
+        reusableStrings.put("successfully-sent","با موفقیت ارسال شد.");
     }
 
     public static void setUpToHomepage(WebDriver driver) {
