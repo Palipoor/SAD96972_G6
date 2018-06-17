@@ -38,6 +38,7 @@ public class RequestDetail {
 
     @Test
     @Order(order = 1)
+    
     public void preConditionTest() {
         List<WebElement> tables = driver.findElements(By.id("table"));
         boolean isTherAnyTransactionsTable = false;
