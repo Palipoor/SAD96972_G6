@@ -15,6 +15,27 @@ from views import Compilation
 from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm
 from apps.customer.models import Customer
 from apps.manager.models import Manager
+import lxml.etree
+import lxml.html
+import requests
+
+
+### returns a dictionary containing dollar and euro prices
+def get_prices():
+    request = requests.get("http://2gheroon.ir")
+    root = lxml.html.fromstring(request.content)
+
+    table_rows = root.xpath('//td[@class = "priceTitle"]')
+    prices = {}
+    for row in table_rows:
+        if 'دلار' in str(row.text):
+            prices['dollar'] = int((row.xpath('./following::td')[0]).text)
+            break
+    for row in table_rows:
+        if 'یورو' in str(row.text):
+            prices['euro'] = int((row.xpath('./following::td')[0]).text)
+            break
+    return prices
 
 
 class IsLoggedInView(LoginRequiredMixin):
@@ -48,16 +69,17 @@ class HasAccessToTransactions(GroupRequiredMixin):
 class WalletView(IsLoggedInView, IsWalletUser, FormView):
     currency = ""
     user_type = ""
-    currency_type = {"rial":"ریال",
-                    "dollar":"دلار",
-                    "euro":"یورو",
-                    }
+    currency_type = {"rial": "ریال",
+                     "dollar": "دلار",
+                     "euro": "یورو",
+                     }
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['currency'] = self.currency_type[self.kwargs['currency']]
         if (self.user_type == "Customer"):
-            context,user =  Compilation.get_customer_context_data(context, self.request.user.username) 
-        context['credit'] = context[self.kwargs['currency']+"_credit"]
+            context, user = Compilation.get_customer_context_data(context, self.request.user.username)
+        context['credit'] = context[self.kwargs['currency'] + "_credit"]
         return context
 
     def get_form_kwargs(self):
@@ -90,36 +112,36 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
         else:
             return self.post(request, *args, **kwargs)
 
-    # todo form
-    # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
-    # def wallet(self, currency, user_type):
-    #     if currency == "dollar":
-    #         currency = "دلار"
-    #     elif currency == "euro":
-    #         currency = "یورو"
-    #     elif currency == "rial":
-    #         currency = "ریال"
-    #     template = loader.get_template(user_type + "/wallet.html")
-    #     return HttpResponse(template.render({"currency": currency}))
+            # todo form
+            # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
+            # def wallet(self, currency, user_type):
+            #     if currency == "dollar":
+            #         currency = "دلار"
+            #     elif currency == "euro":
+            #         currency = "یورو"
+            #     elif currency == "rial":
+            #         currency = "ریال"
+            #     template = loader.get_template(user_type + "/wallet.html")
+            #     return HttpResponse(template.render({"currency": currency}))
 
-    # def get_context_data(self, **kwargs):
-    #     data = super().get_context_data(**kwargs)
-    #     if self.currency == "rial":
-    #         if self.user_type == "Customer":
-    #             data['credit'] = Customer.objects.get(username=self.user.username).rial_credit
-    #         else:
-    #             data['credit'] = Manager.objects.get(username=self.user.username).company_rial_credit
-    #     elif self.currency == "dollar":
-    #         if self.user_type == "Customer":
-    #             data['credit'] = Customer.objects.get(username=self.user.username).dollar_credit
-    #         else:
-    #             data['credit'] = Manager.objects.get(username=self.user.username).company_dollar_credit
-    #     else:
-    #         if self.user_type == "Customer":
-    #             data['credit'] = Customer.objects.get(username=self.user.username).euro_credit
-    #         else:
-    #             data['credit'] = Manager.objects.get(username=self.user.username).company_euro_credit
-    #     return data
+            # def get_context_data(self, **kwargs):
+            #     data = super().get_context_data(**kwargs)
+            #     if self.currency == "rial":
+            #         if self.user_type == "Customer":
+            #             data['credit'] = Customer.objects.get(username=self.user.username).rial_credit
+            #         else:
+            #             data['credit'] = Manager.objects.get(username=self.user.username).company_rial_credit
+            #     elif self.currency == "dollar":
+            #         if self.user_type == "Customer":
+            #             data['credit'] = Customer.objects.get(username=self.user.username).dollar_credit
+            #         else:
+            #             data['credit'] = Manager.objects.get(username=self.user.username).company_dollar_credit
+            #     else:
+            #         if self.user_type == "Customer":
+            #             data['credit'] = Customer.objects.get(username=self.user.username).euro_credit
+            #         else:
+            #             data['credit'] = Manager.objects.get(username=self.user.username).company_euro_credit
+            #     return data
 
 
 class DetailsView(IsLoggedInView, DetailView):
@@ -198,8 +220,9 @@ def login_success(request):
 
 
 def index(request):
+    prices = get_prices()
     template = loader.get_template("main/index.html")
-    return HttpResponse(template.render())
+    return HttpResponse(template.render(prices, request))
 
 
 def register_success(request):
