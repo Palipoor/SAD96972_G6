@@ -1,11 +1,8 @@
 package Employee;
 
 
-import Reusables.EmployeeReusables;
-import Reusables.GeneralReusables;
+import Reusables.*;
 
-import Reusables.ManagerReusables;
-import Reusables.Order;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,7 +25,7 @@ public class ConfirmForeign {
     public static void setUp() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //createNewTransaction(String type);   TODO
+        CustomerReusables.createNewForeign();
         dollarDeposit = ManagerReusables.getCompanyCredit("dollar");
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsAnEmployeeWithoutName(driver);
@@ -47,9 +44,10 @@ public class ConfirmForeign {
     @Test
     @Order(order = 2)
     public void confirm() {
-        //EmployeeReusables.acceptTransactionGivenDetailPage(driver); //TODO!!! it needs a confirm button
-        //TODO!!!: how much does it change? it needs to read the profit and amount of transaction
-        assertEquals( ManagerReusables.getCompanyCredit("rial"), dollarDeposit, 1);
+
+        EmployeeReusables.acceptTransactionGivenDetailPage(driver);
+        assertEquals( ManagerReusables.getCompanyCredit("rial"),
+                dollarDeposit - Integer.parseInt(CustomerReusables.reusableStrings.get("amount")), 1);
 
 
     }

@@ -72,8 +72,8 @@ public class EmployeeReusables {
         GeneralReusables.logout(driver);
     }
     public static void acceptTransactionGivenDetailPage(WebDriver driver) { //TODO
-        WebElement accept = driver.findElement(By.name("accept"));
-        accept.click();
+        //WebElement accept = driver.findElement(By.name("accept"));
+        //accept.click();
         WebElement done = driver.findElement(By.name("done"));
         done.click();
     }
