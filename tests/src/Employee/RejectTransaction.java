@@ -21,28 +21,30 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Reusables.OrderedRunner.class)
 public class RejectTransaction {
     static WebDriver driver;
+    static double  rialDeposit;
     static double personWalletCredit;
-    static double rialDeposit;
 
     @BeforeClass
     public static void setUp() {
+        CustomerReusables.createNewAnonymous();
+
+        rialDeposit = ManagerReusables.getCompanyCredit("rial");
+
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //createNewTransaction(String type);   TODO
-        rialDeposit = ManagerReusables.getCompanyCredit("rial");
         GeneralReusables.setUpToHomepage(driver);
-
-        GeneralReusables.setUpToHomepage(driver);
-
-        GeneralReusables.login(driver, " ", " ");//TODO email and password of customer
+        //GeneralReusables.login(driver, "","" );//TODO password of customer
+        GeneralReusables.loginAsACustomer(driver);
         personWalletCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         GeneralReusables.logout(driver);
-        GeneralReusables.setUpToHomepage(driver);
 
-        GeneralReusables.loginAsAnEmployee(driver);
-//        WebElement cell = ManagerReusables.getNewestRequest(driver);
-//        WebElement link = cell.findElement(By.tagName("a"));
-//        link.click();
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.loginAsAnEmployeeWithoutName(driver);
+        String transactionId = EmployeeReusables.getNewestTransactionId(driver);
+        EmployeeReusables.bringMeTheDetails(transactionId, driver);
+
 
     }
 
@@ -56,16 +58,32 @@ public class RejectTransaction {
     @Test
     @Order(order = 2)
     public void transactionDetail() {
-        WebElement reject = driver.findElement(By.name("reject"));
-        reject.submit(); //or click?
-        //TODO: check the status.
+        EmployeeReusables.rejectTransactionGivenDetailPage(driver);
         GeneralReusables.logout(driver);
-        //TODO: how much does it change?
-        boolean systemCreditCorrectness = ManagerReusables.getCompanyCredit("rial")== rialDeposit; //TODO almost ==
-        GeneralReusables.login(driver, " ", " ");//TODO email and password of customer
+
+
+        boolean systemCreditCorrectness
+                = Math.abs(ManagerReusables.getCompanyCredit("rial") - rialDeposit
+                + Integer.parseInt(CustomerReusables.reusableStrings.get(("amount")))
+                + Integer.parseInt(CustomerReusables.reusableStrings.get(("profit"))) )
+                < 1;
+
+
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        GeneralReusables.setUpToHomepage(driver);
+        //GeneralReusables.login(driver, " ", " ");//TODO email and password of receiver
+        GeneralReusables.loginAsACustomer(driver);
         boolean personCreditCorrectness
-                = WalletUsersReusables.getWalletCredit(driver, "rial") == personWalletCredit;//TODO alnost ==
+                = Math.abs( WalletUsersReusables.getWalletCredit(driver, "rial")- personWalletCredit
+                - Integer.parseInt(CustomerReusables.reusableStrings.get(("amount")))
+                - Integer.parseInt(CustomerReusables.reusableStrings.get(("profit"))) )
+                < 1;
+
         assertTrue(systemCreditCorrectness && personCreditCorrectness);
+
+
+
 
     }
 

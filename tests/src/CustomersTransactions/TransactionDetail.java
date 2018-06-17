@@ -28,11 +28,10 @@ public class TransactionDetail {
     public static void setUp() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        /*GeneralReusables.setUpToHomepage(driver);
+        GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
-        WebElement myTransactions= driver.findElement(By.name("my transactions"));
-        myTransactions.click();*/
-        driver.get("http://127.0.0.1:8000/customer/mytransactions");
+        WebElement myTransactions= driver.findElement(By.name("my-transactions"));
+        myTransactions.click();
 
     }
 

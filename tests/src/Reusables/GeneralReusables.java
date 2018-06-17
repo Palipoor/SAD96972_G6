@@ -28,6 +28,7 @@ public class GeneralReusables {
     static {
         reusableStrings = new HashMap<String, String>();
         reusableStrings.put("panel-title","پنل مدیریت");
+        reusableStrings.put("pishkhan","پیشخوان");
         reusableStrings.put("invalid-transaction-id", "1000");
         reusableStrings.put("wrong-id-error", "شناسه تراکنش اشتباه است.");
         reusableStrings.put("invalid-amount-error", "مبلغ وارد شده معتبر نیست.");

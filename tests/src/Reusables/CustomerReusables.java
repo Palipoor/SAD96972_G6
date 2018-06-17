@@ -20,6 +20,7 @@ public class CustomerReusables {
     static {
         reusableStrings = new HashMap<String, String>();
         reusableStrings.put("amount","10");
+        reusableStrings.put("profit","1");
         reusableStrings.put("anonymous-email","palipoor976@gmail.com");
         reusableStrings.put("anonymous-phone","09379605628");
         reusableStrings.put("foreign-accountNumber","1234567890");

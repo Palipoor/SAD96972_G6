@@ -36,13 +36,13 @@ public class TransactionsView {
     @Reusables.Order(order = 1)
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
+        assertEquals(title, GeneralReusables.reusableStrings.get("pishkhan"));
     }
 
     @Test
     @Order(order = 2)
     public void transaction() {
-        WebElement myTransactions= driver.findElement(By.name("my transactions"));
+        WebElement myTransactions= driver.findElement(By.name("my-transactions"));
         myTransactions.click();
         String title = driver.getTitle();
         assertEquals(title, myTransactionTitle);
@@ -51,7 +51,6 @@ public class TransactionsView {
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        driver.close();
     }
 
 }

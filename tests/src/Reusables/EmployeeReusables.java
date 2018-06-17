@@ -77,6 +77,12 @@ public class EmployeeReusables {
         WebElement done = driver.findElement(By.name("done"));
         done.click();
     }
+    public static void rejectTransactionGivenDetailPage(WebDriver driver) { //TODO
+        //WebElement accept = driver.findElement(By.name("accept"));
+        //accept.click();
+        WebElement done = driver.findElement(By.name("done"));
+        done.click();
+    }
 
     public static void rejectTransaction(String transactionId) {
         WebDriver driver = new FirefoxDriver();
