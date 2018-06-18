@@ -18,9 +18,9 @@ public class ProfileReusables {
     static {
         reusableStrings = new HashMap<String, String>();
         reusableStrings.put("sign-up-title", "سپاا | ثبت‌ نام");
-        reusableStrings.put("log-in-title", "ورود");
-        reusableStrings.put("password-change-title", "");
-        reusableStrings.put("user-details-title", "");
+        reusableStrings.put("log-in-title", "سپاا | ورود");
+        reusableStrings.put("password-change-title", "تغییر پسوورد");
+        reusableStrings.put("user-details-title", "مشخصات مشتری");
         reusableStrings.put("first-name", "");
         reusableStrings.put("sur-name", "");
         reusableStrings.put("username", "");

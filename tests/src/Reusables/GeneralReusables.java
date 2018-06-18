@@ -115,6 +115,17 @@ public class GeneralReusables {
         panel.close();
 
     }
+    public static void backToLogin(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
+        WebElement userMenu = panel.findElement(By.name("user menu"));
+        userMenu.click();
+        WebElement logoutButton = panel.findElement(By.name("logout"));
+        logoutButton.click();
+        setUpToHomepage(panel);
+        // Go to Log In page
+        String linkToOpen = panel.findElement(By.name("log in")).getAttribute("href");
+        panel.get(linkToOpen);
+
+    }
 
     public static int getPrice(String currency) {
         String elementName = currency + "-price";

@@ -36,7 +36,7 @@ public class NotifsView {
     @Order(order = 1)
     public void preConditionTest() {
         String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
+        assertEquals(title, GeneralReusables.reusableStrings.get("pishkhan"));
     }
 
     @Test

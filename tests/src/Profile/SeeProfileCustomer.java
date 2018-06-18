@@ -23,13 +23,15 @@ public class SeeProfileCustomer {
 
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
-        WebElement viewProfileLink = driver.findElement(By.name("")); //TODO : I could not find it.
-        viewProfileLink.click(); //TODO : click??????
+        driver.findElement(By.name("profile-list")).click();
+        driver.findElement(By.name("profile-view")).click();
+
+
 
     }
 
@@ -40,7 +42,7 @@ public class SeeProfileCustomer {
     }
 
     @AfterClass
-    public void tearDown() {
+    public static void tearDown() {
         GeneralReusables.logout(driver);
     }
 

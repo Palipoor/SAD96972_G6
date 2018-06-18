@@ -24,8 +24,7 @@ public class LogOut {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-       // GeneralReusables.loginAsACustomer(driver); //TODO:!!!!!!!!!!!!!
-        GeneralReusables.login(driver, ProfileReusables.reusableStrings.get("email"), ProfileReusables.password1);
+        GeneralReusables.loginAsACustomer(driver);
     }
 
     @Test
@@ -37,8 +36,10 @@ public class LogOut {
     @Test
     public void signOut() {
 
-        WebElement logout = driver.findElement(By.name("logout"));
-        logout.click();
+        WebElement userMenu = driver.findElement(By.name("user menu"));
+        userMenu.click();
+        WebElement logoutButton = driver.findElement(By.name("logout"));
+        logoutButton.click();
 
        //TODO: finally, how to check?
 
