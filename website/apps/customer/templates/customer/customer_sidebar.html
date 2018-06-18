@@ -7,12 +7,12 @@
     </a>
     <ul class="treeview-menu">
             <li class = "active">
-                    <a href='{% url "customer:profile" %}'>
+                    <a name = "profile-view" href='{% url "customer:profile" %}'>
                     <i class="glyphicon glyphicon-chevron-left" name="profile"></i> پروفایل کاربر</a>
                 </li>
         <li>
             <a href='{% url "customer:settings" %}' name = "user-settings">
-                <i class="glyphicon glyphicon-chevron-left"></i> ویرایش مشخصات</a>
+                <i class="glyphicon glyphicon-chevron-left" name="change-detail"></i> ویرایش مشخصات</a>
         </li>
         <li>
             <a href='{% url "customer:change_password" %}' name = "password-change">
