@@ -32,3 +32,7 @@ def customer_details(request, user_id):
 def notifications(request):
     template = loader.get_template("employee/notifications.html")
     return HttpResponse(template.render())
+
+def profile(request):
+    template = loader.get_template("employee/profile.html")
+    return HttpResponse(template.render())

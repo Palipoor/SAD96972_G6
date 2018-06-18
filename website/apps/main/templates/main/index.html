@@ -91,25 +91,25 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
                             <li>
-                                <a href='{% static "#HOME" %}' name="home">خانه</a>
+                                <a href='#HOME' name="home">خانه</a>
                             </li>
                             <li>
-                                <a href='{% static "#ABOUT" %}' name="about">دربارهٔ ما </a>
+                                <a href='#ABOUT' name="about">دربارهٔ ما </a>
                             </li>
                             <li>
-                                <a href='{% static "#FEATURES" %}' name="features">خدمات</a>
+                                <a href='#FEATURES' name="features">خدمات</a>
                             </li>
                             <li>
-                                <a href='{% static "#HISTORY" %}' name="history">تاریخچه</a>
+                                <a href="#HISTORY" name="history">تاریخچه</a>
                             </li>
                             <li>
-                                <a href='{% static "#FINANCE" %}' name="prices">نرخ و مبادله ارز </a>
+                                <a href="#FINANCE" name="prices">نرخ و مبادله ارز </a>
                             </li>
                             <li>
-                                <a href='{% static "#LAW" %}' name="law">قوانین و مقررات</a>
+                                <a href="#LAW" name="law">قوانین و مقررات</a>
                             </li>
                             <li>
-                                <a href='{% static "#CONTACT" %}' name="contact">ارتباط با ما </a>
+                                <a href="#CONTACT" name="contact">ارتباط با ما </a>
                             </li>
                         </ul>
                     </div>
@@ -136,7 +136,7 @@
                                 <br> توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه </p>
                             <small>
                                 <font color="white">عضو سامانه نیستید؟ می‌توانید از </font>
-                                <a href="{% url 'main:register' %}" style="color:orange">اینجا</a>
+                                <a href="{% url 'main:register' %}" name = "sign up"style="color:orange">اینجا</a>
                                 <font color="white"> ثبت نام کنید.</font>
                             </small>
                             <div class="download-btn">
@@ -500,7 +500,7 @@
                         aliquip.</p>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-primary btn-action" href='{% static "panel\pages\examples\register.html" %}' role="button" name="sign up">ثبت نام</a>
+                    <a class="btn btn-primary btn-action" href='{% url "main:register" %}' role="button">ثبت نام</a>
                 </div>
             </div>
         </div>
@@ -592,8 +592,8 @@
                     <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- TITLE -->
                         <div class="inner_about_title" dir="rtl" name="history">
-                            <h2 dir="rtl">تاریخچه</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            <h2 dir="rtl" name = "history-header">تاریخچه</h2>
+                            <p name = "history-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                                 labore et dolore magna aliqua.</p>
                         </div>
                     </div>
@@ -673,9 +673,9 @@
                 <div class="row">
                     <div class="col-md-12  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- TITLE -->
-                        <div class="inner_about_title" dir="rtl" name="history">
-                            <h2 dir="rtl">قوانین و مقررات</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        <div class="inner_about_title" dir="rtl" name="laws">
+                            <h2 dir="rtl" name = "laws-header">قوانین و مقررات</h2>
+                            <p name = "laws-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                                 labore et dolore magna aliqua.</p>
                         </div>
                     </div>

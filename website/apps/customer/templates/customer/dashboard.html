@@ -146,7 +146,7 @@
               <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
             </div>
             <div class="product-info">
-              <a href='{% static "panel/pages/customer/payment_form.html" %}' class="product-title" name = "payment">پرداخت ارزی</a>
+              <a href='{% url "customer:foreign_payment" %}' class="product-title" name = "foreign-payment">پرداخت ارزی</a>
               <span class="product-description">
                 یسری توضیح یسری توضیح یسری توضیح
               </span>
@@ -158,7 +158,7 @@
               <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
             </div>
             <div class="product-info">
-              <a href='{% static "panel/pages/customer/application_fee_form.html" %}' class="product-title" name = "application-fee">پرداخت هزینه ثبت نام و یا شهریه دانشگاه </a>
+              <a href='{% url "customer:application_fee" %}' class="product-title" name = "application-fee">پرداخت هزینه ثبت نام و یا شهریه دانشگاه </a>
               <span class="product-description">
                 یسری توضیح یسری توضیح یسری توضیح
               </span>
@@ -170,7 +170,7 @@
               <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
             </div>
             <div class="product-info">
-              <a href='{% static "panel/pages/customer/anonymous_payment_form.html" %}' class="product-title" name = "anonymous-payment">پرداخت به صورت ناشناس </a>
+              <a href='{% url "customer:anonymous_payment" %}' class="product-title" name = "anonymous-payment">پرداخت به صورت ناشناس </a>
               <span class="product-description">
                 یسری توضیح یسری توضیح یسری توضیح
               </span>
@@ -182,7 +182,7 @@
               <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
             </div>
             <div class="product-info">
-              <a href='{% static "panel/pages/customer/reverse_charge.html" %}' class="product-title" name = "reverse-charge">برداشت از کیف پول ریالی </a>
+              <a href='{% url "customer:reverse_charge" %}' class="product-title" name = "reverse-charge">برداشت از کیف پول ریالی </a>
               <span class="product-description">
                 یسری توضیح یسری توضیح یسری توضیح
               </span>
