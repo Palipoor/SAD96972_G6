@@ -41,14 +41,16 @@ public class NotifsView {
 
     @Test
     public void viewNotifs() {
-        List<WebElement> notifs = driver.findElements(By.name("notifications menu"));
-        assertNotEquals(notifs.size(), 0);// exists such element in the page
+        driver.findElement(By.name("notif")).click();
+        driver.findElement(By.name("see-all")).click();
+        String title = driver.getTitle();
+        assertEquals(title, GeneralReusables.reusableStrings.get("notification-title"));
+
     }
 
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        driver.close();
     }
 
 }
