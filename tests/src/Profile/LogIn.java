@@ -15,12 +15,12 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+
 @RunWith(Reusables.OrderedRunner.class)
 public class LogIn {
-    private static  WebDriver driver;
-
-
+    private static WebDriver driver;
 
 
     @BeforeClass
@@ -46,8 +46,7 @@ public class LogIn {
 
     @Test
     @Order(order = 2)
-    public void invalidEmail()  throws Exception {
-
+    public void invalidEmail() throws Exception {
 
 
         // Enter an invalid email
@@ -61,22 +60,20 @@ public class LogIn {
         ProfileReusables.clickForLogIn(driver);
         String errorText = "";
 
-        if (driver.getTitle().equals(ProfileReusables.reusableStrings.get("log-in-title"))){
+        if (driver.getTitle().equals(ProfileReusables.reusableStrings.get("log-in-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
-        }else
+        } else
             GeneralReusables.backToLogin(driver); //This only happens when the test fails
 
+        assertFalse(driver.getCurrentUrl().contains("dashboard"));
         assertEquals(errorText, ProfileReusables.invalidEmailError);
-
-
 
 
     }
 
     @Test
     @Order(order = 3)
-    public void notRegisteredEmail()  throws Exception {
-
+    public void notRegisteredEmail() throws Exception {
 
 
         // Enter an not registered email
@@ -93,10 +90,11 @@ public class LogIn {
 
         if (driver.getTitle().equals(ProfileReusables.reusableStrings.get("log-in-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
-        }else
-           GeneralReusables.backToLogin(driver);
+        } else
+            GeneralReusables.backToLogin(driver);
 
-        assertEquals(errorText,ProfileReusables.notRegisteredEmailError);
+        assertFalse(driver.getCurrentUrl().contains("dashboard"));
+        assertEquals(errorText, ProfileReusables.notRegisteredEmailError);
     }
 
     @Test
@@ -107,7 +105,7 @@ public class LogIn {
         ProfileReusables.enterValidEmail(driver);
 
 
-        WebElement password  = driver.findElement(By.name("password"));
+        WebElement password = driver.findElement(By.name("password"));
         password.clear();
         password.sendKeys(ProfileReusables.wrongPassword);
 
@@ -117,12 +115,12 @@ public class LogIn {
 
         if (driver.getTitle().equals(ProfileReusables.reusableStrings.get("log-in-title"))) {
             errorText = driver.findElement(By.name("not valid")).getText();
-        }else
+        } else
             GeneralReusables.backToLogin(driver);
 
+        assertFalse(driver.getCurrentUrl().contains("dashboard"));
         assertEquals(errorText, ProfileReusables.wrongPasswordError);
     }
-
 
 
     @Test
@@ -140,9 +138,6 @@ public class LogIn {
         assertNotEquals(userMenu.size(), 0);// exists such element in the page
 
 
-
-
-
     }
 
 
@@ -150,11 +145,6 @@ public class LogIn {
     public static void tearDown() {
         GeneralReusables.logout(driver);
     }
-
-
-
-
-
 
 
 }

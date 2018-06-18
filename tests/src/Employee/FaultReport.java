@@ -28,6 +28,7 @@ public class FaultReport {
         transactionId = CustomerReusables.createNewTransaction();
         driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
+        driver.close();
         employeeUsername = GeneralReusables.loginAsAnEmployee(driver);
     }
 
