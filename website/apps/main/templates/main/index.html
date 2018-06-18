@@ -91,25 +91,25 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
                             <li>
-                                <a href='{% static "#HOME" %}' name="home">خانه</a>
+                                <a href='{{ request.path }}#HOME' name="home">خانه</a>
                             </li>
                             <li>
-                                <a href='{% static "#ABOUT" %}' name="about">دربارهٔ ما </a>
+                                <a href='{{ request.path }}#ABOUT' name="about">دربارهٔ ما </a>
                             </li>
                             <li>
-                                <a href='{% static "#FEATURES" %}' name="features">خدمات</a>
+                                <a href='{{ request.path }}#FEATURES' name="features">خدمات</a>
                             </li>
                             <li>
-                                <a href='{% static "#HISTORY" %}' name="history">تاریخچه</a>
+                                <a href='{{ request.path }}#HISTORY'  name="history">تاریخچه</a>
                             </li>
                             <li>
-                                <a href='{% static "#FINANCE" %}' name="prices">نرخ و مبادله ارز </a>
+                                <a href='{{ request.path }}#FINANCE'  name="prices">نرخ و مبادله ارز </a>
                             </li>
                             <li>
-                                <a href='{% static "#LAW" %}' name="law">قوانین و مقررات</a>
+                                <a href='{{ request.path }}#LAW' name="law">قوانین و مقررات</a>
                             </li>
                             <li>
-                                <a href='{% static "#CONTACT" %}' name="contact">ارتباط با ما </a>
+                                <a href='{{ request.path }}#CONTACT' name="contact">ارتباط با ما </a>
                             </li>
                         </ul>
                     </div>
@@ -142,8 +142,8 @@
                             <div class="download-btn">
                                 <!-- BUTTON -->
 
-                                <a class="btn home-btn wow fadeInLeft" href='{% static "panel\pages\examples\login.html" %}' name="log in">ورود</a>
-                                <a class="tuor btn wow fadeInRight" href='{% static "#ABOUT" %}'>اطلاعات بیشتر
+                                <a class="btn home-btn wow fadeInLeft" href="{% url 'main:login' %}" name="log in">ورود</a>
+                                <a class="tuor btn wow fadeInRight" href='{{ request.path }}#ABOUT'>اطلاعات بیشتر
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                             </div>
