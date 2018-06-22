@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 # Create your views here.
@@ -9,10 +10,10 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin, ProcessFormView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from braces.views import GroupRequiredMixin
 from views import Compilation
-from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm
+from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm, ContactForm
 from apps.customer.models import Customer
 from apps.manager.models import Manager
 import lxml.etree
@@ -221,8 +222,23 @@ def login_success(request):
 
 def index(request):
     prices = get_prices()
-    template = loader.get_template("main/index.html")
-    return HttpResponse(template.render(prices, request))
+    context = {}
+    context.update(prices)
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+
+    context.update({'form': form})
+    return render(request, "main/index.html", context) #todo errors and success message
 
 
 def register_success(request):

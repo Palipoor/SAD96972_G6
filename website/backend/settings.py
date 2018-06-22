@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '4b+0ocq+n32#o%1mg7rqyi1u2i_7_u95eis=(-nf+l5alxl0)q'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -60,12 +58,12 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'apps','main', 'templates'),
+            os.path.join(BASE_DIR, 'apps', 'main', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'customer', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'employee', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'manager', 'templates'),
             os.path.join(BASE_DIR, 'templates'),
-            #os.path.join(BASE_DIR, 'app2', 'template'),
+            # os.path.join(BASE_DIR, 'app2', 'template'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -81,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -89,13 +86,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sadproject',
-        'USER': 'postgres',
-        'PASSWORD':  'mardechini',
+        'USER': 'sad',
+        'PASSWORD': 'sad',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -115,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -128,7 +123,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -143,3 +137,9 @@ STATICFILES_DIRS = [
 
 
 LOGIN_REDIRECT_URL = '/login_success'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'contact.us.sapaa@gmail.com'
+EMAIL_HOST_PASSWORD = 'aapasaapas'

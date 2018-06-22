@@ -1,4 +1,4 @@
-{% load static staticfiles %}
+{% load static staticfiles widget_tweaks %}
 <!DOCTYPE html>
 
 <html lang="en">
@@ -710,27 +710,31 @@
                 <div class="container">
 
                     <!-- START ERROR AND SUCCESS MESSAGE -->
-                    <div class="form_error text-center" name="errorbox">
+                    <!----<div class="form_error text-center" name="errorbox">
                         <div class="name_error hide error" name="name-error">لطفا نام خود را وارد کنید.</div>
                         <div class="email_error hide error" name="email-error">لطفا ایمیل خود را وارد کنید.</div>
                         <div class="email_val_error hide error" name="email-val-error">لطفا یک ایمیل معتبر وارد کنید.</div>
                         <div class="message_error hide error" name="message-error">لطفا پیام خود را وارد کنید.</div>
                     </div>
-                    <div class="Sucess" name="success">پیام شما با موفقیت ارسال شد.</div>
+                    <div class="Sucess" name="success">پیام شما با موفقیت ارسال شد.</div>---!>
                     <!-- END ERROR AND SUCCESS MESSAGE -->
 
                     <!-- CONTACT FORM starts here, Go to contact.php and add your email ID, thats it.-->
-                    <form role="form" action="contact.php" name="contact-form">
+                    <form method="POST" name="contact-form">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-md-8">
-                                <textarea class="form-control" id="message" rows="25" cols="10" placeholder=" متن پیام"></textarea>
-                                <button type="button" name="send message" class="btn btn-default submit-btn form_submit">ارسال پیام</button>
+                                {% render_field form.message class="form-control" placeholder="پیام" %}
+                                <div class="form-actions">
+                                <button type="submit" name="send message" class="btn btn-default submit-btn ">ارسال پیام</button>
+                                </div>
                             </div>
 
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="name" placeholder="اسم">
-                                <input type="email" class="form-control" id="email" placeholder="ایمیل">
-                                <input type="text" class="form-control" id="subject" placeholder="موضوع">
+                                {% render_field form.name class="form-control" placeholder="اسم" %}
+                                {% render_field form.email class="form-control" placeholder="ایمیل" %}
+                                {% render_field form.subject class="form-control" placeholder="موضوع" %}
+
                             </div>
                         </div>
                     </form>
