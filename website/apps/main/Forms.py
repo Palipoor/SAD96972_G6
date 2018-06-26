@@ -6,12 +6,22 @@ from apps.main.models import GenUser
 from apps.manager.models import Manager
 
 
+class ConvertForm(forms.Form):
+    amount = forms.IntegerField(required=True)
+    conversion_type = forms.ChoiceField(choices=[('rial2euro', 'ریال به یورو'),
+                                                 ('rial2dollar', 'ریال به دلار'),
+                                                 ('dollar2euro', 'دلار به یورو'),
+                                                 ('dollar2rial', 'دلار به ریال'),
+                                                 ('euro2rial', 'یورو به ریال'),
+                                                 ('euro2dollar', 'یورو به دلار')])
+
+
 class ContactForm(forms.Form):
     email = forms.EmailField(required=True)
-    name = forms.CharField(required = True)
+    name = forms.CharField(required=True)
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
-    
+
 
 class SignUpForm(forms.Form):
     username = forms.CharField(max_length=100, required=True, label='نام کاربری',

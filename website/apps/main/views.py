@@ -12,8 +12,10 @@ from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin, ProcessFormView
 from django.shortcuts import redirect, render
 from braces.views import GroupRequiredMixin
+
+from apps.main.MultiForm import MultiFormsView
 from views import Compilation
-from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm, ContactForm
+from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm, ContactForm, ConvertForm
 from apps.customer.models import Customer
 from apps.manager.models import Manager
 import lxml.etree
@@ -220,25 +222,47 @@ def login_success(request):
         return redirect("customer/dashboard")
 
 
-def index(request):
-    prices = get_prices()
-    context = {}
-    context.update(prices)
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-            try:
-                send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
+class LandingPageView(MultiFormsView):
+    template_name = 'main/index.html'
+    form_classes = {'conversion': ConvertForm, 'contact_us': ContactForm}
 
-    context.update({'form': form})
-    return render(request, "main/index.html", context) #todo errors and success message
+    def get_context_data(self, **kwargs):
+        context = super(LandingPageView, self).get_context_data(**kwargs)
+        prices = get_prices()
+        context.update(prices)
+        return context
+
+    def contact_us_form_valid(self, form):
+        subject = form.cleaned_data['subject']
+        from_email = form.cleaned_data['email']
+        message = form.cleaned_data['message']
+        try:
+            send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        context = self.get_context_data() #todo man balad nistam ino. dorost bayad beshe.
+        return render(self.request, "main/index.html", context)
+
+
+# def index(request):
+#     prices = get_prices()
+#     context = {}
+#     context.update(prices)
+#     if request.method == 'GET':
+#         form = ContactForm()
+#     else:
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             from_email = form.cleaned_data['email']
+#             message = form.cleaned_data['message']
+#             try:
+#                 send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
+#             except BadHeaderError:
+#                 return HttpResponse('Invalid header found.')
+#
+#     context.update({'form': form})
+#     return render(request, "main/index.html", context)  # todo errors and success message
 
 
 def register_success(request):

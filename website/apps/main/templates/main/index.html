@@ -724,16 +724,16 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-8">
-                                {% render_field form.message class="form-control" placeholder="پیام" %}
+                                {% render_field forms.contact_us.message class="form-control" placeholder="پیام" %}
                                 <div class="form-actions">
-                                <button type="submit" name="send message" class="btn btn-default submit-btn ">ارسال پیام</button>
+                                <button type="submit" name="action" value="contact_us" class="btn btn-default submit-btn ">ارسال پیام</button>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
-                                {% render_field form.name class="form-control" placeholder="اسم" %}
-                                {% render_field form.email class="form-control" placeholder="ایمیل" %}
-                                {% render_field form.subject class="form-control" placeholder="موضوع" %}
+                                {% render_field forms.contact_us.name class="form-control" placeholder="اسم" %}
+                                {% render_field forms.contact_us.email class="form-control" placeholder="ایمیل" %}
+                                {% render_field forms.contact_us.subject class="form-control" placeholder="موضوع" %}
 
                             </div>
                         </div>
@@ -742,41 +742,6 @@
                 </div>
             </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 wow bounceInLeft">
-                        <div class="social_icons">
-                            <ul>
-                                <li>
-                                    <a href='{% static "." %}'>
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href='{% static "." %}'>
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href='{% static "." %}'>
-                                        <i class="fa fa-dribbble"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href='{% static "." %}'>
-                                        <i class="fa fa-behance"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href='{% static "." %}'>
-                                        <i class="fa fa-youtube-play"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- END CONTACT -->
