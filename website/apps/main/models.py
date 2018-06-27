@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import User, Group
 from polymorphic.models import PolymorphicModel
 
 
@@ -14,21 +14,21 @@ class GenUser(User):
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=70, unique=True, null=False)'''
     # are email and username unique in Django User? fix if they are not.
-    #photo = models.ImageField()   imagefiled needs something before makemigration
+    # photo = models.ImageField()   imagefiled needs something before makemigration
     '''english_first_name = models.CharField(max_length=50)
     english_last_name = models.CharField(max_length=50)'''
     persian_first_name = models.CharField(max_length=50)
     persian_last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
     user_type = models.IntegerField(choices=types, default=0)
+
     # online = models.BooleanField(default=True)
     # active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        g = Group.objects.get(name = self.types[self.user_type][1])
+        g = Group.objects.get(name=self.types[self.user_type][1])
         self.groups.add(g)
-
 
 
 class Notification(models.Model):
@@ -46,3 +46,16 @@ class Notification(models.Model):
     text = models.CharField(max_length=500)
     type = models.IntegerField(choices=types)
     status = models.IntegerField(choices=statuses)
+
+
+class WalletChange(models.Model):
+    currency_types = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
+    )
+    value = models.FloatField
+    wallet = models.IntegerField(choices=currency_types)
+    user = customer = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING, null=False)
+    time = models.DateTimeField()
+    is_profit = models.BooleanField(default=False)

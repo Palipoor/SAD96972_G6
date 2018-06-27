@@ -2,6 +2,7 @@ from apps.main.models import GenUser
 from django.db import models
 from polymorphic.models import PolymorphicModel
 
+
 # Create your models here.
 
 
@@ -12,19 +13,19 @@ class Customer(GenUser):
     account_number = models.CharField(max_length=20, unique=True, null=False)
 
     def __init__(self, *args, **kwargs):
-        super(Customer, self).__init__( *args, **kwargs)
+        super(Customer, self).__init__(*args, **kwargs)
         self.user_type = 0
 
 
 class RequestType(models.Model):  # ???
-    currency = (
-           (0, 'rial'),
-           (1, 'dollar'),
-           (2, 'euro'),
+    currency_types = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
     )
     title = models.CharField(max_length=20)
     profitRate = models.FloatField()
-    currency = models.IntegerField(choices=currency)
+    currency = models.IntegerField(choices=currency_types)
 
 
 class Request(PolymorphicModel):
@@ -47,6 +48,25 @@ class Request(PolymorphicModel):
     description = models.CharField(max_length=500)
     status = models.IntegerField(choices=statuses, null=False)
     profitRate = models.FloatField(null=False)
+
+
+class Charge(Request):
+    currency = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
+    )
+    wallet = models.IntegerField(choices=currency)
+
+
+class Exchange(Request):
+    currency = (
+        (0, 'rial'),
+        (1, 'dollar'),
+        (2, 'euro'),
+    )
+    source = models.IntegerField(choices=currency)
+    destination = models.IntegerField(choices=currency)
 
 
 class LangTest(Request):
@@ -123,21 +143,21 @@ class GRE(IBT):
 
 
 class UniversityTrans(Request):
-        types = (
-            (0, 'application fee'),
-            (1, 'deposit fee')
-        )
-        type = models.IntegerField(choices=types, null=False)
-        university_name = models.CharField(max_length=50, null=False)
-        link = models.URLField(null=False)
-        username = models.CharField(max_length=100, null=False)
-        password = models.CharField(max_length=50, null=False)
-        guide = models.CharField(max_length=1000, null=False)
+    types = (
+        (0, 'application fee'),
+        (1, 'deposit fee')
+    )
+    type = models.IntegerField(choices=types, null=False)
+    university_name = models.CharField(max_length=50, null=False)
+    link = models.URLField(null=False)
+    username = models.CharField(max_length=100, null=False)
+    password = models.CharField(max_length=50, null=False)
+    guide = models.CharField(max_length=1000, null=False)
 
 
 class ForeignTrans(Request):
-    account_number = models.CharField(max_length=20,  null=False)
-    bank_name = models.CharField(max_length=50,  null=False)
+    account_number = models.CharField(max_length=20, null=False)
+    bank_name = models.CharField(max_length=50, null=False)
 
 
 class InternalTrans(Request):
@@ -151,50 +171,50 @@ class UnknownTrans(Request):
     email = models.EmailField()
     phone_number = models.CharField(max_length=20)
 
-
-class CustomerWalletTransfer(models.Model):
-    wallets = (
-        (0, 'rial wallet'),
-        (1, 'dollar wallet'),
-        (2, 'euro wallet'),
-    )
-    source = models.IntegerField(choices=wallets, null=False)
-    destination = models.IntegerField(choices=wallets, null=False)
-    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
-    transfer_time = models.DateTimeField(null=False)
-    profitًRate = models.FloatField(null=False)
-    source_deposit_before = models.FloatField(null=False)
-    source_deposit_after = models.FloatField(null=False)
-    destination_deposit_before = models.FloatField(null=False)
-    destination_deposit_after = models.FloatField(null=False)
-    rial_deposit_before_profit = models.FloatField(null=False)
-    rial_deposit_after_profit = models.FloatField(null=False)
-
-
-class CustomerWalletCharge(models.Model):
-    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
-    charge_time = models.DateTimeField(null=False)
-    deposit_before = models.FloatField(null=False)
-    deposit_after = models.FloatField(null=False)
-
-
-class CostumerWalletChanges(models.Model):
-        types = (
-            (1, 'request submit'),
-            (2, 'request profit'),
-            (3, 'request failure'),  # rejected or failed
-            (4, 'request failure profit'),
-        )
-        wallets = (
-            (0, 'rial'),
-            (1, 'dollar'),
-            (2, 'euro'),
-        )
-        type = models.IntegerField(choices=types, null=False)
-        wallet = models.IntegerField(choices=wallets, null=False)
-        request = models.ForeignKey('Request', on_delete=models.CASCADE, null=False)
-        change_time = models.DateTimeField(null=False)
-        deposit_before = models.FloatField(null=False)
-        deposit_after = models.FloatField(null=False)
-        rial_deposit_before_profit = models.FloatField(null=False)
-        rial_deposit_after_profit = models.FloatField(null=False)
+#
+# class CustomerWalletTransfer(models.Model):
+#     wallets = (
+#         (0, 'rial wallet'),
+#         (1, 'dollar wallet'),
+#         (2, 'euro wallet'),
+#     )
+#     source = models.IntegerField(choices=wallets, null=False)
+#     destination = models.IntegerField(choices=wallets, null=False)
+#     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
+#     transfer_time = models.DateTimeField(null=False)
+#     profitًRate = models.FloatField(null=False)
+#     source_deposit_before = models.FloatField(null=False)
+#     source_deposit_after = models.FloatField(null=False)
+#     destination_deposit_before = models.FloatField(null=False)
+#     destination_deposit_after = models.FloatField(null=False)
+#     rial_deposit_before_profit = models.FloatField(null=False)
+#     rial_deposit_after_profit = models.FloatField(null=False)
+#
+#
+# class CustomerWalletCharge(models.Model):
+#     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
+#     charge_time = models.DateTimeField(null=False)
+#     deposit_before = models.FloatField(null=False)
+#     deposit_after = models.FloatField(null=False)
+#
+#
+# class CostumerWalletChanges(models.Model):
+#         types = (
+#             (1, 'request submit'),
+#             (2, 'request profit'),
+#             (3, 'request failure'),  # rejected or failed
+#             (4, 'request failure profit'),
+#         )
+#         wallets = (
+#             (0, 'rial'),
+#             (1, 'dollar'),
+#             (2, 'euro'),
+#         )
+#         type = models.IntegerField(choices=types, null=False)
+#         wallet = models.IntegerField(choices=wallets, null=False)
+#         request = models.ForeignKey('Request', on_delete=models.CASCADE, null=False)
+#         change_time = models.DateTimeField(null=False)
+#         deposit_before = models.FloatField(null=False)
+#         deposit_after = models.FloatField(null=False)
+#         rial_deposit_before_profit = models.FloatField(null=False)
+#         rial_deposit_after_profit = models.FloatField(null=False)
