@@ -227,7 +227,7 @@ class LandingPageView(MultiFormsView):
     form_classes = {'conversion': ConvertForm, 'contact_us': ContactForm}
 
     def get_context_data(self, **kwargs):
-        context = super(LandingPageView, self).get_context_data(**kwargs)
+        context = super(LandingPageView, self).get_context_data(forms=self.get_forms(self.form_classes))
         prices = get_prices()
         context.update(prices)
         return context
@@ -240,29 +240,32 @@ class LandingPageView(MultiFormsView):
             send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-        context = self.get_context_data() #todo man balad nistam ino. dorost bayad beshe.
-        return render(self.request, "main/index.html", context)
+        context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
+        return render(self.request, "main/index.html", context) #todo bere bakhshe contact us!
 
+    def conversion_form_valid(self, form):
+        prices = get_prices()
+        conversion_type = form.cleaned_data['conversion_type']
+        amount = form.cleaned_data['amount']
+        dollar_price = prices['dollar']
+        euro_price = prices['euro']
 
-# def index(request):
-#     prices = get_prices()
-#     context = {}
-#     context.update(prices)
-#     if request.method == 'GET':
-#         form = ContactForm()
-#     else:
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             subject = form.cleaned_data['subject']
-#             from_email = form.cleaned_data['email']
-#             message = form.cleaned_data['message']
-#             try:
-#                 send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
-#             except BadHeaderError:
-#                 return HttpResponse('Invalid header found.')
-#
-#     context.update({'form': form})
-#     return render(request, "main/index.html", context)  # todo errors and success message
+        if conversion_type == 'dollar2rial':
+            converted = dollar_price * amount
+        elif conversion_type == 'rial2dollar':
+            converted = amount / dollar_price
+        elif conversion_type == 'euro2rial':
+            converted = euro_price * amount
+        elif conversion_type == 'rial2euro':
+            converted = amount / euro_price
+        elif conversion_type == 'euro2dollar':
+            converted = amount * euro_price / dollar_price
+        else:
+            converted = amount * dollar_price / euro_price
+
+        context = self.get_context_data()
+        context['result'] = converted
+        return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
 
 
 def register_success(request):

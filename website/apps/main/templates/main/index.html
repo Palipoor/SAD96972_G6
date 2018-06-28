@@ -14,10 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>سپاا</title>
     <!-- Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Raleway:500,600,700,800,900,400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:500,600,700,800,900,400,300' rel='stylesheet'
+          type='text/css'>
 
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic' rel='stylesheet'
-        type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic'
+          rel='stylesheet'
+          type='text/css'>
     <!-- Bootstrap -->
     <link href='{% static "css/bootstrap.min.css"%}' rel="stylesheet">
 
@@ -38,10 +40,11 @@
     <link href='{% static "css/prettyPhoto.css" %}' rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href='{% static "favicon.ico" %}' />
+    <link rel="shortcut icon" type="image/x-icon" href='{% static "favicon.ico" %}'/>
 
     <!-- Style -->
-    <link href='{% static "css/style.css" %}' rel="stylesheet"> -->
+    <link href='{% static "css/style.css" %}' rel="stylesheet">
+    -->
 
     <link href='{% static "css/animate.css" %}' rel="stylesheet">
     <!-- Responsive CSS -->
@@ -49,756 +52,751 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        	<![endif]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body dir="rtl">
-    <!-- PRELOADER -->
-    <div class="spn_hol">
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
+<!-- PRELOADER -->
+<div class="spn_hol">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<!-- END PRELOADER -->
+
+<!-- =========================
+ START ABOUT US SECTION
+============================== -->
+<section class="header parallax home-parallax page" id="HOME">
+    <h2></h2>
+    <div class="section_overlay">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href='{% static "#" %}'>
+                        <img src='{% static "images/logo.png" %}' alt="Logo">
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="navbar" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- NAV -->
+                        <li>
+                            <a href='{% static "#HOME" %}' name="home">خانه</a>
+                        </li>
+                        <li>
+                            <a href='{% static "#ABOUT" %}' name="about">دربارهٔ ما </a>
+                        </li>
+                        <li>
+                            <a href='{% static "#FEATURES" %}' name="features">خدمات</a>
+                        </li>
+                        <li>
+                            <a href='{% static "#HISTORY" %}' name="history">تاریخچه</a>
+                        </li>
+                        <li>
+                            <a href='{% static "#FINANCE" %}' name="prices">نرخ و مبادله ارز </a>
+                        </li>
+                        <li>
+                            <a href='{% static "#LAW" %}' name="law">قوانین و مقررات</a>
+                        </li>
+                        <li>
+                            <a href='{% static "#CONTACT" %}' name="contact">ارتباط با ما </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container- -->
+        </nav>
+
+        <div class="container home-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo text-center">
+                        <!-- LOGO -->
+                        <img width="125" height="55" src='{% static "images/logo.png" %}' alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <div class="home_text">
+                        <!-- TITLE AND DESC -->
+                        <h1 dir="rtl">سپاا</h1>
+                        <p dir="rtl">توضیحات مربوطه توضیحات مربوطه
+                            <br> توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه </p>
+                        <small>
+                            <font color="white">عضو سامانه نیستید؟ می‌توانید از </font>
+                            <a href="{% url 'main:register' %}" style="color:orange">اینجا</a>
+                            <font color="white"> ثبت نام کنید.</font>
+                        </small>
+                        <div class="download-btn">
+                            <!-- BUTTON -->
+
+                            <a class="btn home-btn wow fadeInLeft" href='{% static "panel\pages\examples\login.html" %}'
+                               name="log in">ورود</a>
+                            <a class="tuor btn wow fadeInRight" href='{% static "#ABOUT" %}'>اطلاعات بیشتر
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-offset-1 col-sm-4">
+                    <div class="home-iphone">
+                        <img src='{% static "images/iPhone_Home.png" %}' alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- END HEADER SECTION -->
+
+
+<!-- =========================
+ START ABOUT US SECTION
+============================== -->
+
+
+<section class="about page" id="ABOUT">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <!-- ABOUT US SECTION TITLE-->
+                <div class="section_title" name="about us">
+                    <h2 name="about-us-header">دربارهٔ ما</h2>
+                    <p name="about-us-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut aliquip.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="inner_about_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                        <!-- PHONE -->
+                        <img src='{% static "images/about_iphone.png" %}' alt="">
+                    </div>
+                </div>
+                <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                    <!-- TITLE -->
+                    <div class="inner_about_title" dir="rtl">
+                        <h2 dir="rtl">چرا ما بهترین
+                            <br> گزینه‌ایم؟</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                    <div class="inner_about_desc">
+
+                        <!-- SINGLE DESC -->
+                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1s">
+                            <!-- ICON -->
+                            <div>
+                                <i class="pe-7s-timer"></i>
+                            </div>
+                            <!-- HEADING DESCRIPTION -->
+                            <h3>ویژگی خیلی خیلی خوب</h3>
+                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Sed
+                                ut perspiciatis unde omnis iste natus error sit.</p>
+                        </div>
+                        <!-- END SINGLE DESC -->
+
+
+                        <!-- SINGLE DESC -->
+                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1.5s">
+                            <!-- ICON -->
+                            <div>
+                                <i class="pe-7s-target"></i>
+                            </div>
+                            <!-- HEADING DESCRIPTION -->
+                            <h3>ویژگی خیلی خیلی خوب</h3>
+                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Sed
+                                ut perspiciatis unde omnis iste natus error sit.</p>
+                        </div>
+                        <!-- END SINGLE DESC -->
+
+
+                        <!-- SINGLE DESC -->
+                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="2s">
+                            <!-- ICON -->
+                            <div>
+                                <i class="pe-7s-stopwatch"></i>
+                            </div>
+                            <!-- HEADING DESCRIPTION -->
+                            <h3>ویژگی خیلی خیلی خوب</h3>
+                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Sed
+                                ut perspiciatis unde omnis iste natus error sit.</p>
+                        </div>
+                        <!-- END SINGLE DESC -->
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- END PRELOADER -->
-
-    <!-- =========================
-     START ABOUT US SECTION
-============================== -->
-    <section class="header parallax home-parallax page" id="HOME">
-        <h2></h2>
-        <div class="section_overlay">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href='{% static "#" %}'>
-                            <img src='{% static "images/logo.png" %}' alt="Logo">
-                        </a>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="navbar" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- NAV -->
-                            <li>
-                                <a href='{% static "#HOME" %}' name="home">خانه</a>
-                            </li>
-                            <li>
-                                <a href='{% static "#ABOUT" %}' name="about">دربارهٔ ما </a>
-                            </li>
-                            <li>
-                                <a href='{% static "#FEATURES" %}' name="features">خدمات</a>
-                            </li>
-                            <li>
-                                <a href='{% static "#HISTORY" %}' name="history">تاریخچه</a>
-                            </li>
-                            <li>
-                                <a href='{% static "#FINANCE" %}' name="prices">نرخ و مبادله ارز </a>
-                            </li>
-                            <li>
-                                <a href='{% static "#LAW" %}' name="law">قوانین و مقررات</a>
-                            </li>
-                            <li>
-                                <a href='{% static "#CONTACT" %}' name="contact">ارتباط با ما </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container- -->
-            </nav>
-
-            <div class="container home-container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="logo text-center">
-                            <!-- LOGO -->
-                            <img width="125" height="55" src='{% static "images/logo.png" %}' alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 col-sm-8">
-                        <div class="home_text">
-                            <!-- TITLE AND DESC -->
-                            <h1 dir="rtl">سپاا</h1>
-                            <p dir="rtl">توضیحات مربوطه توضیحات مربوطه
-                                <br> توضیحات مربوطه توضیحات مربوطه توضیحات مربوطه </p>
-                            <small>
-                                <font color="white">عضو سامانه نیستید؟ می‌توانید از </font>
-                                <a href="{% url 'main:register' %}" style="color:orange">اینجا</a>
-                                <font color="white"> ثبت نام کنید.</font>
-                            </small>
-                            <div class="download-btn">
-                                <!-- BUTTON -->
-
-                                <a class="btn home-btn wow fadeInLeft" href='{% static "panel\pages\examples\login.html" %}' name="log in">ورود</a>
-                                <a class="tuor btn wow fadeInRight" href='{% static "#ABOUT" %}'>اطلاعات بیشتر
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-md-offset-1 col-sm-4">
-                        <div class="home-iphone">
-                            <img src='{% static "images/iPhone_Home.png" %}' alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- END HEADER SECTION -->
+    <!-- video has been deleted -->
 
 
+</section>
+<!-- End About Us -->
 
 
-    <!-- =========================
-     START ABOUT US SECTION
+<!-- =========================
+ START TESTIMONIAL SECTION
 ============================== -->
 
-
-    <section class="about page" id="ABOUT">
+<section id="TESTIMONIAL" class="testimonial parallax">
+    <div class="section_overlay">
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <!-- ABOUT US SECTION TITLE-->
-                    <div class="section_title" name="about us">
-                        <h2 name="about-us-header">دربارهٔ ما</h2>
-                        <p name="about-us-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip.</p>
+                <div class="col-md-12 wow bounceInDown">
+                    <div id="carousel-example-caption-testimonial" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-caption-testimonial" data-slide-to="0"
+                                class="active"></li>
+                            <li data-target="#carousel-example-caption-testimonial" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-caption-testimonial" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <!-- IMAGE -->
+                                            <img src='{% static "images/client_1.png" %}' alt="">
+                                            <div class="testimonial_caption">
+                                                <!-- DESCRIPTION -->
+                                                <h2>ممد</h2>
+                                                <h4>
+                                                    <span>علاف</span> فلانجا</h4>
+                                                <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                                    veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                                    commodo consequat.”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <!-- IMAGE -->
+                                            <img src='{% static "images/client_2.png" %}' alt="">
+                                            <div class="testimonial_caption">
+                                                <!-- DESCRIPTION -->
+                                                <h2>مریم</h2>
+                                                <h4>
+                                                    <span>علاف</span> فلانجا</h4>
+                                                <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                                    veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                                    commodo consequat.”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <!-- IMAGE -->
+                                            <img src='{% static "images/client_3.png" %}' alt="">
+                                            <div class="testimonial_caption">
+                                                <!-- DESCRIPTION -->
+                                                <h2>میترا</h2>
+                                                <h4>
+                                                    <span>علاف</span> فلانجا</h4>
+                                                <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                                    veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                                    commodo consequat.”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <div class="inner_about_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                            <!-- PHONE -->
-                            <img src='{% static "images/about_iphone.png" %}' alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
-                        <!-- TITLE -->
-                        <div class="inner_about_title" dir="rtl">
-                            <h2 dir="rtl">چرا ما بهترین
-                                <br> گزینه‌ایم؟</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua.</p>
-                        </div>
-                        <div class="inner_about_desc">
-
-                            <!-- SINGLE DESC -->
-                            <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1s">
-                                <!-- ICON -->
-                                <div>
-                                    <i class="pe-7s-timer"></i>
-                                </div>
-                                <!-- HEADING DESCRIPTION -->
-                                <h3>ویژگی خیلی خیلی خوب</h3>
-                                <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed
-                                    ut perspiciatis unde omnis iste natus error sit.</p>
-                            </div>
-                            <!-- END SINGLE DESC -->
+    </div>
+</section>
 
 
-                            <!-- SINGLE DESC -->
-                            <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1.5s">
-                                <!-- ICON -->
-                                <div>
-                                    <i class="pe-7s-target"></i>
-                                </div>
-                                <!-- HEADING DESCRIPTION -->
-                                <h3>ویژگی خیلی خیلی خوب</h3>
-                                <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed
-                                    ut perspiciatis unde omnis iste natus error sit.</p>
-                            </div>
-                            <!-- END SINGLE DESC -->
+<!-- END TESTIMONIAL SECTION -->
 
 
-                            <!-- SINGLE DESC -->
-                            <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="2s">
-                                <!-- ICON -->
-                                <div>
-                                    <i class="pe-7s-stopwatch"></i>
-                                </div>
-                                <!-- HEADING DESCRIPTION -->
-                                <h3>ویژگی خیلی خیلی خوب</h3>
-                                <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed
-                                    ut perspiciatis unde omnis iste natus error sit.</p>
-                            </div>
-                            <!-- END SINGLE DESC -->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- video has been deleted -->
-
-
-    </section>
-    <!-- End About Us -->
-
-
-
-
-    <!-- =========================
-     START TESTIMONIAL SECTION
+<!-- =========================
+ START FEATURES
 ============================== -->
-
-    <section id="TESTIMONIAL" class="testimonial parallax">
-        <div class="section_overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 wow bounceInDown">
-                        <div id="carousel-example-caption-testimonial" class="carousel slide" data-ride="carousel">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-caption-testimonial" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-caption-testimonial" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-caption-testimonial" data-slide-to="2"></li>
-                            </ol>
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12 text-center">
-                                                <!-- IMAGE -->
-                                                <img src='{% static "images/client_1.png" %}' alt="">
-                                                <div class="testimonial_caption">
-                                                    <!-- DESCRIPTION -->
-                                                    <h2>ممد</h2>
-                                                    <h4>
-                                                        <span>علاف</span> فلانجا</h4>
-                                                    <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                        veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                        commodo consequat.”</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12 text-center">
-                                                <!-- IMAGE -->
-                                                <img src='{% static "images/client_2.png" %}' alt="">
-                                                <div class="testimonial_caption">
-                                                    <!-- DESCRIPTION -->
-                                                    <h2>مریم</h2>
-                                                    <h4>
-                                                        <span>علاف</span> فلانجا</h4>
-                                                    <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                        veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                        commodo consequat.”</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12 text-center">
-                                                <!-- IMAGE -->
-                                                <img src='{% static "images/client_3.png" %}' alt="">
-                                                <div class="testimonial_caption">
-                                                    <!-- DESCRIPTION -->
-                                                    <h2>میترا</h2>
-                                                    <h4>
-                                                        <span>علاف</span> فلانجا</h4>
-                                                    <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                        veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                        commodo consequat.”</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<section id="FEATURES" class="features page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <!-- FEATURES SECTION TITLE -->
+                <div class="section_title wow fadeIn" data-wow-duration="1s">
+                    <h2>خدمات</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut aliquip.</p>
                 </div>
+                <!-- END FEATURES SECTION TITLE -->
             </div>
         </div>
-    </section>
+    </div>
 
-
-
-    <!-- END TESTIMONIAL SECTION -->
-
-
-
-    <!-- =========================
-     START FEATURES
-============================== -->
-    <section id="FEATURES" class="features page">
+    <div class="feature_inner">
         <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <!-- FEATURES SECTION TITLE -->
-                    <div class="section_title wow fadeIn" data-wow-duration="1s">
-                        <h2>خدمات</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip.</p>
+            <div class="row" name="transactions">
+                <div class="col-md-4 right_no_padding wow fadeInLeft" data-wow-duration="1s">
+                    <!-- FEATURE -->
+
+                    <div class="left_single_feature">
+                        <!-- ICON -->
+                        <div>
+                            <span class="pe-7s-like"></span>
+                        </div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>یدونه خدمت
+                            <span></span>
+                        </h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
-                    <!-- END FEATURES SECTION TITLE -->
+
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="left_single_feature">
+                        <!-- ICON -->
+                        <div>
+                            <span class="pe-7s-science"></span>
+                        </div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>یدونه خدمت
+                            <span></span>
+                        </h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="left_single_feature">
+                        <!-- ICON -->
+                        <div>
+                            <span class="pe-7s-look"></span>
+                        </div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>یدونه خدمت
+                            <span></span>
+                        </h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+                </div>
+                <div class="col-md-4">
+                    <div class="feature_iphone">
+                        <!-- FEATURE PHONE IMAGE -->
+                        <img class="wow bounceIn" data-wow-duration="1s" src='{% static "images/iPhone02.png" %}'
+                             alt="">
+                    </div>
+                </div>
+                <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
+
+                    <!-- FEATURE -->
+                    <div class="right_single_feature">
+                        <!-- ICON -->
+                        <div>
+                            <span class="pe-7s-monitor"></span>
+                        </div>
+                        <h3>یدونه خدمت
+                            <span></span>
+                        </h3>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="right_single_feature">
+                        <!-- ICON -->
+                        <div>
+                            <span class="pe-7s-phone"></span>
+                        </div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>یدونه خدمت
+                            <span></span>
+                        </h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="right_single_feature">
+                        <!-- ICON -->
+                        <div>
+                            <span class="pe-7s-gleam"></span>
+                        </div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>یدونه خدمت
+                            <span></span>
+                        </h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
                 </div>
             </div>
         </div>
-
-        <div class="feature_inner">
-            <div class="container">
-                <div class="row" name="transactions">
-                    <div class="col-md-4 right_no_padding wow fadeInLeft" data-wow-duration="1s">
-                        <!-- FEATURE -->
-
-                        <div class="left_single_feature">
-                            <!-- ICON -->
-                            <div>
-                                <span class="pe-7s-like"></span>
-                            </div>
-
-                            <!-- FEATURE HEADING AND DESCRIPTION -->
-                            <h3>یدونه خدمت
-                                <span></span>
-                            </h3>
-                            <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        </div>
-
-                        <!-- END SINGLE FEATURE -->
+    </div>
+</section>
+<!-- END FEATURES SECTION -->
 
 
-                        <!-- FEATURE -->
-                        <div class="left_single_feature">
-                            <!-- ICON -->
-                            <div>
-                                <span class="pe-7s-science"></span>
-                            </div>
-
-                            <!-- FEATURE HEADING AND DESCRIPTION -->
-                            <h3>یدونه خدمت
-                                <span></span>
-                            </h3>
-                            <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        </div>
-                        <!-- END SINGLE FEATURE -->
-
-
-                        <!-- FEATURE -->
-                        <div class="left_single_feature">
-                            <!-- ICON -->
-                            <div>
-                                <span class="pe-7s-look"></span>
-                            </div>
-
-                            <!-- FEATURE HEADING AND DESCRIPTION -->
-                            <h3>یدونه خدمت
-                                <span></span>
-                            </h3>
-                            <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        </div>
-                        <!-- END SINGLE FEATURE -->
-
-                    </div>
-                    <div class="col-md-4">
-                        <div class="feature_iphone">
-                            <!-- FEATURE PHONE IMAGE -->
-                            <img class="wow bounceIn" data-wow-duration="1s" src='{% static "images/iPhone02.png" %}' alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
-
-                        <!-- FEATURE -->
-                        <div class="right_single_feature">
-                            <!-- ICON -->
-                            <div>
-                                <span class="pe-7s-monitor"></span>
-                            </div>
-                            <h3>یدونه خدمت
-                                <span></span>
-                            </h3>
-
-                            <!-- FEATURE HEADING AND DESCRIPTION -->
-                            <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        </div>
-                        <!-- END SINGLE FEATURE -->
-
-
-                        <!-- FEATURE -->
-                        <div class="right_single_feature">
-                            <!-- ICON -->
-                            <div>
-                                <span class="pe-7s-phone"></span>
-                            </div>
-
-                            <!-- FEATURE HEADING AND DESCRIPTION -->
-                            <h3>یدونه خدمت
-                                <span></span>
-                            </h3>
-                            <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        </div>
-                        <!-- END SINGLE FEATURE -->
-
-
-                        <!-- FEATURE -->
-                        <div class="right_single_feature">
-                            <!-- ICON -->
-                            <div>
-                                <span class="pe-7s-gleam"></span>
-                            </div>
-
-                            <!-- FEATURE HEADING AND DESCRIPTION -->
-                            <h3>یدونه خدمت
-                                <span></span>
-                            </h3>
-                            <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        </div>
-                        <!-- END SINGLE FEATURE -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END FEATURES SECTION -->
-
-
-
-    <!-- =========================
-     START CALL TO ACTION
+<!-- =========================
+ START CALL TO ACTION
 ============================== -->
-    <div class="call_to_action">
-        <div class="container">
-            <div class="row wow fadeInLeftBig" data-wow-duration="1s">
-                <div class="col-md-9">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                        et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip.</p>
+<div class="call_to_action">
+    <div class="container">
+        <div class="row wow fadeInLeftBig" data-wow-duration="1s">
+            <div class="col-md-9">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip.</p>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-primary btn-action" href='{% static "panel\pages\examples\register.html" %}'
+                   role="button" name="sign up">ثبت نام</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END CALL TO ACTION -->
+
+
+<!-- =========================
+ Start APPS SCREEN SECTION
+============================== -->
+
+
+<!-- ENS APPS SCREEN -->
+
+
+<!-- =========================
+ Start FUN FACTS
+============================== -->
+
+
+<section class="fun_facts parallax">
+    <div class="section_overlay">
+        <div class="container wow bounceInLeft" data-wow-duration="1s">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div class="single_fun_facts">
+                        <i class="pe-7s-cloud-download"></i>
+                        <h2>
+                            <span class="counter_num">699</span>
+                            <span>+</span>
+                        </h2>
+                        <p>تعداد کاربران</p>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-primary btn-action" href='{% static "panel\pages\examples\register.html" %}' role="button" name="sign up">ثبت نام</a>
+                    <div class="single_fun_facts">
+                        <i class="pe-7s-look"></i>
+                        <h2>
+                            <span class="counter_num">1999</span>
+                            <span>+</span>
+                        </h2>
+                        <p>تعداد تراکنش</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single_fun_facts">
+                        <i class="pe-7s-comment"></i>
+                        <h2>
+                            <span class="counter_num">199</span>
+                            <span>+</span>
+                        </h2>
+                        <p>میزان تجمعی تراکنش‌ها</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="single_fun_facts">
+                        <i class="pe-7s-cup"></i>
+                        <h2>
+                            <span class="counter_num">10</span>
+                            <span>+</span>
+                        </h2>
+                        <p>جوایز</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- END FUN FACTS -->
+
+<!-- =========================
+ START Histoy SECTION
+============================== -->
+<section class="about page" id="HISTORY">
+    <div class="inner_about_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                        <!-- PHONE -->
+                        <img src='{% static "images/about_iphone.png" %}' alt="">
+                    </div>
+                </div>
+                <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                    <!-- TITLE -->
+                    <div class="inner_about_title" dir="rtl" name="history">
+                        <h2 dir="rtl">تاریخچه</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- END CALL TO ACTION -->
+    <!-- video has been deleted -->
+</section>
 
+<!-- END History SECTION -->
 
-    <!-- =========================
-     Start APPS SCREEN SECTION
+<!-- =========================
+ START Finance SECTION
 ============================== -->
-
-
-    <!-- ENS APPS SCREEN -->
-
-
-
-
-
-    <!-- =========================
-     Start FUN FACTS
-============================== -->
-
-
-    <section class="fun_facts parallax">
-        <div class="section_overlay">
-            <div class="container wow bounceInLeft" data-wow-duration="1s">
-                <div class="row text-center">
-                    <div class="col-md-3">
-                        <div class="single_fun_facts">
-                            <i class="pe-7s-cloud-download"></i>
-                            <h2>
-                                <span class="counter_num">699</span>
-                                <span>+</span>
-                            </h2>
-                            <p>تعداد کاربران</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="single_fun_facts">
-                            <i class="pe-7s-look"></i>
-                            <h2>
-                                <span class="counter_num">1999</span>
-                                <span>+</span>
-                            </h2>
-                            <p>تعداد تراکنش</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="single_fun_facts">
-                            <i class="pe-7s-comment"></i>
-                            <h2>
-                                <span class="counter_num">199</span>
-                                <span>+</span>
-                            </h2>
-                            <p>میزان تجمعی تراکنش‌ها</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="single_fun_facts">
-                            <i class="pe-7s-cup"></i>
-                            <h2>
-                                <span class="counter_num">10</span>
-                                <span>+</span>
-                            </h2>
-                            <p>جوایز</p>
-                        </div>
-                    </div>
-                </div>
+<section class="about page" id="FINANCE">
+    <div class="inner_about_area">
+        <div class="container">
+            <div class="inner_about_title" dir="rtl" name="prices">
+                <h2 dir="rtl">نرخ ارز</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- END FUN FACTS -->
-
-    <!-- =========================
-     START Histoy SECTION
-============================== -->
-    <section class="about page" id="HISTORY">
-        <div class="inner_about_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
-                            <!-- PHONE -->
-                            <img src='{% static "images/about_iphone.png" %}' alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
-                        <!-- TITLE -->
-                        <div class="inner_about_title" dir="rtl" name="history">
-                            <h2 dir="rtl">تاریخچه</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- video has been deleted -->
-    </section>
-
-    <!-- END History SECTION -->
-
-    <!-- =========================
-     START Finance SECTION
-============================== -->
-    <section class="about page" id="FINANCE">
-        <div class="inner_about_area">
-            <div class="container">
-                <div class="inner_about_title" dir="rtl" name="prices">
-                    <h2 dir="rtl">نرخ ارز</h2>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="conversion" placeholder="مبلغ ورودی" name="value"></input>
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% render_field forms.conversion.amount class="form-control" placeholder="مبلغ" %}
                         <div class="form-group">
                             <label>شیوه تبدیل</label>
-                            <select class="form-control" id="conversion-type" name="exchange dropdown">
-                                <option value="dollar2rial">دلار به ریال</option>
-                                <option value="rial2dollar">ریال به دلار</option>
-                                <option value="euro2rial">یورو به ریال</option>
-                                <option value="rial2euro">ریال به یورو</option>
-                                <option value="euro2dollar">یورو به دلار</option>
-                                <option value="dollar2euro">دلار به یورو</option>
-                            </select>
+                            {% render_field forms.conversion.conversion_type class="form-control"  %}
                         </div>
                         <div class="row">
-                            <a class="btn home-btn wow fadeInLeft" style='margin: 15px;' name="calculate">محاسبه کن</a>
-                            <label id="conversion" name="result"> 100 </label>
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-8" name="prices-content">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p>نرخ دلار</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p name="dollar-price">{{dollar}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p>نرخ یورو</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p name="euro-price">{{euro}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- video has been deleted -->
-    </section>
-
-    <!-- END Finance SECTION -->
-
-
-    <!-- =========================
-     START Law SECTION
-============================== -->
-    <section class="about page" id="LAW">
-        <div class="inner_about_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
-                        <!-- TITLE -->
-                        <div class="inner_about_title" dir="rtl" name="history">
-                            <h2 dir="rtl">قوانین و مقررات</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- video has been deleted -->
-    </section>
-
-    <!-- END Law SECTION -->
-
-
-    <!-- =========================
-     START CONTCT FORM AREA
-============================== -->
-    <section class="contact page" id="CONTACT">
-        <div class="section_overlay">
-            <div class="container">
-                <div class="col-md-10 col-md-offset-1 wow bounceIn">
-                    <!-- Start Contact Section Title-->
-                    <div class="section_title">
-                        <h2>ارتباط با ما</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contact_form wow bounceIn">
-                <div class="container">
-
-                    <!-- START ERROR AND SUCCESS MESSAGE -->
-                    <!----<div class="form_error text-center" name="errorbox">
-                        <div class="name_error hide error" name="name-error">لطفا نام خود را وارد کنید.</div>
-                        <div class="email_error hide error" name="email-error">لطفا ایمیل خود را وارد کنید.</div>
-                        <div class="email_val_error hide error" name="email-val-error">لطفا یک ایمیل معتبر وارد کنید.</div>
-                        <div class="message_error hide error" name="message-error">لطفا پیام خود را وارد کنید.</div>
-                    </div>
-                    <div class="Sucess" name="success">پیام شما با موفقیت ارسال شد.</div>---!>
-                    <!-- END ERROR AND SUCCESS MESSAGE -->
-
-                    <!-- CONTACT FORM starts here, Go to contact.php and add your email ID, thats it.-->
-                    <form method="POST" name="contact-form">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-md-8">
-                                {% render_field forms.contact_us.message class="form-control" placeholder="پیام" %}
-                                <div class="form-actions">
-                                <button type="submit" name="action" value="contact_us" class="btn btn-default submit-btn ">ارسال پیام</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                {% render_field forms.contact_us.name class="form-control" placeholder="اسم" %}
-                                {% render_field forms.contact_us.email class="form-control" placeholder="ایمیل" %}
-                                {% render_field forms.contact_us.subject class="form-control" placeholder="موضوع" %}
-
-                            </div>
+                            <button class="btn home-btn wow fadeInLeft" style='margin: 15px;'value="conversion" name="action">محاسبه کن</button>
+                            <label id="conversion" name="result"> {{result}} </label>
                         </div>
                     </form>
-                    <!-- END FORM -->
+                </div>
+                <div class="col-md-8" name="prices-content">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p>نرخ دلار</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p name="dollar-price">{{dollar}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p>نرخ یورو</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p name="euro-price">{{euro}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
-    </section>
-    <!-- END CONTACT -->
+    </div>
+
+    <!-- video has been deleted -->
+</section>
+
+<!-- END Finance SECTION -->
 
 
-
-
-    <!-- =========================
-     FOOTER 
+<!-- =========================
+ START Law SECTION
 ============================== -->
-
-    <section class="copyright">
-        <h2></h2>
+<section class="about page" id="LAW">
+    <div class="inner_about_area">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="copy_right_text">
-                        <!-- COPYRIGHT TEXT -->
-                        <p>Copyright &copy; 2017. All Rights Reserved.</p>
-                        <p>A theme by
-                            <a href="https://dcrazed.com/">Dcrazed</a>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="col-md-6">
-                    <div class="scroll_top">
-                        <a href='{% static "#HOME" %}'>
-                            <i class="fa fa-angle-up"></i>
-                        </a>
+                <div class="col-md-12  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                    <!-- TITLE -->
+                    <div class="inner_about_title" dir="rtl" name="history">
+                        <h2 dir="rtl">قوانین و مقررات</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- END FOOTER -->
+    </div>
+
+    <!-- video has been deleted -->
+</section>
+
+<!-- END Law SECTION -->
 
 
-    <!-- =========================
-     SCRIPTS 
+<!-- =========================
+ START CONTCT FORM AREA
+============================== -->
+<section class="contact page" id="CONTACT">
+    <div class="section_overlay">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 wow bounceIn">
+                <!-- Start Contact Section Title-->
+                <div class="section_title">
+                    <h2>ارتباط با ما</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut aliquip.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact_form wow bounceIn">
+            <div class="container">
+
+                <!-- START ERROR AND SUCCESS MESSAGE -->
+                <!----<div class="form_error text-center" name="errorbox">
+                    <div class="name_error hide error" name="name-error">لطفا نام خود را وارد کنید.</div>
+                    <div class="email_error hide error" name="email-error">لطفا ایمیل خود را وارد کنید.</div>
+                    <div class="email_val_error hide error" name="email-val-error">لطفا یک ایمیل معتبر وارد کنید.</div>
+                    <div class="message_error hide error" name="message-error">لطفا پیام خود را وارد کنید.</div>
+                </div>
+                <div class="Sucess" name="success">پیام شما با موفقیت ارسال شد.</div>---!>
+                <!-- END ERROR AND SUCCESS MESSAGE -->
+
+                <!-- CONTACT FORM starts here, Go to contact.php and add your email ID, thats it.-->
+                <form method="POST" name="contact-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            {% render_field forms.contact_us.message class="form-control" placeholder="پیام" %}
+                            <div class="form-actions">
+                                <button type="submit" name="action" value="contact_us"
+                                        class="btn btn-default submit-btn ">ارسال پیام
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            {% render_field forms.contact_us.name class="form-control" placeholder="اسم" %}
+                            {% render_field forms.contact_us.email class="form-control" placeholder="ایمیل" %}
+                            {% render_field forms.contact_us.subject class="form-control" placeholder="موضوع" %}
+
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM -->
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- END CONTACT -->
+
+
+<!-- =========================
+ FOOTER
+============================== -->
+
+<section class="copyright">
+    <h2></h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="copy_right_text">
+                    <!-- COPYRIGHT TEXT -->
+                    <p>Copyright &copy; 2017. All Rights Reserved.</p>
+                    <p>A theme by
+                        <a href="https://dcrazed.com/">Dcrazed</a>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="scroll_top">
+                    <a href='{% static "#HOME" %}'>
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END FOOTER -->
+
+
+<!-- =========================
+ SCRIPTS
 ============================== -->
 
 
-    <script src='{% static "js/jquery.min.js" %}'></script>
-    <script src='{% static "js/bootstrap.min.js"  %}'></script>
-    <script src='{% static "js/owl.carousel.js" %}'></script>
-    <script src='{% static "js/jquery.fitvids.js" %}'></script>
-    <script src='{% static "js/smoothscroll.js" %}'></script>
-    <script src='{% static "js/jquery.parallax-1.1.3.js" %}'></script>
-    <script src='{% static "js/jquery.prettyPhoto.js" %}'></script>
-    <script src='{% static "js/jquery.ajaxchimp.min.js" %}'></script>
-    <script src='{% static "js/jquery.ajaxchimp.langs.js" %}'></script>
-    <script src='{% static "js/wow.min.js" %}'></script>
-    <script src='{% static "js/waypoints.min.js" %}'></script>
-    <script src='{% static "js/jquery.counterup.min.js" %}'></script>
-    <script src='{% static "js/script.js" %}'></script>
+<script src='{% static "js/jquery.min.js" %}'></script>
+<script src='{% static "js/bootstrap.min.js"  %}'></script>
+<script src='{% static "js/owl.carousel.js" %}'></script>
+<script src='{% static "js/jquery.fitvids.js" %}'></script>
+<script src='{% static "js/smoothscroll.js" %}'></script>
+<script src='{% static "js/jquery.parallax-1.1.3.js" %}'></script>
+<script src='{% static "js/jquery.prettyPhoto.js" %}'></script>
+<script src='{% static "js/jquery.ajaxchimp.min.js" %}'></script>
+<script src='{% static "js/jquery.ajaxchimp.langs.js" %}'></script>
+<script src='{% static "js/wow.min.js" %}'></script>
+<script src='{% static "js/waypoints.min.js" %}'></script>
+<script src='{% static "js/jquery.counterup.min.js" %}'></script>
+<script src='{% static "js/script.js" %}'></script>
 
 
 </body>

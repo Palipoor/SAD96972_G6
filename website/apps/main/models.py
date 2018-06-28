@@ -54,8 +54,8 @@ class WalletChange(models.Model):
         (1, 'dollar'),
         (2, 'euro'),
     )
-    value = models.FloatField
+    value = models.FloatField(null=False)
     wallet = models.IntegerField(choices=currency_types)
-    user = customer = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING, null=False)
+    user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING, null=False)
     time = models.DateTimeField()
     is_profit = models.BooleanField(default=False)
