@@ -117,35 +117,6 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
 
             # todo form
             # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
-            # def wallet(self, currency, user_type):
-            #     if currency == "dollar":
-            #         currency = "دلار"
-            #     elif currency == "euro":
-            #         currency = "یورو"
-            #     elif currency == "rial":
-            #         currency = "ریال"
-            #     template = loader.get_template(user_type + "/wallet.html")
-            #     return HttpResponse(template.render({"currency": currency}))
-
-            # def get_context_data(self, **kwargs):
-            #     data = super().get_context_data(**kwargs)
-            #     if self.currency == "rial":
-            #         if self.user_type == "Customer":
-            #             data['credit'] = Customer.objects.get(username=self.user.username).rial_credit
-            #         else:
-            #             data['credit'] = Manager.objects.get(username=self.user.username).company_rial_credit
-            #     elif self.currency == "dollar":
-            #         if self.user_type == "Customer":
-            #             data['credit'] = Customer.objects.get(username=self.user.username).dollar_credit
-            #         else:
-            #             data['credit'] = Manager.objects.get(username=self.user.username).company_dollar_credit
-            #     else:
-            #         if self.user_type == "Customer":
-            #             data['credit'] = Customer.objects.get(username=self.user.username).euro_credit
-            #         else:
-            #             data['credit'] = Manager.objects.get(username=self.user.username).company_euro_credit
-            #     return data
-
 
 class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
@@ -177,10 +148,6 @@ class CustomerDetailsView(DetailsView, ListView):
 
 
 class EmployeeDetailsView(DetailsView):
-    # model = Employee
-
-    # def get_object(self, queryset=None):
-    #   return Employee.objects.get(id=self.employee_id)  # todo id e ya username?
 
     def dispatch(self, request, *args, **kwargs):
         self.employee_id = kwargs['employee_id']
