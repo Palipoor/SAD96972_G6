@@ -155,9 +155,9 @@ class EmployeeDetailsView(DetailsView):
 
 
 class Register(FormView):
-    # todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
+    #todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
     form_class = SignUpForm
-    success_url = reverse_lazy('main:register_success')
+    success_url = reverse_lazy ('main:register_success')
     template_name = 'main/register.html'
 
     def post(self, request, *args, **kwargs):
