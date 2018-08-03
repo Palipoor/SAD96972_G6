@@ -20,6 +20,7 @@ class Customer(GenUser):
         customer_group.user_set.add(self)
         customer_group = Group.objects.get(name='wallet_user')
         customer_group.user_set.add(self)
+        
 
 
 

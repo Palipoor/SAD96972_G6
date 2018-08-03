@@ -11,7 +11,10 @@ def add_employee(apps, schema_editor):
         employee = Employee(username= 'employee', email = 'employee@employee.com', current_salary = 20)
         employee.password = make_password('employeeemployee')
         employee.save()
-
+        employee_group = Group.objects.get(name='employee')
+        employee_group.user_set.add(employee)
+        employee_group = Group.objects.get(name='staff')
+        employee_group.user_set.add(employee)
 def remove_employee(apps,schema_editor):
     Employee = apps.get_model('employee', 'Employee')
     try:

@@ -12,6 +12,10 @@ def add_customer(apps, schema_editor):
         customer = Customer(username= 'customer', email = 'customer@customer.com')
         customer.password = make_password('customercustomer')
         customer.save()
+        customer_group = Group.objects.get(name='customer')
+        customer_group.user_set.add(customer)
+        customer_group = Group.objects.get(name='wallet_user')
+        customer_group.user_set.add(customer)
 
 def remove_customer(apps,schema_editor):
     Customer = apps.get_model('customer', 'Customer')

@@ -11,6 +11,12 @@ def add_manager(apps, schema_editor):
         manager = Manager(username= 'manager', email = 'manager@manager.com', company_rial_credit = 12, company_dollar_cent_credit = 342, company_euro_cent_credit = 324, company_account_number = "134123123")
         manager.password = make_password('managermanager')
         manager.save()
+        manager_group = Group.objects.get(name='manager')
+        manager_group.user_set.add(manager)
+        manager_group = Group.objects.get(name='wallet_user')
+        manager_group.user_set.add(manager)
+        manager_group = Group.objects.get(name='staff')
+        manager_group.user_set.add(manager)
 
 def remove_manager(apps,schema_editor):
     Manager = apps.get_model('manager', 'Manager')
