@@ -25,10 +25,7 @@ class GenUser(User):
     # online = models.BooleanField(default=True)
     # active = models.BooleanField(default=True)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        g = Group.objects.get(name=self.types[self.user_type][1])
-        self.groups.add(g)
+
 
 
 class Notification(models.Model):

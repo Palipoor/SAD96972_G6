@@ -16,6 +16,9 @@ from braces.views import GroupRequiredMixin
 from apps.main.MultiForm import MultiFormsView
 from views import Compilation
 from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm, ContactForm, ConvertForm
+from django.utils.decorators import method_decorator
+
+from django.views.decorators.csrf import csrf_exempt
 from apps.customer.models import Customer
 from apps.manager.models import Manager
 import lxml.etree
@@ -50,26 +53,26 @@ class IsLoggedInView(LoginRequiredMixin):
 
 
 class IsCustomer(GroupRequiredMixin):
-    group_required = u"Customer"
+    group_required = u"customer"
 
 
 class IsEmployee(GroupRequiredMixin):
-    group_required = u"Employee"
+    group_required = u"employee"
 
 
 class IsManager(GroupRequiredMixin):
-    group_required = u"Manager"
+    group_required = u"manager"
 
 
 class IsWalletUser(GroupRequiredMixin):
-    group_required = [u"Manager", u"Customer"]
+    group_required = u"wallet_user"
 
 
-class HasAccessToTransactions(GroupRequiredMixin):
-    group_required = [u"Manager", u"Employee"]
+class IsStaff(GroupRequiredMixin):
+    group_required = [u"manager", u"employee"]
 
 
-class WalletView(IsLoggedInView, IsWalletUser, FormView):
+class WalletView(FormView, IsLoggedInView, IsWalletUser):
     currency = ""
     user_type = ""
     currency_type = {"rial": "ریال",
@@ -77,6 +80,7 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
                      "euro": "یورو",
                      }
 
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['currency'] = self.currency_type[self.kwargs['currency']]
@@ -89,18 +93,20 @@ class WalletView(IsLoggedInView, IsWalletUser, FormView):
         kwargs = super(WalletView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
-
     def dispatch(self, request, *args, **kwargs):
         self.currency = kwargs['currency']
         self.user = request.user
-        isManager = self.user.groups.filter(name='Manager').exists()
-        isCustomer = self.user.groups.filter(name='Customer').exists()
+        isManager = self.user.groups.filter(name='manager').exists()
+        isCustomer = self.user.groups.filter(name='customer').exists()
         if isManager and self.user_type == "Manager":
             self.template_name = 'manager/wallet.html'
             self.user_type = "Manager"
+            self.success_url = "/manager/" + self.currency + "_wallet"
         elif isCustomer and self.user_type == "Customer":
             self.template_name = 'customer/wallet.html'
             self.user_type = "Customer"
+            self.success_url = "/customer/" + self.currency + "_wallet"
+
         else:
             return HttpResponseForbidden()
 
@@ -128,7 +134,7 @@ class TransactionDetailsView(DetailsView):
         # todo incomplete
 
 
-class AllTransactionDetails(HasAccessToTransactions, TransactionDetailsView):
+class AllTransactionDetails(IsStaff, TransactionDetailsView):
     ""
 
 

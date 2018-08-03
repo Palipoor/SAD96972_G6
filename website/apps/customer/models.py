@@ -1,7 +1,7 @@
 from apps.main.models import GenUser
 from django.db import models
 from polymorphic.models import PolymorphicModel
-
+from django.contrib.auth.models import Group
 
 # Create your models here.
 
@@ -11,10 +11,16 @@ class Customer(GenUser):
     dollar_cent_credit = models.FloatField(default=0)
     euro_cent_credit = models.FloatField(default=0)
     account_number = models.CharField(max_length=20, unique=True, null=False)
-
     def __init__(self, *args, **kwargs):
         super(Customer, self).__init__(*args, **kwargs)
         self.user_type = 0
+    def save(self, *args, **kwargs):
+        super(Customer, self).save(*args, **kwargs)
+        customer_group = Group.objects.get(name='customer')
+        customer_group.user_set.add(self)
+        customer_group = Group.objects.get(name='wallet_user')
+        customer_group.user_set.add(self)
+
 
 
 class RequestType(models.Model):  # ???

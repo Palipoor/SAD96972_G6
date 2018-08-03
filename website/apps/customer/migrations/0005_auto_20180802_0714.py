@@ -5,7 +5,6 @@ from django.db import migrations
 
 def add_customer(apps, schema_editor):
     Group = apps.get_model('auth', 'Group')
-    customer_group = Group.objects.get(name='customer')
     Customer = apps.get_model('customer', 'Customer')
     try:
         customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
@@ -13,7 +12,6 @@ def add_customer(apps, schema_editor):
         customer = Customer(username= 'customer', email = 'customer@customer.com')
         customer.password = make_password('customercustomer')
         customer.save()
-        customer_group.user_set.add(customer)
 
 def remove_customer(apps,schema_editor):
     Customer = apps.get_model('customer', 'Customer')

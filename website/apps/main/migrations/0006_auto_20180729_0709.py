@@ -9,7 +9,9 @@ def add_groups(apps, schema_editor):
     Group.objects.bulk_create([
         Group(name=u'employee'),
         Group(name=u'customer'),
-        Group(name=u'manager')
+        Group(name=u'manager'),
+        Group(name=u'staff'),
+        Group(name=u'wallet_user'),
     ])
 def remove_groups(apps, schema_editor):
     Group = apps.get_model('auth', 'Group')

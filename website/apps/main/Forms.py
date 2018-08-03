@@ -124,7 +124,7 @@ class DollarChargeForm(WalletChargeForm):
         if not valid:
             return False
         user = self.user
-        if user.user_type == 0:  # customer
+        if user.groups.filter(name='customer').exists():  # customer
             the_customer = Customer.objects.get(username=user.username)
             rial_credit = the_customer.rial_credit
             converted_amount = int(self.cleaned_data['amount']) * dollar_price
@@ -133,7 +133,7 @@ class DollarChargeForm(WalletChargeForm):
                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
             else:
                 the_customer.rial_credit = rial_credit - converted_amount
-                the_customer.dollar_credit = the_customer.dollar_credit + converted_amount
+                the_customer.dollar_cent_credit = the_customer.dollar_cent_credit + converted_amount
                 the_customer.save()
         else:  # manager
             the_manager = Manager.objects.get(username=user.username)
@@ -157,7 +157,7 @@ class RialChargeForm(WalletChargeForm):
             return False
         user = self.user
         charge_amount = int(self.cleaned_data['amount'])
-        if user.groups.filter(name='Customer').exists():  # customer
+        if user.groups.filter(name='customer').exists():  # customer
             the_customer = Customer.objects.get(username=user.username)
             the_customer.rial_credit = the_customer.rial_credit + charge_amount
             the_customer.save()

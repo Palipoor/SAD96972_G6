@@ -1,5 +1,7 @@
 from django.db import models
 from apps.main import models as main_models
+from django.contrib.auth.models import Group
+
 
 
 # Create your models here.
@@ -11,6 +13,13 @@ class Employee(main_models.GenUser):
     def __init__(self, *args, **kwargs):
         super(Employee, self).__init__( *args, **kwargs)
         self.user_type = 1
+
+    def save(self, *args, **kwargs):
+        super(Employee, self).save(*args, **kwargs)
+        customer_group = Group.objects.get(name='employee')
+        customer_group.user_set.add(self)
+        customer_group = Group.objects.get(name='staff')
+        customer_group.user_set.add(self)
 
 
 
