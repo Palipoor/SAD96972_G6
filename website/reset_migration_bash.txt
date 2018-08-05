@@ -9,9 +9,9 @@ python3 manage.py migrate --fake main 0001_initial
 printf "\n\n********************\nafter faking\n********************\n\n"
 python3 manage.py showmigrations
 printf "\n\n********************\ndrop old db\n********************\n\n"
-sudo -u postgres psql postgres -c "drop database sadproject"
+sudo -u $1 psql postgres -c "drop database sadproject"
 printf "\n\n********************\ncreate new db\n********************\n\n"
-sudo -u postgres psql postgres -c "CREATE DATABASE sadproject WITH OWNER = sad"
+sudo -u $1 psql postgres -c "CREATE DATABASE sadproject WITH OWNER = sad"
 printf "\n\n********************\nmigrating\n********************\n\n"
 python3 manage.py migrate
 printf "\n\n********************\nresult\n********************\n\n"
