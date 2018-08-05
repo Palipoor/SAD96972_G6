@@ -90,7 +90,7 @@ class EuroChargeForm(WalletChargeForm):
         if not valid:
             return False
         user = self.user
-        if user.user_type == 0:  # customer
+        if user.groups.filter(name='customer').exists():  # customer
             the_customer = Customer.objects.get(username=user.username)
             rial_credit = the_customer.rial_credit
             converted_amount = int(self.cleaned_data['amount']) * euro_price
@@ -99,7 +99,7 @@ class EuroChargeForm(WalletChargeForm):
                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
             else:
                 the_customer.rial_credit = rial_credit - converted_amount
-                the_customer.euro_credit = the_customer.euro_credit + converted_amount
+                the_customer.euro_cent_credit = the_customer.euro_cent_credit + int(self.cleaned_data['amount'])
             the_customer.save()
         else:  # manager
             the_manager = Manager.objects.get(username=user.username)
@@ -110,7 +110,7 @@ class EuroChargeForm(WalletChargeForm):
                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
             else:
                 the_manager.company_rial_credit = rial_credit - converted_amount
-                the_manager.company_euro_credit = the_manager.company_euro_credit + converted_amount
+                the_manager.company_euro_cent_credit = the_manager.company_euro_cent_credit + int(self.cleaned_data['amount']) 
                 the_manager.save()
 
         return not flag
@@ -133,7 +133,7 @@ class DollarChargeForm(WalletChargeForm):
                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
             else:
                 the_customer.rial_credit = rial_credit - converted_amount
-                the_customer.dollar_cent_credit = the_customer.dollar_cent_credit + converted_amount
+                the_customer.dollar_cent_credit = the_customer.dollar_cent_credit + int(self.cleaned_data['amount'])
                 the_customer.save()
         else:  # manager
             the_manager = Manager.objects.get(username=user.username)
@@ -144,7 +144,7 @@ class DollarChargeForm(WalletChargeForm):
                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
             else:
                 the_manager.company_rial_credit = rial_credit - converted_amount
-                the_manager.company_dollar_credit = the_manager.company_dollar_credit + converted_amount
+                the_manager.company_dollar_cent_credit = the_manager.company_dollar_cent_credit + int(self.cleaned_data['amount'])
                 the_manager.save()
 
         return not flag

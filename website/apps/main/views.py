@@ -84,8 +84,10 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['currency'] = self.currency_type[self.kwargs['currency']]
-        if (self.user_type == "Customer"):
+        if (self.user_type == "customer"):
             context, user = Compilation.get_customer_context_data(context, self.request.user.username)
+        else:
+            context, user = Compilation.get_manager_context_data(cotext, self.request.user.username)
         context['credit'] = context[self.kwargs['currency'] + "_credit"]
         return context
 
@@ -93,18 +95,19 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
         kwargs = super(WalletView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+        
     def dispatch(self, request, *args, **kwargs):
         self.currency = kwargs['currency']
         self.user = request.user
         isManager = self.user.groups.filter(name='manager').exists()
         isCustomer = self.user.groups.filter(name='customer').exists()
-        if isManager and self.user_type == "Manager":
+        if isManager:
             self.template_name = 'manager/wallet.html'
-            self.user_type = "Manager"
+            self.user_type = "manager"
             self.success_url = "/manager/" + self.currency + "_wallet"
-        elif isCustomer and self.user_type == "Customer":
+        elif isCustomer:
             self.template_name = 'customer/wallet.html'
-            self.user_type = "Customer"
+            self.user_type = "customer"
             self.success_url = "/customer/" + self.currency + "_wallet"
 
         else:
