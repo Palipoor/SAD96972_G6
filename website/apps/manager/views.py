@@ -16,7 +16,7 @@ from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, 
     CustomerAccessRemovalForm
 
 
-class ManagerDashboardView(IsLoggedInView, IsManager, cTemplateView):
+class ManagerDashboardView(IsLoggedInView, IsManager, TemplateView):
     template_name = "manager/dashboard.html"
     ""
 
