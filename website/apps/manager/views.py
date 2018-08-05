@@ -10,12 +10,13 @@ from django.views.generic.list import BaseListView, MultipleObjectMixin
 from apps.customer.models import Customer
 from apps.employee.models import Employee
 from apps.main.MultiForm import MultiFormsView
+from django.views.generic import TemplateView
 from apps.main.views import IsLoggedInView, DetailsView, IsManager, CustomerDetailsView, EmployeeDetailsView
 from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
     CustomerAccessRemovalForm
 
 
-class ManagerDashboardView(IsLoggedInView, IsManager, View):
+class ManagerDashboardView(IsLoggedInView, IsManager, TemplateView):
     template_name = "manager/dashboard.html"
     ""
 

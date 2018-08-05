@@ -34,27 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for transaction in new_transactions %}
-          <tr>
-              <td><a href= {{transaction.id}}+"_transaction_details">{{transaction.id}}</a></td>
-              <td>{{transaction.type}}</td>
-              <td>{{transaction.time}}</td>
-              <td>{{transaction.customer.username}}</td>
-              <td>{{transaction.amount}}{{transaction.currency}}</td>
-              {%if transaction.status == 'pending' %}
-            <td>
-                  <span class="label label-warning">transaction.status</span>
-            </td>
-              {% elif transaction.status == 'accepted' %}
-            <td>
-                  <span class="label label-success">transaction.status</span>
-            </td>
-              {% elif transaction.status == 'rejected' or transaction.status == 'reported' %}
-            <td>
-                  <span class="label label-danger">transaction.status</span>
-            </td>
-          </tr>
-        {% endfor %}
+           
         </tbody>
           <tfoot>
             <tr>
@@ -83,7 +63,8 @@
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form class="form-horizontal">
+      <form class="form-horizontal" method = "POST">
+        {% csrf_token %}
         <div class="box-body">
           <div class="form-group">
             <label for="transaction-id" class="col-sm-2 control-label">شناسه تراکنش</label>

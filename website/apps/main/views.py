@@ -187,9 +187,9 @@ class Login(LoginView):
 
 
 def login_success(request):
-    if request.user.groups.filter(name="Manager").exists():
+    if request.user.groups.filter(name="manager").exists():
         return redirect("manager/dashboard")
-    elif request.user.groups.filter(name='Employee').exists():
+    elif request.user.groups.filter(name='employee').exists():
         return redirect("employee/dashboard")
     else:
         return redirect("customer/dashboard")

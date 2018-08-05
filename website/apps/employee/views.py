@@ -13,6 +13,10 @@ from apps.employee.models import Employee
 from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView
 
 
+def dashboard(request):
+     template = loader.get_template("employee/dashboard.html")
+     return HttpResponse(template.render())
+    
 class EmployeeDashboardView(IsLoggedInView, IsEmployee, ListView, FormView):  # todo not sure if this works:/
     ""
 
