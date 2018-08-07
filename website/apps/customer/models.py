@@ -35,7 +35,7 @@ class RequestType(models.Model):  # ???
     currency = models.IntegerField(choices=currency_types)
 
 
-class Request(PolymorphicModel):
+class Request(models.Model):
     statuses = (
         (0, 'accepted'),
         (1, 'rejected'),
@@ -51,10 +51,10 @@ class Request(PolymorphicModel):
     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False, default=2)
     currency = models.IntegerField(choices=currency, null=False)
     amount = models.FloatField(null=False)
-    request_time = models.DateTimeField(null=False)
+    request_time = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=500)
-    status = models.IntegerField(choices=statuses, null=False)
-    profitRate = models.FloatField(null=False)
+    status = models.IntegerField(choices=statuses, default= 0)
+    profitRate = models.FloatField(default= 0.05)
 
 
 class Charge(Request):
@@ -64,6 +64,10 @@ class Charge(Request):
         (2, 'euro'),
     )
     wallet = models.IntegerField(choices=currency)
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.customer.rial_credit += self.amount
+        super(Charge, self).save(*args, **kwargs)
 
 
 class Exchange(Request):
