@@ -29,4 +29,9 @@ class Migration(migrations.Migration):
             model_name='request',
             name='polymorphic_ctype',
         ),
+        migrations.AlterField(
+            model_name='request',
+            name='status',
+            field=models.IntegerField(choices=[(0, 'accepted'), (1, 'rejected'), (2, 'pending'), (3, 'failed'), (4, 'reported')], default=0),
+        ),
     ]

@@ -41,7 +41,7 @@ class Request(models.Model):
         (1, 'rejected'),
         (2, 'pending'),
         (3, 'failed'),
-        # (3, 'reported'),   request can be failed and reported in the same time
+        (4, 'reported'),
     )
     currency = (
         (0, 'rial'),
@@ -55,6 +55,18 @@ class Request(models.Model):
     description = models.CharField(max_length=500)
     status = models.IntegerField(choices=statuses, default= 0)
     profitRate = models.FloatField(default= 0.05)
+    def reject(self):
+        self.status = 1
+        self.customer.save()
+
+    def accept(self):
+        self.status = 0
+        self.customer.save()
+
+    def report(self):
+        self.status = 4
+        self.customer.save()
+
 
 
 class Charge(Request):
@@ -207,7 +219,7 @@ class ForeignTrans(Request):
     bank_name = models.CharField(max_length=50, null=False)
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.status = 3
+            self.status = 2
             if(self.currency == 0):
                 self.customer.rial_credit -= self.amount*(1+self.profitRate)
             elif(self.currency == 1):
@@ -216,6 +228,11 @@ class ForeignTrans(Request):
                 self.customer.euro_cent_credit -= self.amount*(1+self.profitRate)
             self.customer.save()
             super(ForeignTrans, self).save(*args, **kwargs)
+    
+    def reject(self):
+        self.customer.rial_credit += self.amount*(1+self.profitRate)
+        super(ForeignTrans, self).save(*args, **kwargs)
+
 
 
 class InternalTrans(Request):

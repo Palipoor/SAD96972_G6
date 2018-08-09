@@ -46,10 +46,24 @@ def add_foreignTrans(apps, schema_editor):
     Customer = apps.get_model('customer', 'Customer')
     ForeignTrans = apps.get_model('customer', 'ForeignTrans')
     customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
-    foreignTrans = ForeignTrans(customer = customer, currency = 0, amount = 30000, account_number = '12312412',bank_name = 'mammadbagherbank',status = 3)
+    foreignTrans = ForeignTrans(customer = customer, currency = 0, amount = 30000, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
     customer.rial_credit -= 30000 + 3000*foreignTrans.profitRate
     foreignTrans.save()
-    foreignTrans = ForeignTrans(customer = customer, currency = 0, amount = 30000, account_number = '12312412',bank_name = 'mammadbagherbank',status = 3)
+    foreignTrans = ForeignTrans(customer = customer, currency = 1, amount = 1, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
+    customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
+    foreignTrans.save()
+    foreignTrans = ForeignTrans(customer = customer, currency = 2, amount = 1, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
+    customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
+    foreignTrans = ForeignTrans(customer = customer, currency = 1, amount = 1, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
+    customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
+    foreignTrans.save()
+    foreignTrans = ForeignTrans(customer = customer, currency = 2, amount = 1, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
+    customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
+    foreignTrans.save()
+    foreignTrans = ForeignTrans(customer = customer, currency = 2, amount = 1, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
+    customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
+    foreignTrans.save()
+    foreignTrans = ForeignTrans(customer = customer, currency = 2, amount = 1, account_number = '12312412',bank_name = 'mammadbagherbank',status = 2)
     customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
     foreignTrans.save()
     customer.save()
