@@ -9,7 +9,7 @@ def add_charge(apps, schema_editor):
     customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
     for i in range(0,5):
         charge = Charge(customer = customer, currency = 0, amount = i*10, wallet = 0)
-        customer.rial_credit += i*10
+        customer.rial_credit += i*100000
         charge.save()
     customer.save()
 def remove_charge(apps,schema_editor):
@@ -19,7 +19,49 @@ def remove_charge(apps,schema_editor):
     Customer = apps.get_model('customer', 'Customer')
     charges = Customer.objects.get(customer = customer)
     charges.delete()
+
+def add_exchange(apps, schema_editor):
+    Customer = apps.get_model('customer', 'Customer')
+    Exchange = apps.get_model('customer', 'Exchange')
+    customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
+    exchange = Exchange(customer = customer, currency = 0, amount = 100000,source = 0, destination = 1)
+    customer.rial_credit -= 100000
+    customer.dollar_cent_credit += 1000
+    exchange.save()
+    exchange = Exchange(customer = customer, currency = 0, amount = 100000,source = 0, destination = 2)
+    customer.rial_credit -= 100000
+    customer.euro_cent_credit += 1000
+    exchange.save()
+    customer.save()
     
+def remove_exchange(apps,schema_editor):
+    Customer = apps.get_model('customer', 'Customer')
+    Exchange = apps.get_model('customer', 'Exchange')
+    customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
+    Customer = apps.get_model('customer', 'Customer')
+    exchanges = Exchange.objects.get(customer = customer)
+    exchanges.delete()
+    
+def add_foreignTrans(apps, schema_editor):
+    Customer = apps.get_model('customer', 'Customer')
+    ForeignTrans = apps.get_model('customer', 'ForeignTrans')
+    customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
+    foreignTrans = ForeignTrans(customer = customer, currency = 0, amount = 30000, account_number = '12312412',bank_name = 'mammadbagherbank',status = 3)
+    customer.rial_credit -= 30000 + 3000*foreignTrans.profitRate
+    foreignTrans.save()
+    foreignTrans = ForeignTrans(customer = customer, currency = 0, amount = 30000, account_number = '12312412',bank_name = 'mammadbagherbank',status = 3)
+    customer.dollar_cent_credit -= 1 + 1*foreignTrans.profitRate
+    foreignTrans.save()
+    customer.save()
+    
+def remove_foreignTrans(apps,schema_editor):
+    Customer = apps.get_model('customer', 'Customer')
+    ForeignTrans = apps.get_model('customer', 'Exchange')
+    customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
+    Customer = apps.get_model('customer', 'Customer')
+    foreignTrans = ForeignTrans.objects.get(customer = customer)
+    foreignTrans.delete()
+
 
 
 class Migration(migrations.Migration):
@@ -29,5 +71,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(add_charge, remove_charge)
+        migrations.RunPython(add_charge, remove_charge),
+        migrations.RunPython(add_exchange, remove_exchange),
+        migrations.RunPython(add_foreignTrans, remove_foreignTrans),
     ]

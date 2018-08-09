@@ -78,6 +78,42 @@ class Exchange(Request):
     )
     source = models.IntegerField(choices=currency)
     destination = models.IntegerField(choices=currency)
+    def save(self, *args, **kwargs):
+        #todo error for negative account
+        exchange_matrix = [[1,0.01,0.01],[100,1,1],[100,1,1]]
+        if not self.pk:
+            if(self.source == 0):
+                if(self.destination == 0):
+                    self.customer.rial_credit -= self.amount
+                    self.customer.rial_credit += self.amount*exchange_matrix[0][0]
+                elif self.destination == 1:
+                    self.customer.rial_credit -= self.amount
+                    self.customer.dollar_cent_credit += self.amount*exchange_matrix[0][1]
+                elif self.destination == 2:
+                    self.customer.rial_credit -= self.amount
+                    self.customer.euro_cent_credit += self.amount*exchange_matrix[0][2]
+            elif self.source == 1:
+                if(self.destination == 0):
+                    self.customer.dollar_cent_credit -= self.amount
+                    self.customer.rial_credit += self.amount*exchange_matrix[1][0]
+                elif self.destination == 1:
+                    self.customer.dollar_cent_credit -= self.amount
+                    self.customer.dollar_cent_credit += self.amount*exchange_matrix[1][1]
+                elif self.destination == 2:
+                    self.customer.dollar_cent_credit -= self.amount
+                    self.customer.euro_cent_credit += self.amount*exchange_matrix[1][2]
+            elif self.source == 2:
+                if(self.destination == 0):
+                    self.customer.euro_cent_credit -= self.amount
+                    self.customer.rial_credit += self.amount*exchange_matrix[2][0]
+                elif self.destination == 1:
+                    self.customer.euro_cent_credit -= self.amount
+                    self.customer.dollar_cent_credit += self.amount*exchange_matrix[2][1]
+                elif self.destination == 2:
+                    self.customer.euro_cent_credit -= self.amount
+                    self.customer.euro_cent_credit += self.amount*exchange_matrix[2][2]
+        self.customer.save()
+        super(Exchange, self).save(*args, **kwargs)
 
 
 class LangTest(Request):
@@ -169,6 +205,17 @@ class UniversityTrans(Request):
 class ForeignTrans(Request):
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.status = 3
+            if(self.currency == 0):
+                self.customer.rial_credit -= self.amount*(1+self.profitRate)
+            elif(self.currency == 1):
+                self.customer.dollar_cent_credit -= self.amount*(1+self.profitRate)
+            elif (self.currency == 2):
+                self.customer.euro_cent_credit -= self.amount*(1+self.profitRate)
+            self.customer.save()
+            super(ForeignTrans, self).save(*args, **kwargs)
 
 
 class InternalTrans(Request):
