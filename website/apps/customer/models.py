@@ -231,7 +231,7 @@ class ForeignTrans(Request):
     
     def reject(self):
         self.customer.rial_credit += self.amount*(1+self.profitRate)
-        super(ForeignTrans, self).save(*args, **kwargs)
+        super(ForeignTrans, self).save()
 
 
 

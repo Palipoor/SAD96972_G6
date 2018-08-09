@@ -23,10 +23,10 @@ class Employee(main_models.GenUser):
 
 
 
-class Report(models.Model):
-    transaction = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
-    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
-    description = models.TextField(max_length=300)
+# class Report(models.Model):
+#     transaction = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
+#     employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
+#     description = models.TextField(max_length=300)
 
 
 class EmployeeReview(models.Model):
@@ -37,7 +37,8 @@ class EmployeeReview(models.Model):
         (2, 'pending'),
         (3, 'failed'),
         (4, 'reported'), 
-    )     
+    )
+    description = models.TextField(max_length=300, default='')
     request = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
     employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
     new_status = models.IntegerField(choices=statuses, null=False, default=0)

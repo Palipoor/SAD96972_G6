@@ -15,4 +15,20 @@ class Migration(migrations.Migration):
             name='new_status',
             field=models.IntegerField(choices=[(0, 'accepted'), (1, 'rejected'), (2, 'pending'), (3, 'failed'), (4, 'reported')], default=0),
         ),
+        migrations.RemoveField(
+            model_name='report',
+            name='employee',
+        ),
+        migrations.RemoveField(
+            model_name='report',
+            name='transaction',
+        ),
+        migrations.AddField(
+            model_name='employeereview',
+            name='description',
+            field=models.TextField(default='', max_length=300),
+        ),
+        migrations.DeleteModel(
+            name='Report',
+        ),
     ]
