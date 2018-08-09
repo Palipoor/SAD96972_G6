@@ -433,7 +433,7 @@
                 <div class="col-md-4">
                     <div class="feature_iphone">
                         <!-- FEATURE PHONE IMAGE -->
-                        <img class="wow bounceIn" data-wow-duration="1s" src='{% static "images/iPhone02.png" %}'
+                        <img class="wow bounceIn" data-wow-duration="1s"     src='{% static "images/iPhone02.png" %}'
                              alt="">
                     </div>
                 </div>
@@ -500,12 +500,10 @@
     <div class="container">
         <div class="row wow fadeInLeftBig" data-wow-duration="1s">
             <div class="col-md-9">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip.</p>
+                <p>برای استفاده از خدمات شرکت سپاا می‌توانید به طور رایگان ثبت نام کنید. </p>
             </div>
             <div class="col-md-3">
-                <a class="btn btn-primary btn-action" href='{% static "panel\pages\examples\register.html" %}'
+                <a class="btn btn-primary btn-action" href="{% url 'main:register' %}"
                    role="button" name="sign up">ثبت نام</a>
             </div>
         </div>
@@ -622,21 +620,21 @@
                 <div class="col-md-4">
                     <form method="POST">
                         {% csrf_token %}
-                        {% render_field forms.conversion.amount class="form-control" placeholder="مبلغ" %}
+                        {% render_field convert_form.amount class="form-control" placeholder="مبلغ" %}
                         <div class="form-group">
                             <label>شیوه تبدیل</label>
-                            {% render_field forms.conversion.conversion_type class="form-control"  %}
+                            {% render_field convert_form.conversion_type class="form-control"  %}
                         </div>
                         <div class="row">
-                            <button class="btn home-btn wow fadeInLeft" style='margin: 15px;'value="conversion" name="action">محاسبه کن</button>
-                            <label id="conversion" name="result"> {{result}} </label>
+                            <button class="btn home-btn wow fadeInLeft" style='margin: 15px;'value="conversion" name="convert_form">محاسبه کن</button>
+                            <label id="convert_form" name="result " dir="rtl"> مبلغ وارد شده معادل با {{result}}  واحد {{currency}} است. </label>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-8" name="prices-content">
                     <div class="row">
                         <div class="col-md-3">
-                            <p>نرخ دلار</p>
+                            <p> نرخ دلار در واحد ده هزار ریال</p>
                         </div>
                         <div class="col-md-3">
                             <p name="dollar-price">{{dollar}}</p>
@@ -644,7 +642,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <p>نرخ یورو</p>
+                            <p>نرخ یورو در واحد ده هزار ریال</p>
                         </div>
                         <div class="col-md-3">
                             <p name="euro-price">{{euro}}</p>
@@ -672,8 +670,7 @@
                     <!-- TITLE -->
                     <div class="inner_about_title" dir="rtl" name="history">
                         <h2 dir="rtl">قوانین و مقررات</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                        <p>قوانین و مقررات موسسه به طور مفصل این جا می‌آیند.</p>
                     </div>
                 </div>
             </div>
@@ -696,10 +693,7 @@
                 <!-- Start Contact Section Title-->
                 <div class="section_title">
                     <h2>ارتباط با ما</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut aliquip.</p>
+                    <p>برای گزارش مشکل، پرسش سوال و یا ارائهٔ نظرات خود می‌توانید از طریق فرم زیر با مدیریت وبسایت موسسه در تماس باشید.</p>
                 </div>
             </div>
         </div>
@@ -722,20 +716,22 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-8">
-                            {% render_field forms.contact_us.message class="form-control" placeholder="پیام" %}
+                            {% render_field contact_form.message class="form-control" placeholder="پیام" %}
                             <div class="form-actions">
-                                <button type="submit" name="action" value="contact_us"
+                                <button type="submit" name="contact_form" value="contact_us"
                                         class="btn btn-default submit-btn ">ارسال پیام
                                 </button>
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            {% render_field forms.contact_us.name class="form-control" placeholder="اسم" %}
-                            {% render_field forms.contact_us.email class="form-control" placeholder="ایمیل" %}
-                            {% render_field forms.contact_us.subject class="form-control" placeholder="موضوع" %}
-
+                            {% render_field contact_form.name class="form-control" placeholder="نام" %}
+                            {% render_field contact_form.email class="form-control" placeholder="ایمیل" %}
+                            {% render_field contact_form.subject class="form-control" placeholder="موضوع" %}
+                            <br>
+                            <br>
                         </div>
+                       
                     </div>
                 </form>
                 <!-- END FORM -->
@@ -768,7 +764,7 @@
 
             <div class="col-md-6">
                 <div class="scroll_top">
-                    <a href='{% static "#HOME" %}'>
+                    <a href='#HOME'>
                         <i class="fa fa-angle-up"></i>
                     </a>
                 </div>

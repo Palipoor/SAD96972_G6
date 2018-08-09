@@ -8,11 +8,11 @@ from apps.manager.models import Manager
 
 class ConvertForm(forms.Form):
     amount = forms.IntegerField(required=True)
-    conversion_type = forms.ChoiceField(choices=[('rial2euro', 'ریال به یورو'),
-                                                 ('rial2dollar', 'ریال به دلار'),
+    conversion_type = forms.ChoiceField(choices=[('rial2euro', 'ده هزار ریال به یورو'),
+                                                 ('rial2dollar', 'ده هزار ریال به دلار'),
                                                  ('dollar2euro', 'دلار به یورو'),
-                                                 ('dollar2rial', 'دلار به ریال'),
-                                                 ('euro2rial', 'یورو به ریال'),
+                                                 ('dollar2rial', 'دلار به ده هزار ریال'),
+                                                 ('euro2rial', 'یورو به ده هزار ریال'),
                                                  ('euro2dollar', 'یورو به دلار')])
 
 

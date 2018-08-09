@@ -28,20 +28,20 @@ import requests
 
 ### returns a dictionary containing dollar and euro prices
 def get_prices():
-    request = requests.get("http://2gheroon.ir")
-    root = lxml.html.fromstring(request.content)
+    # request = requests.get("http://2gheroon.ir")
+    # root = lxml.html.fromstring(request.content)
 
-    table_rows = root.xpath('//td[@class = "priceTitle"]')
-    prices = {}
-    for row in table_rows:
-        if 'دلار' in str(row.text):
-            prices['dollar'] = int((row.xpath('./following::td')[0]).text)
-            break
-    for row in table_rows:
-        if 'یورو' in str(row.text):
-            prices['euro'] = int((row.xpath('./following::td')[0]).text)
-            break
-    return prices
+    # table_rows = root.xpath('//td[@class = "priceTitle"]')
+    # prices = {}
+    # for row in table_rows:
+    #     if 'دلار' in str(row.text):
+    #         prices['dollar'] = int((row.xpath('./following::td')[0]).text)
+    #         break
+    # for row in table_rows:
+    #     if 'یورو' in str(row.text):
+    #         prices['euro'] = int((row.xpath('./following::td')[0]).text)
+    #         break
+    return {'euro': 6, 'dollar': 4} #TODO
 
 
 class IsLoggedInView(LoginRequiredMixin):
@@ -198,50 +198,117 @@ def login_success(request):
         return redirect("customer/dashboard")
 
 
-class LandingPageView(MultiFormsView):
+class LandingPageView(FormView):
     template_name = 'main/index.html'
-    form_classes = {'conversion': ConvertForm, 'contact_us': ContactForm}
-
+    contact_form_class = ContactForm
+    convert_form_class = ConvertForm
+    form_class = contact_form_class
     def get_context_data(self, **kwargs):
-        context = super(LandingPageView, self).get_context_data(forms=self.get_forms(self.form_classes))
-        prices = get_prices()
-        context.update(prices)
+        context = super(LandingPageView, self).get_context_data(**kwargs)
+        if 'contact_form' not in context:
+            context['contact_form'] = self.contact_form_class()
+        if 'convert_form' not in context:
+            context['convert_form'] = self.convert_form_class()
+        price = get_prices()
+        context.update(price)
         return context
 
-    def contact_us_form_valid(self, form):
-        subject = form.cleaned_data['subject']
-        from_email = form.cleaned_data['email']
-        message = form.cleaned_data['message']
-        try:
-            send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
-        except BadHeaderError:
-            return HttpResponse('Invalid header found.')
-        context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
-        return render(self.request, "main/index.html", context) #todo bere bakhshe contact us!
-
-    def conversion_form_valid(self, form):
-        prices = get_prices()
-        conversion_type = form.cleaned_data['conversion_type']
-        amount = form.cleaned_data['amount']
-        dollar_price = prices['dollar']
-        euro_price = prices['euro']
-
-        if conversion_type == 'dollar2rial':
-            converted = dollar_price * amount
-        elif conversion_type == 'rial2dollar':
-            converted = amount / dollar_price
-        elif conversion_type == 'euro2rial':
-            converted = euro_price * amount
-        elif conversion_type == 'rial2euro':
-            converted = amount / euro_price
-        elif conversion_type == 'euro2dollar':
-            converted = amount * euro_price / dollar_price
+    def post(self, request, *args, **kwargs):
+        if 'contact_form' in request.POST:
+            form_class = self.contact_form_class
+            form_name = 'contact_form'
         else:
-            converted = amount * dollar_price / euro_price
+            form_class = self.convert_form_class
+            form_name = 'convert_form'
 
-        context = self.get_context_data()
-        context['result'] = converted
-        return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(**{form_name: form})
+
+    def form_valid(self,form):
+        if isinstance(form,ContactForm):
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
+            return HttpResponseRedirect("main/index.html") 
+
+        else:
+            prices = get_prices()
+            conversion_type = form.cleaned_data['conversion_type']
+            amount = form.cleaned_data['amount']
+            dollar_price = prices['dollar']
+            euro_price = prices['euro']
+            dest_currency = ''
+            if conversion_type == 'dollar2rial':
+                converted = dollar_price * amount
+                dest_currency = 'ده هزار ریالی'
+            elif conversion_type == 'rial2dollar':
+                converted = amount / dollar_price
+                dest_currency = 'دلار'
+            elif conversion_type == 'euro2rial':
+                converted = euro_price * amount
+                dest_currency = 'ده هزار ریالی'
+            elif conversion_type == 'rial2euro':
+                converted = amount / euro_price
+                dest_currency = 'یورو'
+            elif conversion_type == 'euro2dollar':
+                converted = amount * euro_price / dollar_price
+                dest_currency = 'دلار'
+            else:
+                converted = amount * dollar_price / euro_price
+                dest_currency = 'یورو'
+
+            context = self.get_context_data()
+            context['result'] = converted
+            context.update({'currency' : dest_currency})
+            return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
+
+
+    def form_invalid(self, **kwargs):
+        return self.render_to_response(self.get_context_data(**kwargs))
+
+    # def contact_us_form_valid(self, form):
+    #     subject = form.cleaned_data['subject']
+    #     from_email = form.cleaned_data['email']
+    #     message = form.cleaned_data['message']
+    #     try:
+    #         send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
+    #     except BadHeaderError:
+    #         return HttpResponse('Invalid header found.')
+    #     context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
+    #     return render(self.request, "main/index.html", context) #todo bere bakhshe contact us!
+
+    # def conversion_form_valid(self, form):
+    #     prices = get_prices()
+    #     conversion_type = form.cleaned_data['conversion_type']
+    #     amount = form.cleaned_data['amount']
+    #     dollar_price = prices['dollar']
+    #     euro_price = prices['euro']
+
+    #     if conversion_type == 'dollar2rial':
+    #         converted = dollar_price * amount
+    #     elif conversion_type == 'rial2dollar':
+    #         converted = amount / dollar_price
+    #     elif conversion_type == 'euro2rial':
+    #         converted = euro_price * amount
+    #     elif conversion_type == 'rial2euro':
+    #         converted = amount / euro_price
+    #     elif conversion_type == 'euro2dollar':
+    #         converted = amount * euro_price / dollar_price
+    #     else:
+    #         converted = amount * dollar_price / euro_price
+
+    #     context = self.get_context_data()
+    #     context['result'] = converted
+    #     return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
 
 
 def register_success(request):
