@@ -24,6 +24,7 @@ from apps.manager.models import Manager
 import lxml.etree
 import lxml.html
 import requests
+from utils.currency_utils import Currencies
 
 
 # returns a dictionary containing dollar and euro prices
@@ -75,23 +76,15 @@ class IsStaff(GroupRequiredMixin):
 class WalletView(FormView, IsLoggedInView, IsWalletUser):
     currency = ""
     user_type = ""
-    currency_type = {"rial": "ریال",
-                     "dollar": "دلار",
-                     "euro": "یورو",
-                     }
-    currency_to_num = {"rial": 0,
-                       "dollar": 1,
-                       "euro": 2,
-                       }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['currency'] = self.currency_type[self.kwargs['currency']]
+        context['currency'] = Currencies.currency_to_persian(self.kwargs['currency'])
         if (self.user_type == "customer"):
             context, user = Compilation.get_customer_context_data(context, self.request.user.username)
         else:
             context, user = Compilation.get_manager_context_data(cotext, self.request.user.username)
-        context = Compilation.get_wallet_requests(context, self.request.user.username, self.currency_to_num[self.kwargs['currency']])
+        context = Compilation.get_wallet_requests(context, self.request.user.username, Currencies.currency_to_num(self.kwargs['currency']))
         context['credit'] = context[self.kwargs['currency'] + "_credit"]
         return context
 
