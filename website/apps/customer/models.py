@@ -11,17 +11,17 @@ class Customer(GenUser):
     dollar_cent_credit = models.FloatField(default=0)
     euro_cent_credit = models.FloatField(default=0)
     account_number = models.CharField(max_length=20, unique=True, null=False)
+
     def __init__(self, *args, **kwargs):
         super(Customer, self).__init__(*args, **kwargs)
         self.user_type = 0
+
     def save(self, *args, **kwargs):
         super(Customer, self).save(*args, **kwargs)
         customer_group = Group.objects.get(name='customer')
         customer_group.user_set.add(self)
         customer_group = Group.objects.get(name='wallet_user')
         customer_group.user_set.add(self)
-        
-
 
 
 class RequestType(models.Model):  # ???
@@ -53,8 +53,9 @@ class Request(models.Model):
     amount = models.FloatField(null=False)
     request_time = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=500)
-    status = models.IntegerField(choices=statuses, default= 0)
-    profitRate = models.FloatField(default= 0.05)
+    status = models.IntegerField(choices=statuses, default=0)
+    profitRate = models.FloatField(default=0.05)
+
     def reject(self):
         self.status = 1
         self.customer.save()
@@ -68,7 +69,6 @@ class Request(models.Model):
         self.customer.save()
 
 
-
 class Charge(Request):
     currency = (
         (0, 'rial'),
@@ -76,6 +76,7 @@ class Charge(Request):
         (2, 'euro'),
     )
     wallet = models.IntegerField(choices=currency)
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.customer.rial_credit += self.amount
@@ -90,9 +91,10 @@ class Exchange(Request):
     )
     source = models.IntegerField(choices=currency)
     destination = models.IntegerField(choices=currency)
+
     def save(self, *args, **kwargs):
-        #todo error for negative account
-        exchange_matrix = [[1,0.01,0.01],[100,1,1],[100,1,1]]
+        # todo error for negative account
+        exchange_matrix = [[1, 0.01, 0.01], [100, 1, 1], [100, 1, 1]]
         if not self.pk:
             if(self.source == 0):
                 if(self.destination == 0):
@@ -217,6 +219,7 @@ class UniversityTrans(Request):
 class ForeignTrans(Request):
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
+
     def save(self, *args, **kwargs):
         if not self.pk:
             self.status = 2
@@ -228,11 +231,10 @@ class ForeignTrans(Request):
                 self.customer.euro_cent_credit -= self.amount*(1+self.profitRate)
             self.customer.save()
             super(ForeignTrans, self).save(*args, **kwargs)
-    
+
     def reject(self):
         self.customer.rial_credit += self.amount*(1+self.profitRate)
         super(ForeignTrans, self).save()
-
 
 
 class InternalTrans(Request):

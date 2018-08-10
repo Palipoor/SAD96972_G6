@@ -41,9 +41,9 @@ class SignUpForm(forms.Form):
     email = forms.EmailField(max_length=70, required=True, label='ایمیل',
                              widget=forms.widgets.EmailInput(attrs={'name': 'email'}))
     account_number = forms.IntegerField(label='شماره حساب', widget=forms.widgets.NumberInput(
-            attrs={'name': 'account-number'}))  # todo behtaresh konim vase validation
+        attrs={'name': 'account-number'}))  # todo behtaresh konim vase validation
     phone_number = forms.IntegerField(label='شماره تماس', widget=forms.widgets.NumberInput(
-            attrs={'name': 'phone-number'}))  # todo behtaresh konim vase validation
+        attrs={'name': 'phone-number'}))  # todo behtaresh konim vase validation
     i_agree = forms.BooleanField(label='با قوانین و مقررات موافقم', required=True)
 
     def is_valid(self):
@@ -110,7 +110,7 @@ class EuroChargeForm(WalletChargeForm):
                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
             else:
                 the_manager.company_rial_credit = rial_credit - converted_amount
-                the_manager.company_euro_cent_credit = the_manager.company_euro_cent_credit + int(self.cleaned_data['amount']) 
+                the_manager.company_euro_cent_credit = the_manager.company_euro_cent_credit + int(self.cleaned_data['amount'])
                 the_manager.save()
 
         return not flag

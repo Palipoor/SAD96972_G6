@@ -13,9 +13,12 @@ def add_groups(apps, schema_editor):
         Group(name=u'staff'),
         Group(name=u'wallet_user'),
     ])
+
+
 def remove_groups(apps, schema_editor):
     Group = apps.get_model('auth', 'Group')
     Group.objects.all().delete()
+
 
 def add_admin(apps, schema_editor):
     superuser = User()
@@ -26,11 +29,15 @@ def add_admin(apps, schema_editor):
     superuser.email = 'admin@admin.net'
     superuser.set_password('adminadmin')
     superuser.save()
-def remove_admin(apps,schema_editor):
-    User.objects.get(username = "newadmin")
+
+
+def remove_admin(apps, schema_editor):
+    User.objects.get(username="newadmin")
+
 
 def add_transactions(apps, schema_editor):
     ""
+
 
 class Migration(migrations.Migration):
 
@@ -40,5 +47,4 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(add_groups, remove_groups),
-        migrations.RunPython(add_admin,remove_admin)]
-    
+        migrations.RunPython(add_admin, remove_admin)]

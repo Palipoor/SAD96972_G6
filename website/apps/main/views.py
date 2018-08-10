@@ -26,7 +26,7 @@ import lxml.html
 import requests
 
 
-### returns a dictionary containing dollar and euro prices
+# returns a dictionary containing dollar and euro prices
 def get_prices():
     request = requests.get("http://2gheroon.ir")
     root = lxml.html.fromstring(request.content)
@@ -80,7 +80,6 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
                      "euro": "یورو",
                      }
 
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['currency'] = self.currency_type[self.kwargs['currency']]
@@ -95,7 +94,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
         kwargs = super(WalletView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
-        
+
     def dispatch(self, request, *args, **kwargs):
         self.currency = kwargs['currency']
         self.user = request.user
@@ -126,6 +125,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
 
             # todo form
             # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
+
 
 class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
@@ -164,9 +164,9 @@ class EmployeeDetailsView(DetailsView):
 
 
 class Register(FormView):
-    #todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
+    # todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
     form_class = SignUpForm
-    success_url = reverse_lazy ('main:register_success')
+    success_url = reverse_lazy('main:register_success')
     template_name = 'main/register.html'
 
     def post(self, request, *args, **kwargs):
@@ -217,7 +217,7 @@ class LandingPageView(MultiFormsView):
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
         context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
-        return render(self.request, "main/index.html", context) #todo bere bakhshe contact us!
+        return render(self.request, "main/index.html", context)  # todo bere bakhshe contact us!
 
     def conversion_form_valid(self, form):
         prices = get_prices()
@@ -241,7 +241,7 @@ class LandingPageView(MultiFormsView):
 
         context = self.get_context_data()
         context['result'] = converted
-        return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
+        return render(self.request, 'main/index.html', context)  # todo bere bakhshe finance!
 
 
 def register_success(request):

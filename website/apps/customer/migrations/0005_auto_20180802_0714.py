@@ -3,13 +3,14 @@
 from django.contrib.auth.hashers import make_password
 from django.db import migrations
 
+
 def add_customer(apps, schema_editor):
     Group = apps.get_model('auth', 'Group')
     Customer = apps.get_model('customer', 'Customer')
     try:
-        customer = Customer.objects.get(username= 'customer', email = 'customer@customer.com')
+        customer = Customer.objects.get(username='customer', email='customer@customer.com')
     except:
-        customer = Customer(username= 'customer', email = 'customer@customer.com')
+        customer = Customer(username='customer', email='customer@customer.com')
         customer.password = make_password('customercustomer')
         customer.save()
         customer_group = Group.objects.get(name='customer')
@@ -17,14 +18,16 @@ def add_customer(apps, schema_editor):
         customer_group = Group.objects.get(name='wallet_user')
         customer_group.user_set.add(customer)
 
-def remove_customer(apps,schema_editor):
+
+def remove_customer(apps, schema_editor):
     Customer = apps.get_model('customer', 'Customer')
     try:
-        customer = Customer.objects.get(username= 'customer')
+        customer = Customer.objects.get(username='customer')
         customer.delete()
     except:
-        pass    
-    
+        pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [

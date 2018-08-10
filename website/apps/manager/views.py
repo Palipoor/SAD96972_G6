@@ -36,8 +36,11 @@ class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
 class CustomerDetailsForManager(IsManager, CustomerDetailsView):
     ""
 
+
 class EmployeeDetailsForManager(IsManager, EmployeeDetailsView):
     ""
+
+
 class CustomersListView(IsLoggedInView, IsManager, FormView):
     template_name = "manager/users.html"
     form_class = CustomerAccessRemovalForm
@@ -54,13 +57,11 @@ class CustomersListView(IsLoggedInView, IsManager, FormView):
         else:
             return self.form_invalid(form)
 
-
     def get_context_data(self, **kwargs):
         context = super(CustomersListView, self).get_context_data(**kwargs)
         context['object_list'] = Customer.objects.all()
         context['type'] = "مشتری"
         return context
-
 
     def get_queryset(self):
         return Customer.objects.all()

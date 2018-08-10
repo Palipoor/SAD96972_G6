@@ -6,7 +6,7 @@ from django.template import Context, loader
 import os
 # Create your views here.
 from django.views.generic.edit import FormView
-from django.views.generic import CreateView, UpdateView, ListView,TemplateView
+from django.views.generic import CreateView, UpdateView, ListView, TemplateView
 from apps.main.views import IsLoggedInView, IsCustomer
 from apps.customer.models import Customer
 from views import Compilation
@@ -16,31 +16,32 @@ from apps.customer.Forms import CustomerSettingsForm
 from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
+
 class CustomerTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
-        context,customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        context = super().get_context_data(**kwargs)
+        context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
         return context
 
 
 class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
-        context,customer =  Compilation.get_customer_context_data(context, self.request.user.username)
+        context = super().get_context_data(**kwargs)
+        context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
         return context
+
 
 class CustomerWallet (CustomerFormView):
     template_name = "customer/wallet.html"
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)        
+        context = super().get_context_data(**kwargs)
         context['currency'] = self.kwargs['currency']
         return context
-    
+
 
 class CustomerDashboardView(CustomerTemplateView, IsLoggedInView, IsCustomer):
     template_name = "customer/dashboard.html"
-    
-
 
 
 class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
@@ -93,6 +94,7 @@ class GRECreationView(TransactionCreationView):
 
 class CustomerProfile(IsCustomer, CustomerDetailsView):
     ""
+
 
 class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView):
     success_url = reverse_lazy('customer:change_password')

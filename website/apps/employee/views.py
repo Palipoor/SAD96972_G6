@@ -14,9 +14,10 @@ from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView
 
 
 def dashboard(request):
-     template = loader.get_template("employee/dashboard.html")
-     return HttpResponse(template.render())
-    
+    template = loader.get_template("employee/dashboard.html")
+    return HttpResponse(template.render())
+
+
 class EmployeeDashboardView(IsLoggedInView, IsEmployee, ListView, FormView):  # todo not sure if this works:/
     ""
 
@@ -24,9 +25,10 @@ class EmployeeDashboardView(IsLoggedInView, IsEmployee, ListView, FormView):  # 
 class EmployeeProfile(IsEmployee, EmployeeDetailsView):
     ""
 
+
 class EmployeePasswordChangeView(PasswordChangeView, IsEmployee):
     success_url = reverse_lazy('employee:change_password')
-    template_name =  'employee/change_password.html'
+    template_name = 'employee/change_password.html'
 
 
 class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):

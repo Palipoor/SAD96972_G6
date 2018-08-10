@@ -2,27 +2,31 @@
 from django.contrib.auth.hashers import make_password
 from django.db import migrations
 
+
 def add_employee(apps, schema_editor):
     Group = apps.get_model('auth', 'Group')
     Employee = apps.get_model('employee', 'Employee')
     try:
-        employee = Employee.objects.get(username= 'employee', email = 'employee@employee.com')
+        employee = Employee.objects.get(username='employee', email='employee@employee.com')
     except:
-        employee = Employee(username= 'employee', email = 'employee@employee.com', current_salary = 20)
+        employee = Employee(username='employee', email='employee@employee.com', current_salary=20)
         employee.password = make_password('employeeemployee')
         employee.save()
         employee_group = Group.objects.get(name='employee')
         employee_group.user_set.add(employee)
         employee_group = Group.objects.get(name='staff')
         employee_group.user_set.add(employee)
-def remove_employee(apps,schema_editor):
+
+
+def remove_employee(apps, schema_editor):
     Employee = apps.get_model('employee', 'Employee')
     try:
-        employee = Employee.objects.get(username= 'employee')
+        employee = Employee.objects.get(username='employee')
         employee.delete()
     except:
-        pass    
-    
+        pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [

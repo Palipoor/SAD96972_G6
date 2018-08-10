@@ -95,8 +95,8 @@ DATABASES = {
 }
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
 }
 
 # Password validation

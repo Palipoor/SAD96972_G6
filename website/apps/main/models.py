@@ -26,8 +26,6 @@ class GenUser(User):
     # active = models.BooleanField(default=True)
 
 
-
-
 class Notification(models.Model):
     statuses = (
         (0, 'seen'),
