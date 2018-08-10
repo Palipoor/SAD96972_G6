@@ -275,41 +275,6 @@ class LandingPageView(FormView):
     def form_invalid(self, **kwargs):
         return self.render_to_response(self.get_context_data(**kwargs))
 
-    # def contact_us_form_valid(self, form):
-    #     subject = form.cleaned_data['subject']
-    #     from_email = form.cleaned_data['email']
-    #     message = form.cleaned_data['message']
-    #     try:
-    #         send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
-    #     except BadHeaderError:
-    #         return HttpResponse('Invalid header found.')
-    #     context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
-    #     return render(self.request, "main/index.html", context) #todo bere bakhshe contact us!
-
-    # def conversion_form_valid(self, form):
-    #     prices = get_prices()
-    #     conversion_type = form.cleaned_data['conversion_type']
-    #     amount = form.cleaned_data['amount']
-    #     dollar_price = prices['dollar']
-    #     euro_price = prices['euro']
-
-    #     if conversion_type == 'dollar2rial':
-    #         converted = dollar_price * amount
-    #     elif conversion_type == 'rial2dollar':
-    #         converted = amount / dollar_price
-    #     elif conversion_type == 'euro2rial':
-    #         converted = euro_price * amount
-    #     elif conversion_type == 'rial2euro':
-    #         converted = amount / euro_price
-    #     elif conversion_type == 'euro2dollar':
-    #         converted = amount * euro_price / dollar_price
-    #     else:
-    #         converted = amount * dollar_price / euro_price
-
-    #     context = self.get_context_data()
-    #     context['result'] = converted
-    #     return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
-
 
 def register_success(request):
     template = loader.get_template("main/success.html")

@@ -1,9 +1,11 @@
+import unicodedata
 from django import forms
 from django.contrib.auth.models import User
 
 from apps.customer.models import Customer
 from apps.main.models import GenUser
 from apps.manager.models import Manager
+from utils.strings import *
 
 
 class ConvertForm(forms.Form):
@@ -17,11 +19,22 @@ class ConvertForm(forms.Form):
 
 
 class ContactForm(forms.Form):
-    email = forms.EmailField(required=True)
-    name = forms.CharField(required=True)
-    subject = forms.CharField(required=True)
-    message = forms.CharField(widget=forms.Textarea, required=True)
 
+    email = forms.EmailField(widget = forms.EmailInput(attrs= {"class": "form-control", "placeholder": "ایمیل"}),required=True, error_messages = {'required' : FIELD_REQUIRED, 'invalid' : INVALID_EMAIL})
+    name = forms.CharField(required=True, error_messages = {'required' : FIELD_REQUIRED})
+    subject = forms.CharField(required=True, error_messages = {'required' : FIELD_REQUIRED})
+    message = forms.CharField(widget=forms.Textarea, required=True, error_messages = {'required' : FIELD_REQUIRED})
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        for c in name:
+            cat = unicodedata.category(c)
+            if cat not in ('Lo', 'Zs'):
+                raise forms.ValidationError("لطفا از کاراکترهای فارسی و فاصله در نام خود استفاده کنید.")
+        return name
 
 class SignUpForm(forms.Form):
     username = forms.CharField(max_length=100, required=True, label='نام کاربری',
