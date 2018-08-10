@@ -174,8 +174,6 @@ class Register(FormView):
         if form.is_valid():
             new_user = Customer(username=form.cleaned_data['username'],
                                 first_name=form.cleaned_data["first_name"], last_name=form.cleaned_data["last_name"],
-                                persian_first_name=form.cleaned_data['persian_first_name'],
-                                persian_last_name=form.cleaned_data['persian_last_name'],
                                 email=form.cleaned_data['email'], phone_number=form.cleaned_data['phone_number'],
                                 account_number=form.cleaned_data['account_number'])
             new_user.set_password(form.cleaned_data['password'])

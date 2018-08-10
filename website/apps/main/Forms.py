@@ -6,10 +6,12 @@ from apps.customer.models import Customer
 from apps.main.models import GenUser
 from apps.manager.models import Manager
 from utils.strings import *
+from utils import fields
 
 
 class ConvertForm(forms.Form):
-    amount = forms.IntegerField(required=True)
+    amount = fields.AMOUNT
+    amount.error_messages = {'invalid': INVALID_AMOUNT}
     conversion_type = forms.ChoiceField(choices=[('rial2euro', 'ده هزار ریال به یورو'),
                                                  ('rial2dollar', 'ده هزار ریال به دلار'),
                                                  ('dollar2euro', 'دلار به یورو'),
@@ -20,67 +22,49 @@ class ConvertForm(forms.Form):
 
 class ContactForm(forms.Form):
 
-    email = forms.EmailField(widget = forms.EmailInput(attrs= {"class": "form-control", "placeholder": "ایمیل"}),required=True, error_messages = {'required' : FIELD_REQUIRED, 'invalid' : INVALID_EMAIL})
-    name = forms.CharField(required=True, error_messages = {'required' : FIELD_REQUIRED})
-    subject = forms.CharField(required=True, error_messages = {'required' : FIELD_REQUIRED})
-    message = forms.CharField(widget=forms.Textarea, required=True, error_messages = {'required' : FIELD_REQUIRED})
+    email = fields.EMAIL
+    email.error_messages = {'required': FIELD_REQUIRED, 'invalid': INVALID_EMAIL}
+    name = fields.PERSIAN_FIRST_NAME
+    name.error_messages = {'required': FIELD_REQUIRED}
+    subject = forms.CharField(widget=forms.TextInput(attrs={'name': 'subject'}), required=True, error_messages={'required': FIELD_REQUIRED})
+    message = forms.CharField(widget=forms.Textarea(attrs={'name': 'message'}), required=True, error_messages={'required': FIELD_REQUIRED})
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
 
-    def clean_name(self):
-        name = self.cleaned_data['name']
-        for c in name:
-            cat = unicodedata.category(c)
-            if cat not in ('Lo', 'Zs'):
-                raise forms.ValidationError("لطفا از کاراکترهای فارسی و فاصله در نام خود استفاده کنید.")
-        return name
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(max_length=100, required=True, label='نام کاربری',
-                               widget=forms.widgets.TextInput(attrs={'name': 'username'}))
-    password = forms.CharField(max_length=50, required=True, label='کلمه عبور',
-                               widget=forms.PasswordInput(attrs={'name': 'password'}))
-    password2 = forms.CharField(max_length=50, required=True, label='تکرار کلمه عبور',
-                                widget=forms.PasswordInput(attrs={'name': 'password-repeat'}))
-    first_name = forms.CharField(max_length=50, required=True, label='نام  به انگلیسی',
-                                 widget=forms.widgets.TextInput(attrs={'name': 'english-first-name'}))
-    last_name = forms.CharField(max_length=50, required=True, label='نام خانوادگی  به انگلیسی',
-                                widget=forms.widgets.TextInput(attrs={'name': 'english-last-name'}))
-    persian_first_name = forms.CharField(max_length=50, required=True, label='نام به فارسی',
-                                         widget=forms.widgets.TextInput(attrs={'name': 'persian-first-name'}))
-    persian_last_name = forms.CharField(max_length=50, required=True, label='نام خانوادگی به فارسی',
-                                        widget=forms.widgets.TextInput(attrs={'name': 'persian-last-name'}))
-    email = forms.EmailField(max_length=70, required=True, label='ایمیل',
-                             widget=forms.widgets.EmailInput(attrs={'name': 'email'}))
-    account_number = forms.IntegerField(label='شماره حساب', widget=forms.widgets.NumberInput(
-            attrs={'name': 'account-number'}))  # todo behtaresh konim vase validation
-    phone_number = forms.IntegerField(label='شماره تماس', widget=forms.widgets.NumberInput(
-            attrs={'name': 'phone-number'}))  # todo behtaresh konim vase validation
-    i_agree = forms.BooleanField(label='با قوانین و مقررات موافقم', required=True)
+    username = fields.USERNAME
+    password = fields.PASSWORD
+    password2 = fields.PASSWORD2
+    first_name = fields.FIRST_NAME
+    last_name = fields.LAST_NAME
+    email = fields.EMAIL
+    account_number = fields.ACCOUNT_NUMBER
+    phone_number = fields.PHONE
+    phone_number.required = True
+    phone_number.error_messages = {'required': FIELD_REQUIRED}
+    i_agree = forms.BooleanField(label='با قوانین و مقررات موافقم', required=True, error_messages={'required': FIELD_REQUIRED})
 
-    def is_valid(self):
-        flag = False
-        valid = super(SignUpForm, self).is_valid()
-        if not valid:
-            flag = True
-
+    def clean_username(self):
         if GenUser.objects.filter(username=self.cleaned_data['username']).exists():
-            self.errors['username'] = 'کاربری با این مشخصات وجود دارد'
-            flag = True
+            raise forms.ValidationError(REPEATED_USER)
+        return self.cleaned_data['username']
 
+    def clean_email(self):
         if GenUser.objects.filter(email=self.cleaned_data['email']).exists():
-            self.errors['email'] = 'کاربری با این ایمیل وجود دارد'
-            flag = True
+            raise forms.ValidationError(REPEATED_USER)
+        return self.cleaned_data['email']
 
+    def clean_account_number(self):
         if Customer.objects.filter(account_number=self.cleaned_data['account_number']).exists():
-            self.errors['account_number'] = 'کاربری با این شماره حساب وجود دارد'
-            flag = True
+            raise forms.ValidationError(REPEATED_USER)
+        return self.cleaned_data['account_number']
 
+    def clean_password2(self):
         if self.cleaned_data['password'] != self.cleaned_data['password2']:
-            self._errors['repeat_not_match'] = 'تکرار رمز عبور با آن یکی نیست'
-            flag = True
-        return not flag
+            raise forms.ValidationError('تکرار رمز عبور با آن یکی نیست.')
+        return not self.cleaned_data['password2']
 
 
 class WalletChargeForm(forms.Form):
@@ -109,7 +93,7 @@ class EuroChargeForm(WalletChargeForm):
             converted_amount = int(self.cleaned_data['amount']) * euro_price
             if rial_credit < converted_amount:
                 flag = True
-                self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
+                self.add_error('amount', NOT_ENOUGH_RIAL)
             else:
                 the_customer.rial_credit = rial_credit - converted_amount
                 the_customer.euro_cent_credit = the_customer.euro_cent_credit + int(self.cleaned_data['amount'])
@@ -120,10 +104,10 @@ class EuroChargeForm(WalletChargeForm):
             converted_amount = int(self.cleaned_data['amount']) * euro_price
             if rial_credit < converted_amount:
                 flag = True
-                self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
+                self.add_error('amount', NOT_ENOUGH_RIAL)
             else:
                 the_manager.company_rial_credit = rial_credit - converted_amount
-                the_manager.company_euro_cent_credit = the_manager.company_euro_cent_credit + int(self.cleaned_data['amount']) 
+                the_manager.company_euro_cent_credit = the_manager.company_euro_cent_credit + int(self.cleaned_data['amount'])
                 the_manager.save()
 
         return not flag
@@ -143,7 +127,7 @@ class DollarChargeForm(WalletChargeForm):
             converted_amount = int(self.cleaned_data['amount']) * dollar_price
             if rial_credit < converted_amount:
                 flag = True
-                self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
+                self.add_error('amount', NOT_ENOUGH_RIAL)
             else:
                 the_customer.rial_credit = rial_credit - converted_amount
                 the_customer.dollar_cent_credit = the_customer.dollar_cent_credit + int(self.cleaned_data['amount'])
@@ -154,7 +138,7 @@ class DollarChargeForm(WalletChargeForm):
             converted_amount = int(self.cleaned_data['amount']) * dollar_price
             if rial_credit < converted_amount:
                 flag = True
-                self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
+                self.add_error('amount', NOT_ENOUGH_RIAL)
             else:
                 the_manager.company_rial_credit = rial_credit - converted_amount
                 the_manager.company_dollar_cent_credit = the_manager.company_dollar_cent_credit + int(self.cleaned_data['amount'])
