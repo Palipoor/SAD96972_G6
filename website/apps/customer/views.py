@@ -42,6 +42,15 @@ class CustomerWallet (CustomerFormView):
 
 class CustomerDashboardView(CustomerTemplateView, IsLoggedInView, IsCustomer):
     template_name = "customer/dashboard.html"
+    currency_to_num = {"rial": 0,
+                       "dollar": 1,
+                       "euro": 2,
+                       }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
+        return context
 
 
 class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):

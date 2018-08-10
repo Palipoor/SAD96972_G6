@@ -82,7 +82,7 @@
         <h3 class="box-title">تراکنش‌های اخیر</h3>
       </div>
       <!-- /.box-header -->
-      <div class="box-body table-responsive no-padding" name = "new-transactions">
+      <div class="box-body table-responsive no-padding" name="new-transactions">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -92,26 +92,16 @@
               <th>وضعیت</th>
             </tr>
           </thead>
-            <tbody>
-            {% for transaction in new_transactions %}
-                <tr>
-                  <td>{{transaction.id}}</td>
-                  <td>{{transaction.type}}</td>
-                  <td>{{transaction.time}}</td>
-                  {%if transaction.status == 'pending' %}
-                    <td>
-                      <span class="label label-warning">transaction.status</span>
-                    </td>
-                  {% elif transaction.status == 'accepted' %}
-                    <td>
-                      <span class="label label-success">transaction.status</span>
-                    </td>
-                  {% elif transaction.status == 'rejected' or transaction.status == 'reported' %}
-                    <td>
-                      <span class="label label-danger">transaction.status</span>
-                    </td>
-                  {% endif %}
-                </tr>
+          <tbody>
+            {% for req in requests %}
+            <tr>
+              <td>
+                <a href={{req.id}}+ "_transaction_details">{{req.id}}</a>
+              </td>
+              <td>{{req.request_time}}</td>
+              <td>{{req.amount}}</td>
+              <td>{{req.status}}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
