@@ -79,6 +79,10 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
                      "dollar": "دلار",
                      "euro": "یورو",
                      }
+    currency_to_num = {"rial": 0,
+                       "dollar": 1,
+                       "euro": 2,
+                       }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -87,6 +91,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
             context, user = Compilation.get_customer_context_data(context, self.request.user.username)
         else:
             context, user = Compilation.get_manager_context_data(cotext, self.request.user.username)
+        context = Compilation.get_wallet_requests(context, self.request.user.username, self.currency_to_num[self.kwargs['currency']])
         context['credit'] = context[self.kwargs['currency'] + "_credit"]
         return context
 

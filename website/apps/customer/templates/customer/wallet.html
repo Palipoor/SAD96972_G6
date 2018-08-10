@@ -18,6 +18,8 @@
 {% endblock content_header_link %}
 
 {% block main_content %}
+
+
 <!-- Main content -->
 <section class="content">
     <!-- Small boxes (Stat box) -->
@@ -94,12 +96,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for transaction in new_transactions %}
+                        {% for req in requests %}
                         <tr>
-                            <td><a href={{transaction.id}}+"_transaction_details">{{transaction.id}}</a></td>
-                            <td>{{transaction.time}}</td>
-                            <td>{{transaction.amount}}</td>
-                            <td>{{transaction.type}}</td>
+                            <td><a href={{req.id}}+"_transaction_details">{{req.id}}</a></td>
+                            <td>{{req.request_time}}</td>
+                            <td>{{req.amount}}</td>
+                            <td>{{req.status}}</td>
                         </tr>
                         {% endfor %}
                         </tbody>

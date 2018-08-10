@@ -1,6 +1,7 @@
 from apps.customer.models import Customer
 from apps.main.models import GenUser
 from apps.manager.models import Manager
+from apps.customer.models import Request
 
 
 class Compilation():
@@ -44,3 +45,12 @@ class Compilation():
         # returns context and user
         user = GenUser.objects.filter(username=username).first()
         return (Compilation.user_context(context, user), user)
+
+    def get_wallet_requests(context, user_name, wallet):
+        # get requests regarding a wallet of the user. if wallet equals -1 all wallets are used.
+        customer = Customer.objects.get(username=user_name)
+        if (wallet == -1):
+            context['requests'] = Request.objects.filter(customer=customer)
+        else:
+            context['requests'] = Request.objects.filter(customer=customer, currency=wallet)
+        return context
