@@ -124,8 +124,8 @@ public class GeneralReusables {
 		logoutButton.click();
 		setUpToHomepage(panel);
 		// Go to Log In page
-		String linkToOpen = panel.findElement(By.name("log in")).getAttribute("href");
-		panel.get(linkToOpen);
+		panel.get("http://127.0.0.1:8000/login");
+		GeneralReusables.waitForSeconds(2);
 
 	}
 
