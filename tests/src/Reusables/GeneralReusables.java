@@ -21,129 +21,130 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralReusables {
 
-    public static double delta = 0.05;
+	public static double delta = 0.05;
 
-    public static final Map<String, String> reusableStrings;
+	public static final Map<String, String> reusableStrings;
 
-    static {
-        reusableStrings = new HashMap<String, String>();
-        reusableStrings.put("panel-title","پنل مدیریت");
-        reusableStrings.put("notification-title","اعلان‌ها");
-        reusableStrings.put("pishkhan","پیشخوان");
-        reusableStrings.put("invalid-transaction-id", "1000");
-        reusableStrings.put("wrong-id-error", "شناسه تراکنش اشتباه است.");
-        reusableStrings.put("invalid-amount-error", "مبلغ وارد شده معتبر نیست.");
-        reusableStrings.put("invalid-username-error", "نام کاربری وارد شده معتبر نیست.");
-        reusableStrings.put("invalid-email-error", "لطفا یک ایمیل معتبر وارد کنید.");
-        reusableStrings.put("invalid-first-name-error", "نام وارد شده معتبر نیست.");
-        reusableStrings.put("invalid-family-name-error", "نام خانوادگی وارد شده معتبر نیست.");
-        reusableStrings.put("invalid-phone-number-error", "شماره تماس وارد شده معتبر نیست.");
-        reusableStrings.put("invalid-account-number-error", "شماره حساب وارد شده معتبر نیست");
-        reusableStrings.put("access-denied-error", "شما به این صفحه دسترسی ندارید.");
-        reusableStrings.put("no-such-user-error", "کاربری با این مشخصات وجود ندارد.");
-        reusableStrings.put("done-transaction", "انجام شده");
-        reusableStrings.put("pending-transaction", "در انتظار");
-        reusableStrings.put("failed-transaction", "ناموفق");
-        reusableStrings.put("reported-transaction", "گزارش شده");
-        reusableStrings.put("username-exists", "کاربری با این نام کاربری قبلا ثبت شده است.");
-        reusableStrings.put("request-status", "شرایط درخواست");
-        reusableStrings.put("successfully-sent","با موفقیت ارسال شد.");
-    }
+	static {
+		reusableStrings = new HashMap<String, String>();
+		reusableStrings.put("panel-title", "پنل مدیریت");
+		reusableStrings.put("notification-title", "اعلان‌ها");
+		reusableStrings.put("pishkhan", "پیشخوان");
+		reusableStrings.put("invalid-transaction-id", "1000");
+		reusableStrings.put("wrong-id-error", "شناسه تراکنش اشتباه است.");
+		reusableStrings.put("invalid-amount-error", "مبلغ وارد شده معتبر نیست.");
+		reusableStrings.put("invalid-username-error", "نام کاربری وارد شده معتبر نیست. لطفا فقط از حروف انگلیسی، اعداد و علامت ـ استفاده کنید.");
+		reusableStrings.put("invalid-email-error", "لطفا یک ایمیل معتبر وارد کنید.");
+		reusableStrings.put("invalid-first-name-error", "لطفا فقط از حروف انگلیسی و فاصله استفاده کنید.");
+		reusableStrings.put("invalid-family-name-error", "لطفا فقط از حروف انگلیسی و فاصله استفاده کنید.");
+		reusableStrings.put("invalid-phone-number-error", "شماره تلفن وارد شده معتبر نیست");
+		reusableStrings.put("invalid-account-number-error", "شماره حساب وارد شده معتبر نیست");
+		reusableStrings.put("access-denied-error", "شما به این صفحه دسترسی ندارید.");
+		reusableStrings.put("no-such-user-error", "کاربری با این مشخصات وجود ندارد.");
+		reusableStrings.put("done-transaction", "انجام شده");
+		reusableStrings.put("pending-transaction", "در انتظار");
+		reusableStrings.put("failed-transaction", "ناموفق");
+		reusableStrings.put("reported-transaction", "گزارش شده");
+		reusableStrings.put("username-exists", "کاربری با این مشخصات وجود دارد.");
+		reusableStrings.put("request-status", "شرایط درخواست");
+		reusableStrings.put("successfully-sent", "با موفقیت ارسال شد.");
+	}
 
-    public static void setUpToHomepage(WebDriver driver) {
-        String homePageAddress = "http://127.0.0.1:8000/";
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get(homePageAddress);
-    }
+	public static void setUpToHomepage(WebDriver driver) {
+		String homePageAddress = "http://127.0.0.1:8000/";
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get(homePageAddress);
+	}
 
-    public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
-        GeneralReusables.setUpToHomepage(homepage);
-        // Go to Sign up page
-        String linkToOpen = homepage.findElement(By.name("log in")).getAttribute("href");
-        homepage.get(linkToOpen);
-        WebElement emailField = homepage.findElement(By.name("email"));
-        emailField.sendKeys(email);
-        WebElement passwordField = homepage.findElement(By.name("password"));
-        emailField.sendKeys(password);
+	public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
+		GeneralReusables.setUpToHomepage(homepage);
+		// Go to Sign up page
+		String linkToOpen = homepage.findElement(By.name("log in")).getAttribute("href");
+		homepage.get(linkToOpen);
+		WebElement emailField = homepage.findElement(By.name("email"));
+		emailField.sendKeys(email);
+		WebElement passwordField = homepage.findElement(By.name("password"));
+		emailField.sendKeys(password);
 
-        WebElement finalButton = homepage.findElement(By.name("log in button"));
-        finalButton.click();
-    }
+		WebElement finalButton = homepage.findElement(By.name("log in button"));
+		finalButton.click();
+	}
 
-    public static void loginAsACustomer(WebDriver homepage) {
-        homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
+	public static void loginAsACustomer(WebDriver homepage) {
+		homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
 //        String email = ProfileReusables.email1;
 //        String password = ProfileReusables.password1;
 //        login(homepage, email, password);
-    }
+	}
 
-    public static void loginAsTheManager(WebDriver homepage) {
-        homepage.navigate().to("http://127.0.0.1:8000/manager/dashboard");
+	public static void loginAsTheManager(WebDriver homepage) {
+		homepage.navigate().to("http://127.0.0.1:8000/manager/dashboard");
 //        String email = "customerEmail";
 //        String password = "customerPassword";
 //        login(homepage, email, password);
-    }
+	}
 
-    public static String loginAsAnEmployee(WebDriver homepage) {
-        homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
+	public static String loginAsAnEmployee(WebDriver homepage) {
+		homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
 //        String email = "customerEmail";
 //        String password = "customerPassword";
 //        login(homepage, email, password);
 //        return getUsername(homepage);
-        return getUsername(homepage);
-    }
+		return getUsername(homepage);
+	}
 
-    public static void loginAsAnEmployeeWithoutName(WebDriver homepage) {
-        homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
+	public static void loginAsAnEmployeeWithoutName(WebDriver homepage) {
+		homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
 //        String email = "customerEmail";
 //        String password = "customerPassword";
 //        login(homepage, email, password);
-    }
+	}
 
-    public static String getUsername(WebDriver panel) {
-        WebElement userDetails = panel.findElement(By.name("user-details"));
-        userDetails.click();
-        WebElement usernameElement = panel.findElement(By.name("my-username"));
-        panel.navigate().back();
-        return usernameElement.getText();
-    }
+	public static String getUsername(WebDriver panel) {
+		WebElement userDetails = panel.findElement(By.name("user-details"));
+		userDetails.click();
+		WebElement usernameElement = panel.findElement(By.name("my-username"));
+		panel.navigate().back();
+		return usernameElement.getText();
+	}
 
-    public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
-        WebElement userMenu = panel.findElement(By.name("user menu"));
-        userMenu.click();
-        WebElement logoutButton = panel.findElement(By.name("logout"));
-        logoutButton.click();
-        panel.close();
+	public static void logout(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
+		WebElement userMenu = panel.findElement(By.name("user menu"));
+		userMenu.click();
+		WebElement logoutButton = panel.findElement(By.name("logout"));
+		logoutButton.click();
+		panel.close();
 
-    }
-    public static void backToLogin(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
-        WebElement userMenu = panel.findElement(By.name("user menu"));
-        userMenu.click();
-        WebElement logoutButton = panel.findElement(By.name("logout"));
-        logoutButton.click();
-        setUpToHomepage(panel);
-        // Go to Log In page
-        String linkToOpen = panel.findElement(By.name("log in")).getAttribute("href");
-        panel.get(linkToOpen);
+	}
 
-    }
+	public static void backToLogin(WebDriver panel) {// از هر جایی در پنل کاربری مي‌شه لاگ اوت کرد!
+		WebElement userMenu = panel.findElement(By.name("user menu"));
+		userMenu.click();
+		WebElement logoutButton = panel.findElement(By.name("logout"));
+		logoutButton.click();
+		setUpToHomepage(panel);
+		// Go to Log In page
+		String linkToOpen = panel.findElement(By.name("log in")).getAttribute("href");
+		panel.get(linkToOpen);
 
-    public static int getPrice(String currency) {
-        String elementName = currency + "-price";
-        WebDriver homepage = new FirefoxDriver();
-        setUpToHomepage(homepage);
-        WebElement priceElement = homepage.findElement(By.name(elementName));
-        int price = Integer.valueOf(priceElement.getText());
-        homepage.close();
-        return price;
-    }
+	}
 
-    public static void waitForSeconds(int seconds){
-        try {
-            Thread.sleep(seconds*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+	public static int getPrice(String currency) {
+		String elementName = currency + "-price";
+		WebDriver homepage = new FirefoxDriver();
+		setUpToHomepage(homepage);
+		WebElement priceElement = homepage.findElement(By.name(elementName));
+		int price = Integer.valueOf(priceElement.getText());
+		homepage.close();
+		return price;
+	}
+
+	public static void waitForSeconds(int seconds) {
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

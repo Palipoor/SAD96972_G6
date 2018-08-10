@@ -17,23 +17,17 @@ public class ProfileReusables {
 
     static {
         reusableStrings = new HashMap<String, String>();
-        reusableStrings.put("sign-up-title", "سپاا | ثبت‌ نام");
+        reusableStrings.put("sign-up-title", "");
         reusableStrings.put("log-in-title", "سپاا | ورود");
         reusableStrings.put("password-change-title", "تغییر پسوورد");
         reusableStrings.put("user-details-title", "مشخصات مشتری");
-        reusableStrings.put("first-name", "");
-        reusableStrings.put("sur-name", "");
-        reusableStrings.put("username", "");
-        reusableStrings.put("email", "");
-        reusableStrings.put("phone-number", "");
-        reusableStrings.put("account-number", "");
-        reusableStrings.put("not-registered-email", "");
-        reusableStrings.put("wrong-password", "");
-        reusableStrings.put("invalid-password", "");
-        reusableStrings.put("not-matched-password", "");
-        reusableStrings.put("invalid-name", "");
-        reusableStrings.put("invalid-phone-number", "");
-        reusableStrings.put("invalid-account-number", "");
+        reusableStrings.put("email", "dorna@gmail.com");
+        reusableStrings.put("phone-number", "09123456789");
+        reusableStrings.put("account-number", "1020304050");
+        reusableStrings.put("wrong-password", "رمز عبور اشتباه است.");
+        reusableStrings.put("invalid-name", "لطفا فقط از حروف انگلیسی و فاصله استفاده کنید.");
+        reusableStrings.put("invalid-phone-number", "شماره تلفن وارد شده معتبر نیست.");
+        reusableStrings.put("invalid-account-number", "شماره حساب وارد شده معتبر نیست.");
 
 
     }
@@ -46,16 +40,14 @@ public class ProfileReusables {
     public static String invalidEmail = "dorna";
 
     public static String wrongPassword = "duck";
-    public static String invalidPassword = "";
     public static String notMatchedPassword = "somethingElse";
     public static String invalidName = "!";
-    public static String invalidPhoneNumber = "1";
-    public static String invalidAccountNumber = "1";
+    public static String invalidPhoneNumber = "!";
+    public static String invalidAccountNumber = "!";
 
-    public static String invalidEmailError = "ایمیل وارد شده معتبر نیست.";
-    public static String invalidPasswordError = "رمز عبور وارد شده معتبر نیست.";
-    public static String invalidPasswordRepaetError = "رمز عبور ها مطابق نیستند.";
-    public static String notRegisteredEmailError = "ایمیل وارد شده در سامانه نیست.";
+    public static String invalidEmailError = "لطفا یک ایمیل معتبر وارد کنید.";
+	public static String invalidPasswordRepaetError = "تکرار رمز عبور با آن یکی نیست.";
+    public static String notRegisteredEmailError = "کاربری با این مشخصات وجود ندارد.";
     public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
 
 
@@ -76,7 +68,7 @@ public class ProfileReusables {
 
         enterValidPhoneNumber(driver);
 
-        WebElement accountNumber = driver.findElement(By.name("account number"));
+        WebElement accountNumber = driver.findElement(By.name("account_number"));
         accountNumber.sendKeys(ProfileReusables.reusableStrings.get("account-number"));
 
         enterValidPassword(driver);
@@ -84,17 +76,19 @@ public class ProfileReusables {
 
         clickForSignUp(driver);
 
+		GeneralReusables.waitForSeconds(10);
+
     }
 
     public static void enterValidFirstName(WebDriver driver) {
-        WebElement email = driver.findElement(By.name("first name"));
+        WebElement email = driver.findElement(By.name("first_name"));
         email.clear();
         email.sendKeys(firstName1);
 
     }
 
     public static void enterValidFamilyName(WebDriver driver) {
-        WebElement email = driver.findElement(By.name("family name"));
+        WebElement email = driver.findElement(By.name("last_name"));
         email.clear();
         email.sendKeys(surName1);
 
@@ -116,13 +110,13 @@ public class ProfileReusables {
 
 
     public static void enterValidPhoneNumber(WebDriver driver) {
-        WebElement phoneNumber = driver.findElement(By.name("contact number"));
+        WebElement phoneNumber = driver.findElement(By.name("phone_number"));
         phoneNumber.clear();
         phoneNumber.sendKeys(ProfileReusables.reusableStrings.get("phone-number"));
     }
 
     public static void enterValidAccountNumber(WebDriver driver) {
-        WebElement shomareHesab = driver.findElement(By.name("account number"));
+        WebElement shomareHesab = driver.findElement(By.name("account_number"));
         shomareHesab.clear();
         shomareHesab.sendKeys(reusableStrings.get("account-number"));
     }
@@ -136,7 +130,7 @@ public class ProfileReusables {
 
     public static void repeatValidPassword(WebDriver driver) {
 
-        WebElement password = driver.findElement(By.name("password repeat"));
+        WebElement password = driver.findElement(By.name("password2"));
         password.clear();
         password.sendKeys(ProfileReusables.password1);
     }
@@ -144,6 +138,7 @@ public class ProfileReusables {
 
     public static void clickForSignUp(WebDriver driver) {
 
+		driver.findElement(By.className("iCheck-helper")).click();
         WebElement submitButton = driver.findElement(By.name("sign up"));
         submitButton.click();
     }

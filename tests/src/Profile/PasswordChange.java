@@ -68,28 +68,6 @@ public class PasswordChange {
 
 
     @Test
-    @Order(order = 3)
-    public void invalidPassword() throws Exception {
-        WebElement currentPassword = driver.findElement(By.name("current-password"));
-        currentPassword.clear();
-        currentPassword.sendKeys(ProfileReusables.password1);
-
-        WebElement newPassword = driver.findElement(By.name("new-password"));
-        newPassword.clear();
-        newPassword.sendKeys(ProfileReusables.invalidPassword);
-
-        WebElement newPasswordRep = driver.findElement(By.name("new-password-2"));
-        newPasswordRep.clear();
-        newPasswordRep.sendKeys(ProfileReusables.invalidPassword);
-
-        submit();
-
-
-        String errorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(errorText, ProfileReusables.invalidPasswordError);
-    }
-
-    @Test
     @Order(order = 4)
     public void notMatchedPassword() throws Exception {
         WebElement currentPassword = driver.findElement(By.name("current-password"));
