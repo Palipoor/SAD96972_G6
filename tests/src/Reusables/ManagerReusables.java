@@ -184,7 +184,6 @@ public class ManagerReusables {
         return newUsername;
     }
 
-
     public static int getSalary(String employeeUsername) {
         WebDriver driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);

@@ -118,7 +118,6 @@ public class AddEmployee {
         assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-amount-error"));
     }
 
-
     @Test
     public void isEmployeeAdded() {
 
@@ -161,6 +160,5 @@ public class AddEmployee {
         WebElement error = driver.findElement(By.name("error"));
         assertEquals(error.getText(), GeneralReusables.reusableStrings.get("username-exists"));
     }
-
 
 }

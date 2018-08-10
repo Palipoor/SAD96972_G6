@@ -20,9 +20,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Reusables.OrderedRunner.class)
 public class TransactionDetail {
     static WebDriver driver;
-    String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش";
-
-
+    String transactionDetailTitle = "پنل مدیریت | جزئیات تراکنش";
 
     @BeforeClass
     public static void setUp() {
@@ -52,11 +50,11 @@ public class TransactionDetail {
     public void transactionDetail() {
         WebElement table = driver.findElement(By.id("table"));
         List<WebElement> allRows = table.findElements(By.tagName("tr"));
-        if(allRows.size() != 0) {
+        if (allRows.size() != 0) {
             WebElement firstCell = table.findElement(By.tagName("td"));
             WebElement link = firstCell.findElement(By.tagName("a"));
             link.click();
-            assertEquals(driver.getTitle(),transactionDetailTitle );
+            assertEquals(driver.getTitle(), transactionDetailTitle);
         }
 
     }
@@ -66,4 +64,3 @@ public class TransactionDetail {
         GeneralReusables.logout(driver);
     }
 }
-

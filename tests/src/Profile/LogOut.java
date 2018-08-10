@@ -18,13 +18,12 @@ import static org.junit.Assert.assertEquals;
 public class LogOut {
     private static WebDriver driver;
 
-
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-       // GeneralReusables.loginAsACustomer(driver); //TODO:!!!!!!!!!!!!!
+        // GeneralReusables.loginAsACustomer(driver); //TODO:!!!!!!!!!!!!!
         GeneralReusables.login(driver, ProfileReusables.email1, ProfileReusables.password1);
     }
 
@@ -40,19 +39,13 @@ public class LogOut {
         WebElement logout = driver.findElement(By.name("logout"));
         logout.click();
 
-       //TODO: finally, how to check?
-
-
+        // TODO: finally, how to check?
 
     }
-
 
     @AfterClass
     public static void tearDown() {
         driver.close();
     }
-
-
-
 
 }

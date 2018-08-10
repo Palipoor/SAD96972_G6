@@ -39,7 +39,7 @@ public class ShowingTransactions {
     }
 
     @AfterClass
-    public static void tearDown(){
+    public static void tearDown() {
         GeneralReusables.logout(driver);
     }
 }

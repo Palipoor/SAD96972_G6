@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 public class OrderedRunner extends BlockJUnit4ClassRunner {
 
     public OrderedRunner(Class<?> clazz) throws InitializationError {

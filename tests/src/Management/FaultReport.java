@@ -60,9 +60,9 @@ public class FaultReport {
 
     @Test
     public void successfulReceiveReportTest() {
-        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.REPORTED_TRANSACTION));
+        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername)
+                && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.REPORTED_TRANSACTION));
     }
-
 
     @AfterClass
     public static void tearDown() {

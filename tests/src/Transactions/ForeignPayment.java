@@ -115,7 +115,8 @@ public class ForeignPayment {
     @Test
     public void transactionIsAdded() {
         String myUsername = GeneralReusables.getUsername(driver);
-        String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
+        String otherUsername = ManagerReusables
+                .getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
 
         assertEquals(otherUsername, myUsername);
     }

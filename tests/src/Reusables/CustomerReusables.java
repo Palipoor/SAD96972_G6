@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CustomerReusables {
 
-    public static String createNewTransaction() { //requests a new transaction and returns its id
+    public static String createNewTransaction() { // requests a new transaction and returns its id
         WebDriver driver = new ChromeDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);

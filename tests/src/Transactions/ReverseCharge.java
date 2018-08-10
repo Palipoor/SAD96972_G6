@@ -52,7 +52,7 @@ public class ReverseCharge {
     }
 
     @Test
-    public void paymentsAreDone(){
+    public void paymentsAreDone() {
 
     }
 }

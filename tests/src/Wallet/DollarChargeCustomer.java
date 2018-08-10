@@ -34,7 +34,7 @@ public class DollarChargeCustomer {
 
     @Test
     public void conversionTest() {// مبلغی که نشون می‌ده برابر با مبلغ وارد شده ضربدر قیمت دلار باشه.
-        //todo ye kare behtari ba in kon
+        // todo ye kare behtari ba in kon
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(amount);
         double dollarPrice = GeneralReusables.getPrice("dollar");
@@ -68,7 +68,8 @@ public class DollarChargeCustomer {
     @Test
     public void invalidDecreaseTest() {
         double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
+        double decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه
+                                                                                                    // دارد.
         WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
         desiredAmount.sendKeys(String.valueOf(decreaseAmount));
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
@@ -76,7 +77,6 @@ public class DollarChargeCustomer {
         WebElement errorMessage = driver.findElement(By.name("error"));
         assertEquals(errorMessage.getText(), WalletUsersReusables.NOT_ENOUGH_ERROR_MESSAGE);// ارور خالی نباشد!
     }
-
 
     @AfterClass
     public static void tearDown() {

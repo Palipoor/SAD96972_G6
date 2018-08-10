@@ -60,7 +60,6 @@ public class AnonymousPayment {
         email.clear();
         email.sendKeys("palipoor976");
 
-
         WebElement button = driver.findElement(By.name("submit-button"));
         button.click();
 
@@ -116,7 +115,8 @@ public class AnonymousPayment {
     @Test
     public void transactionIsAdded() {
         String myUsername = GeneralReusables.getUsername(driver);
-        String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
+        String otherUsername = ManagerReusables
+                .getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
 
         assertEquals(otherUsername, myUsername);
     }

@@ -18,23 +18,22 @@ public class PasswordChange {
 
     static String newPass = "123454321Dorna";
 
+    static WebDriver driver;
 
-
-    static  WebDriver driver;
-
-    public void submit (){
+    public void submit() {
         WebElement submitButton = driver.findElement(By.name("submit"));
         submitButton.click();
     }
+
     @BeforeClass
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver); //TODO :       how to change in order to match for all kind of users????
+        GeneralReusables.loginAsACustomer(driver); // TODO : how to change in order to match for all kind of users????
 
         WebElement changePasswordLink = driver.findElement(By.name("password change"));
-        changePasswordLink.click(); //TODO : click??????
+        changePasswordLink.click(); // TODO : click??????
 
     }
 
@@ -43,7 +42,6 @@ public class PasswordChange {
         String title = driver.getTitle();
         assertEquals(title, ProfileReusables.passwordChangeTitle);
     }
-
 
     @Test
     public void wrongCurrentPassword() throws Exception {
@@ -58,11 +56,9 @@ public class PasswordChange {
 
         submit();
 
-
         String errorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(errorText, ProfileReusables.wrongPasswordError);
     }
-
 
     @Test
     public void invalidPassword() throws Exception {
@@ -79,7 +75,6 @@ public class PasswordChange {
         newPasswordRep.sendKeys(ProfileReusables.invalidPassword);
 
         submit();
-
 
         String errorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(errorText, ProfileReusables.invalidPasswordError);
@@ -100,7 +95,6 @@ public class PasswordChange {
         newPasswordRep.sendKeys(ProfileReusables.notMatchedPassword);
 
         submit();
-
 
         String errorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(errorText, ProfileReusables.invalidPasswordRepaetError);
@@ -128,17 +122,10 @@ public class PasswordChange {
         String passwordErrorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(passwordErrorText, ProfileReusables.wrongPasswordError);
 
-
-        //TODO : change in order to match for all kind of users
+        // TODO : change in order to match for all kind of users
     }
 
-
-
-
-
-
-
     @AfterClass
-    public void tearDown() { //TODO : it should be loged out after valid change.
-        }
+    public void tearDown() { // TODO : it should be loged out after valid change.
+    }
 }

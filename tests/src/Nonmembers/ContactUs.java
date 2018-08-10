@@ -164,12 +164,14 @@ public class ContactUs {
 
         WebElement successMessage = theForm.findElement(By.name("success"));
         assertFalse(successMessage.getText().equals(""));
-        //// TODO: 4/20/2018 AD find a way to login and check wether the email is received
+        //// TODO: 4/20/2018 AD find a way to login and check wether the email is
+        //// received
     }
 
     @Test
     public void isReceivedTest() {
-        driver.get("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&hl=en&emr=1&elo=1");
+        driver.get(
+                "https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&hl=en&emr=1&elo=1");
         driver.findElement(By.id("Email")).sendKeys("palipoor976");
         driver.findElement(By.xpath("//input[@id='Passwd']")).sendKeys("mardechini");
         driver.findElement(By.xpath("//input[@type='checkbox']")).click();

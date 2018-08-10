@@ -13,15 +13,17 @@ import java.util.concurrent.TimeUnit;
  * Created by Golpar on 4/12/2018 AD.
  */
 
-/// این کلاس برای تامین توابع دوباره استفاده کردنی در بخش‌های مختلف تست‌ها ساخته شده. کافی ست این کلاس در فایل هر تستی اینکلود بشه و از توابع
+/// این کلاس برای تامین توابع دوباره استفاده کردنی در بخش‌های مختلف تست‌ها ساخته
+/// شده. کافی ست این کلاس در فایل هر تستی اینکلود بشه و از توابع
 // استاتیکش استفاده بشه.
 // صرفا باید وبدراویر رو بهش بدیم تا عوضش کنه به جایی که باید.
 
-// در توابعی که قرار نیست وبدرایور عوض بشه، باید برای استفاده یک وبدرایور ساخت و بهش داد.
+// در توابعی که قرار نیست وبدرایور عوض بشه، باید برای استفاده یک وبدرایور ساخت و
+// بهش داد.
 
 public class GeneralReusables {
 
-    //todo درست کردن این فیلدها
+    // todo درست کردن این فیلدها
 
     public static double delta = 0.05;
 
@@ -57,14 +59,14 @@ public class GeneralReusables {
     public static String WRONG_USERNAME_ERROR;
     public static String REPORTED_TRANSACTION;
 
-
     public static void setUpToHomepage(WebDriver driver) {
         String homePageAddress = "http://127.0.0.1:8000/"; //// TODO: 4/12/2018 AD درست کردن این ادرس
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(homePageAddress);
     }
 
-    public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
+    public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین
+                                                                                 // می‌کند با مشخصات مربوط.
         GeneralReusables.setUpToHomepage(homepage);
         // Go to Sign up page
         String linkToOpen = homepage.findElement(By.name("log in")).getAttribute("href");
@@ -80,24 +82,24 @@ public class GeneralReusables {
 
     public static void loginAsACustomer(WebDriver homepage) {
         homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
-//        String email = ProfileReusables.email1;
-//        String password = ProfileReusables.password1;
-//        login(homepage, email, password);
+        // String email = ProfileReusables.email1;
+        // String password = ProfileReusables.password1;
+        // login(homepage, email, password);
     }
 
     public static void loginAsTheManager(WebDriver homepage) {
         homepage.navigate().to("http://127.0.0.1:8000/manager/dashboard");
-//        String email = "customerEmail";
-//        String password = "customerPassword";
-//        login(homepage, email, password);
+        // String email = "customerEmail";
+        // String password = "customerPassword";
+        // login(homepage, email, password);
     }
 
     public static String loginAsAnEmployee(WebDriver homepage) {
         homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
-//        String email = "customerEmail";
-//        String password = "customerPassword";
-//        login(homepage, email, password);
-//        return getUsername(homepage);
+        // String email = "customerEmail";
+        // String password = "customerPassword";
+        // login(homepage, email, password);
+        // return getUsername(homepage);
         return getUsername(homepage);
     }
 
@@ -124,6 +126,5 @@ public class GeneralReusables {
         WebElement priceElement = homepage.findElement(By.name(elementName));
         return Integer.valueOf(priceElement.getText());
     }
-
 
 }

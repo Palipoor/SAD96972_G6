@@ -20,8 +20,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Reusables.OrderedRunner.class)
 public class TransactionsView {
     static WebDriver driver;
-    String myTransactionTitle= "تراکنش‌های من";
-
+    String myTransactionTitle = "تراکنش‌های من";
 
     @BeforeClass
     public static void setUp() {
@@ -42,7 +41,7 @@ public class TransactionsView {
     @Test
     @Order(order = 2)
     public void transaction() {
-        WebElement myTransactions= driver.findElement(By.name("my transactions"));
+        WebElement myTransactions = driver.findElement(By.name("my transactions"));
         myTransactions.click();
         String title = driver.getTitle();
         assertEquals(title, myTransactionTitle);
