@@ -133,7 +133,8 @@ class Request(models.Model):
 class Reverse_Request(Request):
     # type of request when rejecting or failing a transatcion.
     # reference to rejected transaction.
-    related_request = models.OneToOneField(Request)
+    # it is unique foreign key not one to one
+    related_request = models.OneToOneField(Request,  on_delete=models.DO_NOTHING, unique=True)
 
     def set_status(self):
         self.status = 0
