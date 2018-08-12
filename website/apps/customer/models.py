@@ -1,4 +1,4 @@
-from apps.main.models import GenUser
+from apps.main.models import GenUser, Wallet_User
 from django.db import models
 from polymorphic.models import PolymorphicModel
 from django.contrib.auth.models import Group
@@ -8,11 +8,7 @@ from apps.employee.models import EmployeeReview
 # Create your models here.
 
 
-class Customer(GenUser):
-    rial_credit = models.FloatField(default=0)
-    dollar_cent_credit = models.FloatField(default=0)
-    euro_cent_credit = models.FloatField(default=0)
-    account_number = models.CharField(max_length=20, unique=True, null=False)
+class Customer(Wallet_User):
 
     def __init__(self, *args, **kwargs):
         super(Customer, self).__init__(*args, **kwargs)

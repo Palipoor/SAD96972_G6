@@ -6,11 +6,7 @@ from django.contrib.auth.models import Group
 # Create your models here.
 
 
-class Manager(main_models.GenUser):
-    company_rial_credit = models.FloatField()
-    company_dollar_cent_credit = models.FloatField()
-    company_euro_cent_credit = models.FloatField()
-    company_account_number = models.CharField(max_length=20, null=False)
+class Manager(main_models.Wallet_User):
 
     def __init__(self, *args, **kwargs):
         super(Manager, self).__init__(*args, **kwargs)
