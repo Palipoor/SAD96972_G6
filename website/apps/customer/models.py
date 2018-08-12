@@ -51,13 +51,14 @@ class Request(models.Model):
     exchange_rate = models.FloatField()
 
     def save(self, *args, **kwargs):
-        # if it is being saved for the first time does the payment. If exchange rate is nul computes it.
+        # if it is being saved for the first time does the payment and sets status to default. If exchange rate is nul computes it.
         if not self.pk:
             if (not self.exchange_rate):
                 self.exchange_rate = Transactions.get_exchange_rate(source_wallet, dest_wallet)
             self.pay()
             self.recieve()
             self.set_status()
+            self.set_profitRate()
         super(Charge, self).save(*args, **kwargs)
 
     def reject(self):
@@ -92,6 +93,10 @@ class Request(models.Model):
     def set_status(self):
         # for determining default status of request. Default status is pending.
         self.status = 2
+
+    def set_profitRate(self):
+        # for determining default profitRate of request. Default status is pending.
+        self.profitRate = 0.05
 
     def pay(self):
         # what source user has to pay
@@ -136,6 +141,9 @@ class Reverse_Request(Request):
 
     def set_status(self):
         self.status = 0
+
+    def set_profitRate(self):
+        self.profitRate = 0
 
 
 class Charge(Request):
