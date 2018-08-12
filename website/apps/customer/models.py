@@ -2,6 +2,8 @@ from apps.main.models import GenUser
 from django.db import models
 from polymorphic.models import PolymorphicModel
 from django.contrib.auth.models import Group
+from utils.currency_utils import Transactions
+from apps.employee.models import EmployeeReview
 
 # Create your models here.
 
@@ -24,73 +26,127 @@ class Customer(GenUser):
         customer_group.user_set.add(self)
 
 
-class RequestType(models.Model):  # ???
-    currency_types = (
-        (0, 'rial'),
-        (1, 'dollar'),
-        (2, 'euro'),
-    )
-    title = models.CharField(max_length=20)
-    profitRate = models.FloatField()
-    currency = models.IntegerField(choices=currency_types)
-
-
 class Request(models.Model):
-    statuses = (
-        (0, 'accepted'),
-        (1, 'rejected'),
-        (2, 'pending'),
-        (3, 'failed'),
-        (4, 'reported'),
-    )
-    currency = (
-        (0, 'rial'),
-        (1, 'dollar'),
-        (2, 'euro'),
-    )
-    customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False, default=2)
-    currency = models.IntegerField(choices=currency, null=False)
+    # all financial transactions are children of this.
+    statuses = Transactions.request_types_json
+    currencies = Transactions.num_to_currency_json
+    # all users can be null which means the dont exists and therefore can be ignored.
+    # who pays
+    source_user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING)
+    source_wallet = models.IntegerField(choices=currencies, default=0)
+    # who recieves and possibly redirects
+    dest_user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING)
+    dest_wallet = models.IntegerField(choices=currencies, default=0)
+    # who recieves
+    final_user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING)
+    fianl_wallet = models.IntegerField(choices=currencies, default=0)
+    # amount of payment in rial or cents.
     amount = models.FloatField(null=False)
     request_time = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=500)
-    status = models.IntegerField(choices=statuses, default=0)
-    profitRate = models.FloatField(default=0.05)
+    # defaul status varies between children. some may be accepted since creation.
+    status = models.IntegerField(choices=statuses, default=2)
+    profitRate = models.FloatField(default=0)
+    # if not specified will be determind using utils.
+    exchange_rate = models.FloatField()
+
+    def save(self, *args, **kwargs):
+        # if it is being saved for the first time does the payment. If exchange rate is nul computes it.
+        if not self.pk:
+            if (not self.exchange_rate):
+                self.exchange_rate = Transactions.get_exchange_rate(source_wallet, dest_wallet)
+            self.pay()
+            self.recieve()
+            self.set_status()
+        super(Charge, self).save(*args, **kwargs)
 
     def reject(self):
-        self.status = 1
-        self.customer.save()
+        # only works if the current status is pending or reported
+        if (self.status == 2 or self.status == 4):
+            reject = self.create_reverse_request()
+            reject.save()
+            # sets the status to rejected
+            self.status = 1
+        return null
 
     def accept(self):
-        self.status = 0
-        self.customer.save()
+        # only works if the current status is pending or reported
+        if (self.status == 2 or self.status == 4):
+            self.status = 0
+        return null
 
     def report(self):
-        self.status = 4
-        self.customer.save()
+        # only works if the current status is pending
+        if (self.status == 2):
+            self.status = 4
+        return null
+
+    def fail(self):
+        # only works if the current status is pending
+        if (self.status == 2):
+            reject = self.create_reverse_request()
+            reject.save()
+            self.status = 3
+        return null
+
+    def set_status(self):
+        # for determining default status of request. Default status is pending.
+        self.status = 2
+
+    def pay(self):
+        # what source user has to pay
+        if (self.source_user):
+            if (self.source_wallet == 0):
+                self.source_user.rial_credit -= self.amount*(1+self.profitRate)
+            elif (self.source_wallet == 1):
+                self.source_user.dollar_cent_credit -= self.amount*(1+self.profitRate)
+            elif (self.source_wallet == 2):
+                self.source_user.dollar_cent_credit -= self.amount * (1 + self.profitRate)
+            self.source_user.save()
+
+    def recieve(self):
+        # what dest user revieves. we assume that dest user always recieves the profit.
+        if (self.dest_user):
+            if (self.dest_wallet == 0):
+                self.source_user.rial_credit += self.amount*(1+self.profitRate)*self.exchange_rate
+            elif (self.source_wallet == 1):
+                self.source_user.dollar_cent_credit += self.amount*(1+self.profitRate)*self.exchange_rate
+            elif (self.source_wallet == 2):
+                self.source_user.dollar_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
+            self.dest_user.save()
+
+    def create_reverse_request(self):
+        # created the transaction for rejecting current transaction.
+        reject = Reverse_Request(source_user=self.dest_user,
+                                 source_wallet=dest_wallet,
+                                 dest_user=self.source_user,
+                                 dest_wallet=self.source_wallet,
+                                 amount=self.amount*(1 + self.profitRate)*exchange_rate,
+                                 profitRate=0,
+                                 exchange_rate=1./exchange_rate,
+                                 related_request=self
+                                 )
+        return reject
+
+
+class Reverse_Request(Request):
+    # type of request when rejecting or failing a transatcion.
+    # reference to rejected transaction.
+    related_request = models.OneToOneField(Request)
+
+    def set_status(self):
+        self.status = 0
 
 
 class Charge(Request):
-    currency = (
-        (0, 'rial'),
-        (1, 'dollar'),
-        (2, 'euro'),
-    )
-    wallet = models.IntegerField(choices=currency)
-
     def save(self, *args, **kwargs):
         if not self.pk:
+            self.status = 0
             self.customer.rial_credit += self.amount
         super(Charge, self).save(*args, **kwargs)
 
 
 class Exchange(Request):
-    currency = (
-        (0, 'rial'),
-        (1, 'dollar'),
-        (2, 'euro'),
-    )
-    source = models.IntegerField(choices=currency)
-    destination = models.IntegerField(choices=currency)
 
     def save(self, *args, **kwargs):
         # todo error for negative account
