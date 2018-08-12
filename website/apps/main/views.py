@@ -12,10 +12,10 @@ from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin, ProcessFormView
 from django.shortcuts import redirect, render
 from braces.views import GroupRequiredMixin
-
+from apps.main.models import Wallet_User
 from apps.main.MultiForm import MultiFormsView
 from views import Compilation
-from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm, ContactForm, ConvertForm
+from apps.main.Forms import WalletChargeForm, SignUpForm, ContactForm, ConvertForm
 from django.utils.decorators import method_decorator
 
 from django.views.decorators.csrf import csrf_exempt
@@ -90,7 +90,8 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
 
     def get_form_kwargs(self):
         kwargs = super(WalletView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
+        kwargs['user'] = Wallet_User.objects.get(username=self.request.user)
+        kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
         return kwargs
 
     def dispatch(self, request, *args, **kwargs):
@@ -110,12 +111,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
         else:
             return HttpResponseForbidden()
 
-        if self.currency == 'rial':
-            self.form_class = RialChargeForm
-        elif self.currency == 'dollar':
-            self.form_class = DollarChargeForm
-        else:
-            self.form_class = EuroChargeForm
+        self.form_class = WalletChargeForm
         if request.method == 'GET':
             return self.get(request, *args, **kwargs)
         else:
@@ -123,6 +119,10 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
 
             # todo form
             # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
+
+    def form_valid(self, form):
+        form.update_db()
+        return super().form_valid(form)
 
 
 class DetailsView(IsLoggedInView, DetailView):

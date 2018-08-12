@@ -4,6 +4,7 @@ from polymorphic.models import PolymorphicModel
 from django.contrib.auth.models import Group
 from utils.currency_utils import Transactions
 from apps.employee.models import EmployeeReview
+from apps.manager.models import Manager
 
 # Create your models here.
 
@@ -22,19 +23,20 @@ class Customer(Wallet_User):
         customer_group.user_set.add(self)
 
 
-class Request(models.Model):
+class Request(PolymorphicModel):
     # all financial transactions are children of this.
     statuses = Transactions.request_types_json
-    currencies = Transactions.num_to_currency_json
+    currencies = Transactions.num_to_currency_json.items()
+    print(currencies)
     # all users can be null which means the dont exists and therefore can be ignored.
     # who pays
-    source_user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING)
+    source_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='source_user', null=True)
     source_wallet = models.IntegerField(choices=currencies, default=0)
     # who recieves and possibly redirects
-    dest_user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING)
+    dest_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='dest_user', null=True)
     dest_wallet = models.IntegerField(choices=currencies, default=0)
     # who recieves
-    final_user = models.ForeignKey('GenUser', on_delete=models.DO_NOTHING)
+    final_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='final_user', null=True)
     fianl_wallet = models.IntegerField(choices=currencies, default=0)
     # amount of payment in rial or cents.
     amount = models.FloatField(null=False)
@@ -44,18 +46,18 @@ class Request(models.Model):
     status = models.IntegerField(choices=statuses, default=2)
     profitRate = models.FloatField(default=0)
     # if not specified will be determind using utils.
-    exchange_rate = models.FloatField()
+    exchange_rate = models.FloatField(null=True)
 
     def save(self, *args, **kwargs):
         # if it is being saved for the first time does the payment and sets status to default. If exchange rate is nul computes it.
         if not self.pk:
             if (not self.exchange_rate):
-                self.exchange_rate = Transactions.get_exchange_rate(source_wallet, dest_wallet)
+                self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
             self.pay()
             self.recieve()
             self.set_status()
             self.set_profitRate()
-        super(Charge, self).save(*args, **kwargs)
+        super(Request, self).save(*args, **kwargs)
 
     def reject(self):
         # only works if the current status is pending or reported
@@ -96,7 +98,8 @@ class Request(models.Model):
 
     def pay(self):
         # what source user has to pay
-        if (self.source_user):
+        try:
+            self.source_user
             if (self.source_wallet == 0):
                 self.source_user.rial_credit -= self.amount*(1+self.profitRate)
             elif (self.source_wallet == 1):
@@ -104,17 +107,26 @@ class Request(models.Model):
             elif (self.source_wallet == 2):
                 self.source_user.dollar_cent_credit -= self.amount * (1 + self.profitRate)
             self.source_user.save()
+        except:
+            pass
 
     def recieve(self):
         # what dest user revieves. we assume that dest user always recieves the profit.
-        if (self.dest_user):
+        try:
+            self.dest_user
+            print("goodbye")
+            print(self.dest_wallet)
             if (self.dest_wallet == 0):
-                self.source_user.rial_credit += self.amount*(1+self.profitRate)*self.exchange_rate
-            elif (self.source_wallet == 1):
-                self.source_user.dollar_cent_credit += self.amount*(1+self.profitRate)*self.exchange_rate
-            elif (self.source_wallet == 2):
-                self.source_user.dollar_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
+                self.dest_user.rial_credit += self.amount*(1+self.profitRate)*self.exchange_rate
+            elif (self.dest_wallet == 1):
+                print(self.dest_user.dollar_cent_credit)
+                self.dest_user.dollar_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
+                print(self.dest_user.dollar_cent_credit)
+            elif (self.dest_wallet == 2):
+                self.dest_user.euro_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
             self.dest_user.save()
+        except:
+            pass
 
     def create_reverse_request(self):
         # created the transaction for rejecting current transaction.
@@ -131,10 +143,10 @@ class Request(models.Model):
 
 
 class Reverse_Request(Request):
-    # type of request when rejecting or failing a transatcion.
+    # type of request when rejecting or failing a transatcion. Arguments similar to request.
     # reference to rejected transaction.
     # it is unique foreign key not one to one
-    related_request = models.OneToOneField(Request,  on_delete=models.DO_NOTHING, unique=True)
+    reference = models.ForeignKey(Request,  on_delete=models.DO_NOTHING, unique=True, related_name='related_request')
 
     def set_status(self):
         self.status = 0
@@ -144,51 +156,25 @@ class Reverse_Request(Request):
 
 
 class Charge(Request):
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.status = 0
-            self.customer.rial_credit += self.amount
-        super(Charge, self).save(*args, **kwargs)
+    # Only needs destination user and wallet and amount as argument.
+    def set_status(self):
+        self.status = 0
+
+    def set_profitRate(self):
+        self.profitRate = 0
 
 
 class Exchange(Request):
+    # Only needs source user and wallet, amount and destination wallet as argument.
+    # def __init__(self, *args, **kwargs):
+    #     kwargs['dest_user'] = kwargs["source_user"]
+    #     super(Exchange, self).__init__(self, *args, **kwargs)
 
-    def save(self, *args, **kwargs):
-        # todo error for negative account
-        exchange_matrix = [[1, 0.01, 0.01], [100, 1, 1], [100, 1, 1]]
-        if not self.pk:
-            if(self.source == 0):
-                if(self.destination == 0):
-                    self.customer.rial_credit -= self.amount
-                    self.customer.rial_credit += self.amount*exchange_matrix[0][0]
-                elif self.destination == 1:
-                    self.customer.rial_credit -= self.amount
-                    self.customer.dollar_cent_credit += self.amount*exchange_matrix[0][1]
-                elif self.destination == 2:
-                    self.customer.rial_credit -= self.amount
-                    self.customer.euro_cent_credit += self.amount*exchange_matrix[0][2]
-            elif self.source == 1:
-                if(self.destination == 0):
-                    self.customer.dollar_cent_credit -= self.amount
-                    self.customer.rial_credit += self.amount*exchange_matrix[1][0]
-                elif self.destination == 1:
-                    self.customer.dollar_cent_credit -= self.amount
-                    self.customer.dollar_cent_credit += self.amount*exchange_matrix[1][1]
-                elif self.destination == 2:
-                    self.customer.dollar_cent_credit -= self.amount
-                    self.customer.euro_cent_credit += self.amount*exchange_matrix[1][2]
-            elif self.source == 2:
-                if(self.destination == 0):
-                    self.customer.euro_cent_credit -= self.amount
-                    self.customer.rial_credit += self.amount*exchange_matrix[2][0]
-                elif self.destination == 1:
-                    self.customer.euro_cent_credit -= self.amount
-                    self.customer.dollar_cent_credit += self.amount*exchange_matrix[2][1]
-                elif self.destination == 2:
-                    self.customer.euro_cent_credit -= self.amount
-                    self.customer.euro_cent_credit += self.amount*exchange_matrix[2][2]
-        self.customer.save()
-        super(Exchange, self).save(*args, **kwargs)
+    def set_status(self):
+        self.status = 0
+
+    def set_profitRate(self):
+        self.profitRate = 0
 
 
 class LangTest(Request):
@@ -278,24 +264,19 @@ class UniversityTrans(Request):
 
 
 class ForeignTrans(Request):
+    # Only needs source user and wallet, amount, account number and bank name as arguments.
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            self.status = 2
-            if(self.currency == 0):
-                self.customer.rial_credit -= self.amount*(1+self.profitRate)
-            elif(self.currency == 1):
-                self.customer.dollar_cent_credit -= self.amount*(1+self.profitRate)
-            elif (self.currency == 2):
-                self.customer.euro_cent_credit -= self.amount*(1+self.profitRate)
-            self.customer.save()
-            super(ForeignTrans, self).save(*args, **kwargs)
+        manager = Manager.get_manager()
+        super(ForeignTrans, self).save(*args, dest_user=manager, dest_wallet=kwargs['source_wallet'], **kwargs)
 
-    def reject(self):
-        self.customer.rial_credit += self.amount*(1+self.profitRate)
-        super(ForeignTrans, self).save()
+    def set_status(self):
+        self.status = 2
+
+    def set_profitRate(self):
+        self.profitRate = 0.05
 
 
 class InternalTrans(Request):

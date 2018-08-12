@@ -50,7 +50,7 @@ class Compilation():
         # get requests regarding a wallet of the user. if wallet equals -1 all wallets are used.
         customer = Customer.objects.get(username=user_name)
         if (wallet == -1):
-            context['requests'] = Request.objects.filter(customer=customer)
+            context['requests'] = Request.objects.filter(source_user=customer) | Request.objects.filter(dest_user=customer)
         else:
-            context['requests'] = Request.objects.filter(customer=customer, currency=wallet)
+            context['requests'] = Request.objects.filter(source_user=customer, source_wallet=wallet) | Request.objects.filter(dest_user=customer, dest_wallet=wallet)
         return context

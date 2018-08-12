@@ -41,4 +41,4 @@ class Transactions:
 
     @staticmethod
     def get_exchange_rate(source, destination):
-        return exhchange_matrix[source, destination]
+        return Transactions.exhchange_matrix[source][destination]

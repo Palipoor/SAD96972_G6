@@ -21,6 +21,10 @@ class Manager(main_models.Wallet_User):
         customer_group = Group.objects.get(name='staff')
         customer_group.user_set.add(self)
 
+    @staticmethod
+    def get_manager():
+        return Manager.objects.all()[0]
+
 
 '''class User_Status(models.Model): #???
     manager = models.ForeignKey("Manager", on_delete=models.DO_NOTHING) 
