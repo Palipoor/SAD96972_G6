@@ -29,22 +29,18 @@
                     {% csrf_token %}
                     <div class="box-body">
                         <div class="form-group">
-                            <label>نام کاربری</label>
-                            {% render_field form.username class="form-control" placeholder="نام کاربری جدید" %}
-                        </div>
-                        <div class="form-group">
                             <label>نام و نام خانوادگی</label>
-                            {% render_field form.persian_first_name class="form-control" placeholder="نام فارسی جدید" %}
+                            {{form.persian_first_name}}
                         </div>
                         <div class="form-group">
-                            {% render_field form.persian_last_name class="form-control" placeholer="نام خانوادگی فارسی جدید" %}
+                            {{form.persian_last_name}}
                         </div>
                         <div class="form-group">
                             <label> نام و نام خانوادگی لاتین</label>
-                            {% render_field form.first_name class="form-control" placeholder="نام لاتین جدید" %}
+                            {{form.first_name}}
                         </div>
                         <div class="form-group">
-                            {% render_field form.last_name class="form-control" placeholder="نام خانوادگی لاتین جدید" %}
+                            {{form.last_name}}
                         </div>
                         <div class="box-footer" allign="Left">
                             <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
