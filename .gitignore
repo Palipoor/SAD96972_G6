@@ -86,3 +86,4 @@ modules.xml
 chromedriver
 
 # End of https://www.gitignore.io/api/intellij+all,visualstudiocode
+.vscode/settings.json
