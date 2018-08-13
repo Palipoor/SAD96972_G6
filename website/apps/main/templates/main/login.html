@@ -32,10 +32,9 @@
         <p class="login-box-msg">ورود به سامانه</p>
         {% if next %}
         {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-          please login with an account that has access.</p>
+        <p>حساب کاربری شما به این صفحه دسترسی ندارد. لطفا با حسابی که دسترسی دارد وارد شوید. </p>
         {% else %}
-        <p>Please login to see this page.</p>
+        <p class = "text-danger">برای دسترسی به صفحه مقصد لازم است وارد شوید.</p>
         {% endif %}
         {% endif %}
         {% if form.errors %}

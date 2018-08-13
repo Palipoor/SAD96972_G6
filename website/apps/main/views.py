@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.template import loader
 # Create your views here.
 from django.urls import reverse_lazy
@@ -12,6 +12,7 @@ from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.views.generic.edit import FormMixin, ProcessFormView
 from django.shortcuts import redirect, render
 from braces.views import GroupRequiredMixin
+from django.contrib.auth import logout
 
 from apps.main.MultiForm import MultiFormsView
 from views import Compilation
@@ -24,7 +25,7 @@ from apps.manager.models import Manager
 import lxml.etree
 import lxml.html
 import requests
-
+ 
 
 ### returns a dictionary containing dollar and euro prices
 def get_prices():
@@ -45,15 +46,13 @@ def get_prices():
 
 
 class IsLoggedInView(LoginRequiredMixin):
-    def get_redirect_field_name(self):
-        return 'main/login.html'
-
-    def get_permission_denied_message(self):
-        return 'شما هنوز وارد سیستم نشده اید.'
+    login_url = '/login'
+    permission_denied_message =  'شما هنوز وارد سیستم نشده اید.'
 
 
 class IsCustomer(GroupRequiredMixin):
     group_required = u"customer"
+    raise_exception = True
 
 
 class IsEmployee(GroupRequiredMixin):
@@ -277,6 +276,10 @@ class LandingPageView(FormView):
 def register_success(request):
     template = loader.get_template("main/success.html")
     return HttpResponse(template.render())
+
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy('main:home'))
 
 # def user_panel(request):  # in bayad be jaye dorost bere.
 #     template = loader.get_template("user_panel.html")
