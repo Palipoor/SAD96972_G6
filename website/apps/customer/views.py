@@ -113,10 +113,15 @@ class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
 
     def get_object(self, queryset=None):
         username = self.request.user.username
+        print("username is " + username)
         return Customer.objects.get(username=username)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
         clean = form.cleaned_data
+        print("*" * 20 + str(clean))
         context = {}
         self.object = context.update(clean)
         return super(CustomerSettingsView, self).form_valid(form)
