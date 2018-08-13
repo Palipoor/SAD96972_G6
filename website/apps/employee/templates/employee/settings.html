@@ -1,21 +1,9 @@
-{% extends "employee/mother_panel.html" %}
-{% load static staticfiles  widget_tweaks %}
-
-{% block title %}
-ویرایش مشخصات کاربری
-{% endblock title %}
-
-{% block content_header_text %}
+{% extends "employee/mother_panel.html" %} {% load static staticfiles widget_tweaks %} {% block title %} ویرایش مشخصات کاربری
+{% endblock title %} {% block content_header_text %}
 <h1>ویرایش مشخصات کاربری</h1>
-{{ block.super }}
-{% endblock content_header_text %}
-
-{% block content_header_link %}
-{{ block.super }}
+{{ block.super }} {% endblock content_header_text %} {% block content_header_link %} {{ block.super }}
 <li class="active"> ویرایش مشخصات کاربری</li>
-{% endblock content_header_link %}
-
-{% block main_content %}
+{% endblock content_header_link %} {% block main_content %}
 <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
@@ -30,17 +18,28 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label>نام و نام خانوادگی</label>
-                            {{form.persian_first_name}}
+                            {{form.persian_first_name}} {% for error in form.persian_first_name.errors %}
+                            <span class="text-danger" name="persian-first-name-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="form-group">
                             {{form.persian_last_name}}
+                            {% for error in form.persian_last_name.errors %}
+                            <span class="text-danger" name="persian-last-name-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="form-group">
                             <label> نام و نام خانوادگی لاتین</label>
                             {{form.first_name}}
+                            {% for error in form.first_name.errors %}
+                            <span class="text-danger" name="first-name-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="form-group">
                             {{form.last_name}}
+                            {% for error in form.last_name.errors %}
+                            <span class="text-danger" name="last-name-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="box-footer" allign="Left">
                             <button type="submit" class="btn btn-primary">اعمال تغییرات</button>

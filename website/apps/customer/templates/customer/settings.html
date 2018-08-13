@@ -18,12 +18,24 @@
                         <div class="form-group">
                             <label>نام و نام خانوادگی</label>
                             {{form.persian_first_name}}
+                            {% for error in form.persian_first_name.errors %}
+                            <span class="text-danger" name="persian-first-name-error">{{ error }}</span>
+                            {% endfor %}
                             <br> {{form.persian_last_name}}
+                            {% for error in form.persian_last_name.errors %}
+                            <span class="text-danger" name="persian-last-name-error">{{ error }}</span>
+                            {% endfor %}
                             <br>
                             <br>
                             <label> نام و نام خانوادگی لاتین</label>
                             {{form.first_name}}
+                            {% for error in form.first_name.errors %}
+                            <span class="text-danger" name="first-name-error">{{ error }}</span>
+                            {% endfor %}
                             <br> {{form.last_name}}
+                            {% for error in form.last_name.errors %}
+                            <span class="text-danger" name="last-name-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="box-footer" allign="Left">
                             <button type="submit" name="button_1" class="btn btn-primary">اعمال تغییرات</button>
@@ -41,10 +53,16 @@
                         <div class="form-group">
                             <label>آدرس ایمیل</label>
                             {{form.email}}
+                            {% for error in form.email.errors %}
+                            <span class="text-danger" name="email-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="form-group">
                             <label>شمارهٔ تماس</label>
                             {{form.phone_number}}
+                            {% for error in form.phone_number.errors %}
+                            <span class="text-danger" name="phone-number-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                         <div class="form-group">
                             <label>راه تماس</label>
@@ -73,6 +91,9 @@
                         <div class="form-group">
                             <label>شمارهٔ حساب </label>
                             {{form.account_number}}
+                            {% for error in form.account_number.errors %}
+                            <span class="text-danger" name="account-number-error">{{ error }}</span>
+                            {% endfor %}
                         </div>
                     </div>
                     <!--box body-->
