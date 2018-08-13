@@ -1,7 +1,7 @@
 import unicodedata
 from django import forms
 from django.contrib.auth.models import User
-
+from django.contrib.auth.forms import PasswordChangeForm
 from apps.customer.models import Customer, Exchange
 from apps.main.models import GenUser, Wallet_User
 from apps.manager.models import Manager
@@ -101,60 +101,47 @@ class WalletChargeForm(forms.Form):
         exchange.save()
 
 
-# class EuroChargeForm(WalletChargeForm):
-#     def is_valid(self):
-#         user = Wallet_User.objects.get(username=)
+class UserPasswordChangeForm(forms.Form):
+    error_messages = {
+        'password_mismatch': "تکرار رمز عبور با آن یکسان نیست."
+    }
 
+    old_password = forms.CharField(
+        label="رمز عبور فعلی",
+        widget=forms.PasswordInput(attrs={'autofocus': True, 'class': 'form-control'}),
+    )
 
-# class DollarChargeForm(WalletChargeForm):
-#     def is_valid(self):
-#         dollar_price = 5000  # todo retrieve it !
-#         flag = False
-#         valid = super(DollarChargeForm, self).is_valid()
-#         if not valid:
-#             return False
-#         user = self.user
-#         if user.groups.filter(name='customer').exists():  # customer
-#             the_customer = Customer.objects.get(username=user.username)
-#             rial_credit = the_customer.rial_credit
-#             converted_amount = int(self.cleaned_data['amount']) * dollar_price
-#             if rial_credit < converted_amount:
-#                 flag = True
-#                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
-#             else:
-#                 the_customer.rial_credit = rial_credit - converted_amount
-#                 the_customer.dollar_cent_credit = the_customer.dollar_cent_credit + int(self.cleaned_data['amount'])
-#                 the_customer.save()
-#         else:  # manager
-#             the_manager = Manager.objects.get(username=user.username)
-#             rial_credit = the_manager.company_rial_credit
-#             converted_amount = int(self.cleaned_data['amount']) * dollar_price
-#             if rial_credit < converted_amount:
-#                 flag = True
-#                 self.errors['not-enough'] = 'موجودی کیف  پول ریالی کافی نیست.'
-#             else:
-#                 the_manager.company_rial_credit = rial_credit - converted_amount
-#                 the_manager.company_dollar_cent_credit = the_manager.company_dollar_cent_credit + int(self.cleaned_data['amount'])
-#                 the_manager.save()
+    new_password1 = forms.CharField(
+        label="رمز عبور جدید",
+        widget=forms.PasswordInput
+    )
+    new_password2 = forms.CharField(
+        label="تکرار رمز عبور جدید",
+        widget=forms.PasswordInput
+    )
 
-#         return not flag
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
 
+    def clean_old_password(self):
+        if not self.user.check_password(self.cleaned_data['old_password']):
+            raise forms.ValidationError(WRONG_PASSWORD)
+        else:
+            return self.cleaned_data['old_password']
 
-# class RialChargeForm(WalletChargeForm):
-#     def is_valid(self):
-#         valid = super(RialChargeForm, self).is_valid()
-#         if not valid:
-#             return False
-#         user = self.user
-#         charge_amount = int(self.cleaned_data['amount'])
-#         if user.groups.filter(name='customer').exists():  # customer
-#             the_customer = Customer.objects.get(username=user.username)
-#             the_customer.rial_credit = the_customer.rial_credit + charge_amount
-#             the_customer.save()
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'])
+        return password2
 
-#         else:  # manager
-#             the_manager = Manager.objects.get(username=user.username)
-#             the_manager.company_rial_credit = the_manager.company_rial_credit + charge_amount
-#             the_manager.save()
-
-#         return True
+    def save(self, commit=True):
+        password = self.cleaned_data["new_password1"]
+        self.user.set_password(password)
+        if commit:
+            self.user.save()
+        return self.user

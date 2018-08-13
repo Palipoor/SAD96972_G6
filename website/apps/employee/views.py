@@ -11,6 +11,7 @@ from django.views.generic import UpdateView, FormView, ListView
 from apps.employee.Forms import EmployeeSettingsForm
 from apps.employee.models import Employee
 from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView
+from apps.main.Forms import UserPasswordChangeForm
 
 
 def dashboard(request):
@@ -26,10 +27,19 @@ class EmployeeProfile(IsEmployee, EmployeeDetailsView):
     ""
 
 
-class EmployeePasswordChangeView(PasswordChangeView, IsEmployee):
-    success_url = reverse_lazy('employee:change_password')
+class EmployeePasswordChangeView(IsEmployee, FormView):
+    form_class = UserPasswordChangeForm
+    success_url = reverse_lazy('main:login')
     template_name = 'employee/change_password.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(EmployeePasswordChangeView, self).get_form_kwargs()
+        kwargs['user'] = Employee.objects.get(username=self.request.user)
+        return kwargs
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
 
 class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
     form_class = EmployeeSettingsForm
