@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import static junit.framework.TestCase.assertEquals;
 
-
 /**
  * Created by Golpar on 4/21/2018 AD.
  */

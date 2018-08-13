@@ -1,6 +1,5 @@
 package Profile;
 
-
 import Reusables.ProfileReusables;
 import Reusables.GeneralReusables;
 import org.junit.*;
@@ -18,9 +17,6 @@ import static org.junit.Assert.assertNotEquals;
 public class LogIn {
     private WebDriver driver;
 
-
-
-
     @BeforeClass
     public void setUp() {
         // Initialize the WebDriver
@@ -34,7 +30,6 @@ public class LogIn {
 
     }
 
-
     @Test
     public void preConditionTest() {
         String title = driver.getTitle();
@@ -42,30 +37,24 @@ public class LogIn {
     }
 
     @Test
-    public void invalidEmail()  throws Exception {
+    public void invalidEmail() throws Exception {
         ProfileReusables.enterValidUsername(driver);
-
 
         // Enter an invalid email
         WebElement email = driver.findElement(By.name("email"));
         email.sendKeys("email.com");
 
-
         ProfileReusables.enterValidPassword(driver);
-
 
         ProfileReusables.clickForLogIn(driver);
 
-
-        //    Verify that error message is displayed for authentication failure.
+        // Verify that error message is displayed for authentication failure.
         String emailErrorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(emailErrorText, ProfileReusables.invalidEmailError);
     }
 
     @Test
-    public void notRegisteredEmail()  throws Exception {
-
-
+    public void notRegisteredEmail() throws Exception {
 
         // Enter an not registered email
         WebElement email = driver.findElement(By.name("email"));
@@ -74,36 +63,28 @@ public class LogIn {
 
         ProfileReusables.enterValidPassword(driver);
 
-
         ProfileReusables.clickForLogIn(driver);
 
-
-        //    Verify that error message is displayed for authentication failure.
+        // Verify that error message is displayed for authentication failure.
         String emailErrorText = driver.findElement(By.name("not valid")).getText();
-        assertEquals(emailErrorText,ProfileReusables.notRegisteredEmailError);
+        assertEquals(emailErrorText, ProfileReusables.notRegisteredEmailError);
     }
 
     @Test
     public void wrongPassword() throws Exception {
 
-
         ProfileReusables.enterValidEmail(driver);
 
-
-        WebElement password  = driver.findElement(By.name("password"));
+        WebElement password = driver.findElement(By.name("password"));
         password.clear();
         password.sendKeys(ProfileReusables.wrongPassword);
 
-
         ProfileReusables.clickForLogIn(driver);
 
-
-        //    Verify that error message is displayed for authentication failure.
+        // Verify that error message is displayed for authentication failure.
         String passwordErrorText = driver.findElement(By.name("not valid")).getText();
         assertEquals(passwordErrorText, ProfileReusables.wrongPasswordError);
     }
-
-
 
     @Test
     public void validLogIn() throws Exception {
@@ -112,27 +93,16 @@ public class LogIn {
 
         ProfileReusables.enterValidPassword(driver);
 
-
         ProfileReusables.clickForLogIn(driver);
 
         List<WebElement> userMenu = driver.findElements(By.name("user menu"));
         assertNotEquals(userMenu.size(), 0);// exists such element in the page
 
-
-
-
     }
-
 
     @AfterClass
     public void tearDown() {
         GeneralReusables.logout(driver);
     }
-
-
-
-
-
-
 
 }

@@ -21,15 +21,14 @@ import static org.junit.Assert.assertEquals;
 public class SeeProfileCustomer {
     static WebDriver driver;
 
-
     @BeforeClass
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsACustomer(driver);
-        WebElement viewProfileLink = driver.findElement(By.name("")); //TODO : I could not find it.
-        viewProfileLink.click(); //TODO : click??????
+        WebElement viewProfileLink = driver.findElement(By.name("")); // TODO : I could not find it.
+        viewProfileLink.click(); // TODO : click??????
 
     }
 
@@ -43,6 +42,5 @@ public class SeeProfileCustomer {
     public void tearDown() {
         GeneralReusables.logout(driver);
     }
-
 
 }

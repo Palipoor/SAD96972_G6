@@ -4,10 +4,10 @@
 #./reset_migration_bash.txt
 printf "\n\n********************\nfirst status\n********************\n\n"
 python3 manage.py showmigrations
-printf "\n\n********************\nfaking ...\n********************\n\n"
-python3 manage.py migrate --fake main 0001_initial
-printf "\n\n********************\nafter faking\n********************\n\n"
-python3 manage.py showmigrations
+#printf "\n\n********************\nfaking ...\n********************\n\n"
+#python3 manage.py migrate --fake main 0001_initial
+#printf "\n\n********************\nafter faking\n********************\n\n"
+#python3 manage.py showmigrations
 printf "\n\n********************\ndrop old db\n********************\n\n"
 sudo -u $1 psql postgres -c "drop database sadproject"
 printf "\n\n********************\ncreate new db\n********************\n\n"

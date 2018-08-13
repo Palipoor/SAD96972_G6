@@ -1,6 +1,5 @@
 package Employee;
 
-
 import Reusables.*;
 
 import org.junit.AfterClass;
@@ -23,20 +22,15 @@ public class ConfirmUnknown {
     static double rialDeposit;
     static double personWalletCredit;
 
-
-
-
-
-
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //createNewTransaction(String type);   TODO
+        // createNewTransaction(String type); TODO
         rialDeposit = ManagerReusables.getCompanyCredit("rial");
         GeneralReusables.setUpToHomepage(driver);
 
-        GeneralReusables.login(driver, " ", " ");//TODO email and password of receiver
+        GeneralReusables.login(driver, " ", " ");// TODO email and password of receiver
         personWalletCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         GeneralReusables.logout(driver);
         GeneralReusables.setUpToHomepage(driver);
@@ -60,26 +54,24 @@ public class ConfirmUnknown {
     public void confirm() {
         WebElement confirm = driver.findElement(By.name("confirm"));
         confirm.submit();
-        //TODO: check the status.
+        // TODO: check the status.
         GeneralReusables.logout(driver);
-        //TODO: how much does it change?
-         boolean systemCreditCorrectness = ManagerReusables.getCompanyCredit("rial")== rialDeposit; //TODO almost ==
-        GeneralReusables.login(driver, " ", " ");//TODO email and password of receiver
-        boolean personCreditCorrectness
-                = WalletUsersReusables.getWalletCredit(driver, "rial") == personWalletCredit;//TODO alnost ==
+        // TODO: how much does it change?
+        boolean systemCreditCorrectness = ManagerReusables.getCompanyCredit("rial") == rialDeposit; // TODO almost ==
+        GeneralReusables.login(driver, " ", " ");// TODO email and password of receiver
+        boolean personCreditCorrectness = WalletUsersReusables.getWalletCredit(driver, "rial") == personWalletCredit;// TODO
+                                                                                                                     // alnost
+                                                                                                                     // ==
         assertTrue(systemCreditCorrectness && personCreditCorrectness);
-
-
 
     }
 
-    //TODO: write test for invalid case and the case in which the person does not have an account
-
+    // TODO: write test for invalid case and the case in which the person does not
+    // have an account
 
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        //driver.close();
+        // driver.close();
     }
 }
-

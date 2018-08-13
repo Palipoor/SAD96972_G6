@@ -39,7 +39,7 @@ public class RialChargeManager {
         amountBox.sendKeys("10000");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
-        //todo چیزی که باید از درگاه برمی‌گرده ببینه رو این جا بنویس.
+        // todo چیزی که باید از درگاه برمی‌گرده ببینه رو این جا بنویس.
         double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         double charged = newRialCredit - rialCredit;
         assertEquals(charged, 10000, GeneralReusables.delta); // oon ghadri ke lazeme charge shode bashe

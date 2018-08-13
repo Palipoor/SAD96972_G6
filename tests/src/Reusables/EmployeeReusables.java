@@ -12,8 +12,7 @@ import java.util.List;
  */
 public class EmployeeReusables {
 
-    public static String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش";
-
+    public static String transactionDetailTitle = "پنل مدیریت | جزئیات تراکنش";
 
     public static void bringMeTheDetails(String transactionId, WebDriver driver) {
         WebElement theTable = driver.findElement(By.name("transactions-table"));

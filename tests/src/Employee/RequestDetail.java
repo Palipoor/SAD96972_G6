@@ -21,11 +21,8 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Reusables.OrderedRunner.class)
 public class RequestDetail {
     static WebDriver driver;
-    String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش";
-    String requestStatus= "تایید نشده";
-
-
-
+    String transactionDetailTitle = "پنل مدیریت | جزئیات تراکنش";
+    String requestStatus = "تایید نشده";
 
     @BeforeClass
     public static void setUp() {
@@ -53,10 +50,10 @@ public class RequestDetail {
     @Order(order = 2)
     public void transactionDetail() {
         WebElement cell = ManagerReusables.getNewestRequest(driver);
-        if(cell!=null){
+        if (cell != null) {
             WebElement link = cell.findElement(By.tagName("a"));
             link.click();
-            assertEquals(driver.getTitle(),transactionDetailTitle);
+            assertEquals(driver.getTitle(), transactionDetailTitle);
 
         }
 
@@ -65,7 +62,6 @@ public class RequestDetail {
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        //driver.close();
+        // driver.close();
     }
 }
-

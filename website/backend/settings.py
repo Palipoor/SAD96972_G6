@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.employee',
     'apps.manager',
     'widget_tweaks',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +92,11 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
+}
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
 }
 
 # Password validation

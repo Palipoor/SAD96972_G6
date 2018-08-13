@@ -1,6 +1,5 @@
 package Employee;
 
-
 import Reusables.*;
 
 import org.junit.AfterClass;
@@ -24,21 +23,17 @@ public class RejectTransaction {
     static double personWalletCredit;
     static double rialDeposit;
 
-
-
-
-
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //createNewTransaction(String type);   TODO
+        // createNewTransaction(String type); TODO
         rialDeposit = ManagerReusables.getCompanyCredit("rial");
         GeneralReusables.setUpToHomepage(driver);
 
         GeneralReusables.setUpToHomepage(driver);
 
-        GeneralReusables.login(driver, " ", " ");//TODO email and password of customer
+        GeneralReusables.login(driver, " ", " ");// TODO email and password of customer
         personWalletCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         GeneralReusables.logout(driver);
         GeneralReusables.setUpToHomepage(driver);
@@ -48,13 +43,12 @@ public class RejectTransaction {
         WebElement link = cell.findElement(By.tagName("a"));
         link.click();
 
-
     }
 
     @Test
     @Order(order = 1)
     public void preConditionTest() {
-        assertEquals(driver.getTitle(),EmployeeReusables.transactionDetailTitle);
+        assertEquals(driver.getTitle(), EmployeeReusables.transactionDetailTitle);
 
     }
 
@@ -62,14 +56,15 @@ public class RejectTransaction {
     @Order(order = 2)
     public void transactionDetail() {
         WebElement reject = driver.findElement(By.name("reject"));
-        reject.submit(); //or click?
-        //TODO: check the status.
+        reject.submit(); // or click?
+        // TODO: check the status.
         GeneralReusables.logout(driver);
-        //TODO: how much does it change?
-        boolean systemCreditCorrectness = ManagerReusables.getCompanyCredit("rial")== rialDeposit; //TODO almost ==
-        GeneralReusables.login(driver, " ", " ");//TODO email and password of customer
-        boolean personCreditCorrectness
-                = WalletUsersReusables.getWalletCredit(driver, "rial") == personWalletCredit;//TODO alnost ==
+        // TODO: how much does it change?
+        boolean systemCreditCorrectness = ManagerReusables.getCompanyCredit("rial") == rialDeposit; // TODO almost ==
+        GeneralReusables.login(driver, " ", " ");// TODO email and password of customer
+        boolean personCreditCorrectness = WalletUsersReusables.getWalletCredit(driver, "rial") == personWalletCredit;// TODO
+                                                                                                                     // alnost
+                                                                                                                     // ==
         assertTrue(systemCreditCorrectness && personCreditCorrectness);
 
     }
@@ -77,7 +72,6 @@ public class RejectTransaction {
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        //driver.close();
+        // driver.close();
     }
 }
-

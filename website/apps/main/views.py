@@ -14,9 +14,10 @@ from django.shortcuts import redirect, render
 from braces.views import GroupRequiredMixin
 from django.contrib.auth import logout
 
+from apps.main.models import Wallet_User
 from apps.main.MultiForm import MultiFormsView
 from views import Compilation
-from apps.main.Forms import SignUpForm, RialChargeForm, DollarChargeForm, EuroChargeForm, ContactForm, ConvertForm
+from apps.main.Forms import WalletChargeForm, SignUpForm, ContactForm, ConvertForm
 from django.utils.decorators import method_decorator
 
 from django.views.decorators.csrf import csrf_exempt
@@ -25,9 +26,10 @@ from apps.manager.models import Manager
 import lxml.etree
 import lxml.html
 import requests
- 
+from utils.currency_utils import Transactions
 
-### returns a dictionary containing dollar and euro prices
+
+# returns a dictionary containing dollar and euro prices
 def get_prices():
     # request = requests.get("http://2gheroon.ir")
     # root = lxml.html.fromstring(request.content)
@@ -42,12 +44,12 @@ def get_prices():
     #     if 'یورو' in str(row.text):
     #         prices['euro'] = int((row.xpath('./following::td')[0]).text)
     #         break
-    return {'euro': 6, 'dollar': 4} #TODO
+    return {'euro': 6, 'dollar': 4}  # TODO
 
 
 class IsLoggedInView(LoginRequiredMixin):
     login_url = '/login'
-    permission_denied_message =  'شما هنوز وارد سیستم نشده اید.'
+    permission_denied_message = 'شما هنوز وارد سیستم نشده اید.'
 
 
 class IsCustomer(GroupRequiredMixin):
@@ -74,27 +76,24 @@ class IsStaff(GroupRequiredMixin):
 class WalletView(FormView, IsLoggedInView, IsWalletUser):
     currency = ""
     user_type = ""
-    currency_type = {"rial": "ریال",
-                     "dollar": "دلار",
-                     "euro": "یورو",
-                     }
 
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['currency'] = self.currency_type[self.kwargs['currency']]
+        context['currency'] = Transactions.currency_to_persian(self.kwargs['currency'])
         if (self.user_type == "customer"):
             context, user = Compilation.get_customer_context_data(context, self.request.user.username)
         else:
             context, user = Compilation.get_manager_context_data(cotext, self.request.user.username)
+        context = Compilation.get_wallet_requests(context, self.request.user.username, Transactions.currency_to_num(self.kwargs['currency']))
         context['credit'] = context[self.kwargs['currency'] + "_credit"]
         return context
 
     def get_form_kwargs(self):
         kwargs = super(WalletView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
+        kwargs['user'] = Wallet_User.objects.get(username=self.request.user)
+        kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
         return kwargs
-        
+
     def dispatch(self, request, *args, **kwargs):
         self.currency = kwargs['currency']
         self.user = request.user
@@ -112,12 +111,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
         else:
             return HttpResponseForbidden()
 
-        if self.currency == 'rial':
-            self.form_class = RialChargeForm
-        elif self.currency == 'dollar':
-            self.form_class = DollarChargeForm
-        else:
-            self.form_class = EuroChargeForm
+        self.form_class = WalletChargeForm
         if request.method == 'GET':
             return self.get(request, *args, **kwargs)
         else:
@@ -125,6 +119,11 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
 
             # todo form
             # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
+
+    def form_valid(self, form):
+        form.update_db()
+        return super().form_valid(form)
+
 
 class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
@@ -163,9 +162,9 @@ class EmployeeDetailsView(DetailsView):
 
 
 class Register(FormView):
-    #todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
+    # todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
     form_class = SignUpForm
-    success_url = reverse_lazy ('main:register_success')
+    success_url = reverse_lazy('main:register_success')
     template_name = 'main/register.html'
 
     def post(self, request, *args, **kwargs):
@@ -200,6 +199,7 @@ class LandingPageView(FormView):
     contact_form_class = ContactForm
     convert_form_class = ConvertForm
     form_class = contact_form_class
+
     def get_context_data(self, **kwargs):
         context = super(LandingPageView, self).get_context_data(**kwargs)
         if 'contact_form' not in context:
@@ -225,8 +225,8 @@ class LandingPageView(FormView):
         else:
             return self.form_invalid(**{form_name: form})
 
-    def form_valid(self,form):
-        if isinstance(form,ContactForm):
+    def form_valid(self, form):
+        if isinstance(form, ContactForm):
             subject = form.cleaned_data['subject']
             from_email = form.cleaned_data['email']
             message = form.cleaned_data['message']
@@ -235,7 +235,7 @@ class LandingPageView(FormView):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
-            return HttpResponseRedirect("main/index.html") 
+            return HttpResponseRedirect("main/index.html")
 
         else:
             prices = get_prices()
@@ -265,9 +265,8 @@ class LandingPageView(FormView):
 
             context = self.get_context_data()
             context['result'] = converted
-            context.update({'currency' : dest_currency})
-            return render(self.request, 'main/index.html', context) #todo bere bakhshe finance!
-
+            context.update({'currency': dest_currency})
+            return render(self.request, 'main/index.html', context)  # todo bere bakhshe finance!
 
     def form_invalid(self, **kwargs):
         return self.render_to_response(self.get_context_data(**kwargs))
@@ -276,6 +275,7 @@ class LandingPageView(FormView):
 def register_success(request):
     template = loader.get_template("main/success.html")
     return HttpResponse(template.render())
+
 
 def log_out(request):
     logout(request)

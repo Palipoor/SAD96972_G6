@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNotEquals;
 public class NotifsView {
     static WebDriver driver;
 
-
     @BeforeClass
     public static void setUp() {
         driver = new ChromeDriver();

@@ -31,6 +31,6 @@ urlpatterns = [
     path('foreign_payment/', ForeignPaymentCreationView.as_view(), name='foreign_payment'),
     path('application_fee/', ApplicationFeeCreationView.as_view(), name='application_fee'),
     path('anonymous_payment/', AnonymousPaymentCreationView.as_view(), name='anonymous_payment'),
-    path('<currency>_wallet/', WalletView.as_view(user_type = "Customer"), name='wallet'),
+    path('<currency>_wallet/', WalletView.as_view(user_type="Customer"), name='wallet'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),
 ]

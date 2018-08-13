@@ -31,7 +31,7 @@ urlpatterns = [
     path('customer_users/', CustomersListView.as_view(), name='customer_users'),
     path('<user_id>_customer_details/', CustomerDetailsForManager.as_view(), name='customer_details'),
     path('<employee_id>_employee_details/', EmployeeDetailsForManager.as_view(), name='employee_details'),
-    path('<currency>_wallet/', WalletView.as_view(user_type = "Manager"), name='wallet'),
+    path('<currency>_wallet/', WalletView.as_view(user_type="Manager"), name='wallet'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),
 
 ]

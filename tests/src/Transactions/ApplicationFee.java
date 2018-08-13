@@ -112,7 +112,8 @@ public class ApplicationFee {
     @Test
     public void transactionIsAdded() {
         String myUsername = GeneralReusables.getUsername(driver);
-        String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
+        String otherUsername = ManagerReusables
+                .getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
 
         assertEquals(otherUsername, myUsername);
         WebElement currency = driver.findElement(By.name("dollar-radio"));
