@@ -13,6 +13,7 @@ from views import Compilation
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 from apps.customer.Forms import CustomerSettingsForm
+from apps.main.Forms import UserPasswordChangeForm
 from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
@@ -101,10 +102,19 @@ class CustomerProfile(IsCustomer, CustomerDetailsView):
     ""
 
 
-class CustomerPasswordChangeView(IsLoggedInView, IsCustomer, PasswordChangeView):
-    success_url = reverse_lazy('customer:change_password')
+class CustomerPasswordChangeView(IsCustomer, FormView):
+    form_class = UserPasswordChangeForm
+    success_url = reverse_lazy('main:login')
     template_name = 'customer/change_password.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(CustomerPasswordChangeView, self).get_form_kwargs()
+        kwargs['user'] = Customer.objects.get(username=self.request.user)
+        return kwargs
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
 
 class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
     form_class = CustomerSettingsForm

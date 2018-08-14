@@ -9,7 +9,9 @@ from django.views.generic.list import BaseListView, MultipleObjectMixin
 
 from apps.customer.models import Customer
 from apps.employee.models import Employee
+from apps.manager.models import Manager
 from apps.main.MultiForm import MultiFormsView
+from apps.main.Forms import UserPasswordChangeForm
 from django.views.generic import TemplateView
 from apps.main.views import IsLoggedInView, DetailsView, IsManager, CustomerDetailsView, EmployeeDetailsView
 from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
@@ -21,10 +23,19 @@ class ManagerDashboardView(IsLoggedInView, IsManager, TemplateView):
     ""
 
 
-class ManagerPasswordChangeView(IsLoggedInView, IsManager, PasswordChangeView):
-    success_url = reverse_lazy('manager:change_password')
+class ManagerPasswordChangeView(IsManager, FormView):
+    form_class = UserPasswordChangeForm
+    success_url = reverse_lazy('main:login')
     template_name = 'manager/change_password.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(ManagerPasswordChangeView, self).get_form_kwargs()
+        kwargs['user'] = Manager.objects.get(username=self.request.user)
+        return kwargs
+
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
     #model = Company
