@@ -5,6 +5,8 @@ from django.contrib.auth.models import Group
 from utils.currency_utils import Transactions
 from apps.employee.models import EmployeeReview
 from apps.manager.models import Manager
+import traceback
+
 
 # Create your models here.
 
@@ -27,36 +29,50 @@ class Request(PolymorphicModel):
     # all financial transactions are children of this.
     statuses = Transactions.request_types_json
     currencies = Transactions.num_to_currency_json.items()
-    print(currencies)
     # all users can be null which means the dont exists and therefore can be ignored.
     # who pays
-    source_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='source_user', null=True)
-    source_wallet = models.IntegerField(choices=currencies, default=0)
+    source_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='source_user', null=True, blank=True)
+    source_wallet = models.IntegerField(choices=currencies, default=0, blank=True)
     # who recieves and possibly redirects
-    dest_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='dest_user', null=True)
-    dest_wallet = models.IntegerField(choices=currencies, default=0)
+    dest_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='dest_user', null=True, blank=True)
+    dest_wallet = models.IntegerField(choices=currencies, default=0, blank=True)
     # who recieves
-    final_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='final_user', null=True)
-    fianl_wallet = models.IntegerField(choices=currencies, default=0)
+    final_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='final_user', null=True, blank=True)
+    fianl_wallet = models.IntegerField(choices=currencies, default=0, blank=True)
     # amount of payment in rial or cents.
-    amount = models.FloatField(null=False)
-    request_time = models.DateTimeField(auto_now_add=True)
-    description = models.CharField(max_length=500)
+    amount = models.FloatField(null=False, blank=True)
+    request_time = models.DateTimeField(auto_now_add=True, blank=True)
+    description = models.CharField(max_length=500, blank=True)
     # defaul status varies between children. some may be accepted since creation.
-    status = models.IntegerField(choices=statuses, default=2)
-    profitRate = models.FloatField(default=0)
+    status = models.IntegerField(choices=statuses, default=2, blank=True)
+    profitRate = models.FloatField(default=0, blank=True)
     # if not specified will be determind using utils.
-    exchange_rate = models.FloatField(null=True)
+    exchange_rate = models.FloatField(null=True, blank=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if (not self.exchange_rate):
+            self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
+        # print('in iniit')
+        # print(self.dest_user.dollar_cent_credit)
+        self.pay()
+        self.recieve()
+        # print(self.dest_user.dollar_cent_credit)
+        # print('end')
 
     def save(self, *args, **kwargs):
         # if it is being saved for the first time does the payment and sets status to default. If exchange rate is nul computes it.
         if not self.pk:
-            if (not self.exchange_rate):
-                self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
-            self.pay()
-            self.recieve()
             self.set_status()
             self.set_profitRate()
+            try:
+                self.dest_user.save()
+            except Exception:
+                print(traceback.format_exc())
+            try:
+                self.source_user.save()
+            except Exception:
+                print(traceback.format_exc())
         super(Request, self).save(*args, **kwargs)
 
     def reject(self):
@@ -106,27 +122,49 @@ class Request(PolymorphicModel):
                 self.source_user.dollar_cent_credit -= self.amount*(1+self.profitRate)
             elif (self.source_wallet == 2):
                 self.source_user.dollar_cent_credit -= self.amount * (1 + self.profitRate)
-            self.source_user.save()
-        except:
-            pass
+            # self.source_user.save()
+        except Exception:
+            print(traceback.format_exc())
 
     def recieve(self):
         # what dest user revieves. we assume that dest user always recieves the profit.
         try:
             self.dest_user
-            print("goodbye")
-            print(self.dest_wallet)
+            # print("goodbye")
+            # print(self.dest_wallet == 1)
             if (self.dest_wallet == 0):
+                # print('zero wallet')
                 self.dest_user.rial_credit += self.amount*(1+self.profitRate)*self.exchange_rate
             elif (self.dest_wallet == 1):
-                print(self.dest_user.dollar_cent_credit)
+                # print('one wallet')
+                # print(self.amount * (1 + self.profitRate) * self.exchange_rate)
+                # print(self.dest_user.dollar_cent_credit)
                 self.dest_user.dollar_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
-                print(self.dest_user.dollar_cent_credit)
+                # print(self.dest_user.dollar_cent_credit)
             elif (self.dest_wallet == 2):
                 self.dest_user.euro_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
-            self.dest_user.save()
-        except:
-            pass
+            # self.dest_user.save()
+        except Exception:
+            print(traceback.format_exc())
+
+    def exception_texts(self):
+        excps = []
+        try:
+            excps += self.source_user.exception_texts()
+            print('source user')
+        except Exception:
+            print(traceback.format_exc())
+        try:
+            excps += self.dest_user.exception_texts()
+            print('source user')
+        except Exception:
+            print(traceback.format_exc())
+        try:
+            excps += self.final_user.exception_texts()
+            print('source user')
+        except Exception:
+            print(traceback.format_exc())
+        return excps
 
     def create_reverse_request(self):
         # created the transaction for rejecting current transaction.

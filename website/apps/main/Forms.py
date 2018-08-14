@@ -1,6 +1,7 @@
 import unicodedata
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from apps.customer.models import Customer, Exchange
 from apps.main.models import GenUser, Wallet_User
@@ -8,6 +9,7 @@ from apps.manager.models import Manager
 from utils.strings import *
 from utils import fields
 from utils.currency_utils import Transactions
+from utils import fields
 
 
 class ConvertForm(forms.Form):
@@ -69,36 +71,34 @@ class SignUpForm(forms.Form):
 
 
 class WalletChargeForm(forms.Form):
+    # form for charging wallets
     amount = forms.IntegerField(min_value=1, label='مبلغ درخواستی',
                                 widget=forms.widgets.TextInput(attrs={'name': 'desired-amount'}))
 
+    # TODO make exchanging from each wallet possible. make real rial charge possible.
     def __init__(self, *args, **kwargs):
         print("in init")
         self.user = kwargs.pop('user')
         self.dest = kwargs.pop('dest')
         self.source = 0
+        self.transaction = None
         super(WalletChargeForm, self).__init__(*args, **kwargs)
 
-    def is_valid(self):
-        print('in is valid')
-        valid = super(WalletChargeForm, self).is_valid()
-        if (not valid):
-            return False
+    def clean_amount(self):
+        # makes exception if charge is invalid
         self.needed_value = self.cleaned_data['amount'] * Transactions.get_exchange_rate(self.dest, self.source)
-        if (self.source == 0):
-            temp = self.user.rial_credit - self.needed_value
-        elif (self.source == 1):
-            temp = self.user.rial_credit - self.needed_value
-        elif (self.source == 2):
-            temp = self.user.rial_credit - self.needed_value
-        if temp < 0:
-            return False
-        return True
+        self.transaction = Exchange(source_user=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
+        exps = self.transaction.exception_texts()
+        print("clean_amount")
+        print(exps)
+        if (exps):
+            raise ValidationError(exps[0])
+        return self.cleaned_data['amount']
 
     def update_db(self):
-        print('hello')
-        exchange = Exchange(source_user=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
-        exchange.save()
+        # updates db
+        self.transaction.save()
+        pass
 
 
 # class EuroChargeForm(WalletChargeForm):
