@@ -20,7 +20,6 @@ from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, 
 
 class ManagerDashboardView(IsLoggedInView, IsManager, TemplateView):
     template_name = "manager/dashboard.html"
-    ""
 
 
 class ManagerPasswordChangeView(IsManager, FormView):

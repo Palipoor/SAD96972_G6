@@ -188,16 +188,16 @@
                 <a href = '{% static "panel/pages/customer/#" %}'  class="dropdown-toggle" data-toggle="dropdown">
                    {% block user_photo_bar %}
                   <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="user-image" alt="User Image">
-                  <span class="hidden-xs">{{first_name}}{{last_name}}</span>
+                  <span class="hidden-xs">{{first_name}}  {{last_name}}</span>
                    {% endblock user_photo_bar %}
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" name = "user menu">
                   <!-- User image -->
                   <li class="user-header">
                      {% block user_profile_bar %}
                     <img src = '{% static "panel/dist/img/user2-160x160.jpg" %}'  class="img-circle" alt="User Image">
                     <p>
-                      {{first_name}}{{last_name}}
+                      {{first_name}}  {{last_name}}
                     </p>
                      {% endblock user_profile_bar %}
 					</li>

@@ -113,11 +113,11 @@ class UserPasswordChangeForm(forms.Form):
 
     new_password1 = forms.CharField(
         label="رمز عبور جدید",
-        widget=forms.PasswordInput
+        widget=forms.PasswordInput(attrs = {'class': 'form-control'})
     )
     new_password2 = forms.CharField(
         label="تکرار رمز عبور جدید",
-        widget=forms.PasswordInput
+        widget=forms.PasswordInput(attrs = {'class': 'form-control'})
     )
 
     def __init__(self, *args, **kwargs):
