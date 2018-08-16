@@ -27,9 +27,10 @@ public class Karmozd {
         GeneralReusables.setUpToHomepage(driver);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1500)");
-        GeneralReusables.waitForSeconds(5);
+        GeneralReusables.waitForSeconds(3);
         WebElement features = driver.findElement(By.name("features"));
         features.click();
+		GeneralReusables.waitForSeconds(1);
     }
 
     @Test

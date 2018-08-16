@@ -26,221 +26,235 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(Reusables.OrderedRunner.class)
 public class ContactUs {
-    private static WebDriver driver;
-    private static WebElement theForm;
-    private String theSubject;
+	private static WebDriver driver;
+	private static WebElement theForm;
+	private String theSubject;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,1500)");
-        GeneralReusables.waitForSeconds(5);
-        WebElement contactUs = driver.findElement(By.name("contact"));
-        contactUs.click();
-        theForm = driver.findElement(By.name("contact-form"));
-    }
+	private static JavascriptExecutor js;
 
-    @Test
-    @Order(order = 1)
-    public void emptyNameTest() {
-        WebElement email = theForm.findElement(By.id("email"));
-        GeneralReusables.waitForSeconds(2);
-        email.clear();
-        email.sendKeys("palr@gmail.com");
+	@BeforeClass
+	public static void setUp() {
+		driver = new FirefoxDriver();
+		GeneralReusables.setUpToHomepage(driver);
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1500)");
+		GeneralReusables.waitForSeconds(5);
+		WebElement contactUs = driver.findElement(By.name("contact"));
+		contactUs.click();
+		theForm = driver.findElement(By.name("contact-form"));
+	}
 
-        WebElement subject = theForm.findElement(By.id("subject"));
-        subject.clear();
-        long currentTime = System.currentTimeMillis();
-        String currentTimeString = String.valueOf(currentTime);
-        theSubject = "test_subject_" + currentTimeString;
-        subject.sendKeys(theSubject);
+	@Test
+	@Order(order = 1)
+	public void emptyNameTest() {
+		WebElement email = theForm.findElement(By.name("email"));
+		GeneralReusables.waitForSeconds(2);
+		email.clear();
+		email.sendKeys("palr@gmail.com");
 
-        WebElement content = theForm.findElement(By.id("message"));
-        content.clear();
-        content.sendKeys("my message");
+		WebElement subject = theForm.findElement(By.name("subject"));
+		subject.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		theSubject = "test_subject_" + currentTimeString;
+		subject.sendKeys(theSubject);
 
-        WebElement sendButton = theForm.findElement(By.name("send message"));
-        sendButton.click();
+		WebElement content = theForm.findElement(By.name("message"));
+		content.clear();
+		content.sendKeys("my message");
 
-        WebElement nameError = driver.findElement(By.name("name-error"));
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertTrue(nameError.isDisplayed());
-    }
+		WebElement sendButton = theForm.findElement(By.name("contact_form"));
+		sendButton.click();
 
-    @Test
-    @Order(order = 2)
-    public void emptyEmailTest() {
-        WebElement email = theForm.findElement(By.id("email"));
-        GeneralReusables.waitForSeconds(2);
-        email.clear();
+		js.executeScript("window.scrollBy(0,5000)");
 
-        WebElement name = theForm.findElement(By.id("name"));
-        name.clear();
-        name.sendKeys("تست نام");
+		GeneralReusables.waitForSeconds(5);
 
-        WebElement subject = theForm.findElement(By.id("subject"));
-        subject.clear();
-        long currentTime = System.currentTimeMillis();
-        String currentTimeString = String.valueOf(currentTime);
-        theSubject = "test_subject_" + currentTimeString;
-        subject.sendKeys(theSubject);
+		WebElement nameError = driver.findElement(By.name("name-error"));
 
-        WebElement content = theForm.findElement(By.id("message"));
-        content.clear();
-        content.sendKeys("my message");
+		assertTrue(nameError.isDisplayed());
+	}
 
-        WebElement sendButton = theForm.findElement(By.name("send message"));
-        sendButton.click();
+	@Test
+	@Order(order = 2)
+	public void emptyEmailTest() {
+		theForm = driver.findElement(By.name("contact-form"));
+		WebElement email = theForm.findElement(By.name("email"));
+		GeneralReusables.waitForSeconds(2);
+		email.clear();
 
-        WebElement emailError = driver.findElement(By.name("email-error"));
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertTrue(emailError.isDisplayed());
-    }
+		WebElement name = theForm.findElement(By.name("name"));
+		name.clear();
+		name.sendKeys("تست نام");
 
-    @Test
-    @Order(order = 3)
-    public void invalidEmailTest() {
-        WebElement email = theForm.findElement(By.id("email"));
-        GeneralReusables.waitForSeconds(2);
-        email.clear();
-        email.sendKeys("invalidemail");
+		WebElement subject = theForm.findElement(By.name("subject"));
+		subject.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		theSubject = "test_subject_" + currentTimeString;
+		subject.sendKeys(theSubject);
 
-        WebElement name = theForm.findElement(By.id("name"));
-        name.clear();
-        name.sendKeys("تست نام");
+		WebElement content = theForm.findElement(By.name("message"));
+		content.clear();
+		content.sendKeys("my message");
 
-        WebElement subject = theForm.findElement(By.id("subject"));
-        subject.clear();
-        long currentTime = System.currentTimeMillis();
-        String currentTimeString = String.valueOf(currentTime);
-        theSubject = "test_subject_" + currentTimeString;
-        subject.sendKeys(theSubject);
+		WebElement sendButton = theForm.findElement(By.name("contact_form"));
+		sendButton.click();
+		js.executeScript("window.scrollBy(0,5000)");
 
-        WebElement content = theForm.findElement(By.id("message"));
-        content.clear();
-        content.sendKeys("my message");
+		WebElement emailError = driver.findElement(By.name("email-error"));
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertTrue(emailError.isDisplayed());
+	}
 
-        WebElement sendButton = theForm.findElement(By.name("send message"));
-        sendButton.click();
+	@Test
+	@Order(order = 3)
+	public void invalidEmailTest() {
+		theForm = driver.findElement(By.name("contact-form"));
 
-        WebElement emailError = driver.findElement(By.name("email-val-error"));
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertTrue(emailError.isDisplayed());
-    }
+		WebElement email = theForm.findElement(By.name("email"));
+		GeneralReusables.waitForSeconds(2);
+		email.clear();
+		email.sendKeys("invalidemail");
 
-    @Test
-    @Order(order = 4)
-    public void emptyContentTest() {
-        WebElement email = theForm.findElement(By.id("email"));
-        GeneralReusables.waitForSeconds(2);
-        email.clear();
-        email.sendKeys("palipoor976@gmail.com");
+		WebElement name = theForm.findElement(By.name("name"));
+		name.clear();
+		name.sendKeys("تست نام");
 
-        WebElement name = theForm.findElement(By.id("name"));
-        name.clear();
-        name.sendKeys("تست نام");
+		WebElement subject = theForm.findElement(By.name("subject"));
+		subject.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		theSubject = "test_subject_" + currentTimeString;
+		subject.sendKeys(theSubject);
 
-        WebElement subject = theForm.findElement(By.id("subject"));
-        subject.clear();
-        long currentTime = System.currentTimeMillis();
-        String currentTimeString = String.valueOf(currentTime);
-        theSubject = "test_subject_" + currentTimeString;
-        subject.sendKeys(theSubject);
+		WebElement content = theForm.findElement(By.name("message"));
+		content.clear();
+		content.sendKeys("my message");
 
-        WebElement content = theForm.findElement(By.id("message"));
-        content.clear();
+		WebElement sendButton = theForm.findElement(By.name("contact_form"));
+		sendButton.click();
 
-        WebElement sendButton = theForm.findElement(By.name("send message"));
-        sendButton.click();
+		GeneralReusables.waitForSeconds(5);
+		js.executeScript("window.scrollBy(0,5000)");
 
-        WebElement messageError = driver.findElement(By.name("message-error"));
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertTrue(messageError.isDisplayed());
-    }
 
-    @Test
-    @Order(order = 5)
-    public void everythingValidTest() {
-        WebElement email = theForm.findElement(By.id("email"));
-        GeneralReusables.waitForSeconds(2);
-        email.clear();
-        email.sendKeys("palipoor976@gmail.com");
+		WebElement emailError = driver.findElement(By.name("email-error"));
+		GeneralReusables.waitForSeconds(1);
+		assertTrue(emailError.isDisplayed());
+	}
 
-        WebElement name = theForm.findElement(By.id("name"));
-        name.clear();
-        name.sendKeys("تست نام");
+	@Test
+	@Order(order = 4)
+	public void emptyContentTest() {
+		theForm = driver.findElement(By.name("contact-form"));
 
-        WebElement subject = theForm.findElement(By.id("subject"));
-        subject.clear();
-        long currentTime = System.currentTimeMillis();
-        String currentTimeString = String.valueOf(currentTime);
-        theSubject = "test_subject_" + currentTimeString;
-        subject.sendKeys(theSubject);
+		WebElement email = theForm.findElement(By.name("email"));
+		GeneralReusables.waitForSeconds(2);
+		email.clear();
+		email.sendKeys("palipoor976@gmail.com");
 
-        WebElement content = theForm.findElement(By.id("message"));
-        content.clear();
-        content.sendKeys("my message");
+		WebElement name = theForm.findElement(By.name("name"));
+		name.clear();
+		name.sendKeys("تست نام");
 
-        WebElement sendButton = theForm.findElement(By.name("send message"));
-        sendButton.click();
+		WebElement subject = theForm.findElement(By.name("subject"));
+		subject.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		theSubject = "test_subject_" + currentTimeString;
+		subject.sendKeys(theSubject);
 
-        WebElement successMessage = driver.findElement(By.name("success"));
-        assertFalse(successMessage.getText().equals(""));
-    }
+		WebElement content = theForm.findElement(By.name("message"));
+		content.clear();
 
-    @Test
-    @Order(order = 6)
-    public void isReceivedTest() {
+		WebElement sendButton = theForm.findElement(By.name("contact_form"));
+		sendButton.click();
 
-        String url = "http://accounts.google.com/signin";
-        driver.get(url);
-        WebElement email_phone = driver.findElement(By.xpath("//input[@id='identifierId']"));
-        email_phone.sendKeys("palipoor976");
-        driver.findElement(By.id("identifierNext")).click();
-        WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(password));
-        password.sendKeys("mardechini");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.findElement(By.id("passwordNext")).click();
-        driver.get("http://gmail.com");
-        List<WebElement> emails = driver.findElements(By.cssSelector("div.xT>div.y6>span>b"));
+		js.executeScript("window.scrollBy(0,5000)");
 
-        boolean isReceived = false;
-        for (WebElement emailsub : emails) {
-            if (emailsub.getText().equals(theSubject)) {
-                emailsub.click();
-                isReceived = true;
-            }
-        }
+		WebElement messageError = driver.findElement(By.name("message-error"));
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertTrue(messageError.isDisplayed());
+	}
 
-        assertTrue(isReceived);
-    }
+	@Test
+	@Order(order = 5)
+	public void everythingValidTest() {
+		theForm = driver.findElement(By.name("contact-form"));
 
-    @AfterClass
-    public static void tearDown() {
-        driver.close();
-    }
+		WebElement email = theForm.findElement(By.name("email"));
+		GeneralReusables.waitForSeconds(2);
+		email.clear();
+		email.sendKeys("palipoor976@gmail.com");
+
+		WebElement name = theForm.findElement(By.name("name"));
+		name.clear();
+		name.sendKeys("تست نام");
+
+		WebElement subject = theForm.findElement(By.name("subject"));
+		subject.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		theSubject = "test_subject_" + currentTimeString;
+		subject.sendKeys(theSubject);
+
+		WebElement content = theForm.findElement(By.name("message"));
+		content.clear();
+		content.sendKeys("my message");
+
+		WebElement sendButton = theForm.findElement(By.name("contact_form"));
+		sendButton.click();
+
+		js.executeScript("window.scrollBy(0,5000)");
+
+		WebElement successMessage = driver.findElement(By.name("success"));
+		assertFalse(successMessage.getText().equals(""));
+	}
+
+	@Test
+	@Order(order = 6)
+	public void isReceivedTest() {
+
+		String url = "http://accounts.google.com/signin";
+		driver.get(url);
+		WebElement email_phone = driver.findElement(By.xpath("//input[@id='identifierId']"));
+		email_phone.sendKeys("palipoor976");
+		driver.findElement(By.name("identifierNext")).click();
+		WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(password));
+		password.sendKeys("mardechini");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		driver.findElement(By.id("passwordNext")).click();
+		driver.get("http://gmail.com");
+		List<WebElement> emails = driver.findElements(By.cssSelector("div.xT>div.y6>span>b"));
+
+		boolean isReceived = false;
+		for (WebElement emailsub : emails) {
+			if (emailsub.getText().equals(theSubject)) {
+				emailsub.click();
+				isReceived = true;
+			}
+		}
+
+		assertTrue(isReceived);
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		driver.close();
+	}
 }

@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -25,17 +26,19 @@ public class History {
         GeneralReusables.setUpToHomepage(driver);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1500)");
-        GeneralReusables.waitForSeconds(5);
-        WebElement history = driver.findElement(By.name("history"));
+		GeneralReusables.waitForSeconds(3);
+		WebElement history = driver.findElement(By.name("history"));
         history.click();
-    }
+		GeneralReusables.waitForSeconds(1);
+	}
 
     @Test
     public void containsText() {
         WebElement title = driver.findElement(By.name("history-header"));
         WebElement content = driver.findElement(By.name("history-content"));
-        assertTrue(!title.getText().equals(""));
-        assertTrue(!content.getText().equals(""));
+		System.out.printf(content.getText());
+		assertFalse(title.getText().equals(""));
+        assertFalse(content.getText().equals(""));
     }
 
     @AfterClass
