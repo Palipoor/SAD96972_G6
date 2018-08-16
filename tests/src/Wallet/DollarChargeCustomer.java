@@ -27,14 +27,8 @@ public class DollarChargeCustomer {
     }
 
     @Test
-    public void preConditionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, WalletUsersReusables.reusableStrings.get("dollar-wallet-title"));
-    }
-
-    @Test
     public void conversionTest() {// مبلغی که نشون می‌ده برابر با مبلغ وارد شده ضربدر قیمت دلار باشه.
-        WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
+        WebElement desiredAmount = driver.findElement(By.name("amount"));
         desiredAmount.sendKeys(amount);
         double dollarPrice = GeneralReusables.getPrice("dollar");
         double rial = dollarPrice * Double.valueOf(amount);
@@ -46,7 +40,12 @@ public class DollarChargeCustomer {
     @Test
     public void decreaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
         double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        WebElement chargeButton = driver.findElement(By.name("charge-button"));
+		WebElement desiredAmount = driver.findElement(By.name("amount"));
+		desiredAmount.clear();
+		desiredAmount.sendKeys(amount);
+		double dollarPrice = GeneralReusables.getPrice("dollar");
+		double rial = dollarPrice * Double.valueOf(amount);
+		WebElement chargeButton = driver.findElement(By.name("charge-button"));
         WebElement rialAmount = driver.findElement(By.name("rial-amount"));
         double shownRial = Double.valueOf(rialAmount.getText());
         chargeButton.click();
@@ -66,13 +65,13 @@ public class DollarChargeCustomer {
 
     @Test
     public void invalidDecreaseTest() {
-        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double decreaseAmount = Math.round((rialCredit + 2) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
-        WebElement desiredAmount = driver.findElement(By.name("desired-amount"));
+        int rialCredit = (int) WalletUsersReusables.getWalletCredit(driver, "rial");
+        int decreaseAmount = Math.round((rialCredit + 20000) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
+        WebElement desiredAmount = driver.findElement(By.name("amount"));
         desiredAmount.sendKeys(String.valueOf(decreaseAmount));
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
-        WebElement errorMessage = driver.findElement(By.name("error"));
+        WebElement errorMessage = driver.findElement(By.name("amount-error"));
         assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));// ارور خالی نباشد!
     }
 

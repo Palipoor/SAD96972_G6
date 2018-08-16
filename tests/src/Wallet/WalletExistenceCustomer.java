@@ -26,11 +26,6 @@ public class WalletExistenceCustomer {
         GeneralReusables.loginAsACustomer(driver);
     }
 
-    @Test
-    public void preConditionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
-    }
 
     @Test
     public void rialWalletExistenceTest() {

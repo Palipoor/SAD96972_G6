@@ -29,12 +29,6 @@ public class WalletExistenceManager {
     }
 
     @Test
-    public void preConditionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
-    }
-
-    @Test
     public void rialWalletExistenceTest() {
         List<WebElement> rialWallets = driver.findElements(By.name("rial-wallet"));
         assertNotEquals(rialWallets.size(), 0);// exists such element in the page

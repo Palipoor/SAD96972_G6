@@ -2,6 +2,7 @@ package Wallet;
 
 import Reusables.GeneralReusables;
 import Reusables.WalletUsersReusables;
+import org.apache.xalan.xsltc.util.IntegerArray;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,20 +29,14 @@ public class RialChargeCustomer {
     }
 
     @Test
-    public void preCondtionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, WalletUsersReusables.reusableStrings.get("rial-wallet-title"));
-    }
-
-    @Test
     public void rialWalletCharge() {
-        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        WebElement amountBox = driver.findElement(By.name("desired-amount"));
+        int rialCredit = Integer.valueOf(driver.findElement(By.name("credit")).getText());
+        WebElement amountBox = driver.findElement(By.name("amount"));
         amountBox.sendKeys("10000");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
-        double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double charged = newRialCredit - rialCredit;
+		int newRialCredit = Integer.valueOf(driver.findElement(By.name("credit")).getText());
+        int charged = newRialCredit - rialCredit;
         assertEquals(charged, 10000.0, GeneralReusables.delta); // oon ghadri ke lazeme charge shode bashe
     }
 
