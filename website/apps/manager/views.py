@@ -77,26 +77,64 @@ class CustomersListView(IsLoggedInView, IsManager, FormView):
         return Customer.objects.all()
 
 
-class EmployeeListView(IsLoggedInView, IsManager, MultiFormsView):
+class EmployeeListView(IsLoggedInView, IsManager, FormView):
+    add_employee_form_class = EmployeeCreationForm
+    remove_access_form_class = EmployeeAccessRemovalForm
+    change_salary_form_class = ChangeSalaryForm
+    form_class = add_employee_form_class
     template_name = "manager/users.html"
-    form_classes = {'add_employee': EmployeeCreationForm, 'remove_access': EmployeeAccessRemovalForm,
-                    'change_salary': ChangeSalaryForm}
-
+    
     def get_context_data(self, **kwargs):
         context = super(EmployeeListView, self).get_context_data(**kwargs)
-        context['type'] = "کارمند"
-        context['object_list'] = Employee.objects.all()
+        if 'add_employee_form' not in context:
+            context['add_employee_form'] = self.add_employee_form_class()
+        if 'remove_access_form' not in context:
+            context['remove_access_form'] = self.remove_access_form_class()
+        if 'change_salary_form' not in context:
+            context['change_salary_form'] = self.change_salary_form_class()
+        context.update({'type': 'کارمند'})
+        context.update({'object_list': Employee.objects.all()})        
         return context
+
+    def post(self, request, *args, **kwargs):
+        if 'add_employee_form' in request.POST:
+            form_class = self.add_employee_form_class
+            form_name = 'add_employee_form'
+        elif 'remove_access_form' in request.POST:
+            form_class = self.remove_access_form_class
+            form_name = 'remove_access_form'
+        else:
+            form_class = self.change_salary_form_class
+            form_name = 'change_salary_form'
+
+        form = self.get_form(form_class)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(**{form_name: form})    
+
+    def form_valid(self, form):
+        if isinstance(form, EmployeeCreationForm):
+            return self.add_employee_form_valid(form)
+        elif isinstance(form, EmployeeAccessRemovalForm):
+            return self.remove_access_form_valid(form)
+        else:
+            return self.change_salary_form_valid(form)
 
     def add_employee_form_valid(self, form):
         new_user = Employee(username=form.cleaned_data['username'],
                             persian_first_name=form.cleaned_data["persian_first_name"],
                             persian_last_name=form.cleaned_data["persian_last_name"],
-                            current_salary=form.cleaned_data['current_salary'])
+                            current_salary=form.cleaned_data['current_salary'], 
+                            first_name = form.cleaned_data['first_name'],
+                            last_name = form.cleaned_data['last_name'], 
+                            email = form.cleaned_data['email'])
         new_user.set_password("someRandomPassword")  # todo generate random
         new_user.save()
         new_form = EmployeeCreationForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
+        name = form.cleaned_data['persian_first_name'] + ' ' + form.cleaned_data['persian_last_name']
+        context.update({'add_success' : name + ' با موفقیت به کارمندان اضافه شد.' })
         return self.render_to_response(context)
 
     def change_salary_form_valid(self, form):
@@ -105,6 +143,7 @@ class EmployeeListView(IsLoggedInView, IsManager, MultiFormsView):
         the_employee.save()
         new_form = ChangeSalaryForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
+        context.update({'change_success' : 'حقوق کارمند مورد نظر تغییر کرد.' })
         return self.render_to_response(context)
 
     def remove_access_form_valid(self, form):
@@ -113,4 +152,8 @@ class EmployeeListView(IsLoggedInView, IsManager, MultiFormsView):
         the_employee.save()
         new_form = EmployeeAccessRemovalForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
+        context.update({'remove_success' : 'دسترسی کارمند مورد نظر از سامانه قطع شد.'})
         return self.render_to_response(context)
+
+    def form_invalid(self, **kwargs):
+        return self.render_to_response(self.get_context_data(**kwargs))

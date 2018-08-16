@@ -28,11 +28,20 @@
                 <div class="box-body">
                     <table id="table" class="table table-bordered table-striped" name="customers-table">
                         <thead>
-                        <tr>
-                            <th>نام کاربری {{type }}</th>
-                            <th>نام خانوادگی</th>
-                            <th>نام</th>
-                        </tr>
+                        {%if type == 'مشتری'%}
+                                <tr>
+                                    <th>نام کاربری {{type }}</th>
+                                    <th>نام خانوادگی</th>
+                                    <th>نام</th>
+                                </tr>
+                        {% else %}
+                                <tr>
+                                    <th>نام کاربری {{type }}</th>
+                                    <th>نام خانوادگی</th>
+                                    <th>نام</th>
+                                    <th>حقوق</th>
+                                </tr>
+                        {% endif %}
                         </thead>
                         <tbody>
                         {%if type == 'مشتری'%}
@@ -49,16 +58,26 @@
                             <td><a href={{user.username}}+"_employee_details.html">{{user.username}}</a></td>
                             <td>{{user.persian_last_name}}</td>
                             <td>{{user.persian_first_name}}</td>
+                            <td>{{user.current_salary}}</td>
                         </tr>
                         {%endfor%}
                         {%endif%}
                         </tbody>
                         <tfoot>
+                        {%if type == 'مشتری'%}
                         <tr>
                             <th>نام کاربری {{type }}</th>
                             <th>نام خانوادگی</th>
                             <th>نام</th>
                         </tr>
+                        {% else %}
+                        <tr>
+                            <th>نام کاربری {{type }}</th>
+                            <th>نام خانوادگی</th>
+                            <th>نام</th>
+                            <th>حقوق</th>
+                        </tr>
+                        {% endif %}
                         </tfoot>
                     </table>
                 </div>
@@ -80,30 +99,32 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <form class="form-horizontal" method="POST">
-                        {% csrf_token %}
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="username" class="col-sm-2 control-label">نام کاربری</label>
-                                <div class="col-sm-6">
-                                    {% render_field form.username class="form-control" placeholder=form.username.label id="username"  name="username"%}
+                            {% csrf_token %}
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="username" class="col-sm-2 control-label">نام کاربری</label>
+                                    <div class="col-sm-6">
+                                        {{form.username}}
+                                        {% for error in form.username.errors %}
+                                        <span class="text-danger" name="username-error-remove-salary">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="why" class="col-sm-2 control-label">توضیح</label>
+                                    <div class="col-sm-6">
+                                    {{form.reason}}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="why" class="col-sm-2 control-label">توضیح</label>
-                                <div class="col-sm-6">
-                                    {% render_field form.reason class="form-control" placeholder=form.reason.label id="why"  name="why"%}
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="submit" name = "remove_access_form" value="remove_access" class="btn btn-info pull-right">قطع دسترسی</button>
+                                <div class="col-md-5">
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" name="action" value="access_removal" class="btn btn-info pull-right">قطع دسترسی</button>
-                            <div class="col-md-5">
-                                <p name="error-message-1">این جا پیام خطا می‌آید.</p>
-                            </div>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
+                            <!-- /.box-footer -->
+                        </form>
                 </div>
             </div>
         </div>
@@ -124,21 +145,23 @@
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">نام کاربری</label>
                             <div class="col-sm-6">
-                                {% render_field forms.remove_access.username class="form-control" placeholder=forms.remove_access.username.label id="username"  name="username"%}
+                                {{remove_access_form.username}}
+                                {% for error in remove_access_form.username.errors %}
+                                <span class="text-danger" name="username-error-remove-salary">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="why" class="col-sm-2 control-label">توضیح</label>
                             <div class="col-sm-6">
-                                {% render_field forms.remove_access.reason class="form-control" placeholder=forms.remove_access.reason.label id="why"  name="why"%}
+                            {{remove_access_form.reason}}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" name = "action" value="remove_access" class="btn btn-info pull-right">قطع دسترسی</button>
+                        <button type="submit" name = "remove_access_form" value="remove_access" class="btn btn-info pull-right">قطع دسترسی</button>
                         <div class="col-md-5">
-                            <p name="message">این جا پیام خطا می‌آید.</p>
                         </div>
                     </div>
                     <!-- /.box-footer -->
@@ -154,23 +177,29 @@
                     {% csrf_token %}
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="username-2" class="col-sm-2 control-label">نام کاربری کارمند</label>
+                            <label for="username" class="col-sm-2 control-label">نام کاربری کارمند</label>
                             <div class="col-sm-6">
-                                {% render_field forms.change_salary.username class="form-control" placeholder=forms.change_salary.username.label id="username-2"  name="username"%}
+                                {{change_salary_form.username}}
+                                {% for error in change_salary_form.username.errors %}
+                                <span class="text-danger" name="username-error-change-salary">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="new-salary" class="col-sm-2 control-label">حقوق جدید</label>
+                            <label for="current_salary" class="col-sm-2 control-label">حقوق جدید</label>
                             <div class="col-sm-6">
-                                {% render_field forms.change_salary.current_salary class="form-control" placeholder=forms.change_salary.current_salary.label id="new-salary" name="salary" %}
+                                {{change_salary_form.current_salary}}
+                                {% for error in change_salary_form.current_salary.errors %}
+                                <span class="text-danger" name="current-salary-error">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right" name = "action" value="change_salary" id="set-button">تغییر حقوق</button>
+                        <button type="submit" class="btn btn-info pull-right" name = "change_salary_form" value="change_salary" id="set-button">تغییر حقوق</button>
+                        <span name="success" >{{ change_success }}</span>
                         <div class="col-md-5">
-                            <p name="message">این جا پیام خطا می‌آید.</p>
                         </div>
                     </div>
                     <!-- /.box-footer -->
@@ -188,37 +217,75 @@
                 <form class="form-horizontal" method="POST">
                     {% csrf_token %}
                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="persian_first_name" class="col-sm-2 control-label">نام به فارسی</label>
+                        <div class = "form-group">
+                            <label for="persian_first_name" class="col-md-3 control-label">نام به فارسی</label>
                             <div class="col-sm-6">
-                                {% render_field forms.add_employee.persian_first_name class="form-control" placeholder=forms.add_employee.persian_first_name.label id="persian_first_name" %}
+                                {{add_employee_form.persian_first_name}}
+                                {% for error in add_employee_form.persian_first_name.errors %}
+                                <span class="text-danger" name="persian-first-name-error">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="persian_last_name" class="col-sm-2 control-label">نام خانوادگی به فارسی</label>
+                        <div class = "form-group">
+                            <label for="persian_last_name" class="col-md-3 control-label">نام خانوادگی به فارسی</label>
                             <div class="col-sm-6">
-                                {% render_field forms.add_employee.persian_last_name class="form-control" placeholder=forms.add_employee.persian_last_name.label id="persian_last_name" %}
+                                {{add_employee_form.persian_last_name}}
+                                {% for error in add_employee_form.persian_last_name.errors %}
+                                <span class="text-danger" name="persian-last-name-error">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">نام کاربری</label>
+                        <div class = "form-group">
+                            <label for="first_name" class="col-md-3 control-label">نام به لاتین</label>
                             <div class="col-sm-6">
-                                {% render_field forms.add_employee.username class="form-control" placeholder=forms.add_employee.username.label id="username" %}
+                                {{add_employee_form.first_name}}
+                                {% for error in add_employee_form.first_name.errors %}
+                                <span class="text-danger" name="first-name-error">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="salary" class="col-sm-2 control-label">میزان حقوق</label>
+                        <div class = "form-group">
+                            <label for="last_name" class="col-md-3 control-label">نام خانوادگی به لاتین</label>
                             <div class="col-sm-6">
-                                {% render_field forms.add_employee.current_salary class="form-control" placeholder=forms.add_employee.current_salary.label id="salary" %}
+                                {{add_employee_form.last_name}}
+                                {% for error in add_employee_form.last_name.errors %}
+                                <span class="text-danger" name="last-name-error">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
+                        <div class = "form-group">
+                            <label for="username" class="col-md-3 control-label">نام کاربری</label>
+                            <div class="col-sm-6">
+                                {{add_employee_form.username}}
+                                {% for error in add_employee_form.username.errors %}
+                                <span class="text-danger" name="username-error">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <label for="salary" class="col-md-3 control-label">ایمیل</label>
+                            <div class="col-sm-6">
+                                {{add_employee_form.email}}
+                                {% for error in add_employee_form.email.errors %}
+                                <span class="text-danger" name="email-error">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                            <div class = "form-group">
+                            <label for="salary" class="col-md-3 control-label">میزان حقوق</label>
+                            <div class="col-sm-6">
+                                {{add_employee_form.current_salary}}
+                                {% for error in add_employee_form.current_salary.errors %}
+                                <span class="text-danger" name="salary-error">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" name="action"  value="add_employee" class="btn btn-info pull-right">افزودن</button>
-                        <div class="col-md-5">
-                            <p name="error">این جا پیام خطا می‌آید.</p>
-                        </div>
+                        <button type="submit" name="add_employee_form"  value="add_employee" class="btn btn-info pull-right">افزودن</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>

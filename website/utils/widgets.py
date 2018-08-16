@@ -17,4 +17,4 @@ URL = forms.TextInput(attrs={'name': 'url', 'class': 'form-control', 'class': 'f
 FILE = forms.FileInput(attrs={'name': 'file', 'class': 'form-control', 'class': 'form-control'})
 ACCOUNT_NUMBER = forms.TextInput(attrs={'name': 'account-number', 'class': 'form-control', 'placeholder': 'شماره حساب'})
 
-AMOUNT = forms.TextInput(attrs={'name': 'desired-amount', 'class': 'form-control'})
+AMOUNT = forms.TextInput(attrs={'name': 'desired-amount', 'class': 'form-control', 'id' : 'amount'})

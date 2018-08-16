@@ -12,13 +12,6 @@ class GenUser(User):
         (1, 'Employee'),
         (2, 'Manager'),
     )
-    '''username = models.CharField(max_length=100, primary_key=True)
-    password = models.CharField(max_length=50)
-    email = models.EmailField(max_length=70, unique=True, null=False)'''
-    # are email and username unique in Django User? fix if they are not.
-    # photo = models.ImageField()   imagefiled needs something before makemigration
-    '''english_first_name = models.CharField(max_length=50)
-    english_last_name = models.CharField(max_length=50)'''
     persian_first_name = models.CharField(max_length=50, blank=True)
     persian_last_name = models.CharField(max_length=50, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
@@ -26,9 +19,6 @@ class GenUser(User):
 
     def exception_texts(self):
         return []
-    # online = models.BooleanField(default=True)
-    # active = models.BooleanField(default=True)
-
 
 class Wallet_User(GenUser):
     rial_credit = models.FloatField(default=0)
@@ -48,20 +38,8 @@ class Wallet_User(GenUser):
 
 
 class Notification(models.Model):
-    statuses = (
-        (0, 'seen'),
-        (1, 'unseen'),
-    )
-    types = (
-        (0, 'message'),
-        (1, 'blah'),
-        (2, 'blah  blah'),
-    )
-    # todo handle correct types
     user = models.ForeignKey('GenUser', on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
-    type = models.IntegerField(choices=types)
-    status = models.IntegerField(choices=statuses)
 
 
 class WalletChange(models.Model):

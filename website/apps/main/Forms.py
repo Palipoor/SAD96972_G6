@@ -74,7 +74,7 @@ class SignUpForm(forms.Form):
 class WalletChargeForm(forms.Form):
     # form for charging wallets
     amount = forms.IntegerField(min_value=1, label='مبلغ درخواستی',
-                                widget=forms.widgets.TextInput(attrs={'name': 'desired-amount'}))
+                                widget=forms.widgets.TextInput(attrs={'name': 'desired-amount', 'oninput':'calculate()'}))
 
     # TODO make exchanging from each wallet possible. make real rial charge possible.
     def __init__(self, *args, **kwargs):

@@ -1,6 +1,7 @@
 import random
 from django import forms
-
+from utils import fields
+from utils.strings import *
 from apps.customer.models import Customer
 from apps.employee.models import Employee
 from django.db.models import AutoField
@@ -13,60 +14,53 @@ class EmployeeCreationForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = ['username', 'current_salary', 'email', 'persian_first_name',
-                  'persian_last_name']  # todo add this to tests.
+                  'persian_last_name', 'first_name', 'last_name']  # todo add this to tests.
 
-    def is_valid(self):
-        valid = super(EmployeeCreationForm, self).is_valid()
-        if not valid:
-            return False
+    username = fields.USERNAME
+    first_name = fields.FIRST_NAME
+    last_name = fields.LAST_NAME
+    persian_first_name = fields.PERSIAN_FIRST_NAME
+    persian_last_name = fields.PERSIAN_LAST_NAME
+    email = fields.EMAIL
+    current_salary = forms.IntegerField(required=True,  error_messages={'required': FIELD_REQUIRED} , widget = forms.NumberInput(attrs = {'class':'form-control'}))
 
+    def clean_username(self):
         if GenUser.objects.filter(username=self.cleaned_data['username']).exists():
-            self.errors['username'] = 'کاربری با این نام کاربری وجود دارد'
-            return False
+            raise forms.ValidationError(REPEATED_USER)
+        return self.cleaned_data['username']
 
-        return True
+    def clean_email(self):
+        if GenUser.objects.filter(email=self.cleaned_data['email']).exists():
+            raise forms.ValidationError(REPEATED_USER)
+        return self.cleaned_data['email']
 
 
 class ChangeSalaryForm(forms.Form):
-    username = forms.CharField(max_length=100, required=True, label='نام کاربری')
-    current_salary = forms.FloatField(required=True, label='حقوق جدید')
+    username = fields.USERNAME
+    current_salary = forms.IntegerField(required=True,  error_messages={'required': FIELD_REQUIRED} , widget = forms.NumberInput(attrs = {'class':'form-control'}))
 
-    def is_valid(self):
-        valid = super(ChangeSalaryForm, self).is_valid()
-        if not valid:
-            return False
+    def clean_username(self):
         if not Employee.objects.filter(username=self.cleaned_data['username']).exists():
-            self.errors['username'] = 'چنین کارمندی وجود ندارد.'
-            return False
-
-        return True
-
-
+            raise forms.ValidationError("چنین کارمندی وجود ندارد.")
+        return self.cleaned_data['username']
+    
 class EmployeeAccessRemovalForm(forms.Form):
-    username = forms.CharField(max_length=100, required=True, label='نام کاربری')
-    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
+    username = fields.USERNAME
+    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea(attrs = {'class': 'form-control', 'placeholder': 'دلیل قطع دسترسی...'}))
 
-    def is_valid(self):
-        valid = super(EmployeeAccessRemovalForm, self).is_valid()
-        if not valid:
-            return False
+    def clean_username(self):
         if not Employee.objects.filter(username=self.cleaned_data['username']).exists():
-            self.errors['username'] = 'چنین کارمندی وجود ندارد.'
-            return False
+            raise forms.ValidationError("چنین کارمندی وجود ندارد.")
+        return self.cleaned_data['username']
+    
 
-        return True
 
 
 class CustomerAccessRemovalForm(forms.Form):
-    username = forms.CharField(max_length=100, required=True, label='نام کاربری')
-    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea)
+    username = fields.USERNAME
+    reason = forms.CharField(max_length=2000, label='دلیل قطع دسترسی', widget=forms.Textarea(attrs = {'class': 'form-control', 'placeholder': 'دلیل قطع دسترسی...'}))
 
-    def is_valid(self):
-        valid = super(CustomerAccessRemovalForm, self).is_valid()
-        if not valid:
-            return False
+    def clean_username(self):
         if not Customer.objects.filter(username=self.cleaned_data['username']).exists():
-            self.errors['username'] = 'چنین مشتری ای وجود ندارد'
-            return False
-
-        return True
+            raise forms.ValidationError("چنین مشتری‌ای وجود ندارد.")
+        return self.cleaned_data['username']

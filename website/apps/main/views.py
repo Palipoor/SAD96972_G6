@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -83,9 +84,10 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
         if (self.user_type == "customer"):
             context, user = Compilation.get_customer_context_data(context, self.request.user.username)
         else:
-            context, user = Compilation.get_manager_context_data(cotext, self.request.user.username)
+            context, user = Compilation.get_manager_context_data(context, self.request.user.username)
         context = Compilation.get_wallet_requests(context, self.request.user.username, Transactions.currency_to_num(self.kwargs['currency']))
         context['credit'] = context[self.kwargs['currency'] + "_credit"]
+        context.update({'dollar': 100000, 'euro': 10000})
         return context
 
     def get_form_kwargs(self):
@@ -116,9 +118,6 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
             return self.get(request, *args, **kwargs)
         else:
             return self.post(request, *args, **kwargs)
-
-            # todo form
-            # todo retrieve wallet credit and wallet transactions! give them as a context to render function!
 
     def form_valid(self, form):
         form.update_db()
@@ -230,12 +229,16 @@ class LandingPageView(FormView):
             subject = form.cleaned_data['subject']
             from_email = form.cleaned_data['email']
             message = form.cleaned_data['message']
+            success = False
             try:
                 send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
+                success = True
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
-            return HttpResponseRedirect("main/index.html")
+            if success:
+                context.update({'success' : 'پیام شما با موفقیت ارسال شد.'})
+            return render(self.request, 'main/index.html', context)
 
         else:
             prices = get_prices()

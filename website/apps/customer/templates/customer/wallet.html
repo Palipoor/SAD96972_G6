@@ -36,11 +36,11 @@
                             {{form.amount.label}}
                             {{form.amount}}
                             {% for error in form.amount.errors%}
-                                <span class = "text-danger">{{error}}</span>
+                                <span class = "text-danger" name = "amount-error">{{error}}</span>
                             {% endfor %}
                             <div class="column">
                                 <small>معادل</small>
-                                <small name="rial-amount">10000</small>
+                                <small name="rial-amount" id = "rial"></small>
                                 <small>ریال</small>
                             </div>
                         </div>
@@ -48,7 +48,6 @@
                             <div class="col-md-1">
                                 <button type="submit" class="btn btn-primary" name="charge-button">پرداخت و شارژ</button>
                             </div>
-                            <small name="error">error</small>
                             <div class="col-md-3"></div>
                         </div>
                     </form>
@@ -132,6 +131,14 @@
 </div>
 
 </div><!-- /.row (main row) -->
-
+<script>
+    function calculate() {
+        var amount = document.getElementById('id_amount').value; 
+        var theResult = amount * 10000;
+        var rial = document.getElementById('rial'); 
+        rial.innerHTML = theResult;
+    }
+</script>
+        
 </section><!-- /.content -->
 {% endblock main_content %}
