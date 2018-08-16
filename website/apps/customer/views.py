@@ -8,10 +8,11 @@ import os
 from django.views.generic.edit import FormView
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView
 from apps.main.views import IsLoggedInView, IsCustomer
-from apps.customer.models import Customer
+from apps.customer.models import Customer, Request
 from views import Compilation
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic.detail import DetailView
 from apps.customer.Forms import CustomerSettingsForm
 from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
@@ -59,6 +60,23 @@ class ReverseChargeCreationView(TransactionCreationView):
     class Meta:
         model = InternalTrans
         # todo incomplete
+
+
+class TransactionDetailsView(DetailView):
+    template_name = "customer/transaction_details.html"
+    mdoel = Request
+    # queryset = Request.objects.all()
+
+    def get_queryset(self):
+        # """Return the last five published questions."""
+        return Request.objects.filter(id=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        temp = super().get_context_data(**kwargs)
+        print(temp)
+        print(temp['foreigntrans'])
+        temp['type'] = temp['foreigntrans']._meta.model_name
+        return(temp)
 
 
 class ForeignPaymentCreationView(TransactionCreationView):

@@ -23,6 +23,12 @@ class Transactions:
         (4, 'reported'),
     )
 
+    request_types_for_review_json = (
+        (0, 'accepted'),
+        (1, 'rejected'),
+        (4, 'reported'),
+    )
+
     exhchange_matrix = [[1, 0.01, 0.01],
                         [100, 1, 1],
                         [100, 1, 1, ]]

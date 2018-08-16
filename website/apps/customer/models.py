@@ -29,7 +29,7 @@ class Request(PolymorphicModel):
     # all financial transactions are children of this.
     statuses = Transactions.request_types_json
     currencies = Transactions.num_to_currency_json.items()
-    # all users can be null which means the dont exists and therefore can be ignored.
+    # all users can be Nonewhich means the dont exists and therefore can be ignored.
     # who pays
     source_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='source_user', null=True, blank=True)
     source_wallet = models.IntegerField(choices=currencies, default=0, blank=True)
@@ -51,6 +51,7 @@ class Request(PolymorphicModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.excps = []
         if (not self.exchange_rate):
             self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
         # print('in iniit')
@@ -82,19 +83,23 @@ class Request(PolymorphicModel):
             reject.save()
             # sets the status to rejected
             self.status = 1
-        return null
+        else:
+            self.excps += ['تراکنش در شرایطی که بتواند رد شود نیست.']
+        return None
 
     def accept(self):
         # only works if the current status is pending or reported
-        if (self.status == 2 or self.status == 4):
-            self.status = 0
-        return null
+        if (not self.status == 2 and not self.status == 4):
+            self.excps += ['تراکنش در شرایطی که بتواند تایید شود نیست.']
+        self.status = 0
+        return None
 
     def report(self):
         # only works if the current status is pending
-        if (self.status == 2):
-            self.status = 4
-        return null
+        if (not self.status == 2):
+            self.excps += ['تراکنش در شرایطی که بتواند گزارش شود نیست.']
+        self.status = 4
+        return None
 
     def fail(self):
         # only works if the current status is pending
@@ -102,7 +107,9 @@ class Request(PolymorphicModel):
             reject = self.create_reverse_request()
             reject.save()
             self.status = 3
-        return null
+        else:
+            self.excps += ['تراکنش در شرایطی که بتواند فیل شود نیست.']
+        return None
 
     def set_status(self):
         # for determining default status of request. Default status is pending.
@@ -148,23 +155,22 @@ class Request(PolymorphicModel):
             print(traceback.format_exc())
 
     def exception_texts(self):
-        excps = []
         try:
-            excps += self.source_user.exception_texts()
+            self.excps += self.source_user.exception_texts()
             print('source user')
         except Exception:
             print(traceback.format_exc())
         try:
-            excps += self.dest_user.exception_texts()
+            self.excps += self.dest_user.exception_texts()
             print('source user')
         except Exception:
             print(traceback.format_exc())
         try:
-            excps += self.final_user.exception_texts()
+            self.excps += self.final_user.exception_texts()
             print('source user')
         except Exception:
             print(traceback.format_exc())
-        return excps
+        return self.excps
 
     def create_reverse_request(self):
         # created the transaction for rejecting current transaction.

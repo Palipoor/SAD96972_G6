@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apps.employee.views import EmployeePasswordChangeView, EmployeeSettingsView, EmployeeDashboardView, dashboard
-from apps.main.views import TransactionDetailsView, CustomerDetailsView, NotificationsView
+from apps.employee.views import EmployeePasswordChangeView, TransactionDetailsView, EmployeeSettingsView, EmployeeDashboardView, EmployeeDashboardView
+from apps.main.views import CustomerDetailsView, NotificationsView
 
 urlpatterns = [
-    path('dashboard', dashboard, name='dashboard'),
+    path('dashboard', EmployeeDashboardView.as_view(), name='dashboard'),
     path('change_password', EmployeePasswordChangeView.as_view(), name='change_password'),
     path('settings', EmployeeSettingsView.as_view(), name='settings'),
-    path('<transaction_id>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
+    path('<pk>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('settings/', EmployeeSettingsView.as_view(), name='settings'),  # todo do ta azin hast :-s
     path('<user_id>_customer_details/', CustomerDetailsView.as_view(), name='customer_details'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),

@@ -1,5 +1,6 @@
 from apps.customer.models import Customer
 from apps.main.models import GenUser
+from apps.employee.models import Employee
 from apps.manager.models import Manager
 from apps.customer.models import Request
 
@@ -12,6 +13,12 @@ class Compilation():
             context['euro_credit'] = customer.euro_cent_credit / 100
             context['dollar_credit'] = customer.dollar_cent_credit / 100
             context['rial_credit'] = customer.rial_credit
+        return context
+
+    @staticmethod
+    def employee_context(context, employee):
+        if(employee):
+            Compilation.user_context(context, employee)
         return context
 
     @staticmethod
@@ -36,6 +43,12 @@ class Compilation():
         return (Compilation.manager_context(context, manager), manager)
 
     @staticmethod
+    def get_employee_context_data(context, username):
+        # returns context and customer
+        employee = Employee.objects.filter(username=username).first()
+        return (Compilation.employee_context(context, employee), employee)
+
+    @staticmethod
     def get_customer_context_data(context, username):
         # returns context and customer
         customer = Customer.objects.filter(username=username).first()
@@ -53,4 +66,9 @@ class Compilation():
             context['requests'] = Request.objects.filter(source_user=customer) | Request.objects.filter(dest_user=customer)
         else:
             context['requests'] = Request.objects.filter(source_user=customer, source_wallet=wallet) | Request.objects.filter(dest_user=customer, dest_wallet=wallet)
+        return context
+
+    def get_all_requests(context):
+        # get requests regarding a wallet of the user. if wallet equals -1 all wallets are used.
+        context['requests'] = Request.objects.all()
         return context

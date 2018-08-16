@@ -41,16 +41,25 @@ class EmployeeReview(models.Model):
     employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
     new_status = models.IntegerField(choices=statuses, null=False, default=0)
 
+    def __init__(self, *args, **kwargs):
+        temp = super().__init__(*args, **kwargs)
+        if self.new_status == 0:
+            self.request.accept()
+        if self.new_status == 1:
+            self.request.reject()
+        if self.new_status == 3:
+            self.request.fail()
+        if self.new_status == 4:
+            self.request.report()
+        return temp
+
     def save(self, *args, **kwargs):
         # TODO cover all scenarios
-        if self.new_status == 1 and self.request.status == 2:
-            self.request.reject()
-        if self.new_status == 0 and self.request.status == 2:
-            self.request.accept()
-        if self.new_status == 4 and self.request.status == 2:
-            self.request.report()
         self.request.save()
         super(EmployeeReview, self).save(*args, **kwargs)
+
+    def exception_texts(self):
+        return self.request.exception_texts()
 
 
 class Salary(models.Model):
