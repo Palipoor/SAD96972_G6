@@ -35,6 +35,9 @@
                         <div class="form-group">
                             {{form.amount.label}}
                             {{form.amount}}
+                            {% for error in form.amount.errors%}
+                                <span class = "text-danger">{{error}}</span>
+                            {% endfor %}
                             <div class="column">
                                 <small>معادل</small>
                                 <small name="rial-amount">10000</small>
