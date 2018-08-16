@@ -36,6 +36,7 @@ public class GeneralReusables {
 		reusableStrings.put("invalid-username-error", "نام کاربری وارد شده معتبر نیست. لطفا فقط از حروف انگلیسی، اعداد و علامت ـ استفاده کنید.");
 		reusableStrings.put("invalid-email-error", "لطفا یک ایمیل معتبر وارد کنید.");
 		reusableStrings.put("invalid-first-name-error", "لطفا فقط از حروف انگلیسی و فاصله استفاده کنید.");
+		reusableStrings.put("invalid-persian-name-error", "لطفا فقط از حروف فارسی و فاصله استفاده کنید.");
 		reusableStrings.put("invalid-family-name-error", "لطفا فقط از حروف انگلیسی و فاصله استفاده کنید.");
 		reusableStrings.put("invalid-phone-number-error", "شماره تلفن وارد شده معتبر نیست");
 		reusableStrings.put("invalid-account-number-error", "شماره حساب وارد شده معتبر نیست");
@@ -48,6 +49,7 @@ public class GeneralReusables {
 		reusableStrings.put("username-exists", "کاربری با این مشخصات وجود دارد.");
 		reusableStrings.put("request-status", "شرایط درخواست");
 		reusableStrings.put("successfully-sent", "با موفقیت ارسال شد.");
+		reusableStrings.put("homepage","http://127.0.0.1:8000");
 	}
 
 	public static void setUpToHomepage(WebDriver driver) {
@@ -56,48 +58,34 @@ public class GeneralReusables {
 		driver.get(homePageAddress);
 	}
 
-	public static void login(WebDriver homepage, String email, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
+	public static void login(WebDriver homepage, String username, String password) {// درایور را در هوم پیج می‌گیرد و لاگین می‌کند با مشخصات مربوط.
 		GeneralReusables.setUpToHomepage(homepage);
-		// Go to Sign up page
-		String linkToOpen = homepage.findElement(By.name("log in")).getAttribute("href");
+		String linkToOpen = reusableStrings.get("homepage") + "/login";
 		homepage.get(linkToOpen);
-		WebElement emailField = homepage.findElement(By.name("email"));
-		emailField.sendKeys(email);
+		WebElement emailField = homepage.findElement(By.name("username"));
+		emailField.sendKeys(username);
 		WebElement passwordField = homepage.findElement(By.name("password"));
-		emailField.sendKeys(password);
+		passwordField.sendKeys(password);
 
 		WebElement finalButton = homepage.findElement(By.name("log in button"));
 		finalButton.click();
 	}
 
 	public static void loginAsACustomer(WebDriver homepage) {
-		homepage.navigate().to("http://127.0.0.1:8000/customer/dashboard");
-//        String email = ProfileReusables.email1;
-//        String password = ProfileReusables.password1;
-//        login(homepage, email, password);
+        login(homepage, "customer", "customercustomer");
 	}
 
 	public static void loginAsTheManager(WebDriver homepage) {
-		homepage.navigate().to("http://127.0.0.1:8000/manager/dashboard");
-//        String email = "customerEmail";
-//        String password = "customerPassword";
-//        login(homepage, email, password);
+        login(homepage, "manager", "managermanager");
 	}
 
 	public static String loginAsAnEmployee(WebDriver homepage) {
-		homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
-//        String email = "customerEmail";
-//        String password = "customerPassword";
-//        login(homepage, email, password);
-//        return getUsername(homepage);
+        login(homepage, "employee", "employeeemployee");
 		return getUsername(homepage);
 	}
 
 	public static void loginAsAnEmployeeWithoutName(WebDriver homepage) {
-		homepage.navigate().to("http://127.0.0.1:8000/employee/dashboard");
-//        String email = "customerEmail";
-//        String password = "customerPassword";
-//        login(homepage, email, password);
+		login(homepage, "employee", "employeeemployee");
 	}
 
 	public static String getUsername(WebDriver panel) {

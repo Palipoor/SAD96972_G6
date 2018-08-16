@@ -19,32 +19,30 @@ import static org.junit.Assert.assertEquals;
  * Created by Golpar on 4/13/2018 AD.
  */
 public class SeeProfileCustomer {
-    static WebDriver driver;
+	static WebDriver driver;
 
 
-    @BeforeClass
-    public static void setUp() {
-        driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-        driver.findElement(By.name("profile-list")).click();
-        driver.findElement(By.name("profile-view")).click();
+	@BeforeClass
+	public static void setUp() {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		GeneralReusables.setUpToHomepage(driver);
+		GeneralReusables.loginAsACustomer(driver);
+		driver.findElement(By.name("profile-list")).click();
+		driver.findElement(By.name("profile-view")).click();
 
+	}
 
+	@Test
+	public void userDetailsExistence() {
+		String title = driver.getTitle();
+		assertEquals(title, ProfileReusables.reusableStrings.get("user-details-title"));
+	}
 
-    }
-
-    @Test
-    public void userDetailsExistence() {
-        String title = driver.getTitle();
-        assertEquals(title, ProfileReusables.reusableStrings.get("user-details-title"));
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        GeneralReusables.logout(driver);
-    }
+	@AfterClass
+	public static void tearDown() {
+		GeneralReusables.logout(driver);
+	}
 
 
 }
