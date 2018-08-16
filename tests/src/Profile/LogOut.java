@@ -27,11 +27,6 @@ public class LogOut {
         GeneralReusables.loginAsACustomer(driver);
     }
 
-    @Test
-    public void preConditionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("panel-title"));
-    }
 
     @Test
     public void signOut() {
@@ -41,10 +36,8 @@ public class LogOut {
         WebElement logoutButton = driver.findElement(By.name("logout"));
         logoutButton.click();
 
-       //TODO: finally, how to check?
-
-
-
+		GeneralReusables.waitForSeconds(1);
+		assertEquals(driver.getCurrentUrl(),GeneralReusables.reusableStrings.get("homepage") + "/");
     }
 
 
