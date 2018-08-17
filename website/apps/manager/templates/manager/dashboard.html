@@ -58,6 +58,9 @@
   <!-- ./col -->
 </div>
 <!-- /.row -->
+
+
+{% comment %}
 <!-- Main row -->
 <div class="row">
   <!-- Left col -->
@@ -121,14 +124,14 @@
         </table>
       </div>
       <!-- /.box-body -->
-    </div>
+    </div> 
     <!-- /.box -->
 
     <!-- /.table-responsive -->
   </div>
   <!-- /.box-body -->
 </div>
-
+{% endcomment %}
 <div class="row">
   <div class="col-xs-14">
     <div class="box">
@@ -149,91 +152,18 @@
             </tr>
           </thead>
           <tbody>
+            {% for req in requests %}
             <tr>
               <td>
-                <a href='{% static "panel/pages/manager/transaction_details.html" %}'>921112</a>
+                <a href="{{req.id}}_transaction_details">{{req.id}}</a>
               </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
+              <td></td>
+              <td>{{req.request_time}}</td>
+              <td></td>
+              <td>{{req.amount}}</td>
+              <td>{{req.status}}</td>
             </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/manager/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/manager/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/manager/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/manager/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-danger">کنسل شده</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href='{% static "panel/pages/manager/transaction_details.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>blah</td>
-              <td>
-                <a href='{% static "panel/pages/manager/customer_details_for_manager.html" %}'>921112</a>
-              </td>
-              <td>blah</td>
-              <td>
-                <span class="label label-success">تایید</span>
-              </td>
-            </tr>
-
+            {% endfor %}
           </tbody>
           <tfoot>
             <tr>
@@ -255,7 +185,52 @@
 </div>
 <!-- /.row -->
 
+<div class="row">
+  <div class="col-md-8">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">گزارش خطا در تراکنش‌ها</h3>
+        {% for error in form.non_field_errors %}
+        <span class="text-danger" name="first-name-error">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form class="form-horizontal" method="POST">
+        {% csrf_token %}
+        <div class="box-body">
+          <div class="form-group">
+            <label for="transaction-id" class="col-sm-2 control-label">شناسه تراکنش</label>
+            {{form.transactionId}} {% for error in form.transactionId.errors %}
+            <span class="text-danger" name="first-name-error">{{ error }}</span>
+            {% endfor %}
 
+          </div>
+          <div class="form-group">
+            <label for="why" class="col-sm-2 control-label">توضیح</label>
+            {{form.description}} {% for error in form.description.errors %}
+            <span class="text-danger" name="first-name-error">{{ error }}</span>
+            {% endfor %}
+
+          </div>
+          <div class="form-group">
+            {{form.action}} {% for error in form.action.errors %}
+            <span class="text-danger" name="first-name-error">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <button type="submit" name="send" class="btn btn-info pull-right">ارسال</button>
+          <div class="col-md-5">
+            <p name="message-1">این جا پیام خطا یا موفقیت می‌آید.</p>
+          </div>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- /.nav-tabs-custom -->
 

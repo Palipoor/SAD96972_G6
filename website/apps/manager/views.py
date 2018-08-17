@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, View, FormView
 from django.views.generic.edit import ProcessFormView
 from django.views.generic.list import BaseListView, MultipleObjectMixin
-
+from views import Compilation
 from apps.customer.models import Customer
 from apps.employee.models import Employee
 from apps.main.MultiForm import MultiFormsView
@@ -14,11 +14,39 @@ from django.views.generic import TemplateView
 from apps.main.views import IsLoggedInView, DetailsView, IsManager, CustomerDetailsView, EmployeeDetailsView
 from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
     CustomerAccessRemovalForm
+from apps.manager.Forms import ReviewForm
+from apps.manager.models import Manager
 
 
-class ManagerDashboardView(IsLoggedInView, IsManager, TemplateView):
+class ManagerFormView(FormView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
+        return context
+
+
+class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):
     template_name = "manager/dashboard.html"
-    ""
+    form_class = ReviewForm
+
+    def get_success_url(self):
+        # success_url = reverse_lazy(EmployeeDashboardView.as_view)
+        # TODO use reverse
+        return ""
+
+    def get_context_data(self, **kwargs):
+        context = super(ManagerFormView, self).get_context_data(**kwargs)
+        context = Compilation.get_all_requests(context)
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(ManagerFormView, self).get_form_kwargs()
+        kwargs['user'] = Manager.objects.get(username=self.request.user)
+        return kwargs
+
+    def form_valid(self, form):
+        form.update_db()
+        return super().form_valid(form)
 
 
 class ManagerPasswordChangeView(IsLoggedInView, IsManager, PasswordChangeView):
