@@ -31,30 +31,27 @@ public class ChangeSalary {
         GeneralReusables.loginAsTheManager(driver);
 
         employeeUsername = ManagerReusables.getAnEmployee();
-    }
+		WebElement employee = driver.findElement(By.name("employee"));
+		employee.click();
 
-    @Test
-    @Order(order = 1)
-    public void preConditionTest() {
-        WebElement employee = driver.findElement(By.name("employee"));
-        employee.click();
-        assertEquals(driver.getTitle(), ManagerReusables.reusableStrings.get("employees-page-title"));
-    }
+	}
+
 
     @Test
     @Order(order = 2)
     public void invalidUsernameTest() {
         WebElement salaryChangeBox = driver.findElement(By.name("salary-change-box"));
-        WebElement usernameInput = salaryChangeBox.findElement(By.id("employee-username-salary"));
+        WebElement usernameInput = salaryChangeBox.findElement(By.name("username"));
         usernameInput.sendKeys("invalid_username");
-        WebElement salaryInput = salaryChangeBox.findElement(By.id("salary"));
+        WebElement salaryInput = salaryChangeBox.findElement(By.name("current_salary"));
         salaryInput.sendKeys("10000");
-        WebElement setKey = salaryChangeBox.findElement(By.id("set-button"));
+        WebElement setKey = salaryChangeBox.findElement(By.name("change_salary_form"));
         setKey.click();
 
-        WebElement message = driver.findElement(By.name("error-message-3"));
+        WebElement message = driver.findElement(By.name("username-error-change-salary"));
         assertTrue(!message.getText().equals(""));
-        assertTrue(message.getText().equals(GeneralReusables.reusableStrings.get("invalid-username-error")));
+		System.out.println(message.getText());
+		assertEquals(message.getText(),GeneralReusables.reusableStrings.get("employee-not-found"));
     }
 
     @Test
@@ -62,17 +59,17 @@ public class ChangeSalary {
     public void changeSalaryTest() {
         WebElement salaryChangeBox = driver.findElement(By.name("salary-change-box"));
 
-        WebElement usernameInput = salaryChangeBox.findElement(By.id("employee-username-salary"));
+        WebElement usernameInput = salaryChangeBox.findElement(By.name("username"));
         usernameInput.clear();
         usernameInput.sendKeys(employeeUsername);
 
         int formerSalary = ManagerReusables.getSalary(employeeUsername);
-        int anotherSalary = formerSalary + 100;
-        WebElement salaryInput = salaryChangeBox.findElement(By.id("salary"));
+        int anotherSalary = formerSalary + 10000;
+        WebElement salaryInput = salaryChangeBox.findElement(By.name("current_salary"));
         salaryInput.clear();
         salaryInput.sendKeys(String.valueOf(anotherSalary));
 
-        WebElement setKey = salaryChangeBox.findElement(By.id("set-button"));
+        WebElement setKey = salaryChangeBox.findElement(By.name("change_salary_form"));
         setKey.click();
 
         int newSalary = ManagerReusables.getSalary(employeeUsername);

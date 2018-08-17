@@ -32,32 +32,27 @@ public class RemoveAccessCustomer {
         driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsTheManager(driver);
+		WebElement customer = driver.findElement(By.name("customers"));
+		customer.click();
     }
-
-    @Test
-    @Order(order = 1)
-    public void preConditionTest() {
-        WebElement employee = driver.findElement(By.name("customers"));
-        employee.click();
-        assertEquals(driver.getTitle(), ManagerReusables.reusableStrings.get("customers-page-title"));
-    }
-
     @Test
     @Order(order = 2)
     public void invalidUsernameTest() {
         WebElement accessRemoveBox = driver.findElement(By.name("access-remove-box"));
-        WebElement usernameField = accessRemoveBox.findElement(By.id("username"));
+        WebElement usernameField = accessRemoveBox.findElement(By.name("username"));
         usernameField.clear();
-        usernameField.sendKeys("!");
-        WebElement reason = accessRemoveBox.findElement(By.id("why"));
+        usernameField.sendKeys("not-existing-username");
+        WebElement reason = accessRemoveBox.findElement(By.name("reason"));
         reason.sendKeys("blah blah");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
+        WebElement submit = driver.findElement(By.name("remove_access_form"));
+
+		GeneralReusables.waitForSeconds(3);
         submit.click();
 
-        WebElement errorMessage = driver.findElement(By.name("error-message-1"));
+        WebElement errorMessage = driver.findElement(By.name("username-error-remove-customer"));
         assertTrue(!errorMessage.getText().equals(""));
-        assertTrue(errorMessage.getText().equals(GeneralReusables.reusableStrings.get("invalid-username-error")));
+        assertTrue(errorMessage.getText().equals(GeneralReusables.reusableStrings.get("customer-not-found")));
 
     }
 
@@ -65,27 +60,31 @@ public class RemoveAccessCustomer {
     @Order(order = 3)
     public void fillTheFormCorrectly() {
         WebElement accessRemoveBox = driver.findElement(By.name("access-remove-box"));
-        WebElement usernameField = accessRemoveBox.findElement(By.id("username"));
+        WebElement usernameField = accessRemoveBox.findElement(By.name("username"));
         usernameField.clear();
         String username = ManagerReusables.createCustomer("desiredPassword");
         usernameField.sendKeys(username);
-        WebElement reason = accessRemoveBox.findElement(By.id("why"));
+        WebElement reason = accessRemoveBox.findElement(By.name("reason"));
         reason.sendKeys("blah blah");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
+        WebElement submit = driver.findElement(By.name("remove_access_form"));
         submit.click();
 
-        assertFalse(successfullLogin(username, "desiredPassword"));
+        assertFalse(successfulLogin(username, "desiredPassword"));
     }
 
     @AfterClass
     public static void tearDown(){
         GeneralReusables.logout(driver);
     }
-    private boolean successfullLogin(String username, String password) {
-        WebElement email = driver.findElement(By.name("email")); //// TODO: 6/2/2018 AD hame beshan username dige.
-        email.clear();
-        email.sendKeys(username);
+
+    private boolean successfulLogin(String username, String password) {
+
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/login");
+		GeneralReusables.waitForSeconds(1);
+        WebElement the_username = driver.findElement(By.name("username")); //// TODO: 6/2/2018 AD hame beshan username dige.
+        the_username.clear();
+        the_username.sendKeys(username);
 
         WebElement passwordElement = driver.findElement(By.name("password"));
         passwordElement.clear();
@@ -94,8 +93,8 @@ public class RemoveAccessCustomer {
         WebElement submitButton = driver.findElement(By.name("log in button"));
         submitButton.click();
 
-        List<WebElement> userMenu = driver.findElements(By.name("user menu"));
-        return !(userMenu.size() == 0);
+		WebElement error = driver.findElement(By.name("error"));
+        return !error.isDisplayed();
     }
 
 }

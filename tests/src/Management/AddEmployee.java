@@ -39,133 +39,160 @@ public class AddEmployee {
     public void invalidName() {
         WebElement theForm = driver.findElement(By.name("add-employee"));
 
-        WebElement name = theForm.findElement(By.id("name"));
+        WebElement name = theForm.findElement(By.name("persian_first_name"));
         name.clear();
         name.sendKeys("!");
 
-        WebElement familyname = theForm.findElement(By.id("familyname"));
+        WebElement familyname = theForm.findElement(By.name("persian_last_name"));
         familyname.clear();
         familyname.sendKeys("تست نام خانوادگی");
 
-        WebElement username = theForm.findElement(By.id("username"));
+		WebElement english_name = theForm.findElement(By.name("first_name"));
+		english_name.clear();
+		english_name.sendKeys("!");
+
+		WebElement english_familyname = theForm.findElement(By.name("last_name"));
+		english_familyname.clear();
+		english_familyname.sendKeys("test last name");
+
+
+		WebElement username = theForm.findElement(By.name("username"));
         username.clear();
         username.sendKeys(employeeUsername);
 
-        WebElement salary = theForm.findElement(By.id("salary"));
+        WebElement salary = theForm.findElement(By.name("current_salary"));
         salary.clear();
         salary.sendKeys("100000");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+		WebElement email = theForm.findElement(By.name("email"));
+		email.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		email.sendKeys("dorna" + currentTimeString+ "@gmail.com");
 
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-first-name-error"));
+
+
+		WebElement submit = driver.findElement(By.name("add_employee_form"));
+        submit.click();
+		GeneralReusables.waitForSeconds(1);
+
+
+		WebElement error = driver.findElement(By.name("persian-first-name-error"));
+        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-persian-name-error"));
     }
+
+
 
     @Test
     @Order(order = 2)
-    public void invalidFamilyName() {
-        WebElement theForm = driver.findElement(By.name("add-employee"));
-
-        WebElement name = theForm.findElement(By.id("name"));
-        name.clear();
-        name.sendKeys("تست نام");
-
-        WebElement familyname = theForm.findElement(By.id("familyname"));
-        familyname.clear();
-        familyname.sendKeys("!");
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-family-name-error"));
-
-    }
-
-    @Test
-    @Order(order = 3)
     public void invalidUsername() {
-        WebElement theForm = driver.findElement(By.name("add-employee"));
+		WebElement theForm = driver.findElement(By.name("add-employee"));
 
-        WebElement familyname = theForm.findElement(By.id("familyname"));
-        familyname.clear();
-        familyname.sendKeys("تست نام خانوادگی");
+		WebElement name = theForm.findElement(By.name("persian_first_name"));
+		name.clear();
+		name.sendKeys("تست نام");
 
-        WebElement username = theForm.findElement(By.id("username"));
-        username.clear();
-        username.sendKeys("!");
+		WebElement familyname = theForm.findElement(By.name("persian_last_name"));
+		familyname.clear();
+		familyname.sendKeys("تست نام خانوادگی");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+		WebElement english_name = theForm.findElement(By.name("first_name"));
+		english_name.clear();
+		english_name.sendKeys("test names");
 
-        WebElement error = driver.findElement(By.name("error"));
+		WebElement english_familyname = theForm.findElement(By.name("last_name"));
+		english_familyname.clear();
+		english_familyname.sendKeys("test last name");
+
+
+		WebElement username = theForm.findElement(By.name("username"));
+		username.clear();
+		username.sendKeys("!!");
+
+		WebElement salary = theForm.findElement(By.name("current_salary"));
+		salary.clear();
+		salary.sendKeys("100000");
+
+		WebElement email = theForm.findElement(By.name("email"));
+		email.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		email.sendKeys("dorna" + currentTimeString+ "@gmail.com");
+
+
+		WebElement submit = driver.findElement(By.name("add_employee_form"));
+		submit.click();
+
+		GeneralReusables.waitForSeconds(1);
+
+		WebElement error = driver.findElement(By.name("username-error"));
         assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-username-error"));
 
     }
 
-    @Test
-    @Order(order = 4)
-    public void invalidSalary() {
-        WebElement theForm = driver.findElement(By.name("add-employee"));
-        WebElement username = theForm.findElement(By.id("username"));
-        username.clear();
-        username.sendKeys(employeeUsername);
-
-        WebElement salary = theForm.findElement(By.id("salary"));
-        salary.clear();
-        salary.sendKeys("abc");
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-amount-error"));
-    }
-
 
     @Test
-    @Order(order = 5)
+    @Order(order = 3)
     public void isEmployeeAdded() {
 
         WebElement theForm = driver.findElement(By.name("add-employee"));
-        WebElement salary = theForm.findElement(By.id("salary"));
-        salary.clear();
-        salary.sendKeys("10000");
+        WebElement username = theForm.findElement(By.name("username"));
+        username.clear();
+        username.sendKeys(employeeUsername);
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
+        WebElement submit = driver.findElement(By.name("add_employee_form"));
         submit.click();
 
-        boolean isAdded = ManagerReusables.employeeExists(employeeUsername);
+		GeneralReusables.waitForSeconds(1);
+
+		boolean isAdded = ManagerReusables.employeeExists(employeeUsername);
         assertTrue(isAdded);
         assertEquals(ManagerReusables.getSalary(employeeUsername), 10000);
     }
 
     @Test
-    @Order(order = 6)
+    @Order(order = 4)
     public void existingUsername() {
-        WebElement theForm = driver.findElement(By.name("add-employee"));
+		WebElement theForm = driver.findElement(By.name("add-employee"));
 
-        WebElement name = theForm.findElement(By.id("name"));
-        name.clear();
-        name.sendKeys("!");
+		WebElement name = theForm.findElement(By.name("persian_first_name"));
+		name.clear();
+		name.sendKeys("تست نام");
 
-        WebElement familyname = theForm.findElement(By.id("familyname"));
-        familyname.clear();
-        familyname.sendKeys("تست نام خانوادگی");
+		WebElement familyname = theForm.findElement(By.name("persian_last_name"));
+		familyname.clear();
+		familyname.sendKeys("تست نام خانوادگی");
 
-        WebElement username = theForm.findElement(By.id("username"));
-        username.clear();
-        username.sendKeys(employeeUsername);
+		WebElement english_name = theForm.findElement(By.name("first_name"));
+		english_name.clear();
+		english_name.sendKeys("!");
 
-        WebElement salary = theForm.findElement(By.id("salary"));
-        salary.clear();
-        salary.sendKeys("100000");
+		WebElement english_familyname = theForm.findElement(By.name("last_name"));
+		english_familyname.clear();
+		english_familyname.sendKeys("test last name");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
 
-        WebElement error = driver.findElement(By.name("error"));
+		WebElement username = theForm.findElement(By.name("username"));
+		username.clear();
+		username.sendKeys(employeeUsername);
+
+		WebElement salary = theForm.findElement(By.name("current_salary"));
+		salary.clear();
+		salary.sendKeys("100000");
+
+		WebElement email = theForm.findElement(By.name("email"));
+		email.clear();
+		long currentTime = System.currentTimeMillis();
+		String currentTimeString = String.valueOf(currentTime);
+		email.sendKeys("dorna" + currentTimeString+ "@gmail.com");
+
+		WebElement submit = driver.findElement(By.name("add_employee_form"));
+		submit.click();
+
+		GeneralReusables.waitForSeconds(1);
+
+
+		WebElement error = driver.findElement(By.name("username-error"));
         assertEquals(error.getText(), GeneralReusables.reusableStrings.get("username-exists"));
     }
 

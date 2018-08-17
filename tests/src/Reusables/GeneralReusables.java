@@ -33,7 +33,7 @@ public class GeneralReusables {
 		reusableStrings.put("invalid-transaction-id", "1000");
 		reusableStrings.put("wrong-id-error", "شناسه تراکنش اشتباه است.");
 		reusableStrings.put("invalid-amount-error", "مبلغ وارد شده معتبر نیست.");
-		reusableStrings.put("invalid-username-error", "نام کاربری وارد شده معتبر نیست. لطفا فقط از حروف انگلیسی، اعداد و علامت ـ استفاده کنید.");
+		reusableStrings.put("invalid-username-error", "لطفا فقط از حروف انگلیسی، اعداد و علامت ـ استفاده کنید.");
 		reusableStrings.put("invalid-email-error", "لطفا یک ایمیل معتبر وارد کنید.");
 		reusableStrings.put("invalid-first-name-error", "لطفا فقط از حروف انگلیسی و فاصله استفاده کنید.");
 		reusableStrings.put("invalid-persian-name-error", "لطفا فقط از حروف فارسی و فاصله استفاده کنید.");
@@ -50,6 +50,9 @@ public class GeneralReusables {
 		reusableStrings.put("request-status", "شرایط درخواست");
 		reusableStrings.put("successfully-sent", "با موفقیت ارسال شد.");
 		reusableStrings.put("homepage","http://127.0.0.1:8000");
+		reusableStrings.put("employee-not-found", "چنین کارمندی وجود ندارد.");
+		reusableStrings.put("customer-not-found", "چنین مشتری‌ای وجود ندارد.");
+
 	}
 
 	public static void setUpToHomepage(WebDriver driver) {

@@ -49,7 +49,7 @@ public class ManagerReusables {
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
         WebElement employeetable = driver.findElement(By.name("users-table"));
-        WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری"));
+        WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری کارمند"));
         usernameSearchBox.clear();
         usernameSearchBox.sendKeys(username);
 
@@ -147,43 +147,39 @@ public class ManagerReusables {
 
         WebDriver driver = new FirefoxDriver();
         GeneralReusables.setUpToHomepage(driver);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,100)");
-        GeneralReusables.waitForSeconds(5);
-        WebElement signupButton = driver.findElement(By.name("sign up"));
-        signupButton.click();
+        String register = GeneralReusables.reusableStrings.get("homepage") + "/register";
+        driver.get(register);
         GeneralReusables.waitForSeconds(2);
-        WebElement name = driver.findElement(By.name("first name"));
+        WebElement name = driver.findElement(By.name("first_name"));
         name.clear();
-        name.sendKeys("تست نام");
-        WebElement familyname = driver.findElement(By.name("family name"));
+        name.sendKeys("name test");
+        WebElement familyname = driver.findElement(By.name("last_name"));
         familyname.clear();
-        familyname.sendKeys("تست نام خانوادگی");
+        familyname.sendKeys("last name");
         WebElement username = driver.findElement(By.name("username"));
         username.clear();
         username.sendKeys(newUsername);
         WebElement email = driver.findElement(By.name("email"));
         email.clear();
         email.sendKeys(newEmail);
-        WebElement number = driver.findElement(By.name("contact number"));
+        WebElement number = driver.findElement(By.name("phone_number"));
         number.clear();
         number.sendKeys("09379605628");
-        WebElement account = driver.findElement(By.name("account number"));
+        WebElement account = driver.findElement(By.name("account_number"));
         account.clear();
         account.sendKeys("10203040");
         WebElement password = driver.findElement(By.name("password"));
         password.clear();
         password.sendKeys(desiredPassword);
-        WebElement passwordAgain = driver.findElement(By.name("password repeat"));
+        WebElement passwordAgain = driver.findElement(By.name("password2"));
         passwordAgain.clear();
         passwordAgain.sendKeys(desiredPassword);
+		driver.findElement(By.className("iCheck-helper")).click();
 
-//        WebElement iAgree = driver.findElement(By.name("i-agree"));
-//        iAgree.click();
+		WebElement submitButton = driver.findElement(By.name("sign up"));
+		submitButton.click();
 
-        signupButton = driver.findElement(By.name("sign up"));
-        signupButton.click();
-        GeneralReusables.logout(driver);
+        driver.close();
         return newUsername;
     }
 
@@ -196,22 +192,22 @@ public class ManagerReusables {
         WebElement employee = driver.findElement(By.name("employee"));
         employee.click();
         WebElement employeetable = driver.findElement(By.name("users-table"));
-        WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری"));
+        WebElement usernameSearchBox = employeetable.findElement(By.name("نام کاربری کارمند"));
         usernameSearchBox.clear();
         usernameSearchBox.sendKeys(employeeUsername);
 
         List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody"));
         List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead//tr"));
         List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
-        int usernameIndex = 0;
+        int salaryIndex = 0;
         for (int i = 0; i < headerTitles.size(); i++) {
-            if (headerTitles.get(i).getText().equals("میزان حقوق")) {
-                usernameIndex = i;
+            if (headerTitles.get(i).getText().equals("حقوق")) {
+                salaryIndex = i;
             }
         }
         if (tableRows.size() > 0) {
             List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-            int salary = Integer.valueOf(employeeDetails.get(usernameIndex).getText());
+            int salary = Integer.valueOf(employeeDetails.get(salaryIndex).getText());
             GeneralReusables.logout(driver);
             return salary;
         }
