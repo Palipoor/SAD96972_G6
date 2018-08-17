@@ -1,4 +1,5 @@
 from apps.main.models import Notification
+from django.core.mail import send_mail, BadHeaderError
 
 
 def send_notification(username, message):
@@ -8,7 +9,9 @@ def send_notification(username, message):
 
 def send_email(email, message,  subject):
     try:
-        send_mail(subject, message, 'info@sad.com' , email)
-        return true
-    except BadHeaderError:
-        return false
+        send_mail(subject, message, 'info@sad.com' , [email])
+        print('sent!!')
+        return True
+    except BadHeaderError as e:
+        print(e)
+        return False

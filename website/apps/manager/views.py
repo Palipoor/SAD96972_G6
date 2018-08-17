@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 import os
+from utils import notification_tools
+from utils import strings
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, View, FormView
@@ -61,7 +63,10 @@ class CustomersListView(IsLoggedInView, IsManager, FormView):
         form = self.get_form(form_class)
         if form.is_valid():
             the_customer = Customer.objects.filter(username=form.cleaned_data['username'])[0]
+            email = the_customer.email
+            message = strings.CUSTOMER_ACCESS_REMOVAL + form.cleaned_data['reason']
             the_customer.is_active = False
+            notification_tools.send_email(message = message, email  = email, subject = 'اعلان قطع دسترسی')
             the_customer.save()
             return self.form_valid(form)
         else:

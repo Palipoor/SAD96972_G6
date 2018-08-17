@@ -26,7 +26,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="table" class="table table-bordered table-striped" name="customers-table">
+                    <table id="table" class="table table-bordered table-striped" name="users-table">
                         <thead>
                         {%if type == 'مشتری'%}
                                 <tr>
@@ -92,7 +92,7 @@
         <div class="col-md-8">
             <div class="col-md-8">
                 <!-- Horizontal Form -->
-                <div class="box">
+                <div class="box" name = "access-remove-box">
                     <div class="box-header with-border">
                         <h3 class="box-title">فرم قطع دسترسی مشتری</h3>
                     </div>
@@ -106,7 +106,7 @@
                                     <div class="col-sm-6">
                                         {{form.username}}
                                         {% for error in form.username.errors %}
-                                        <span class="text-danger" name="username-error-remove-salary">{{ error }}</span>
+                                        <span class="text-danger" name="username-error-remove-customer">{{ error }}</span>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -147,7 +147,7 @@
                             <div class="col-sm-6">
                                 {{remove_access_form.username}}
                                 {% for error in remove_access_form.username.errors %}
-                                <span class="text-danger" name="username-error-remove-salary">{{ error }}</span>
+                                <span class="text-danger" name="username-error-remove-employee">{{ error }}</span>
                                 {% endfor %}
                             </div>
                         </div>
@@ -214,7 +214,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" method="POST">
+                <form class="form-horizontal" method="POST" name = "add-employee">
                     {% csrf_token %}
                     <div class="box-body">
                         <div class = "form-group">
