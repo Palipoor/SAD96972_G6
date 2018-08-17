@@ -38,6 +38,9 @@ class Wallet_User(GenUser):
 
 
 class Notification(models.Model):
+    state_types = ((0,'seen'), (1,'unseen'))
+
+    state = models.IntegerField(choices = state_types)
     user = models.ForeignKey('GenUser', on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
 
