@@ -22,7 +22,7 @@ from apps.main.Forms import WalletChargeForm, SignUpForm, ContactForm, ConvertFo
 from django.utils.decorators import method_decorator
 
 from django.views.decorators.csrf import csrf_exempt
-from apps.customer.models import Customer
+from apps.customer.models import Customer, Request
 from apps.manager.models import Manager
 import lxml.etree
 import lxml.html
@@ -126,16 +126,6 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
 
 class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
-
-
-class TransactionDetailsView(DetailsView):
-    def dispatch(self, request, *args, **kwargs):
-        self.transaction_id = kwargs['transaction_id']
-        # todo incomplete
-
-
-class AllTransactionDetails(IsStaff, TransactionDetailsView):
-    ""
 
 
 class NotificationsView(IsLoggedInView, ListView):

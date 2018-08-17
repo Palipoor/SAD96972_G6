@@ -28,3 +28,4 @@ PHONE = forms.IntegerField(
 
 AMOUNT = forms.IntegerField(min_value=1, label='مبلغ درخواستی',
                             widget=widgets.AMOUNT, error_messages={'invalid': INVALID_AMOUNT})
+DESCRIPTION = forms.CharField(widget=forms.Textarea)

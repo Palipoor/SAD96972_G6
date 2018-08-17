@@ -34,7 +34,16 @@
             </tr>
           </thead>
           <tbody>
-           
+            {% for req in requests %}
+            <tr>
+              <td>
+                <a href="{{req.id}}_transaction_details">{{req.id}}</a>
+              </td>
+              <td>{{req.request_time}}</td>
+              <td>{{req.amount}}</td>
+              <td>{{req.status}}</td>
+            </tr>
+            {% endfor %}
         </tbody>
           <tfoot>
             <tr>
@@ -60,6 +69,9 @@
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title">گزارش خطا در تراکنش‌ها</h3>
+        {% for error in form.non_field_errors  %}
+              <span class="text-danger" name="first-name-error">{{ error }}</span>
+        {% endfor %}
       </div>
       <!-- /.box-header -->
       <!-- form start -->
@@ -68,16 +80,26 @@
         <div class="box-body">
           <div class="form-group">
             <label for="transaction-id" class="col-sm-2 control-label">شناسه تراکنش</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="transaction-id">
-            </div>
+            {{form.transactionId}}
+              {% for error in form.transactionId.errors %}
+                <span class="text-danger" name="first-name-error">{{ error }}</span>
+              {% endfor %}
+
           </div>
           <div class="form-group">
             <label for="why" class="col-sm-2 control-label">توضیح</label>
-            <div class="col-sm-4">
-              <textarea id="why" class="form-control" placeholder="خطای مشاهده شده"></textarea>
-            </div>
+            {{form.description}}
+              {% for error in form.description.errors %}
+                <span class="text-danger" name="first-name-error">{{ error }}</span>
+              {% endfor %}
+
           </div>
+            <div class="form-group">
+              {{form.action}}
+              {% for error in form.action.errors %}
+                <span class="text-danger" name="first-name-error">{{ error }}</span>
+              {% endfor %}
+            </div>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -110,6 +132,8 @@
 <script src='{% static "panel/dist/js/app.min.js" %}'></script>
 <!-- AdminLTE for demo purposes -->
 <script src='{% static "panel/dist/js/demo.js" %}'></script>
+<!-- iCheck 1.0.1 -->
+<script src='{% static "panel/plugins/iCheck/icheck.min.js" %}'></script>
 <!-- page script -->
 <script>
   $(document).ready(function () {
@@ -135,4 +159,9 @@
       });
     });
   });
+  //Flat red color scheme for iCheck
+      {% comment %} $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass: 'iradio_flat-green'
+      }); {% endcomment %}
 </script> {% endblock scripts %}
