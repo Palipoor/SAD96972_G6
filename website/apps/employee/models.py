@@ -38,7 +38,7 @@ class EmployeeReview(models.Model):
     )
     description = models.TextField(max_length=300, default='')
     request = models.ForeignKey("customer.Request", on_delete=models.CASCADE, null=False)
-    employee = models.ForeignKey("Employee", on_delete=models.DO_NOTHING, null=False)
+    employee = models.ForeignKey("main.GenUser", on_delete=models.DO_NOTHING, null=False)
     new_status = models.IntegerField(choices=statuses, null=False, default=0)
 
     def __init__(self, *args, **kwargs):
