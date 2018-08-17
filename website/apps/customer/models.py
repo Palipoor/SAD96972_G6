@@ -174,15 +174,32 @@ class Request(PolymorphicModel):
 
     def create_reverse_request(self):
         # created the transaction for rejecting current transaction.
-        reject = Reverse_Request(source_user=self.dest_user,
-                                 source_wallet=dest_wallet,
-                                 dest_user=self.source_user,
+        # reject = Reverse_Request(source_user=self.dest_user,
+        #                          source_wallet=dest_wallet,
+        #                          dest_user=self.source_user,
+        #                          dest_wallet=self.source_wallet,
+        #                          amount=self.amount*(1 + self.profitRate)*exchange_rate,
+        #                          profitRate=0,
+        #                          exchange_rate=1./exchange_rate,
+        #                          related_request=self
+        #                          )
+        reject = Reverse_Request(source_wallet=self.dest_wallet,
                                  dest_wallet=self.source_wallet,
-                                 amount=self.amount*(1 + self.profitRate)*exchange_rate,
+                                 amount=self.amount*(1 + self.profitRate)*self.exchange_rate,
                                  profitRate=0,
-                                 exchange_rate=1./exchange_rate,
-                                 related_request=self
+                                 exchange_rate=1./self.exchange_rate,
+                                 reference=self
                                  )
+        try:
+            reject.dest_user = self.source_user
+        except:
+            pass
+
+        try:
+            reject.source_user = self.dest_user
+        except:
+            pass
+
         return reject
 
 
@@ -312,9 +329,16 @@ class ForeignTrans(Request):
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
 
+    def __init__(self, *args, **kwargs):
+        temp = super().__init__(*args, **kwargs)
+        if not self.pk:
+            manager = Manager.get_manager()
+            self.dest_user = manager
+            self.dest_wallet = kwargs['source_wallet']
+        return temp
+
     def save(self, *args, **kwargs):
-        manager = Manager.get_manager()
-        super(ForeignTrans, self).save(*args, dest_user=manager, dest_wallet=kwargs['source_wallet'], **kwargs)
+        super(ForeignTrans, self).save(*args, **kwargs)
 
     def set_status(self):
         self.status = 2
