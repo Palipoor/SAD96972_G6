@@ -14,8 +14,9 @@ from django.views.generic.edit import FormMixin, ProcessFormView
 from django.shortcuts import redirect, render
 from braces.views import GroupRequiredMixin
 from django.contrib.auth import logout
+from django.views.generic import TemplateView
 
-from apps.main.models import Wallet_User
+from apps.main.models import Wallet_User, Notification
 from apps.main.MultiForm import MultiFormsView
 from views import Compilation
 from apps.main.Forms import WalletChargeForm, SignUpForm, ContactForm, ConvertForm
@@ -128,8 +129,25 @@ class DetailsView(IsLoggedInView, DetailView):
     ""  # todo undone
 
 
-class NotificationsView(IsLoggedInView, ListView):
-    ""
+class NotificationsView(IsLoggedInView, TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super(NotificationsView, self).get_context_data(**kwargs)
+        context['object_list'] = Notification.objects.get(user.username = self.user.username)
+        return context
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.user = request.user
+        isManager = self.user.groups.filter(name='manager').exists()
+        isCustomer = self.user.groups.filter(name='customer').exists()
+
+        if isManager:
+            self.template_name = 'manager/notifications.html'
+        elif isCustomer:
+            self.template_name = 'customer/notifications.html'
+        else:
+            self.template_name = 'manager/notifications.html'
+
+        return render(request, self.template_name, self.get_context_data(**kwargs))
 
 
 class CustomerDetailsView(DetailsView, ListView):

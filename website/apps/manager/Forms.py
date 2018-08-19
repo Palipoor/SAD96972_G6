@@ -69,11 +69,6 @@ class CustomerAccessRemovalForm(forms.Form):
         if not Customer.objects.filter(username=self.cleaned_data['username']).exists():
             raise forms.ValidationError("چنین مشتری‌ای وجود ندارد.")
         return self.cleaned_data['username']
-            self.errors['username'] = 'چنین مشتری ای وجود ندارد'
-            return False
-
-        return True
-
 
 class ReviewForm(forms.Form):
     CHOICES = Transactions.request_types_for_manager_json
