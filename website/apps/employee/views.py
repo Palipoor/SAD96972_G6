@@ -43,6 +43,7 @@ class EmployeeDashboardView(IsLoggedInView, IsEmployee, EmployeeFormView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeFormView, self).get_context_data(**kwargs)
         context = Compilation.get_all_requests(context)
+        context.update({'notifications' : Notification.objects.filter(user__username = self.request.user.username, seen = False).order_by('-sent_date')})
         return context
 
     def get_form_kwargs(self):
