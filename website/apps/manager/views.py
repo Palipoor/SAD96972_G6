@@ -20,6 +20,7 @@ from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, 
     CustomerAccessRemovalForm
 from apps.manager.Forms import ReviewForm
 from apps.manager.models import Manager
+from apps.main.models import Notification
 
 
 class ManagerFormView(FormView):
@@ -34,13 +35,13 @@ class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):
     form_class = ReviewForm
 
     def get_success_url(self):
-        # success_url = reverse_lazy(EmployeeDashboardView.as_view)
         # TODO use reverse
         return ""
 
     def get_context_data(self, **kwargs):
         context = super(ManagerFormView, self).get_context_data(**kwargs)
         context = Compilation.get_all_requests(context)
+        context.update({'notifications' : Notification.objects.filter(user__username = self.request.user.username, seen = False).order_by('-sent_date')})
         return context
 
     def get_form_kwargs(self):

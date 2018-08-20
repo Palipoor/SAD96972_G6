@@ -144,38 +144,22 @@
               {% endblock drop_down_messages%}
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu"><a href = '{% static "panel/pages/customer/#" %}'  class="dropdown-toggle" data-toggle="dropdown"> <em class="fa fa-bell-o"></em> <span class="label label-warning">۳</span> </a>
+            
+              <li class="dropdown notifications-menu"><a href = '{% static "panel/pages/customer/#" %}'  class="dropdown-toggle" data-toggle="dropdown"> <em class="fa fa-bell-o"></em> {% if notifications|length > 0%}<span class="label label-warning">{{notifications|length}}</span>{%endif%} </a>
                 <ul class="dropdown-menu">
                   {%block drop_down_notifications%}
-                  <li class="header" allign = "center">شما ۳ اعلان جدید دارید.</li>
+                  <li class="header" allign = "center">شما {{notifications|length}} اعلان جدید دارید.</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <li>
-                       <a>
-                        <i class="fa fa-credit-card text-green"></i>
-                        <h7>
-                            یک تراکنش انجام شد.
-                        </h7>
-						  </a>
-                      </li>
-                     
-                      <li>
-                       <a>
-                        <i class="fa fa-credit-card text-red"></i>
-                        <h7>
-                            یک تراکنش ناموفق شد.
-                        </h7>
-						  </a>
-                      </li>
+                      {% for notif in notifications%}
                      <li>
-                       <a>
                         <i class="fa fa-credit-card text-green"></i>
                         <h7>
-                            یک تراکنش دیگر انجام شد.
+                            {{ notif.text|truncatewords:5 }}
                         </h7>
-						  </a>
                       </li>
+                      {% endfor %}
                     </ul>
                   </li>
                   <li class="footer"><a href = {% block notifications %} {% endblock notifications %} '' >مشاهدهٔ همه</a></li>

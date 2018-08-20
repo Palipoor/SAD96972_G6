@@ -16,7 +16,7 @@ from braces.views import GroupRequiredMixin
 from django.contrib.auth import logout
 from django.views.generic import TemplateView
 
-from apps.main.models import Wallet_User, Notification
+from apps.main.models import Wallet_User, Notification, GenUser
 from apps.main.MultiForm import MultiFormsView
 from views import Compilation
 from apps.main.Forms import WalletChargeForm, SignUpForm, ContactForm, ConvertForm
@@ -132,7 +132,10 @@ class DetailsView(IsLoggedInView, DetailView):
 class NotificationsView(IsLoggedInView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(NotificationsView, self).get_context_data(**kwargs)
-        context['object_list'] = Notification.objects.get(user.username = self.user.username)
+        context['object_list'] = Notification.objects.filter(user__username = self.user.username).order_by('-sent_date')
+        for notif  in context['object_list']:
+            notif.seen = True
+            notif.save()
         return context
     
     def dispatch(self, request, *args, **kwargs):
