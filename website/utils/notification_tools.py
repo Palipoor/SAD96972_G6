@@ -40,4 +40,4 @@ def notify(customer_username, message, subject):
     if customer.contact_way == 0:
         send_email(customer.email, subject)
     else:
-        send_text(customer.phone_number, subject)
+        send_text(str(customer.phone_number), subject)
