@@ -52,7 +52,7 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
 
 
 class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
-    template_name = "customer/transaction_creation.html"
+    template_name = "customer/render_form.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.type = self.kwargs['type']
