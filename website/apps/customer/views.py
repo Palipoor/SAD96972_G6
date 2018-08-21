@@ -150,7 +150,6 @@ class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
 
     def form_valid(self, form):
         clean = form.cleaned_data
-        print("*" * 20 + str(clean))
         context = {}
         self.object = context.update(clean)
         return super(CustomerSettingsView, self).form_valid(form)

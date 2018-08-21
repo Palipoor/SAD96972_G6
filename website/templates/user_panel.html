@@ -145,7 +145,7 @@
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
             
-              <li class="dropdown notifications-menu"><a href = '{% static "panel/pages/customer/#" %}'  class="dropdown-toggle" data-toggle="dropdown"> <em class="fa fa-bell-o"></em> {% if notifications|length > 0%}<span class="label label-warning">{{notifications|length}}</span>{%endif%} </a>
+              <li class="dropdown notifications-menu" name = "notif"><a href = '{% static "panel/pages/customer/#" %}'  class="dropdown-toggle" data-toggle="dropdown"> <em class="fa fa-bell-o"></em> {% if notifications|length > 0%}<span class="label label-warning">{{notifications|length}}</span>{%endif%} </a>
                 <ul class="dropdown-menu">
                   {%block drop_down_notifications%}
                   <li class="header" allign = "center">شما {{notifications|length}} اعلان جدید دارید.</li>
@@ -162,7 +162,7 @@
                       {% endfor %}
                     </ul>
                   </li>
-                  <li class="footer"><a href = {% block notifications %} {% endblock notifications %} '' >مشاهدهٔ همه</a></li>
+                  <li class="footer" name = "see-all"><a href = {% block notifications %} {% endblock notifications %} '' >مشاهدهٔ همه</a></li>
                  {% endblock drop_down_notifications %}
                 </ul>
               </li>

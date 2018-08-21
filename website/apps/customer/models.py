@@ -13,6 +13,8 @@ import traceback
 
 class Customer(Wallet_User):
 
+    contact_way = models.IntegerField(choices = ((0,'ایمیل'), (1,'پیامک')) , default = 0)
+
     def __init__(self, *args, **kwargs):
         super(Customer, self).__init__(*args, **kwargs)
         self.user_type = 0
