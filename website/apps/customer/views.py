@@ -16,6 +16,7 @@ from django.views.generic.detail import DetailView
 from apps.customer.Forms import CustomerSettingsForm
 from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
+from apps.customer import Forms
 
 
 class CustomerTemplateView(TemplateView):
@@ -51,7 +52,15 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
 
 
 class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
-    ""
+    template_name = "customer/transaction_creation.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.type = self.kwargs['type']
+        temp = super().dispatch(request, *args, **kwargs)
+        return temp
+
+    def get_form_class(self):
+        return Forms.get_form_class(self.type)
 
 
 class ReverseChargeCreationView(TransactionCreationView):
@@ -142,3 +151,7 @@ class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
 
 class TransactionsListView(IsLoggedInView, IsCustomer, ListView):
     template_name = 'customer/mytransactions.html'
+
+
+class MakeTransactionView(IsLoggedInView, IsCustomer, FormView):
+    template_name = "cuatomer/make_transaction"
