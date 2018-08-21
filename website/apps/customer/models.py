@@ -48,6 +48,8 @@ class Request(PolymorphicModel):
     profitRate = models.FloatField(default=0, blank=True)
     # if not specified will be determind using utils.
     exchange_rate = models.FloatField(null=True, blank=True)
+    # request type
+    type = models.CharField(max_length=100, null=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -218,6 +220,10 @@ class Reverse_Request(Request):
 
 class Charge(Request):
     # Only needs destination user and wallet and amount as argument.
+
+    def __init__(self, *args, **kwargs):
+        super(Request, self).__init__(*args, type="Charge", **kwargs)
+
     def set_status(self):
         self.status = 0
 
@@ -230,6 +236,9 @@ class Exchange(Request):
     # def __init__(self, *args, **kwargs):
     #     kwargs['dest_user'] = kwargs["source_user"]
     #     super(Exchange, self).__init__(self, *args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        super(Request, self).__init__(*args, type="Exchange", **kwargs)
 
     def set_status(self):
         self.status = 0
@@ -316,7 +325,7 @@ class UniversityTrans(Request):
         (0, 'application fee'),
         (1, 'deposit fee')
     )
-    type = models.IntegerField(choices=types, null=False)
+    type1 = models.IntegerField(choices=types, null=False)
     university_name = models.CharField(max_length=50, null=False)
     link = models.URLField(null=False)
     username = models.CharField(max_length=100, null=False)
@@ -330,7 +339,7 @@ class ForeignTrans(Request):
     bank_name = models.CharField(max_length=50, null=False)
 
     def __init__(self, *args, **kwargs):
-        temp = super().__init__(*args, **kwargs)
+        temp = super().__init__(*args, type="ForeignTrans", ** kwargs)
         if not self.pk:
             manager = Manager.get_manager()
             self.dest_user = manager
@@ -358,6 +367,152 @@ class UnknownTrans(Request):
     email = models.EmailField()
     phone_number = models.CharField(max_length=20)
 
+
+class CustomTransactionInstance(Request):
+    # each instance of custom transaction is an instance of this
+    email1 = models.EmailField(null=True)
+    email2 = models.EmailField(null=True)
+    email3 = models.EmailField(null=True)
+    short_text1 = models.CharField(max_length=100, null=True)
+    short_text2 = models.CharField(max_length=100, null=True)
+    short_text3 = models.CharField(max_length=100, null=True)
+    short_text4 = models.CharField(max_length=100, null=True)
+    short_text5 = models.CharField(max_length=100, null=True)
+    short_text6 = models.CharField(max_length=100, null=True)
+    short_text7 = models.CharField(max_length=100, null=True)
+    short_text8 = models.CharField(max_length=100, null=True)
+    long_text1 = models.TextField(null=True)
+    long_text2 = models.TextField(null=True)
+    long_text3 = models.TextField(null=True)
+    long_text4 = models.TextField(null=True)
+    long_text5 = models.TextField(null=True)
+    int1 = models.IntegerField(null=True)
+    int2 = models.IntegerField(null=True)
+    int3 = models.IntegerField(null=True)
+    int4 = models.IntegerField(null=True)
+    int5 = models.IntegerField(null=True)
+    date1 = models.DateTimeField(null=True)
+    date2 = models.DateTimeField(null=True)
+    date3 = models.DateTimeField(null=True)
+    date4 = models.DateTimeField(null=True)
+    float1 = models.FloatField(null=True)
+    float2 = models.FloatField(null=True)
+    float3 = models.FloatField(null=True)
+    float4 = models.FloatField(null=True)
+    boolean1 = models.NullBooleanField()
+    boolean2 = models.NullBooleanField()
+    boolean3 = models.NullBooleanField()
+    boolean4 = models.NullBooleanField()
+    boolean5 = models.NullBooleanField()
+    file1 = models.FileField(null=True)
+    file2 = models.FileField(null=True)
+    file3 = models.FileField(null=True)
+    image1 = models.ImageField(null=True)
+    image2 = models.ImageField(null=True)
+    url1 = models.URLField(null=True)
+    url2 = models.URLField(null=True)
+    user1 = models.ForeignKey('customer.Customer', on_delete=models.DO_NOTHING, null=True, related_name="first_user")
+    user2 = models.ForeignKey('customer.Customer', on_delete=models.DO_NOTHING, null=True, related_name="second_user")
+    request1 = models.ForeignKey('customer.Request', on_delete=models.DO_NOTHING, null=True, related_name="first_request")
+    request2 = models.ForeignKey('customer.Request', on_delete=models.DO_NOTHING, null=True, related_name="second_request")
+
+
+class CustomTransactionType():
+    # each type of custom transaction is an instance of this
+    type = models.CharField(max_length=100, null=True)
+    label = models.CharField(max_length=100, null=True)
+    description = models.TextField(null=True)
+    email1 = models.BooleanField(null=False, default=False)
+    email2 = models.BooleanField(null=False, default=False)
+    email3 = models.BooleanField(null=False, default=False)
+    short_text1 = models.BooleanField(null=False, default=False)
+    short_text2 = models.BooleanField(null=False, default=False)
+    short_text3 = models.BooleanField(null=False, default=False)
+    short_text4 = models.BooleanField(null=False, default=False)
+    short_text5 = models.BooleanField(null=False, default=False)
+    short_text6 = models.BooleanField(null=False, default=False)
+    short_text7 = models.BooleanField(null=False, default=False)
+    short_text8 = models.BooleanField(null=False, default=False)
+    long_text1 = models.BooleanField(null=False, default=False)
+    long_text2 = models.BooleanField(null=False, default=False)
+    long_text3 = models.BooleanField(null=False, default=False)
+    long_text4 = models.BooleanField(null=False, default=False)
+    long_text5 = models.BooleanField(null=False, default=False)
+    int1 = models.BooleanField(null=False, default=False)
+    int2 = models.BooleanField(null=False, default=False)
+    int3 = models.BooleanField(null=False, default=False)
+    int4 = models.BooleanField(null=False, default=False)
+    int5 = models.BooleanField(null=False, default=False)
+    date1 = models.BooleanField(null=False, default=False)
+    date2 = models.BooleanField(null=False, default=False)
+    date3 = models.BooleanField(null=False, default=False)
+    date4 = models.BooleanField(null=False, default=False)
+    float1 = models.BooleanField(null=False, default=False)
+    float2 = models.BooleanField(null=False, default=False)
+    float3 = models.BooleanField(null=False, default=False)
+    float4 = models.BooleanField(null=False, default=False)
+    boolean1 = models.BooleanField(null=False, default=False)
+    boolean2 = models.BooleanField(null=False, default=False)
+    boolean3 = models.BooleanField(null=False, default=False)
+    boolean4 = models.BooleanField(null=False, default=False)
+    boolean5 = models.BooleanField(null=False, default=False)
+    file1 = models.BooleanField(null=False, default=False)
+    file2 = models.BooleanField(null=False, default=False)
+    file3 = models.BooleanField(null=False, default=False)
+    image1 = models.BooleanField(null=False, default=False)
+    image2 = models.BooleanField(null=False, default=False)
+    url1 = models.BooleanField(null=False, default=False)
+    url2 = models.BooleanField(null=False, default=False)
+    user1 = models.BooleanField(null=False, default=False)
+    user2 = models.BooleanField(null=False, default=False)
+    request1 = models.BooleanField(null=False, default=False)
+    request2 = models.BooleanField(null=False, default=False)
+
+    email1 = models.CharField(max_length=100, null=True, default=False)
+    email2 = models.CharField(max_length=100, null=True, default=False)
+    email3 = models.CharField(max_length=100, null=True, default=False)
+    short_text1 = models.CharField(max_length=100, null=True, default=False)
+    short_text2 = models.CharField(max_length=100, null=True, default=False)
+    short_text3 = models.CharField(max_length=100, null=True, default=False)
+    short_text4 = models.CharField(max_length=100, null=True, default=False)
+    short_text5 = models.CharField(max_length=100, null=True, default=False)
+    short_text6 = models.CharField(max_length=100, null=True, default=False)
+    short_text7 = models.CharField(max_length=100, null=True, default=False)
+    short_text8 = models.CharField(max_length=100, null=True, default=False)
+    long_text1 = models.CharField(max_length=100, null=True, default=False)
+    long_text2 = models.CharField(max_length=100, null=True, default=False)
+    long_text3 = models.CharField(max_length=100, null=True, default=False)
+    long_text4 = models.CharField(max_length=100, null=True, default=False)
+    long_text5 = models.CharField(max_length=100, null=True, default=False)
+    int1 = models.CharField(max_length=100, null=True, default=False)
+    int2 = models.CharField(max_length=100, null=True, default=False)
+    int3 = models.CharField(max_length=100, null=True, default=False)
+    int4 = models.CharField(max_length=100, null=True, default=False)
+    int5 = models.CharField(max_length=100, null=True, default=False)
+    date1 = models.CharField(max_length=100, null=True, default=False)
+    date2 = models.CharField(max_length=100, null=True, default=False)
+    date3 = models.CharField(max_length=100, null=True, default=False)
+    date4 = models.CharField(max_length=100, null=True, default=False)
+    float1 = models.CharField(max_length=100, null=True, default=False)
+    float2 = models.CharField(max_length=100, null=True, default=False)
+    float3 = models.CharField(max_length=100, null=True, default=False)
+    float4 = models.CharField(max_length=100, null=True, default=False)
+    boolean1 = models.CharField(max_length=100, null=True, default=False)
+    boolean2 = models.CharField(max_length=100, null=True, default=False)
+    boolean3 = models.CharField(max_length=100, null=True, default=False)
+    boolean4 = models.CharField(max_length=100, null=True, default=False)
+    boolean5 = models.CharField(max_length=100, null=True, default=False)
+    file1 = models.CharField(max_length=100, null=True, default=False)
+    file2 = models.CharField(max_length=100, null=True, default=False)
+    file3 = models.CharField(max_length=100, null=True, default=False)
+    image1 = models.CharField(max_length=100, null=True, default=False)
+    image2 = models.CharField(max_length=100, null=True, default=False)
+    url1 = models.CharField(max_length=100, null=True, default=False)
+    url2 = models.CharField(max_length=100, null=True, default=False)
+    user1 = models.CharField(max_length=100, null=True, default=False)
+    user2 = models.CharField(max_length=100, null=True, default=False)
+    request1 = models.CharField(max_length=100, null=True, default=False)
+    request2 = models.CharField(max_length=100, null=True, default=False)
 #
 # class CustomerWalletTransfer(models.Model):
 #     wallets = (
