@@ -25,7 +25,9 @@
         <form method="post" novalidate>
             {% csrf_token %} {% for field in form %}
             <div class="form-group has-feedback">
-                {{field.label}} {{field}} {% for error in feild.errors %}
+                {{field.name}}
+                {{field.label}} {{field}}
+                {% for error in field.errors %}
                 <span class="text-danger" name="password-repeat-error">{{ error }}</span>
                 {% endfor %}
                 <span class="glyphicon form-control-feedback"></span>
@@ -37,6 +39,9 @@
                 </div>
                 <!-- /.col -->
             </div>
+            {% for error in form.non_field_errors  %}
+              <span class="text-danger" name="first-name-error">{{ error }}</span>
+           {% endfor %}
         </form>
     </div>
 </div>

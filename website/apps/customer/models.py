@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group
 from utils.currency_utils import Transactions
 from apps.employee.models import EmployeeReview
 from apps.manager.models import Manager
+from django.forms import ValidationError
 import traceback
 
 
@@ -58,8 +59,6 @@ class Request(PolymorphicModel):
             self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
         # print('in iniit')
         # print(self.dest_user.dollar_cent_credit)
-        self.pay()
-        self.recieve()
         # print(self.dest_user.dollar_cent_credit)
         # print('end')
 
@@ -203,6 +202,19 @@ class Request(PolymorphicModel):
             pass
 
         return reject
+
+    def take_action(self):
+        self.pay()
+        self.recieve()
+
+    def clean(self):
+        temp = super().clean()
+        if not self.pk:
+            self.take_action()
+        errors = self.exception_texts()
+        if(errors):
+            raise ValidationError([ValidationError(text) for text in errors])
+        return temp
 
 
 class Reverse_Request(Request):

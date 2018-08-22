@@ -17,12 +17,14 @@ from apps.customer.Forms import CustomerSettingsForm
 from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 from apps.customer import Forms
+from apps.main.models import GenUser
 
 
 class CustomerTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        self.context = context
         return context
 
 
@@ -30,6 +32,15 @@ class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        self.context = context
+        return context
+
+
+class CustomerCreateView(CreateView, IsLoggedInView, IsCustomer):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        self.context = context
         return context
 
 
@@ -51,8 +62,18 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
         return context
 
 
-class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
+class TransactionCreationView(CustomerFormView):
     template_name = "customer/render_form.html"
+    success_url = reverse_lazy('customer: create')
+
+    def get_success_url(self):
+        return ""
+
+    def get_form_kwargs(self):
+        kwargs = super(CustomerFormView, self).get_form_kwargs()
+        kwargs['user'] = Customer.objects.get(username=self.request.user)
+        # kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
+        return kwargs
 
     def dispatch(self, request, *args, **kwargs):
         self.type = self.kwargs['type']
@@ -62,8 +83,21 @@ class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
     def get_form_class(self):
         return Forms.get_form_class(self.type)
 
+    def form_valid(self, form):
+        print("valid")
+        object = form.save()
+        print(object)
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print("invalid")
+        print(form.errors.items())
+
+        return super().form_invalid(form)
+
 
 class ReverseChargeCreationView(TransactionCreationView):
+
     template_name = "customer/reverse_charge.html"
 
     class Meta:
@@ -76,9 +110,8 @@ class TransactionDetailsView(DetailView):
     mdoel = Request
     # queryset = Request.objects.all()
 
-    def get_queryset(self):
-        # """Return the last five published questions."""
-        return Request.objects.filter(id=self.kwargs['pk'])
+    # def get_queryset(self):
+    #     # """Return the last five published questions."""p
 
     def get_context_data(self, **kwargs):
         temp = super().get_context_data(**kwargs)
