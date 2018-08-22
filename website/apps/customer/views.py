@@ -15,7 +15,7 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views.generic.detail import DetailView
 from apps.customer.Forms import CustomerSettingsForm
 from apps.main.Forms import UserPasswordChangeForm
-from apps.main.views import IsLoggedInView, IsCustomer, CustomerDetailsView
+from apps.main.views import IsLoggedInView, IsCustomer
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
 
@@ -49,6 +49,7 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
+        context['pending_requests'] = len(Request.objects.filter(source_user__username = self.request.user.username, status=2))
         return context
 
 
@@ -113,12 +114,6 @@ class TOFELCreationView(TransactionCreationView):
 class GRECreationView(TransactionCreationView):
     class Meta:
         model = GRE
-
-
-# todo add other forms as well
-
-class CustomerProfile(IsCustomer, CustomerDetailsView):
-    ""
 
 
 class CustomerPasswordChangeView(IsCustomer, FormView):

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from apps.employee.views import EmployeePasswordChangeView, TransactionDetailsView, EmployeeSettingsView, EmployeeDashboardView, EmployeeDashboardView
-from apps.main.views import CustomerDetailsView, NotificationsView
+from apps.main.views import  NotificationsView
 
 urlpatterns = [
     path('dashboard', EmployeeDashboardView.as_view(), name='dashboard'),
@@ -24,6 +24,6 @@ urlpatterns = [
     path('settings', EmployeeSettingsView.as_view(), name='settings'),
     path('<pk>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('settings/', EmployeeSettingsView.as_view(), name='settings'),  # todo do ta azin hast :-s
-    path('<user_id>_customer_details/', CustomerDetailsView.as_view(), name='customer_details'),
+    # path('<user_id>_customer_details/', CustomerDetailsView.as_view(), name='customer_details'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),
 ]

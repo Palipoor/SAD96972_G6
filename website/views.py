@@ -24,10 +24,10 @@ class Compilation():
     @staticmethod
     def manager_context(context, manager):
         if(manager):
-            Compilation.user_context(context, manager)
             context['euro_credit'] = manager.euro_cent_credit / 100
             context['dollar_credit'] = manager.dollar_cent_credit / 100
             context['rial_credit'] = manager.rial_credit
+        return context
 
     @staticmethod
     def user_context(context, user):
@@ -69,6 +69,5 @@ class Compilation():
         return context
 
     def get_all_requests(context):
-        # get requests regarding a wallet of the user. if wallet equals -1 all wallets are used.
         context['requests'] = Request.objects.all()
         return context

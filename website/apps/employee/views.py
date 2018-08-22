@@ -10,10 +10,11 @@ from django.views.generic import UpdateView, FormView, ListView, TemplateView, D
 
 from apps.employee.Forms import EmployeeSettingsForm, ReviewForm
 from apps.employee.models import Employee
-from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView
+from apps.main.views import IsLoggedInView, IsEmployee
 from apps.main.Forms import UserPasswordChangeForm
 from apps.customer.models import Request
-from apps.main.views import IsLoggedInView, IsEmployee, EmployeeDetailsView, Compilation
+from apps.main.models import Notification
+from apps.main.views import IsLoggedInView, IsEmployee, Compilation
 from django.urls import reverse_lazy
 
 
@@ -54,10 +55,6 @@ class EmployeeDashboardView(IsLoggedInView, IsEmployee, EmployeeFormView):
     def form_valid(self, form):
         form.update_db()
         return super().form_valid(form)
-
-
-class EmployeeProfile(IsEmployee, EmployeeDetailsView):
-    ""
 
 
 class EmployeePasswordChangeView(IsEmployee, FormView):

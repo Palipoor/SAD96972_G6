@@ -15,7 +15,7 @@ from apps.manager.models import Manager
 from apps.main.MultiForm import MultiFormsView
 from apps.main.Forms import UserPasswordChangeForm
 from django.views.generic import TemplateView
-from apps.main.views import IsLoggedInView, DetailsView, IsManager, CustomerDetailsView, EmployeeDetailsView
+from apps.main.views import IsLoggedInView, DetailsView, IsManager
 from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
     CustomerAccessRemovalForm
 from apps.manager.Forms import ReviewForm
@@ -41,7 +41,8 @@ class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):
     def get_context_data(self, **kwargs):
         context = super(ManagerFormView, self).get_context_data(**kwargs)
         context = Compilation.get_all_requests(context)
-        context.update({'notifications' : Notification.objects.filter(user__username = self.request.user.username, seen = False).order_by('-sent_date')})
+        context = Compilation.get_manager_context_data(context = context, username = self.request.user.username)[0]
+        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
         return context
 
     def get_form_kwargs(self):
@@ -64,23 +65,44 @@ class ManagerPasswordChangeView(IsManager, FormView):
         kwargs['user'] = Manager.objects.get(username=self.request.user)
         return kwargs
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
     #model = Company
     template_name = "manager/settings.html"
-    fields = ['english_name', 'persian_name', 'account', 'photo']
-    # todo incomplete
+    fields = ['english_name', 'persian_name', 'account']
+    # TODO incomplete
 
 
-class CustomerDetailsForManager(IsManager, CustomerDetailsView):
-    ""
+# TODO #FIXME #PLEASE
+class CustomerDetailsForManager(IsManager, DetailsView):
+
+    model = Customer
+    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'username', 'email',
+              'phone', 'account-number']
+    template_name = 'customer_details.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user_id = kwargs['user_id']
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerDetailsForManager, self).get_context_data(**kwargs)
+        customer = Customer.objects.get(id=self.user_id)
+        context = Compilation.get_wallet_requests(context, customer.username, -1)
+        return context
 
 
-class EmployeeDetailsForManager(IsManager, EmployeeDetailsView):
-    ""
+class EmployeeDetailsForManager(IsManager, DetailsView):
+
+    def dispatch(self, request, *args, **kwargs):
+        self.employee_id = kwargs['employee_id']
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeDetailsForManager, self).get_context_data(**kwargs)
+        return context
 
 
 class CustomersListView(IsLoggedInView, IsManager, FormView):
@@ -96,7 +118,7 @@ class CustomersListView(IsLoggedInView, IsManager, FormView):
             email = the_customer.email
             message = strings.CUSTOMER_ACCESS_REMOVAL + form.cleaned_data['reason']
             the_customer.is_active = False
-            notification_tools.send_email(message = message, email  = email, subject = 'اعلان قطع دسترسی')
+            notification_tools.send_email(message=message, email=email, subject='اعلان قطع دسترسی')
             the_customer.save()
             return self.form_valid(form)
         else:
@@ -118,7 +140,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
     change_salary_form_class = ChangeSalaryForm
     form_class = add_employee_form_class
     template_name = "manager/users.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super(EmployeeListView, self).get_context_data(**kwargs)
         if 'add_employee_form' not in context:
@@ -128,7 +150,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         if 'change_salary_form' not in context:
             context['change_salary_form'] = self.change_salary_form_class()
         context.update({'type': 'کارمند'})
-        context.update({'object_list': Employee.objects.all()})        
+        context.update({'object_list': Employee.objects.all()})
         return context
 
     def post(self, request, *args, **kwargs):
@@ -146,7 +168,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            return self.form_invalid(**{form_name: form})    
+            return self.form_invalid(**{form_name: form})
 
     def form_valid(self, form):
         if isinstance(form, EmployeeCreationForm):
@@ -160,16 +182,16 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         new_user = Employee(username=form.cleaned_data['username'],
                             persian_first_name=form.cleaned_data["persian_first_name"],
                             persian_last_name=form.cleaned_data["persian_last_name"],
-                            current_salary=form.cleaned_data['current_salary'], 
-                            first_name = form.cleaned_data['first_name'],
-                            last_name = form.cleaned_data['last_name'], 
-                            email = form.cleaned_data['email'])
+                            current_salary=form.cleaned_data['current_salary'],
+                            first_name=form.cleaned_data['first_name'],
+                            last_name=form.cleaned_data['last_name'],
+                            email=form.cleaned_data['email'])
         new_user.set_password("someRandomPassword")  # todo generate random
         new_user.save()
         new_form = EmployeeCreationForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
         name = form.cleaned_data['persian_first_name'] + ' ' + form.cleaned_data['persian_last_name']
-        context.update({'add_success' : name + ' با موفقیت به کارمندان اضافه شد.' })
+        context.update({'add_success': name + ' با موفقیت به کارمندان اضافه شد.'})
         return self.render_to_response(context)
 
     def change_salary_form_valid(self, form):
@@ -178,7 +200,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         the_employee.save()
         new_form = ChangeSalaryForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
-        context.update({'change_success' : 'حقوق کارمند مورد نظر تغییر کرد.' })
+        context.update({'change_success': 'حقوق کارمند مورد نظر تغییر کرد.'})
         return self.render_to_response(context)
 
     def remove_access_form_valid(self, form):
@@ -187,7 +209,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         the_employee.save()
         new_form = EmployeeAccessRemovalForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
-        context.update({'remove_success' : 'دسترسی کارمند مورد نظر از سامانه قطع شد.'})
+        context.update({'remove_success': 'دسترسی کارمند مورد نظر از سامانه قطع شد.'})
         return self.render_to_response(context)
 
     def form_invalid(self, **kwargs):

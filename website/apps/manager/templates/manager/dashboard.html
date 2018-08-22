@@ -19,7 +19,9 @@
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
-        <h3>۱۵۰</h3>
+        <h3>{{rial_credit}}
+          <sup style="font-size: 20px">ریال</sup>
+        </h3>
         <p>موجودی حساب ریالی</p>
       </div>
       <div class="icon">
@@ -32,8 +34,8 @@
     <!-- small box -->
     <div class="small-box bg-green">
       <div class="inner">
-        <h3>۵۳
-          <sup style="font-size: 20px">%</sup>
+        <h3>{{dollar_credit}}
+          <sup style="font-size: 20px">سنت</sup>
         </h3>
         <p>موجودی حساب دلاری</p>
       </div>
@@ -47,7 +49,9 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
-        <h3>۴۴</h3>
+        <h3>{{euro_credit}}
+        <sup style="font-size: 20px">سنت</sup>
+      </h3>
         <p>موجودی حساب یورویی</p>
       </div>
       <div class="icon">
@@ -133,7 +137,7 @@
 </div>
 {% endcomment %}
 <div class="row">
-  <div class="col-xs-14">
+  <div class="col-md-6">
     <div class="box">
       <div class="box-header">
         <h3 class="box-title">تراکنش‌ها و درخواست‌های تراکنش</h3>
@@ -143,12 +147,9 @@
         <table id="table2" name="transactions-table" class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>شناسه تراکنش</th>
-              <th>نوع تراکنش</th>
-              <th>تاریخ تراکنش </th>
-              <th>شناسه درخواست دهنده</th>
-              <th>مبلغ</th>
-              <th>وضعیت</th>
+              <th style = "width: 20px">شناسه</th>
+              <th style = "width: 150px">تاریخ تراکنش </th>
+              <th style = "width: 10px">وضعیت</th>
             </tr>
           </thead>
           <tbody>
@@ -157,22 +158,52 @@
               <td>
                 <a href="{{req.id}}_transaction_details">{{req.id}}</a>
               </td>
-              <td></td>
               <td>{{req.request_time}}</td>
-              <td></td>
-              <td>{{req.amount}}</td>
               <td>{{req.status}}</td>
             </tr>
             {% endfor %}
           </tbody>
           <tfoot>
             <tr>
-              <th>شناسه تراکنش</th>
-              <th>نوع تراکنش</th>
+              <th>شناسه</th>
               <th>تاریخ تراکنش </th>
-              <th>شناسه درخواست دهنده</th>
-              <th>مبلغ</th>
               <th>وضعیت</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <div class="col-md-6">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">تراکنش‌های گزارش‌شده</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table id="table2" name="transactions-table" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th style = "width: 20px">شناسه</th>
+              <th style = "width: 150px">توضیح گزارش</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for req in requests %}
+            <tr>
+              <td>
+                <a href="{{req.id}}_transaction_details">{{req.id}}</a>
+              </td>
+              <td>{{req.request_time}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>شناسه تراکنش</th>
+              <th>توضیح گزارش</th>
             </tr>
           </tfoot>
         </table>
@@ -184,53 +215,6 @@
   <!-- /.col -->
 </div>
 <!-- /.row -->
-
-<div class="row">
-  <div class="col-md-8">
-    <div class="box">
-      <div class="box-header with-border">
-        <h3 class="box-title">گزارش خطا در تراکنش‌ها</h3>
-        {% for error in form.non_field_errors %}
-        <span class="text-danger" name="first-name-error">{{ error }}</span>
-        {% endfor %}
-      </div>
-      <!-- /.box-header -->
-      <!-- form start -->
-      <form class="form-horizontal" method="POST">
-        {% csrf_token %}
-        <div class="box-body">
-          <div class="form-group">
-            <label for="transaction-id" class="col-sm-2 control-label">شناسه تراکنش</label>
-            {{form.transactionId}} {% for error in form.transactionId.errors %}
-            <span class="text-danger" name="first-name-error">{{ error }}</span>
-            {% endfor %}
-
-          </div>
-          <div class="form-group">
-            <label for="why" class="col-sm-2 control-label">توضیح</label>
-            {{form.description}} {% for error in form.description.errors %}
-            <span class="text-danger" name="first-name-error">{{ error }}</span>
-            {% endfor %}
-
-          </div>
-          <div class="form-group">
-            {{form.action}} {% for error in form.action.errors %}
-            <span class="text-danger" name="first-name-error">{{ error }}</span>
-            {% endfor %}
-          </div>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          <button type="submit" name="send" class="btn btn-info pull-right">ارسال</button>
-          <div class="col-md-5">
-            <p name="message-1">این جا پیام خطا یا موفقیت می‌آید.</p>
-          </div>
-        </div>
-        <!-- /.box-footer -->
-      </form>
-    </div>
-  </div>
-</div>
 
 <!-- /.nav-tabs-custom -->
 

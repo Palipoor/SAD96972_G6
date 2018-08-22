@@ -16,10 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from apps.main.views import WalletView, NotificationsView, \
-    CustomerDetailsView
+from apps.main.views import WalletView, NotificationsView
 from apps.manager.views import ManagerPasswordChangeView, CompanySettingsView, \
-    ManagerDashboardView, EmployeeDetailsView, EmployeeListView, CustomersListView, EmployeeDetailsForManager, \
+    ManagerDashboardView, EmployeeListView, CustomersListView, EmployeeDetailsForManager, \
     CustomerDetailsForManager
 
 urlpatterns = [

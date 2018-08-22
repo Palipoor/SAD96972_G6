@@ -132,12 +132,12 @@ class DetailsView(IsLoggedInView, DetailView):
 class NotificationsView(IsLoggedInView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(NotificationsView, self).get_context_data(**kwargs)
-        context['object_list'] = Notification.objects.filter(user__username = self.user.username).order_by('-sent_date')
-        for notif  in context['object_list']:
+        context['object_list'] = Notification.objects.filter(user__username=self.user.username).order_by('-sent_date')
+        for notif in context['object_list']:
             notif.seen = True
             notif.save()
         return context
-    
+
     def dispatch(self, request, *args, **kwargs):
         self.user = request.user
         isManager = self.user.groups.filter(name='manager').exists()
@@ -151,25 +151,6 @@ class NotificationsView(IsLoggedInView, TemplateView):
             self.template_name = 'manager/notifications.html'
 
         return render(request, self.template_name, self.get_context_data(**kwargs))
-
-
-class CustomerDetailsView(DetailsView, ListView):
-    model = Customer
-    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'username', 'email',
-              'phone', 'account-number']
-    context_object_name = 'transactions'
-    template_name = 'manager/customer_details'
-
-    def get_context_data(self, **kwargs):
-        return []  # todo query bezan transaction haye user e marboot ro biar va khode adame ro.
-
-
-class EmployeeDetailsView(DetailsView):
-
-    def dispatch(self, request, *args, **kwargs):
-        self.employee_id = kwargs['employee_id']
-        # todo incomplete
-
 
 class Register(FormView):
     # todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
@@ -248,7 +229,7 @@ class LandingPageView(FormView):
                 return HttpResponse('Invalid header found.')
             context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
             if success:
-                context.update({'success' : 'پیام شما با موفقیت ارسال شد.'})
+                context.update({'success': 'پیام شما با موفقیت ارسال شد.'})
             return render(self.request, 'main/index.html', context)
 
         else:
