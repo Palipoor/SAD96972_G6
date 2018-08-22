@@ -146,10 +146,8 @@
                         <div class="download-btn">
                             <!-- BUTTON -->
 
-                            <a class="btn home-btn wow fadeInLeft" href='{% static "panel\pages\examples\login.html" %}'
+                            <a class="btn home-btn wow fadeInLeft" href="{% url 'main:login' %}"
                                name="log in">ورود</a>
-                            <a class="tuor btn wow fadeInRight" href={% url 'main:login' %}>اطلاعات بیشتر
-                                <i class="fa fa-angle-down"></i>
                             </a>
                         </div>
                     </div>
@@ -202,8 +200,7 @@
                     <div class="inner_about_title" dir="rtl">
                         <h2 dir="rtl">چرا ما بهترین
                             <br> گزینه‌ایم؟</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                        <p>از ما مي‌پرسند که چرا با وجود موسسات مشابه، باید سپاا را انتخاب کنیم</p>
                     </div>
                     <div class="inner_about_desc">
 
@@ -214,28 +211,9 @@
                                 <i class="pe-7s-timer"></i>
                             </div>
                             <!-- HEADING DESCRIPTION -->
-                            <h3>ویژگی خیلی خیلی خوب</h3>
-                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                Sed
-                                ut perspiciatis unde omnis iste natus error sit.</p>
+                            <h3>سهولت کاربری</h3>
+                            <p>رابط کاربری سپاا استفاده از آن را برای مشتریان با هر سنی و از هر قشری ساده کرده است.</p>
                         </div>
-                        <!-- END SINGLE DESC -->
-
-
-                        <!-- SINGLE DESC -->
-                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1.5s">
-                            <!-- ICON -->
-                            <div>
-                                <i class="pe-7s-target"></i>
-                            </div>
-                            <!-- HEADING DESCRIPTION -->
-                            <h3>ویژگی خیلی خیلی خوب</h3>
-                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                Sed
-                                ut perspiciatis unde omnis iste natus error sit.</p>
-                        </div>
-                        <!-- END SINGLE DESC -->
-
 
                         <!-- SINGLE DESC -->
                         <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="2s">
@@ -244,10 +222,8 @@
                                 <i class="pe-7s-stopwatch"></i>
                             </div>
                             <!-- HEADING DESCRIPTION -->
-                            <h3>ویژگی خیلی خیلی خوب</h3>
-                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                Sed
-                                ut perspiciatis unde omnis iste natus error sit.</p>
+                            <h3>کارمزد کمتر</h3>
+                            <p></p>
                         </div>
                         <!-- END SINGLE DESC -->
 
@@ -292,13 +268,10 @@
                                             <img src='{% static "images/client_1.png" %}' alt="">
                                             <div class="testimonial_caption">
                                                 <!-- DESCRIPTION -->
-                                                <h2>ممد</h2>
+                                                <h2>معین نهضتی</h2>
                                                 <h4>
-                                                    <span>علاف</span> فلانجا</h4>
-                                                <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                    commodo consequat.”</p>
+                                                    <span>دانشجو</span></h4>
+                                                <p>“برای گرفتن پذیرش تو مقطع دکتری لازم بود برای چند دانشگاه فرم ثبت نام پر کنم و با سپاا تونستم این کار رو با کارمزد خیلی کمتری از جاهای دیگه انجام بدم.”</p>
                                             </div>
                                         </div>
                                     </div>
@@ -312,33 +285,10 @@
                                             <img src='{% static "images/client_2.png" %}' alt="">
                                             <div class="testimonial_caption">
                                                 <!-- DESCRIPTION -->
-                                                <h2>مریم</h2>
+                                                <h2>پگاه علیپور</h2>
                                                 <h4>
-                                                    <span>علاف</span> فلانجا</h4>
-                                                <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                    commodo consequat.”</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <!-- IMAGE -->
-                                            <img src='{% static "images/client_3.png" %}' alt="">
-                                            <div class="testimonial_caption">
-                                                <!-- DESCRIPTION -->
-                                                <h2>میترا</h2>
-                                                <h4>
-                                                    <span>علاف</span> فلانجا</h4>
-                                                <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, do eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                    veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                    commodo consequat.”</p>
+                                                    <span>مادر</span></h4>
+                                                <p>“دخترم چند وقتیه که دور از ما زندگی می‌کنه و با سپاا می‌تونم به راحتی براش پول جابجا کنم.”</p>
                                             </div>
                                         </div>
                                     </div>
@@ -366,10 +316,7 @@
                 <!-- FEATURES SECTION TITLE -->
                 <div class="section_title wow fadeIn" data-wow-duration="1s">
                     <h2>خدمات</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                        ut aliquip.</p>
+                    <p>موسسه سپاا امکان پرداخت‌‌های مختلف ارزی و غیر ارزی را تنها با چند کلیک برای شما فراهم می‌آورد.</p>
                 </div>
                 <!-- END FEATURES SECTION TITLE -->
             </div>
@@ -595,8 +542,7 @@
                     <!-- TITLE -->
                     <div class="inner_about_title" dir="rtl" name="history">
                         <h2 dir="rtl" name="history-header">تاریخچه</h2>
-                        <p name="history-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                        <p name="history-content">موسسه سپاا در سال ۱۳۹۷ با هدف تسهیل روند پرداخت‌ و دریافت ارزی هموطنان تاسیس شد.</p>
                     </div>
                 </div>
             </div>
