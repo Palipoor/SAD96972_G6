@@ -8,7 +8,7 @@ import os
 from django.views.generic.edit import FormView
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView
 from apps.main.views import IsLoggedInView, IsCustomer
-from apps.customer.models import Customer, Request
+from apps.customer.models import Customer, Request, CustomTransactionType
 from views import Compilation
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
@@ -59,6 +59,8 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
+        context["transaction_types"] = CustomTransactionType.objects.all()
+        print
         return context
 
 

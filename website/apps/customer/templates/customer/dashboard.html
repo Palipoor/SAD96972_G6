@@ -126,48 +126,15 @@
             <div class="product-img">
               <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
             </div>
+
+            {% for type in transaction_types%}
             <div class="product-info">
-              <a href='{% static "panel/pages/customer/payment_form.html" %}' class="product-title" name = "payment">پرداخت ارزی</a>
+              <a href='create_{{type.type}}' class="product-title" name = "payment">{{type.label}}</a>
               <span class="product-description">
-                یسری توضیح یسری توضیح یسری توضیح
+                {{type.description}}
               </span>
             </div>
-          </li>
-          <!-- /.item -->
-          <li class="item">
-            <div class="product-img">
-              <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
-            </div>
-            <div class="product-info">
-              <a href='{% static "panel/pages/customer/application_fee_form.html" %}' class="product-title" name = "application-fee">پرداخت هزینه ثبت نام و یا شهریه دانشگاه </a>
-              <span class="product-description">
-                یسری توضیح یسری توضیح یسری توضیح
-              </span>
-            </div>
-          </li>
-          <!-- /.item -->
-          <li class="item">
-            <div class="product-img">
-              <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
-            </div>
-            <div class="product-info">
-              <a href='{% static "panel/pages/customer/anonymous_payment_form.html" %}' class="product-title" name = "anonymous-payment">پرداخت به صورت ناشناس </a>
-              <span class="product-description">
-                یسری توضیح یسری توضیح یسری توضیح
-              </span>
-            </div>
-          </li>
-          <!-- /.item -->
-          <li class="item">
-            <div class="product-img">
-              <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
-            </div>
-            <div class="product-info">
-              <a href='{% static "panel/pages/customer/reverse_charge.html" %}' class="product-title" name = "reverse-charge">برداشت از کیف پول ریالی </a>
-              <span class="product-description">
-                یسری توضیح یسری توضیح یسری توضیح
-              </span>
-            </div>
+            {% endfor %}
           </li>
           <!-- /.item -->
         </ul>
