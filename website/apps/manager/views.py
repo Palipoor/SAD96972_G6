@@ -40,6 +40,9 @@ class CreateTransactionTypeView(IsLoggedInView, IsManager, ManagerCreateView):
     model = CustomTransactionType
     fields = '__all__'
 
+    def get_success_url(self):
+        return ""
+
 
 class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):
     template_name = "manager/dashboard.html"
@@ -71,7 +74,7 @@ class ManagerPasswordChangeView(IsLoggedInView, IsManager, PasswordChangeView):
 
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
-    #model = Company
+    # model = Company
     template_name = "manager/settings.html"
     fields = ['english_name', 'persian_name', 'account', 'photo']
     # todo incomplete
