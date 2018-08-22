@@ -3,11 +3,11 @@ from django.contrib.auth.views import PasswordChangeView
 import os
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView, View, FormView
+from django.views.generic import UpdateView, ListView, View, FormView, CreateView
 from django.views.generic.edit import ProcessFormView
 from django.views.generic.list import BaseListView, MultipleObjectMixin
 from views import Compilation
-from apps.customer.models import Customer
+from apps.customer.models import Customer, CustomTransactionType
 from apps.employee.models import Employee
 from apps.main.MultiForm import MultiFormsView
 from django.views.generic import TemplateView
@@ -19,10 +19,26 @@ from apps.manager.models import Manager
 
 
 class ManagerFormView(FormView):
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
         return context
+
+
+class ManagerCreateView(CreateView):
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
+        return context
+
+
+class CreateTransactionTypeView(IsLoggedInView, IsManager, ManagerCreateView):
+    # TODO has problems with being child og managercreateview probably because of its get context
+    template_name = "customer/render_form.html"
+    model = CustomTransactionType
+    fields = '__all__'
 
 
 class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):

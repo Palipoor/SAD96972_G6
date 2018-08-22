@@ -25,9 +25,10 @@ class Compilation():
     def manager_context(context, manager):
         if(manager):
             Compilation.user_context(context, manager)
-            context['euro_credit'] = manager.company_euro_cent_credit / 100
-            context['dollar_credit'] = manager.company_dollar_cent_credit / 100
-            context['rial_credit'] = manager.company_rial_credit
+            context['euro_credit'] = manager.euro_cent_credit / 100
+            context['dollar_credit'] = manager.dollar_cent_credit / 100
+            context['rial_credit'] = manager.rial_credit
+        return context
 
     @staticmethod
     def user_context(context, user):
