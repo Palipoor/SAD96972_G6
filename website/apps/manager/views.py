@@ -6,11 +6,11 @@ from utils import notification_tools
 from utils import strings
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView, View, FormView
+from django.views.generic import UpdateView, ListView, View, FormView, CreateView
 from django.views.generic.edit import ProcessFormView
 from django.views.generic.list import BaseListView, MultipleObjectMixin
 from views import Compilation
-from apps.customer.models import Customer, Request
+from apps.customer.models import Customer, Request, CustomTransactionType
 from apps.employee.models import Employee
 from apps.manager.models import Manager
 from apps.main.MultiForm import MultiFormsView
@@ -26,10 +26,29 @@ from apps.main.views import TransactionDetailsView as MainTransactionDetails
 
 
 class ManagerFormView(FormView):
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
         return context
+
+
+class ManagerCreateView(CreateView):
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
+        return context
+
+
+class CreateTransactionTypeView(IsLoggedInView, IsManager, ManagerCreateView):
+    # TODO has problems with being child og managercreateview probably because of its get context
+    template_name = "customer/render_form.html"
+    model = CustomTransactionType
+    fields = '__all__'
+
+    def get_success_url(self):
+        return ""
 
 
 class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):
@@ -79,7 +98,7 @@ class ManagerPasswordChangeView(IsManager, FormView):
 
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
-    #model = Company
+    # model = Company
     template_name = "manager/settings.html"
     fields = ['english_name', 'persian_name', 'account']
     # TODO incomplete

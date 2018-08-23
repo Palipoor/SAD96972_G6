@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView
 from apps.main.views import IsLoggedInView, IsCustomer
 from apps.main.views import TransactionDetailsView as MainTransactionDetails
-from apps.customer.models import Customer, Request
+from apps.customer.models import Customer, Request, CustomTransactionType
 from views import Compilation
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
@@ -17,12 +17,15 @@ from django.views.generic.detail import DetailView
 from apps.customer.Forms import CustomerSettingsForm
 from apps.main.Forms import UserPasswordChangeForm
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
+from apps.customer import Forms
+from apps.main.models import GenUser
 
 
 class CustomerTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        self.context = context
         return context
 
 
@@ -31,8 +34,17 @@ class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
         context = super().get_context_data(**kwargs)
         context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
         context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
+        self.context = context
         return context
 
+
+class CustomerCreateView(FormView, IsLoggedInView, IsCustomer):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
+        self.context = context
+        return context
 
 class CustomerWallet (CustomerFormView):
     template_name = "customer/wallet.html"
@@ -51,14 +63,34 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
         context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
         context['requests'] = context['requests'][:5]
         context['pending_requests'] = len(Request.objects.filter(source_user__username=self.request.user.username, status=2))
+        context["transaction_types"] = CustomTransactionType.objects.all()
         return context
 
 
-class TransactionCreationView(IsLoggedInView, IsCustomer, CreateView):
-    ""
+class TransactionCreationView(CustomerCreateView):
+    template_name = "customer/render_form.html"
+    success_url = reverse_lazy('customer: create')
+
+    def get_success_url(self):
+        return ""
+
+    def get_form_kwargs(self):
+        kwargs = super(CustomerCreateView, self).get_form_kwargs()
+        kwargs['user'] = Customer.objects.get(username=self.request.user)
+        # kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
+        return kwargs
+
+    def dispatch(self, request, *args, **kwargs):
+        self.type = self.kwargs['type']
+        temp = super().dispatch(request, *args, **kwargs)
+        return temp
+
+    def get_form_class(self):
+        return Forms.get_form_class(self.type)
 
 
 class ReverseChargeCreationView(TransactionCreationView):
+
     template_name = "customer/reverse_charge.html"
 
     class Meta:
@@ -68,6 +100,18 @@ class ReverseChargeCreationView(TransactionCreationView):
 
 class TransactionDetailsView(MainTransactionDetails):
     template_name = "customer/transaction_details.html"
+    mdoel = Request
+    # queryset = Request.objects.all()
+
+    # def get_queryset(self):
+    #     # """Return the last five published questions."""p
+
+    def get_context_data(self, **kwargs):
+        temp = super().get_context_data(**kwargs)
+        print(temp)
+        print(temp['foreigntrans'])
+        temp['type'] = temp['foreigntrans']._meta.model_name
+        return(temp)
 
 
 class ForeignPaymentCreationView(TransactionCreationView):
@@ -148,3 +192,6 @@ class TransactionsListView(IsLoggedInView, IsCustomer, TemplateView):
         return context
 
 
+
+class MakeTransactionView(IsLoggedInView, IsCustomer, FormView):
+    template_name = "cuatomer/make_transaction"

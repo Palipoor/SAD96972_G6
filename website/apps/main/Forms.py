@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import ValidationError
 
-from apps.customer.models import Customer, Exchange
+from apps.customer.models import Customer, Exchange, Charge
 from apps.main.models import GenUser, Wallet_User
 from apps.manager.models import Manager
 from utils.strings import *
@@ -81,20 +81,30 @@ class WalletChargeForm(forms.Form):
         print("in init")
         self.user = kwargs.pop('user')
         self.dest = kwargs.pop('dest')
-        self.source = 0
+        self.source = "0"
         self.transaction = None
         super(WalletChargeForm, self).__init__(*args, **kwargs)
 
     def clean_amount(self):
         # makes exception if charge is invalid
         self.needed_value = self.cleaned_data['amount'] * Transactions.get_exchange_rate(self.dest, self.source)
-        self.transaction = Exchange(source_user=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
-        exps = self.transaction.exception_texts()
-        print("clean_amount")
-        print(exps)
-        if (exps):
-            raise ValidationError(exps[0])
+        if(self.dest != "0"):
+            self.transaction = Exchange(source_user=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
+        else:
+            print("hello")
+            self.transaction = Charge(dest_user=self.user, dest_wallet=self.dest, amount=self.needed_value)
+        # TODO generalize peyments
+        # exps = self.transaction.exception_texts()
+        # print("clean_amount")
+        # print(exps)
+        # if (exps):
+        #     raise ValidationError(exps[0])
         return self.cleaned_data['amount']
+
+    def clean(self):
+        temp = super().clean()
+        self.transaction.full_clean()
+        return temp
 
     def update_db(self):
         # updates db

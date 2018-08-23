@@ -32,5 +32,5 @@ urlpatterns = [
     path('<user_id>_employee_details/', EmployeeDetailsForManager.as_view(), name='employee_details'),
     path('<currency>_wallet/', WalletView.as_view(user_type="Manager"), name='wallet'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),
-
+    path('create_transaction_type/', CreateTransactionTypeView.as_view(), name='create_transaction_type'),
 ]

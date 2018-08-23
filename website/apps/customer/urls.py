@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from apps.customer.views import CustomerPasswordChangeView, CustomerSettingsView, \
     ReverseChargeCreationView, ForeignPaymentCreationView, \
-    ApplicationFeeCreationView, AnonymousPaymentCreationView, TransactionsListView, CustomerDashboardView, TransactionDetailsView
+    ApplicationFeeCreationView, AnonymousPaymentCreationView, TransactionsListView, CustomerDashboardView, TransactionDetailsView, TransactionCreationView
 from apps.main.views import WalletView, NotificationsView
 
 urlpatterns = [
@@ -33,4 +33,6 @@ urlpatterns = [
     path('anonymous_payment/', AnonymousPaymentCreationView.as_view(), name='anonymous_payment'),
     path('<currency>_wallet/', WalletView.as_view(user_type="Customer"), name='wallet'),
     path('notifications/', NotificationsView.as_view(), name='notifications'),
+    path('create_<type>/', TransactionCreationView.as_view(), name='create'),
+
 ]
