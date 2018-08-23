@@ -382,9 +382,9 @@ class UnknownTrans(Request):
 
 class CustomTransactionInstance(Request):
     # each instance of custom transaction is an instance of this
-    email1 = models.EmailField(null=True)
-    email2 = models.EmailField(null=True)
-    email3 = models.EmailField(null=True)
+    email1_exists = models.BooleanField(null=False, default=False, blank=True)
+    email2_exists = models.BooleanField(null=False, default=False, blank=True)
+    email3_exists = models.BooleanField(null=False, default=False, blank=True)
     short_text1 = models.CharField(max_length=100, null=True)
     short_text2 = models.CharField(max_length=100, null=True)
     short_text3 = models.CharField(max_length=100, null=True)
@@ -431,9 +431,24 @@ class CustomTransactionInstance(Request):
 
 class CustomTransactionType(models.Model):
     # each type of custom transaction is an instance of this
+    # TODO add fields of request to this, add default amount
     type = models.CharField(max_length=100, null=False, primary_key=True)
     label = models.CharField(max_length=100, null=False)
     description = models.TextField(null=False)
+
+    source_user_exists = models.BooleanField(null=False, default=False, blank=True)
+    source_wallet_exists = models.BooleanField(null=False, default=False, blank=True)
+    dest_user_exists = models.BooleanField(null=False, default=False, blank=True)
+    dest_wallet_exists = models.BooleanField(null=False, default=False, blank=True)
+    final_user_exists = models.BooleanField(null=False, default=False, blank=True)
+    fianl_wallet_exists = models.BooleanField(null=False, default=False, blank=True)
+    amount_exists = models.BooleanField(null=False, default=False, blank=True)
+    request_time_exists = models.BooleanField(null=False, default=False, blank=True)
+    description_exists = models.BooleanField(null=False, default=False, blank=True)
+    status_exists = models.BooleanField(null=False, default=False, blank=True)
+    profitRate_exists = models.BooleanField(null=False, default=False, blank=True)
+    exchange_rate_exists = models.BooleanField(null=False, default=False, blank=True)
+    type_exists = models.BooleanField(null=False, default=False, blank=True)
     email1_exists = models.BooleanField(null=False, default=False, blank=True)
     email2_exists = models.BooleanField(null=False, default=False, blank=True)
     email3_exists = models.BooleanField(null=False, default=False, blank=True)
@@ -480,6 +495,19 @@ class CustomTransactionType(models.Model):
     request1_exists = models.BooleanField(null=False, default=False, blank=True)
     request2_exists = models.BooleanField(null=False, default=False, blank=True)
 
+    source_label = models.CharField(max_length=100, null=True, blank=True)
+    source_label = models.CharField(max_length=100, null=True, blank=True)
+    dest_label = models.CharField(max_length=100, null=True, blank=True)
+    dest_label = models.CharField(max_length=100, null=True, blank=True)
+    final_label = models.CharField(max_length=100, null=True, blank=True)
+    fianl_label = models.CharField(max_length=100, null=True, blank=True)
+    amount_label = models.CharField(max_length=100, null=True, blank=True)
+    request_label = models.CharField(max_length=100, null=True, blank=True)
+    description_label = models.CharField(max_length=100, null=True, blank=True)
+    status_label = models.CharField(max_length=100, null=True, blank=True)
+    profitRate_label = models.CharField(max_length=100, null=True, blank=True)
+    exchange_label = models.CharField(max_length=100, null=True, blank=True)
+    type_label = models.CharField(max_length=100, null=True, blank=True)
     email1_label = models.CharField(max_length=100, null=True, blank=True)
     email2_label = models.CharField(max_length=100, null=True, blank=True)
     email3_label = models.CharField(max_length=100, null=True, blank=True)
@@ -525,6 +553,7 @@ class CustomTransactionType(models.Model):
     user2_label = models.CharField(max_length=100, null=True, blank=True)
     request1_label = models.CharField(max_length=100, null=True, blank=True)
     request2_label = models.CharField(max_length=100, null=True, blank=True)
+    #TODO add default values
 #
 # class CustomerWalletTransfer(models.Model):
 #     wallets = (
