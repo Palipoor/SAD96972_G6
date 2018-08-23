@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from apps.period.views import PhotoView
+from apps.feedback.views import FeedbackView
+#from photos.views import PhotoView
+#from feedback.views import FeedbackView
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('apps.main.urls', 'main'), 'main')),
     path('customer/', include(('apps.customer.urls', 'customer'), 'customer')),
     path('employee/', include(('apps.employee.urls', 'employee'), 'employee')),
     path('manager/', include(('apps.manager.urls', 'manager'), 'manager')),
+    path('photo/', PhotoView.as_view(), name="home"),
+    path('feedback/', FeedbackView.as_view(), name="feedback"),
+
 ]
