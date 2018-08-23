@@ -262,6 +262,9 @@ class Exchange(Request):
 class LangTest(Request):
     username = models.CharField(max_length=100, null=False)
     password = models.CharField(max_length=50, null=False)
+    labels = {"password": "رمز عبور",
+              "username": "نام کاربری",
+              }
 
 
 class IBT(LangTest):
@@ -270,43 +273,60 @@ class IBT(LangTest):
     city = models.CharField(max_length=100, null=False)
     country = models.CharField(max_length=100, null=False)
     date = models.DateTimeField(null=False)
+    labels = {"test_center_name": "نام مرکز آزمون",
+              "test_center_code": "کد مرکز آزمون",
+              "city": "شهر مرکز آزمون",
+              "country": "کشور",
+              "date": "تاریخ آزمون",
+              }
+    labels.update(LangTest.labels)
 
 
 class TOFEL(IBT):
     id_types = (
-        (0, 'Passport'),
-        (1, 'National ID'),
+        (0, 'پاسپورت'),
+        (1, 'کارت ملی'),
 
     )
-    reasons = (
-        (0, 'blah'),
-        (1, 'blah'),
-        (2, 'blah'),
-        (3, 'blah'),
-        (4, 'blah'),
-        (5, 'blah'),
-        (6, 'blah'),
-        (7, 'blah'),
-        (8, 'blah'),
-        (9, 'blah'),
+    # reasons = (
+    #     (0, 'blah'),
+    #     (1, 'blah'),
+    #     (2, 'blah'),
+    #     (3, 'blah'),
+    #     (4, 'blah'),
+    #     (5, 'blah'),
+    #     (6, 'blah'),
+    #     (7, 'blah'),
+    #     (8, 'blah'),
+    #     (9, 'blah'),
 
-    )
-    countries_for_studying = (
-        (0, 'blah'),
-        (1, 'blah'),
-        (2, 'blah'),
-        (3, 'blah'),
-        (4, 'blah'),
-        (5, 'blah'),
-        (6, 'blah'),
-        (7, 'blah'),
-        (8, 'blah'),
-        (9, 'blah'),
-    )
-    reason = models.IntegerField(choices=reasons, null=False)  # handle several reasons
-    country_for_study = models.IntegerField(choices=countries_for_studying, null=False)  # handle several country
+    # )
+    # countries_for_studying = (
+    #     (0, 'blah'),
+    #     (1, 'blah'),
+    #     (2, 'blah'),
+    #     (3, 'blah'),
+    #     (4, 'blah'),
+    #     (5, 'blah'),
+    #     (6, 'blah'),
+    #     (7, 'blah'),
+    #     (8, 'blah'),
+    #     (9, 'blah'),
+    # )
+    reason = models.TextField(null=False)  # (choices=reasons, null=False)  # handle several reasons
+    country_for_study = models.TextField(null=False)  # handle several country
     id_type = models.IntegerField(choices=id_types, null=False)
+    # print("IBT")
+    # print(IBT.labels)
     id_number = models.CharField(max_length=20)
+    labels = {"reason": "دلایل",
+              "country_for_study": "کشور مقصد",
+              "id_type": "شیوهٔ احراز هویت",
+              "id_number": "کد شناسایی",
+              }
+    labels.update(IBT.labels)
+    # print("TOFEL")
+    # print(labels)
 
 
 class GRE(IBT):
@@ -316,20 +336,29 @@ class GRE(IBT):
         (2, 'blah'),
     )
     statuses = (
-        (0, 'blah'),
-        (1, 'blah'),
-        (2, 'blah'),
-        (3, 'blah'),
-        (4, 'blah'),
-        (5, 'blah'),
-        (6, 'blah'),
-        (7, 'blah'),
+        (0, 'سال دوم کارشناسی'),
+        (1, 'سال سوم کارشناسی'),
+        (2, 'سال چهارم و یا آخر کارشناسی'),
+        (3, 'سال اول تحصیلات تکمیلی'),
+        (4, 'سال دوم تحصیلات تکمیلی'),
+        (5, 'فارغ التحصیل تحصیلات تکمیلی'),
+        (6, 'فارغ التحصیل کارشناسی'),
+        (7, 'دیگر'),
 
     )
     major_filed_code = models.CharField(max_length=50, null=False)
     major_filed_name = models.CharField(max_length=50, null=False)
     citizenship = models.IntegerField(choices=citizenships, null=False)
     educational_status = models.IntegerField(choices=statuses, null=False)
+    file = models.FileField(null=True, blank=True)
+    labels = {
+              "file": "پیوست",
+              "major_filed_code": "کد رشتهٔ مورد نظر",
+              "major_filed_name": "نام رشتهٔ مورد نظر",
+              "citizenship": "شهروندی",
+              "educational_status": "تحصیلات",
+              }
+    labels.update(IBT.labels)
 
 
 class UniversityTrans(Request):
@@ -553,7 +582,7 @@ class CustomTransactionType(models.Model):
     user2_label = models.CharField(max_length=100, null=True, blank=True)
     request1_label = models.CharField(max_length=100, null=True, blank=True)
     request2_label = models.CharField(max_length=100, null=True, blank=True)
-    #TODO add default values
+    # TODO add default values
 #
 # class CustomerWalletTransfer(models.Model):
 #     wallets = (
