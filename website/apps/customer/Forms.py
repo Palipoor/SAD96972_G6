@@ -13,42 +13,6 @@ class Charge(forms.Form):
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-
-def get_form_class(type, *args, **kwargs):
-    my_excludes = ["source_user"]
-    my_widgets = {}
-    my_fields = []
-    my_labels = {}
-    my_title = "درخواست تراکنش"
-    my_sub_title = ""
-    print("type in form<"+type+"<")
-    if type == 'tofel':
-        model_class = models.TOFEL
-        my_labels.update(model_class.labels)
-        for field in my_labels:
-            my_fields.insert(0, field)
-        my_widgets["date"] = DateInput()
-        my_widgets["password"] = forms.PasswordInput
-        my_sub_title += "ثبت نام تافل"
-    elif type == 'gre':
-        model_class = models.GRE
-        my_labels.update(model_class.labels)
-        for field in my_labels:
-            my_fields.insert(0, field)
-        my_widgets["date"] = DateInput()
-        my_widgets["password"] = forms.PasswordInput
-        my_sub_title += "ثبت نام جی‌ار‌ای"
-    else:
-        model_class = models.CustomTransactionInstance
-        # TODO return nothing if type is wrong
-        print("TYPE : " + type)
-        details = model_to_dict(models.CustomTransactionType.objects.get(type=type))
-        for name, value in details.items():
-            # print(str(name) + str(value))
-            if name.endswith("exists") and not value:
-                my_excludes.append(name[:-7])
-                # print(name[:-6])
-
 class CustomerSettingsForm(ModelForm):
     class Meta:
         model = Customer

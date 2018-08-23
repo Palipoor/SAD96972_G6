@@ -58,7 +58,6 @@ class Request(PolymorphicModel):
         super().__init__(*args, **kwargs)
         self.excps = []
         if (not self.exchange_rate):
-            print("int types" + str(type(self.source_wallet)) + str(type(self.dest_wallet)))
             self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
         # print('in iniit')
         # print(self.dest_user.dollar_cent_credit)
@@ -317,36 +316,9 @@ class TOFEL(IBT):
         ("1", 'کارت ملی'),
 
     )
-    # reasons = (
-    #     (0, 'blah'),
-    #     (1, 'blah'),
-    #     (2, 'blah'),
-    #     (3, 'blah'),
-    #     (4, 'blah'),
-    #     (5, 'blah'),
-    #     (6, 'blah'),
-    #     (7, 'blah'),
-    #     (8, 'blah'),
-    #     (9, 'blah'),
-
-    # )
-    # countries_for_studying = (
-    #     (0, 'blah'),
-    #     (1, 'blah'),
-    #     (2, 'blah'),
-    #     (3, 'blah'),
-    #     (4, 'blah'),
-    #     (5, 'blah'),
-    #     (6, 'blah'),
-    #     (7, 'blah'),
-    #     (8, 'blah'),
-    #     (9, 'blah'),
-    # )
-    reason = models.TextField(null=False)  # (choices=reasons, null=False)  # handle several reasons
-    country_for_study = models.TextField(null=False)  # handle several country
+    reason = models.TextField(null=False)
+    country_for_study = models.TextField(null=False)
     id_type = models.CharField(choices=id_types, max_length=1, null=False)
-    # print("IBT")
-    # print(IBT.labels)
     id_number = models.CharField(max_length=20)
     labels = {"reason": "دلایل",
               "country_for_study": "کشور مقصد",
@@ -623,50 +595,3 @@ class CustomTransactionType(models.Model):
     request1_label = models.CharField(max_length=100, null=True, blank=True)
     request2_label = models.CharField(max_length=100, null=True, blank=True)
     # TODO add default values
-#
-# class CustomerWalletTransfer(models.Model):
-#     wallets = (
-#         (0, 'rial wallet'),
-#         (1, 'dollar wallet'),
-#         (2, 'euro wallet'),
-#     )
-#     source = models.IntegerField(choices=wallets, null=False)
-#     destination = models.IntegerField(choices=wallets, null=False)
-#     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
-#     transfer_time = models.DateTimeField(null=False)
-#     profitًRate = models.FloatField(null=False)
-#     source_deposit_before = models.FloatField(null=False)
-#     source_deposit_after = models.FloatField(null=False)
-#     destination_deposit_before = models.FloatField(null=False)
-#     destination_deposit_after = models.FloatField(null=False)
-#     rial_deposit_before_profit = models.FloatField(null=False)
-#     rial_deposit_after_profit = models.FloatField(null=False)
-#
-#
-# class CustomerWalletCharge(models.Model):
-#     customer = models.ForeignKey('Customer', on_delete=models.DO_NOTHING, null=False)
-#     charge_time = models.DateTimeField(null=False)
-#     deposit_before = models.FloatField(null=False)
-#     deposit_after = models.FloatField(null=False)
-#
-#
-# class CostumerWalletChanges(models.Model):
-#         types = (
-#             (1, 'request submit'),
-#             (2, 'request profit'),
-#             (3, 'request failure'),  # rejected or failed
-#             (4, 'request failure profit'),
-#         )
-#         wallets = (
-#             (0, 'rial'),
-#             (1, 'dollar'),
-#             (2, 'euro'),
-#         )
-#         type = models.IntegerField(choices=tfrom apps.customer import modelses, null=False)
-#         wallet = models.IntegerField(choicesfrom apps.customer import modelsallets, null=False)
-#         request = models.ForeignKey('Requestfrom apps.customer import models on_delete=models.CASCADE, null=False)
-#         change_time = models.DateTimeField(nfrom apps.customer import modelsl=False)
-#         deposit_before = models.FloatField(null=False)
-#         deposit_after = models.FloatField(null=False)
-#         rial_deposit_before_profit = models.FloatField(null=False)
-#         rial_deposit_after_profit = models.FloatField(null=False)

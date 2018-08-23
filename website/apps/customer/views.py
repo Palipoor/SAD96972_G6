@@ -18,7 +18,9 @@ from apps.customer.Forms import CustomerSettingsForm
 from apps.main.Forms import UserPasswordChangeForm
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 from apps.customer import Forms
-from apps.main.models import GenUser
+from apps.main.models import GenUser, Notification
+from django.contrib.messages.views import SuccessMessageMixin
+
 
 
 class CustomerTemplateView(TemplateView):
@@ -69,10 +71,10 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
 
 class TransactionCreationView(CustomerCreateView):
     template_name = "customer/render_form.html"
-    success_url = reverse_lazy('customer: create')
 
     def get_success_url(self):
-        return ""
+        return reverse_lazy('customer:create', kwargs={'type': self.type})
+
 
     def get_form_kwargs(self):
         kwargs = super(CustomerCreateView, self).get_form_kwargs()
@@ -87,6 +89,10 @@ class TransactionCreationView(CustomerCreateView):
 
     def get_form_class(self):
         return Forms.get_form_class(self.type)
+
+    def form_valid(self, form):
+        return super(TransactionCreationView, self).form_valid(form)
+
 
 
 class ReverseChargeCreationView(TransactionCreationView):

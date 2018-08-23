@@ -127,7 +127,7 @@
               <img src='{% static "panel/dist/img/default-50x50.gif" %}' alt="Product Image">
             </div>
 
-            {% for type in transaction_types%}
+            {% for type in transaction_types %}
             <div class="product-info">
               <a href='create_{{type.type}}' class="product-title" name = "payment">{{type.label}}</a>
               <span class="product-description">
