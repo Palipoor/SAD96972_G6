@@ -199,6 +199,10 @@ class LandingPageView(FormView):
             context['convert_form'] = self.convert_form_class()
         price = get_prices()
         context.update(price)
+        requests = Compilation.get_all_requests({})
+        context['how_many_requests'] = len(requests['requests'])
+        users = GenUser.objects.all()
+        context['how_many_users'] = len(users)
         return context
 
     def post(self, request, *args, **kwargs):

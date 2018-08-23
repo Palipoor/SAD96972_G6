@@ -61,11 +61,11 @@ class Compilation():
 
     def get_wallet_requests(context, user_name, wallet):
         # get requests regarding a wallet of the user. if wallet equals -1 all wallets are used.
-        customer = Customer.objects.get(username=user_name)
+        user = GenUser.objects.get(username=user_name)
         if (wallet == -1):
-            context['requests'] = Request.objects.filter(source_user=customer) | Request.objects.filter(dest_user=customer)
+            context['requests'] = Request.objects.filter(source_user=user) | Request.objects.filter(dest_user=user)
         else:
-            context['requests'] = Request.objects.filter(source_user=customer, source_wallet=wallet) | Request.objects.filter(dest_user=customer, dest_wallet=wallet)
+            context['requests'] = Request.objects.filter(source_user=user, source_wallet=wallet) | Request.objects.filter(dest_user=user, dest_wallet=wallet)
         return context
 
     def get_all_requests(context):
