@@ -48,7 +48,7 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
+        context = Compilation.get_wallet_requests(context, self.request.user.username, -1)[:5]
         context['pending_requests'] = len(Request.objects.filter(source_user__username=self.request.user.username, status=2))
         return context
 
@@ -138,5 +138,12 @@ class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
         return super(CustomerSettingsView, self).form_valid(form)
 
 
-class TransactionsListView(IsLoggedInView, IsCustomer, ListView):
+class TransactionsListView(IsLoggedInView, IsCustomer, TemplateView):
     template_name = 'customer/mytransactions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TransactionsListView, self).get_context_data(**kwargs)
+        Compilation.get_wallet_requests(context, self.request.user.username, -1)
+        return context
+
+

@@ -100,3 +100,20 @@ class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
 class TransactionDetailsView(MainTransactionDetails):
 
     template_name = "employee/transaction_details.html"
+
+
+class CustomerDetailsForEmployee(IsEmployee, TemplateView):
+
+    template_name = 'employee/customer_details.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user_id = kwargs['user_id']
+        return super(CustomerDetailsForManager, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerDetailsForManager, self).get_context_data(**kwargs)
+        customer = Customer.objects.get(id=self.user_id)
+        context['customer'] = customer
+        context = Compilation.get_wallet_requests(context, customer.username, -1)
+        context = Compilation.get_last_request_and_transaction_id(context)
+        return context
