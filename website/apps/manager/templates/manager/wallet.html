@@ -44,6 +44,9 @@
                             <small name="error">error</small>
                             <div class="col-md-3"></div>
                         </div>
+                        {% for error in form.non_field_errors %}
+                            <span class="text-danger" name="first-name-error">{{ error }}</span>
+                        {% endfor %}
                     </form>
                 </div><!--box body-->
             </div>
