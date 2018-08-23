@@ -43,7 +43,7 @@ def get_form_class(type, *args, **kwargs):
             my_fields.insert(0, field)
         my_widgets["date"] = DateInput()
         my_widgets["password"] = forms.PasswordInput
-        my_sub_title += "ثبت نام تافل"
+        my_sub_title += "ثبت نام جی‌ار‌ای"
     else:
         model_class = models.CustomTransactionInstance
         # TODO return nothing if type is wrong
@@ -70,7 +70,7 @@ def get_form_class(type, *args, **kwargs):
             self.user = kwargs.pop('user')
             self.title = my_title
             self.sub_title = my_sub_title
-            temp = super(forms.ModelForm, self).__init__(*args, **kwargs)
+            temp = super(_ObjectForm, self).__init__(*args, **kwargs)
             self.instance.source_user = self.user
             self.transaction = None
             for field in self.fields.values():
