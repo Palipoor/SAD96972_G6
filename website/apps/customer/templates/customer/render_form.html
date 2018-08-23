@@ -2,30 +2,32 @@
 {% load static staticfiles %}
 
  {% block title %} 
-جزئیات تراکنش
+{{form.title}}
  {% endblock title %}
 
 
 {% block content_header_text %}
-<h1>درخواست تراکنش {{type}}</h1>
+<h1>{{form.title}} {{form.sub_title}}
+</h1>
 {{ block.super }}
 {% endblock content_header_text %}
 
 {% block content_header_link %}
 {{ block.super }}
-<li class="active">درخواست تراکنش </li>
-<li class="active">{{type}}</li>
+<li class="active">{{form.title}}
+ </li>
+<li class="active">{{form.sub_title}}
+</li>
 {% endblock content_header_link %} 
 
 
 {% block main_content %}
 <div class="col-md-6">
     <div class="register-box-body">
-    <p class="login-box-msg"> درخواست تراکنش {{type}}</p>
+    <p class="login-box-msg">{{form.title}} {{form.sub_title}}</p>
         <form method="post" novalidate>
             {% csrf_token %} {% for field in form %}
             <div class="form-group has-feedback">
-                {{field.name}}
                 {{field.label}} {{field}}
                 {% for error in field.errors %}
                 <span class="text-danger" name="password-repeat-error">{{ error }}</span>
