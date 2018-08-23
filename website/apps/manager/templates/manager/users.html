@@ -47,7 +47,7 @@
                         {%if type == 'مشتری'%}
                         {%for user in object_list%}
                         <tr>
-                            <td><a href={{user.username}}+"_customer_details.html">{{user.username}}</a></td>
+                            <td><a href="{% url 'manager:customer_details' user_id=user.id %}">{{user.username}}</a></td>
                             <td>{{user.persian_last_name}}</td>
                             <td>{{user.persian_first_name}}</td>
                         </tr>
@@ -55,7 +55,7 @@
                         {%else%}
                         {%for user in object_list%}
                         <tr>
-                            <td><a href={{user.username}}+"_employee_details.html">{{user.username}}</a></td>
+                            <td><a href="{% url 'manager:employee_details' user_id=user.id %}">{{user.username}}</a></td>
                             <td>{{user.persian_last_name}}</td>
                             <td>{{user.persian_first_name}}</td>
                             <td>{{user.current_salary}}</td>

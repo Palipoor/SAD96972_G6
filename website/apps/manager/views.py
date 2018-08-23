@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 import os
+from django.shortcuts import render
 from utils import notification_tools
 from utils import strings
 # Create your views here.
@@ -84,32 +85,34 @@ class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
     # TODO incomplete
 
 
-# TODO #FIXME #PLEASE
-class CustomerDetailsForManager(IsManager, DetailsView):
+class CustomerDetailsForManager(IsManager, TemplateView):
 
-    model = Customer
-    fields = ['persian_first_name', 'persian_last_name', 'english_first_name', 'english_last_name', 'username', 'email',
-              'phone', 'account-number']
-    template_name = 'customer_details.html'
+    template_name = 'manager/customer_details.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.user_id = kwargs['user_id']
+        return super(CustomerDetailsForManager, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CustomerDetailsForManager, self).get_context_data(**kwargs)
         customer = Customer.objects.get(id=self.user_id)
+        context['customer'] = customer
         context = Compilation.get_wallet_requests(context, customer.username, -1)
         context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
+class EmployeeDetailsForManager(IsManager, TemplateView):
 
-class EmployeeDetailsForManager(IsManager, DetailsView):
+    template_name = 'manager/employee_details.html'
 
     def dispatch(self, request, *args, **kwargs):
-        self.employee_id = kwargs['employee_id']
+        self.user_id = kwargs['user_id']
+        return super(EmployeeDetailsForManager, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailsForManager, self).get_context_data(**kwargs)
+        employee = Employee.objects.get(id=self.user_id)
+        context['employee'] = employee
         context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
