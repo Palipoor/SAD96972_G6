@@ -19,7 +19,7 @@ from django.urls import path
 from apps.main.views import WalletView, NotificationsView
 from apps.manager.views import ManagerPasswordChangeView, CompanySettingsView, \
     ManagerDashboardView, EmployeeListView, CustomersListView, EmployeeDetailsForManager, \
-    CustomerDetailsForManager, TransactionDetailsView
+    CustomerDetailsForManager, TransactionDetailsView, CreateTransactionTypeView
 
 urlpatterns = [
     path('dashboard/', ManagerDashboardView.as_view(), name='dashboard'),
