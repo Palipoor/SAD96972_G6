@@ -48,7 +48,8 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context = Compilation.get_wallet_requests(context, self.request.user.username, -1)[:5]
+        context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
+        context['requests'] = context['requests'][:5]
         context['pending_requests'] = len(Request.objects.filter(source_user__username=self.request.user.username, status=2))
         return context
 

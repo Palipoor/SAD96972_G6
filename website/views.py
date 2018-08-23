@@ -63,13 +63,13 @@ class Compilation():
         # get requests regarding a wallet of the user. if wallet equals -1 all wallets are used.
         user = GenUser.objects.get(username=user_name)
         if (wallet == -1):
-            context['requests'] = Request.objects.filter(source_user=user) | Request.objects.filter(dest_user=user)
+            context['requests'] = Request.objects.filter(source_user=user).order_by('-request_time') | Request.objects.filter(dest_user=user).order_by('-request_time')
         else:
-            context['requests'] = Request.objects.filter(source_user=user, source_wallet=wallet) | Request.objects.filter(dest_user=user, dest_wallet=wallet)
+            context['requests'] = Request.objects.filter(source_user=user, source_wallet=wallet).order_by('-request_time') | Request.objects.filter(dest_user=user, dest_wallet=wallet).order_by('-request_time')
         return context
 
     def get_all_requests(context):
-        context['requests'] = Request.objects.all()
+        context['requests'] = Request.objects.all().order_by('-request_time')
         return context
 
     def get_last_request_and_transaction_id(context):
