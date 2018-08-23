@@ -89,6 +89,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
         context = Compilation.get_wallet_requests(context, self.request.user.username, Transactions.currency_to_num(self.kwargs['currency']))
         context['credit'] = context[self.kwargs['currency'] + "_credit"]
         context.update({'dollar': 100000, 'euro': 10000})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def get_form_kwargs(self):
@@ -136,6 +137,7 @@ class NotificationsView(IsLoggedInView, TemplateView):
         for notif in context['object_list']:
             notif.seen = True
             notif.save()
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -203,6 +205,7 @@ class LandingPageView(FormView):
         context['how_many_requests'] = len(requests['requests'])
         users = GenUser.objects.all()
         context['how_many_users'] = len(users)
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -283,3 +286,14 @@ def log_out(request):
 # def user_panel(request):  # in bayad be jaye dorost bere.
 #     template = loader.get_template("user_panel.html")
 #     return HttpResponse(template.render())
+
+class TransactionDetailsView(DetailView):
+
+    def get_context_data(self, **kwargs):
+        context = super(TransactionDetailsView, self).get_context_data(**kwargs)
+        context = Compilation.get_last_request_and_transaction_id(context)
+        return context
+
+    def get_queryset(self):
+        # """Return the last five published questions."""
+        return Request.objects.filter(id=self.kwargs['pk'])

@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 import os
-# Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, FormView, ListView, TemplateView, DetailView
 
@@ -15,6 +14,7 @@ from apps.main.Forms import UserPasswordChangeForm
 from apps.customer.models import Request
 from apps.main.models import Notification
 from apps.main.views import IsLoggedInView, IsEmployee, Compilation
+from apps.main.views import TransactionDetailsView as MainTransactionDetails
 from django.urls import reverse_lazy
 
 
@@ -45,6 +45,7 @@ class EmployeeDashboardView(IsLoggedInView, IsEmployee, EmployeeFormView):
         context = super(EmployeeFormView, self).get_context_data(**kwargs)
         context = Compilation.get_all_requests(context)
         context.update({'notifications' : Notification.objects.filter(user__username = self.request.user.username, seen = False).order_by('-sent_date')})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def get_form_kwargs(self):
@@ -62,6 +63,11 @@ class EmployeePasswordChangeView(IsEmployee, FormView):
     success_url = reverse_lazy('main:login')
     template_name = 'employee/change_password.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(EmployeePasswordChangeView, self).get_context_data(**kwargs)
+        context = Compilation.get_last_request_and_transaction_id(context)
+        return context
+
     def get_form_kwargs(self):
         kwargs = super(EmployeePasswordChangeView, self).get_form_kwargs()
         kwargs['user'] = Employee.objects.get(username=self.request.user)
@@ -76,6 +82,11 @@ class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
     template_name = 'employee/settings.html'
     success_url = reverse_lazy('employee:settings')
 
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeSettingsView, self).get_context_data(**kwargs)
+        context = Compilation.get_last_request_and_transaction_id(context)
+        return context
+
     def get_object(self, queryset=None):
         username = self.request.user.username
         return Employee.objects.get(username=username)
@@ -86,11 +97,6 @@ class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
         self.object = context.update(clean)
         return super(EmployeeSettingsView, self).form_valid(form)
 
-
-class TransactionDetailsView(DetailView):
+class TransactionDetailsView(MainTransactionDetails):
 
     template_name = "employee/transaction_details.html"
-
-    def get_queryset(self):
-        # """Return the last five published questions."""
-        return Request.objects.filter(id=self.kwargs['pk'])

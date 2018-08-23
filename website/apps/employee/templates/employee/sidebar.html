@@ -21,13 +21,13 @@
         <span>مشاهدهٔ درخواست‌ها و تراکنش‌ها</span>
     </a>
     <ul class="treeview-menu">
-        <li>
-            <a href='{% url "employee:transaction_details" "12" %}'>
-                <i class="glyphicon glyphicon-chevron-left" name="transactions"></i> مشاهده تراکنش‌ها</a>
-        </li>
-        <li>
-            <a href='{% url "employee:transaction_details" "12" %}'>
-                <i class="glyphicon glyphicon-chevron-left" name="requests"></i> مشاهده درخواست‌ها</a>
-        </li>
-    </ul>
+            <li>
+                <a href='{% url "employee:transaction_details" pk=last_transaction_id %}'>
+                    <i class="glyphicon glyphicon-chevron-left" name="transactions"></i> مشاهده تراکنش‌ها</a>
+            </li>
+            <li>
+                <a href='{% url "employee:transaction_details" pk=last_request_id %}'>
+                    <i class="glyphicon glyphicon-chevron-left" name="requests"></i> مشاهده درخواست‌ها</a>
+            </li>
+        </ul>
 </li>

@@ -96,8 +96,8 @@
             {% for req in requests %}
             <tr>
               <td>
-                <a href={{req.id}}+ "_transaction_details">{{req.id}}</a>
-              </td>
+                  <a href='{% url "customer:transaction_details" pk=req.id %}'>{{req.id}}</a>
+                </td>
               <td>{{req.request_time}}</td>
               <td>{{req.amount}}</td>
               <td>{{req.status}}</td>

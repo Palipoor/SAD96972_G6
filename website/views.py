@@ -71,3 +71,8 @@ class Compilation():
     def get_all_requests(context):
         context['requests'] = Request.objects.all()
         return context
+
+    def get_last_request_and_transaction_id(context):
+        context['last_request_id'] = str(Request.objects.filter(status=2).last().id)
+        context['last_transaction_id'] = str(Request.objects.last().id)
+        return context

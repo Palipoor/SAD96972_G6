@@ -156,7 +156,7 @@
             {% for req in requests %}
             <tr>
               <td>
-                <a href="{{req.id}}_transaction_details">{{req.id}}</a>
+                <a href='{% url "manager:transaction_details" pk=req.id %}'>{{req.id}}</a>
               </td>
               <td>{{req.request_time}}</td>
               <td>{{req.status}}</td>
@@ -194,8 +194,8 @@
             {% for req in requests %}
             <tr>
               <td>
-                <a href="{{req.id}}_transaction_details">{{req.id}}</a>
-              </td>
+                  <a href= "{{req.id}}_transaction_details">{{req.id}}</a>
+                </td>
               <td>{{req.request_time}}</td>
             </tr>
             {% endfor %}

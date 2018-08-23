@@ -8,6 +8,7 @@ import os
 from django.views.generic.edit import FormView
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView
 from apps.main.views import IsLoggedInView, IsCustomer
+from apps.main.views import TransactionDetailsView as MainTransactionDetails
 from apps.customer.models import Customer, Request
 from views import Compilation
 from django.urls import reverse_lazy
@@ -15,7 +16,6 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views.generic.detail import DetailView
 from apps.customer.Forms import CustomerSettingsForm
 from apps.main.Forms import UserPasswordChangeForm
-from apps.main.views import IsLoggedInView, IsCustomer
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 
 
@@ -30,7 +30,7 @@ class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
-        context.update({'notifications' : Notification.objects.filter(user__username = self.request.user.username, seen = False).order_by('-sent_date')})
+        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
         return context
 
 
@@ -49,7 +49,7 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context = Compilation.get_wallet_requests(context, self.request.user.username, -1)
-        context['pending_requests'] = len(Request.objects.filter(source_user__username = self.request.user.username, status=2))
+        context['pending_requests'] = len(Request.objects.filter(source_user__username=self.request.user.username, status=2))
         return context
 
 
@@ -65,21 +65,8 @@ class ReverseChargeCreationView(TransactionCreationView):
         # todo incomplete
 
 
-class TransactionDetailsView(DetailView):
+class TransactionDetailsView(MainTransactionDetails):
     template_name = "customer/transaction_details.html"
-    mdoel = Request
-    # queryset = Request.objects.all()
-
-    def get_queryset(self):
-        # """Return the last five published questions."""
-        return Request.objects.filter(id=self.kwargs['pk'])
-
-    def get_context_data(self, **kwargs):
-        temp = super().get_context_data(**kwargs)
-        print(temp)
-        print(temp['foreigntrans'])
-        temp['type'] = temp['foreigntrans']._meta.model_name
-        return(temp)
 
 
 class ForeignPaymentCreationView(TransactionCreationView):
@@ -126,9 +113,10 @@ class CustomerPasswordChangeView(IsCustomer, FormView):
         kwargs['user'] = Customer.objects.get(username=self.request.user)
         return kwargs
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
 
 class CustomerSettingsView(IsLoggedInView, IsCustomer, UpdateView):
     form_class = CustomerSettingsForm

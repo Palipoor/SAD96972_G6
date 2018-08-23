@@ -9,7 +9,7 @@ from django.views.generic import UpdateView, ListView, View, FormView
 from django.views.generic.edit import ProcessFormView
 from django.views.generic.list import BaseListView, MultipleObjectMixin
 from views import Compilation
-from apps.customer.models import Customer
+from apps.customer.models import Customer, Request
 from apps.employee.models import Employee
 from apps.manager.models import Manager
 from apps.main.MultiForm import MultiFormsView
@@ -21,6 +21,7 @@ from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, 
 from apps.manager.Forms import ReviewForm
 from apps.manager.models import Manager
 from apps.main.models import Notification
+from apps.main.views import TransactionDetailsView as MainTransactionDetails
 
 
 class ManagerFormView(FormView):
@@ -41,8 +42,9 @@ class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):
     def get_context_data(self, **kwargs):
         context = super(ManagerFormView, self).get_context_data(**kwargs)
         context = Compilation.get_all_requests(context)
-        context = Compilation.get_manager_context_data(context = context, username = self.request.user.username)[0]
+        context = Compilation.get_manager_context_data(context=context, username=self.request.user.username)[0]
         context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def get_form_kwargs(self):
@@ -69,6 +71,11 @@ class ManagerPasswordChangeView(IsManager, FormView):
         form.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(ManagerPasswordChangeView, self).get_context_data(**kwargs)
+        context = Compilation.get_last_request_and_transaction_id(context)
+        return context
+
 
 class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
     #model = Company
@@ -92,6 +99,7 @@ class CustomerDetailsForManager(IsManager, DetailsView):
         context = super(CustomerDetailsForManager, self).get_context_data(**kwargs)
         customer = Customer.objects.get(id=self.user_id)
         context = Compilation.get_wallet_requests(context, customer.username, -1)
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
 
@@ -102,6 +110,7 @@ class EmployeeDetailsForManager(IsManager, DetailsView):
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeDetailsForManager, self).get_context_data(**kwargs)
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
 
@@ -128,6 +137,7 @@ class CustomersListView(IsLoggedInView, IsManager, FormView):
         context = super(CustomersListView, self).get_context_data(**kwargs)
         context['object_list'] = Customer.objects.all()
         context['type'] = "مشتری"
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def get_queryset(self):
@@ -151,6 +161,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
             context['change_salary_form'] = self.change_salary_form_class()
         context.update({'type': 'کارمند'})
         context.update({'object_list': Employee.objects.all()})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -192,6 +203,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
         name = form.cleaned_data['persian_first_name'] + ' ' + form.cleaned_data['persian_last_name']
         context.update({'add_success': name + ' با موفقیت به کارمندان اضافه شد.'})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return self.render_to_response(context)
 
     def change_salary_form_valid(self, form):
@@ -201,6 +213,7 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         new_form = ChangeSalaryForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
         context.update({'change_success': 'حقوق کارمند مورد نظر تغییر کرد.'})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return self.render_to_response(context)
 
     def remove_access_form_valid(self, form):
@@ -210,7 +223,12 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
         new_form = EmployeeAccessRemovalForm()
         context = self.get_context_data(object_list=Employee.objects.all(), add_employee=new_form)
         context.update({'remove_success': 'دسترسی کارمند مورد نظر از سامانه قطع شد.'})
+        context = Compilation.get_last_request_and_transaction_id(context)
         return self.render_to_response(context)
 
     def form_invalid(self, **kwargs):
         return self.render_to_response(self.get_context_data(**kwargs))
+
+
+class TransactionDetailsView(MainTransactionDetails):
+    template_name = "manager/transaction_details.html"

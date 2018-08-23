@@ -16,7 +16,7 @@
     </ul>
 </li>
 <li>
-    <a href='{% url "customer:transaction_details" "123" %}' name="transactions">
+    <a href='{% url "manager:transaction_details" pk=last_transaction_id %}' name="transactions">
         <em class="glyphicon glyphicon-credit-card"></em>
         <span>تراکنش‌های موسسه</span>
     </a>
@@ -34,7 +34,7 @@
     </a>
 </li>
 <li>
-    <a href='{% url "customer:transaction_details" "-1" %}' name="requests">
+    <a href='{% url "manager:transaction_details" pk=last_request_id %}' name="requests">
         <em class="fa fa-comments"></em>
         <span>درخواست‌های تاییدنشده</span>
     </a>
