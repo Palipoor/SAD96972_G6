@@ -36,6 +36,14 @@ class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
         return context
 
 
+class CustomerCreateView(FormView, IsLoggedInView, IsCustomer):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context, customer = Compilation.get_customer_context_data(context, self.request.user.username)
+        self.context = context
+        return context
+
+
 class CustomerCreateView(CreateView, IsLoggedInView, IsCustomer):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -64,7 +72,7 @@ class CustomerDashboardView(IsLoggedInView, IsCustomer, CustomerTemplateView):
         return context
 
 
-class TransactionCreationView(CustomerFormView):
+class TransactionCreationView(CustomerCreateView):
     template_name = "customer/render_form.html"
     success_url = reverse_lazy('customer: create')
 
@@ -72,7 +80,7 @@ class TransactionCreationView(CustomerFormView):
         return ""
 
     def get_form_kwargs(self):
-        kwargs = super(CustomerFormView, self).get_form_kwargs()
+        kwargs = super(CustomerCreateView, self).get_form_kwargs()
         kwargs['user'] = Customer.objects.get(username=self.request.user)
         # kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
         return kwargs
@@ -84,18 +92,6 @@ class TransactionCreationView(CustomerFormView):
 
     def get_form_class(self):
         return Forms.get_form_class(self.type)
-
-    def form_valid(self, form):
-        print("valid")
-        object = form.save()
-        print(object)
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        print("invalid")
-        print(form.errors.items())
-
-        return super().form_invalid(form)
 
 
 class ReverseChargeCreationView(TransactionCreationView):
