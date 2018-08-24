@@ -1,132 +1,65 @@
 package Transactions;
 
-import Reusables.*;
+import Reusables.GeneralReusables;
+import Reusables.ManagerReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
- * Created by Golpar on 5/2/2018 AD.
+ * Created by Golpar on 8/24/2018 AD.
  */
-@RunWith(Reusables.OrderedRunner.class)
 public class ForeignPayment {
-    private static WebDriver driver;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-        WebElement foreignPayment = driver.findElement(By.name("foreign-payment"));
-        foreignPayment.click();
+	private static WebDriver driver;
 
-    }
+	@BeforeClass
+	public static void setUp() {
+		driver = new FirefoxDriver();
+		GeneralReusables.setUpToHomepage(driver);
+		GeneralReusables.loginAsACustomer(driver);
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_banktrans");
+	}
 
-    @Test
-    @Order(order = 1)
-    public void invalidAmount() {
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys("abc");
+	@Test
+	public void validCreation(){
+		WebElement amount = driver.findElement(By.name("amount"));
+		amount.clear();
+		amount.sendKeys("50");
 
-        WebElement currency = driver.findElement(By.name("dollar-radio"));
-        currency.click();
+		WebElement currency = driver.findElement(By.name("source_wallet"));
+		Select dropdown= new Select(currency);
+		dropdown.selectByVisibleText("dollar");
 
-        WebElement accountNumber = driver.findElement(By.name("destination"));
-        accountNumber.clear();
-        accountNumber.sendKeys("1234567890");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+		WebElement bank_name = driver.findElement(By.name("bank_name"));
+		bank_name.clear();
+		bank_name.sendKeys("ملی");
 
-        WebElement error = driver.findElement(By.name("amount-error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-amount-error"));
-    }
+		WebElement account_number = driver.findElement(By.name("account_number"));
+		account_number.clear();
+		account_number.sendKeys("1997-0335-0337");
 
-    @Test
-    @Order(order = 2)
-    public void invalidDestination() {
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys("10");
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+		GeneralReusables.waitForSeconds(1);
 
-        WebElement currency = driver.findElement(By.name("dollar-radio"));
-        currency.click();
+		WebElement message = driver.findElement(By.name("message"));
+		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
+		assertTrue(ManagerReusables.newTransactionExists("foreigntrans"));
 
-        WebElement accountNumber = driver.findElement(By.name("destination"));
-        accountNumber.clear();
-        accountNumber.sendKeys("1");
+	}
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-
-        WebElement error = driver.findElement(By.name("account-error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-account-number-error"));
-    }
-
-    @Test
-    @Order(order = 3)
-    public void moreThanCredit() {
-        double moreThanDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar") + 3;
-        String paymentAmount = String.valueOf(moreThanDollarCredit);
-
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(paymentAmount);
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));
-
-    }
-
-    @Test
-    @Order(order = 4)
-    public void paymentsAreDone() {
-        String paymentAmount = "1";
-        double dollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
-        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double companyRialCredit = ManagerReusables.getCompanyCredit("rial");
-        double companyDollarCredit = ManagerReusables.getCompanyCredit("dollar");
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(paymentAmount);
-
-        WebElement karmozd = driver.findElement(By.name("karmozd"));
-        double karmozdValue = Double.valueOf(karmozd.getText());
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-
-        double newDollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
-        double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double newCompanyRialCredit = ManagerReusables.getCompanyCredit("rial");
-        double newCompanyDollarCredit = ManagerReusables.getCompanyCredit("dollar");
-
-        assertEquals(newDollarCredit, dollarCredit - 1.0, GeneralReusables.delta);
-        assertEquals(newRialCredit, rialCredit - karmozdValue, GeneralReusables.delta);
-        assertEquals(newCompanyDollarCredit, companyDollarCredit + 1.0, GeneralReusables.delta);
-        assertEquals(newCompanyRialCredit, companyRialCredit + karmozdValue, GeneralReusables.delta);
-    }
-
-    @Test
-    public void transactionIsAdded() {
-        String myUsername = GeneralReusables.getUsername(driver);
-        String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
-
-        assertEquals(otherUsername, myUsername);
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        GeneralReusables.logout(driver);
-    }
+	@AfterClass
+	public static void tearDown(){
+		GeneralReusables.logout(driver);
+	}
 }

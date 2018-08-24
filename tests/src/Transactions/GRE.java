@@ -17,7 +17,7 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by Golpar on 8/24/2018 AD.
  */
-public class ApplicationFee {
+public class GRE {
 
 	private static WebDriver driver;
 
@@ -26,12 +26,11 @@ public class ApplicationFee {
 		driver = new FirefoxDriver();
 		GeneralReusables.setUpToHomepage(driver);
 		GeneralReusables.loginAsACustomer(driver);
-		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_universitytrans");
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_gre");
 	}
 
 	@Test
 	public void validCreation(){
-
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
 		username.sendKeys("username");
@@ -40,33 +39,41 @@ public class ApplicationFee {
 		password.clear();
 		password.sendKeys("password");
 
-		WebElement amount = driver.findElement(By.name("amount"));
-		amount.clear();
-		amount.sendKeys("50");
+		WebElement date = driver.findElement(By.name("date"));
+		date.clear();
+		date.sendKeys("1997-05-07");
 
-		WebElement type = driver.findElement(By.id("id_university_transـtype"));
-		Select dropdown= new Select(type);
-		dropdown.selectByVisibleText("application fee");
+		WebElement country = driver.findElement(By.name("country"));
+		country.clear();
+		country.sendKeys("Iran");
 
-		WebElement currency = driver.findElement(By.name("source_wallet"));
-		Select dropdown2= new Select(currency);
-		dropdown2.selectByVisibleText("dollar");
+		WebElement city = driver.findElement(By.name("city"));
+		city.clear();
+		city.sendKeys("Tehran");
 
-		WebElement university_name = driver.findElement(By.name("university_name"));
-		university_name.clear();
-		university_name.sendKeys("ETH");
+		WebElement code = driver.findElement(By.name("test_center_code"));
+		code.clear();
+		code.sendKeys("123");
 
-		WebElement link = driver.findElement(By.name("link"));
-		link.clear();
-		link.sendKeys("ETH.com");
+		WebElement center_name = driver.findElement(By.name("test_center_name"));
+		center_name.clear();
+		center_name.sendKeys("آهنچی مرکز");
 
-		WebElement guide = driver.findElement(By.name("guide"));
-		guide.clear();
-		guide.sendKeys("go there");
+		WebElement education = driver.findElement(By.name("educational_status"));
+		Select dropdown= new Select(education);
+		dropdown.selectByVisibleText("دیگر");
 
-		WebElement other_details = driver.findElement(By.name("other_details"));
-		other_details.clear();
-		other_details.sendKeys("nothing else");
+		WebElement citizenship = driver.findElement(By.name("citizenship"));
+		Select dropdown2= new Select(citizenship);
+		dropdown2.selectByVisibleText("blah");
+
+		WebElement major_field_name = driver.findElement(By.name("major_filed_name"));
+		major_field_name.clear();
+		major_field_name.sendKeys("CS");
+
+		WebElement major_field_code = driver.findElement(By.name("major_filed_code"));
+		major_field_code.clear();
+		major_field_code.sendKeys("1234");
 
 		WebElement button = driver.findElement(By.name("create"));
 		button.click();
@@ -74,7 +81,7 @@ public class ApplicationFee {
 
 		WebElement message = driver.findElement(By.name("message"));
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
-		assertTrue(ManagerReusables.newTransactionExists("universitytrans"));
+		assertTrue(ManagerReusables.newTransactionExists("gre"));
 
 	}
 

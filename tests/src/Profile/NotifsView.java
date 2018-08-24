@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Reusables.OrderedRunner.class)
 public class NotifsView {
@@ -32,13 +33,7 @@ public class NotifsView {
 
     }
 
-    @Test
-    @Order(order = 1)
-    public void preConditionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("pishkhan"));
-    }
-
+	@Order(order = 1)
     @Test
     public void viewNotifs() {
         driver.findElement(By.name("notif")).click();
@@ -47,6 +42,14 @@ public class NotifsView {
         assertEquals(title, GeneralReusables.reusableStrings.get("notification-title"));
 
     }
+
+	@Order(order = 2)
+	@Test
+	public void existsNotificationsTable(){
+		List<WebElement> tables = driver.findElements(By.xpath("//table"));
+		assertTrue(tables.size() > 0);
+
+	}
 
     @AfterClass
     public static void tearDown() {

@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -25,44 +27,48 @@ public class FaultReport {
 
     @BeforeClass
     public static void setUp() {
-        transactionId = CustomerReusables.createNewTransaction();
+        transactionId = ManagerReusables.getNewestTransactionId();
         driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        driver.close();
-        employeeUsername = GeneralReusables.loginAsAnEmployee(driver);
+        GeneralReusables.loginAsAnEmployeeWithoutName(driver);
     }
 
     @Test
     public void invalidIdTest() {
-        WebElement idEntry = driver.findElement(By.id("transaction-id"));
+        WebElement idEntry = driver.findElement(By.name("transactionId"));
         idEntry.clear();
         idEntry.sendKeys(GeneralReusables.reusableStrings.get("invalid-transaction-id"));
-        WebElement reasonEntry = driver.findElement(By.id("why"));
+        WebElement reasonEntry = driver.findElement(By.name("description"));
         reasonEntry.sendKeys(reason);
-        WebElement sendButton = driver.findElement(By.name("send"));
-        sendButton.click();
-        WebElement message = driver.findElement(By.name("message"));
-        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("wrong-id-error")));
+        List<WebElement> choices = driver.findElements(By.className("form-check-input"));
+		WebElement report_choice = choices.get(choices.size() -1 );
+		report_choice.click();
+
+		WebElement send = driver.findElement(By.name("send"));
+		send.click();
+		GeneralReusables.waitForSeconds(5);
+		WebElement message = driver.findElement(By.name("error"));
+		assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("wrong-id-error")));
     }
 
     @Test
     public void successfulReportTest() {
-        WebElement idEntry = driver.findElement(By.id("transaction-id"));
-        idEntry.clear();
-        idEntry.sendKeys(transactionId);
-        WebElement reasonEntry = driver.findElement(By.id("why"));
-        reasonEntry.clear();
-        reasonEntry.sendKeys(reason);
-        WebElement sendButton = driver.findElement(By.name("send"));
-        sendButton.click();
-        WebElement message = driver.findElement(By.name("message"));
-        assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("successfully-sent")));
-    }
+		WebElement idEntry = driver.findElement(By.name("transactionId"));
+		idEntry.clear();
+		idEntry.sendKeys(transactionId);
+		WebElement reasonEntry = driver.findElement(By.name("description"));
+		reasonEntry.sendKeys(reason);
+		List<WebElement> choices = driver.findElements(By.className("form-check-input"));
+		WebElement report_choice = choices.get(choices.size() -1 );
+		report_choice.click();
 
-    @Test
-    public void successfulReceiveReportTest() {
-        assertTrue(ManagerReusables.reportExists(transactionId, reason, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.reusableStrings.get("reported-transaction")));
-    }
+		WebElement send = driver.findElement(By.name("send"));
+		send.click();
+		GeneralReusables.waitForSeconds(5);
+        WebElement message = driver.findElement(By.name("message"));
+        assertTrue(!message.getText().equals("") && message.getText().equals("بررسی تراکنش با موفقیت انجام شد."));
+		assertTrue(ManagerReusables.reportExists(transactionId, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.reusableStrings.get("reported-transaction")));
+
+	}
 
 
     @AfterClass

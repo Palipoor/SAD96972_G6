@@ -31,7 +31,7 @@ public class GeneralReusables {
 		reusableStrings.put("notification-title", "اعلان‌ها");
 		reusableStrings.put("pishkhan", "پیشخوان");
 		reusableStrings.put("invalid-transaction-id", "1000");
-		reusableStrings.put("wrong-id-error", "شناسه تراکنش اشتباه است.");
+		reusableStrings.put("wrong-id-error", "شناسه تراکنش معتبر نیست.");
 		reusableStrings.put("invalid-amount-error", "مبلغ وارد شده معتبر نیست.");
 		reusableStrings.put("invalid-username-error", "لطفا فقط از حروف انگلیسی، اعداد و علامت ـ استفاده کنید.");
 		reusableStrings.put("invalid-email-error", "لطفا یک ایمیل معتبر وارد کنید.");
@@ -52,6 +52,7 @@ public class GeneralReusables {
 		reusableStrings.put("homepage","http://127.0.0.1:8000");
 		reusableStrings.put("employee-not-found", "چنین کارمندی وجود ندارد.");
 		reusableStrings.put("customer-not-found", "چنین مشتری‌ای وجود ندارد.");
+		reusableStrings.put("successful-creation", "تراکنش با موفقیت ثبت شد.");
 
 	}
 

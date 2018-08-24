@@ -31,20 +31,16 @@ public class RejectTransaction {
         rialDeposit = ManagerReusables.getCompanyCredit("rial");
 
         driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-        //GeneralReusables.login(driver, "","" );//TODO password of customer
         GeneralReusables.loginAsACustomer(driver);
         personWalletCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
         GeneralReusables.logout(driver);
 
         driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
         GeneralReusables.loginAsAnEmployeeWithoutName(driver);
         String transactionId = EmployeeReusables.getNewestTransactionId(driver);
         EmployeeReusables.bringMeTheDetails(transactionId, driver);
-
 
     }
 
@@ -72,7 +68,6 @@ public class RejectTransaction {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         GeneralReusables.setUpToHomepage(driver);
-        //GeneralReusables.login(driver, " ", " ");//TODO email and password of receiver
         GeneralReusables.loginAsACustomer(driver);
         boolean personCreditCorrectness
                 = Math.abs( WalletUsersReusables.getWalletCredit(driver, "rial")- personWalletCredit
@@ -81,16 +76,11 @@ public class RejectTransaction {
                 < 1;
 
         assertTrue(systemCreditCorrectness && personCreditCorrectness);
-
-
-
-
     }
 
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
-        //driver.close();
     }
 }
 

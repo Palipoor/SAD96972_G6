@@ -17,7 +17,7 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by Golpar on 8/24/2018 AD.
  */
-public class ApplicationFee {
+public class UniversityDeposit {
 
 	private static WebDriver driver;
 
@@ -46,7 +46,7 @@ public class ApplicationFee {
 
 		WebElement type = driver.findElement(By.id("id_university_transـtype"));
 		Select dropdown= new Select(type);
-		dropdown.selectByVisibleText("application fee");
+		dropdown.selectByVisibleText("deposit fee");
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
 		Select dropdown2= new Select(currency);

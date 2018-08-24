@@ -33,14 +33,6 @@ public class TransactionsView {
     }
 
     @Test
-    @Reusables.Order(order = 1)
-    public void preConditionTest() {
-        String title = driver.getTitle();
-        assertEquals(title, GeneralReusables.reusableStrings.get("pishkhan"));
-    }
-
-    @Test
-    @Order(order = 2)
     public void transaction() {
         WebElement myTransactions= driver.findElement(By.name("my-transactions"));
         myTransactions.click();
