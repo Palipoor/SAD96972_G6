@@ -14,7 +14,7 @@ import traceback
 
 class Customer(Wallet_User):
 
-    contact_way = models.IntegerField(choices = ((0,'ایمیل'), (1,'پیامک')) , default = 0)
+    contact_way = models.IntegerField(choices=((0, 'ایمیل'), (1, 'پیامک')), default=0)
 
     def __init__(self, *args, **kwargs):
         super(Customer, self).__init__(*args, **kwargs)
@@ -34,8 +34,9 @@ class Request(PolymorphicModel):
     currencies = Transactions.num_to_currency_json.items()
     # all users can be Nonewhich means the dont exists and therefore can be ignored.
     # who pays
+    creator = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='creator', null=False, blank=True)
     source_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='source_user', null=True, blank=True)
-    source_wallet = models.CharField(choices=currencies, max_length=1,default="0", blank=True)
+    source_wallet = models.CharField(choices=currencies, max_length=1, default="0", blank=True)
     # who recieves and possibly redirects
     dest_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='dest_user', null=True, blank=True)
     dest_wallet = models.CharField(choices=currencies, max_length=1, default="0", blank=True)
@@ -56,6 +57,11 @@ class Request(PolymorphicModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        try:
+            self.set_initials(*args, **kwargs)
+        except Exception as identifier:
+            print("problems in calling set_initials in init ")
+            print(traceback.format_exc())
         self.excps = []
         if (not self.exchange_rate):
             self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
@@ -63,6 +69,10 @@ class Request(PolymorphicModel):
         # print(self.dest_user.dollar_cent_credit)
         # print(self.dest_user.dollar_cent_credit)
         # print('end')
+
+    def set_initials(self, *args, **kwargs):
+        #things to do after assigning creator
+        pass
 
     def save(self, *args, **kwargs):
         # if it is being saved for the first time does the payment and sets status to default. If exchange rate is nul computes it.
@@ -192,6 +202,7 @@ class Request(PolymorphicModel):
         #                          )
         reject = Reverse_Request(source_wallet=self.dest_wallet,
                                  dest_wallet=self.source_wallet,
+                                 creator=creator,
                                  amount=self.amount*(1 + self.profitRate)*self.exchange_rate,
                                  profitRate=0,
                                  exchange_rate=1./self.exchange_rate,
@@ -247,8 +258,12 @@ class Reverse_Request(Request):
 class Charge(Request):
     # Only needs destination user and wallet and amount as argument.
 
+    def set_initials(self, *args, **kwargs):
+        self.source_user = self.creator
+
     def __init__(self, *args, **kwargs):
         super(Charge, self).__init__(*args, type="Charge", **kwargs)
+        self.source_user = self.creator
 
     def set_status(self):
         self.status = "0"
@@ -262,6 +277,10 @@ class Exchange(Request):
     # def __init__(self, *args, **kwargs):
     #     kwargs['dest_user'] = kwargs["source_user"]
     #     super(Exchange, self).__init__(self, *args, **kwargs)
+
+    def set_initials(self, *args, **kwargs):
+        self.source_user = self.creator
+        self.source_user = self.creator
 
     def __init__(self, *args, **kwargs):
         super(Exchange, self).__init__(*args, type="Exchange", **kwargs)
@@ -279,6 +298,9 @@ class LangTest(Request):
     labels = {"password": "رمز عبور",
               "username": "نام کاربری",
               }
+
+    def set_initials(self, *args, **kwargs):
+        self.source_user = self.creator
 
     def set_status(self):
         self.status = "2"
@@ -355,8 +377,8 @@ class GRE(IBT):
     )
     major_filed_code = models.CharField(max_length=50, null=False)
     major_filed_name = models.CharField(max_length=50, null=False)
-    citizenship = models.CharField(choices=citizenships, max_length = 1, null=False)
-    educational_status = models.CharField(choices=statuses, max_length=1,null=False)
+    citizenship = models.CharField(choices=citizenships, max_length=1, null=False)
+    educational_status = models.CharField(choices=statuses, max_length=1, null=False)
     file = models.FileField(null=True, blank=True)
     labels = {
         "file": "پیوست",
@@ -370,7 +392,7 @@ class GRE(IBT):
     def __init__(self, *args, **kwargs):
         kwargs["source_wallet"] = "1"
         kwargs["type"] = "gre"
-        super(GRE, self).__init__(*args,**kwargs)
+        super(GRE, self).__init__(*args, **kwargs)
 
 
 class UniversityTrans(Request):

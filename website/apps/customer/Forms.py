@@ -6,6 +6,7 @@ from apps.customer.models import Customer
 from django.utils.translation import ugettext_lazy as _
 from django.forms.models import model_to_dict
 
+
 class Charge(forms.Form):
     charge = forms.IntegerField()
 
@@ -13,11 +14,12 @@ class Charge(forms.Form):
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+
 class CustomerSettingsForm(ModelForm):
     class Meta:
         model = Customer
         fields = ['first_name', 'last_name', 'persian_first_name', 'persian_last_name', 'account_number', 'phone_number', 'email', 'contact_way']
-    
+
     first_name = fields.FIRST_NAME
     last_name = fields.LAST_NAME
     persian_first_name = fields.PERSIAN_FIRST_NAME
@@ -27,6 +29,7 @@ class CustomerSettingsForm(ModelForm):
     phone_number.required = True
     email = fields.EMAIL
     email.required = True
+
 
 def get_form_class(type, *args, **kwargs):
     my_excludes = ["source_user"]
@@ -79,7 +82,8 @@ def get_form_class(type, *args, **kwargs):
             self.title = my_title
             self.sub_title = my_sub_title
             temp = super(_ObjectForm, self).__init__(*args, **kwargs)
-            self.instance.source_user = self.user
+            self.instance.creator = self.user
+            self.instance.set_initials()
             self.transaction = None
             for field in self.fields.values():
                 field.widget.attrs.update({"class": "form-control"})
