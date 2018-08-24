@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from apps.customer.views import CustomerPasswordChangeView, CustomerSettingsView, \
-    ReverseChargeCreationView, ForeignPaymentCreationView, \
+    ReverseChargeCreationView, \
     ApplicationFeeCreationView, AnonymousPaymentCreationView, TransactionsListView, CustomerDashboardView, TransactionDetailsView, TransactionCreationView
 from apps.main.views import WalletView, NotificationsView
 
@@ -28,7 +28,7 @@ urlpatterns = [
     path('<pk>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('settings/', CustomerSettingsView.as_view(), name='settings'),
     path('reverse_charge/', ReverseChargeCreationView.as_view(), name='reverse_charge'),
-    path('foreign_payment/', ForeignPaymentCreationView.as_view(), name='foreign_payment'),
+    # path('foreign_payment/', ForeignPaymentCreationView.as_view(), name='foreign_payment'),
     path('application_fee/', ApplicationFeeCreationView.as_view(), name='application_fee'),
     path('anonymous_payment/', AnonymousPaymentCreationView.as_view(), name='anonymous_payment'),
     path('<currency>_wallet/', WalletView.as_view(user_type="Customer"), name='wallet'),

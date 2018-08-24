@@ -16,7 +16,7 @@ from django.views.generic import CreateView, UpdateView, ListView
 from django.views.generic.detail import DetailView
 from apps.customer.Forms import CustomerSettingsForm
 from apps.main.Forms import UserPasswordChangeForm
-from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
+from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, BankTrans, InternalTrans, UnknownTrans
 from apps.customer import Forms
 from apps.main.models import GenUser, Notification
 from django.contrib import messages
@@ -113,11 +113,11 @@ class TransactionDetailsView(MainTransactionDetails):
         return context
 
 
-class ForeignPaymentCreationView(TransactionCreationView):
-    template_name = "customer/foreign_payment.html"
+# class ForeignPaymentCreationView(TransactionCreationView):
+#     template_name = "customer/foreign_payment.html"
 
-    class Meta:
-        model = ForeignTrans
+#     class Meta:
+#         model = ForeignTrans
         # todo incomplete
 
 
