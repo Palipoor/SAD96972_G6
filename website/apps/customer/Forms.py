@@ -83,6 +83,7 @@ def get_form_class(type, *args, **kwargs):
             self.transaction = None
             for field in self.fields.values():
                 field.widget.attrs.update({"class": "form-control"})
+                field.error_messages.update({'required': 'پر کردن این فیلد الزامی است.'})
             return temp
 
     return _ObjectForm

@@ -26,7 +26,7 @@
     <div class="register-box-body">
     <p class="login-box-msg">{{form.title}} {{form.sub_title}}</p>
     {% for message in messages%}
-    <div> {{message}} </div>
+    <div name = "message"> {{message}} </div>
     {% endfor%}
         <form method="post" novalidate>
             {% csrf_token %} {% for field in form %}
@@ -40,7 +40,7 @@
             {% endfor %}
             <div class="row">
                 <div class="col-xs-4">
-                    <button type="submit" name="sign up" class="btn btn-primary btn-block btn-flat">ثبت </button>
+                    <button type="submit" name="create" class="btn btn-primary btn-block btn-flat">ثبت </button>
                 </div>
                 <!-- /.col -->
             </div>

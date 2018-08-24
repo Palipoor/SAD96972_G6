@@ -296,7 +296,6 @@ class TransactionDetailsView(DetailView):
         return context
 
     def get_queryset(self):
-        # """Return the last five published questions."""
         return Request.objects.filter(id=self.kwargs['pk'])
 
 class TransactionDetailsViewForStaff(FormMixin, TransactionDetailsView):
