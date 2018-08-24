@@ -54,6 +54,7 @@ class Request(PolymorphicModel):
     exchange_rate = models.FloatField(null=True, blank=True)
     # request type
     type = models.CharField(max_length=100, null=False)
+    labels = {}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -430,14 +431,23 @@ class ForeignTrans(Request):
     # Only needs source user and wallet, amount, account number and bank name as arguments.
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
+    labels = {
+        "account_number": "شماره حساب",
+        "bank_name": "نام بانک",
+        "source_wallet": "ارز مبدا",
+        "amount": "مبلغ",
+    }
+    labels.update(Request.labels)
+
 
     def __init__(self, *args, **kwargs):
-        temp = super().__init__(*args, type="ForeignTrans", ** kwargs)
-        if not self.pk:
-            manager = Manager.get_manager()
-            self.dest_user = manager
-            self.dest_wallet = kwargs['source_wallet']
-        return temp
+        kwargs["type"] = "foreigntrans"
+        kwargs["dest_user"] = Manager.get_manager()
+        temp = super().__init__(*args, ** kwargs)
+        
+    def set_initials(self, *args, **kwargs):
+        self.source_user = self.creator
+        self.dest_wallet = self.source_wallet
 
     def save(self, *args, **kwargs):
         super(ForeignTrans, self).save(*args, **kwargs)
