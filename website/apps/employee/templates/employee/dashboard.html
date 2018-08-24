@@ -61,21 +61,21 @@
 </div>
 <!-- /.row -->
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">گزارش خطا در تراکنش‌ها</h3>
+        <h3 class="box-title">بررسی تراکنش</h3>
         {% for error in form.non_field_errors  %}
               <span class="text-danger" name="first-name-error">{{ error }}</span>
         {% endfor %}
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-      <form class="form-horizontal" method = "POST">
+      <form class="form" method = "POST">
         {% csrf_token %}
         <div class="box-body">
           <div class="form-group">
-            <label for="transaction-id" class="col-sm-2 control-label">شناسه تراکنش</label>
+            {{form.transactionId.label}}
             {{form.transactionId}}
               {% for error in form.transactionId.errors %}
                 <span class="text-danger" name="first-name-error">{{ error }}</span>
@@ -83,8 +83,9 @@
 
           </div>
           <div class="form-group">
-            <label for="why" class="col-sm-2 control-label">توضیح</label>
-            {{form.description}}
+              {{form.description.label}}
+              <br><br>
+              {{form.description}}
               {% for error in form.description.errors %}
                 <span class="text-danger" name="first-name-error">{{ error }}</span>
               {% endfor %}

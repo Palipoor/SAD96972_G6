@@ -72,8 +72,8 @@ class CustomerAccessRemovalForm(forms.Form):
 
 class ReviewForm(forms.Form):
     CHOICES = Transactions.request_types_for_manager_json
-    action = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
-    transactionId = forms.IntegerField()
+    action = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(attrs = {"class": "form-check-input"}))
+    transactionId = forms.IntegerField(label = "شناسه تراکنش", widget = forms.NumberInput(attrs = {'class': 'form-control'}))
     description = fields.DESCRIPTION
 
     def __init__(self, *args, **kwargs):

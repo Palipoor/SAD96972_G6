@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 import os
+from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, FormView, ListView, TemplateView, DetailView
 
@@ -16,6 +17,10 @@ from apps.main.models import Notification
 from apps.main.views import IsLoggedInView, IsEmployee, Compilation
 from apps.main.views import TransactionDetailsView as MainTransactionDetails
 from django.urls import reverse_lazy
+from django.views.generic.edit import FormMixin
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+
 
 
 class EmployeeTemplateView(TemplateView):
@@ -37,14 +42,12 @@ class EmployeeDashboardView(IsLoggedInView, IsEmployee, EmployeeFormView):
     form_class = ReviewForm
 
     def get_success_url(self):
-        # success_url = reverse_lazy(EmployeeDashboardView.as_view)
-        # TODO use reverse
-        return "dashboard"
+        return "employee:dashboard"
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeFormView, self).get_context_data(**kwargs)
         context = Compilation.get_all_requests(context)
-        context.update({'notifications' : Notification.objects.filter(user__username = self.request.user.username, seen = False).order_by('-sent_date')})
+        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
         context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
@@ -55,7 +58,9 @@ class EmployeeDashboardView(IsLoggedInView, IsEmployee, EmployeeFormView):
 
     def form_valid(self, form):
         form.update_db()
-        return super().form_valid(form)
+        messages.add_message(
+            self.request, messages.SUCCESS, 'بررسی تراکنش با موفقیت انجام شد.')
+        return HttpResponseRedirect(reverse(self.get_success_url()))
 
 
 class EmployeePasswordChangeView(IsEmployee, FormView):
@@ -73,9 +78,10 @@ class EmployeePasswordChangeView(IsEmployee, FormView):
         kwargs['user'] = Employee.objects.get(username=self.request.user)
         return kwargs
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
 
 class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
     form_class = EmployeeSettingsForm
@@ -97,10 +103,44 @@ class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
         self.object = context.update(clean)
         return super(EmployeeSettingsView, self).form_valid(form)
 
-class TransactionDetailsView(MainTransactionDetails):
+
+class TransactionDetailsView(FormMixin, MainTransactionDetails):
 
     template_name = "employee/transaction_details.html"
+    form_class = ReviewForm
 
+    def get_success_url(self):
+        return reverse('employee:transaction_details', kwargs={'pk': self.object.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(TransactionDetailsView, self).get_context_data(**kwargs)
+        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
+        context = Compilation.get_last_request_and_transaction_id(context)
+        context['form'] = self.get_form()
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(TransactionDetailsView, self).get_form_kwargs()
+        kwargs['user'] = Employee.objects.get(username=self.request.user)
+        kwargs['transaction_id'] = self.kwargs['pk']
+        return kwargs
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            print(form.errors)
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.update_db()
+        messages.add_message(
+            self.request, messages.SUCCESS, 'بررسی تراکنش با موفقیت انجام شد.')
+        return super().form_valid(form)
+
+        
 
 class CustomerDetailsForEmployee(IsEmployee, TemplateView):
 

@@ -19,8 +19,7 @@ from apps.main.Forms import UserPasswordChangeForm
 from apps.customer.models import Customer, TOFEL, GRE, UniversityTrans, ForeignTrans, InternalTrans, UnknownTrans
 from apps.customer import Forms
 from apps.main.models import GenUser, Notification
-from django.contrib.messages.views import SuccessMessageMixin
-
+from django.contrib import messages
 
 
 class CustomerTemplateView(TemplateView):
@@ -47,6 +46,7 @@ class CustomerCreateView(FormView, IsLoggedInView, IsCustomer):
         context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
         self.context = context
         return context
+
 
 class CustomerWallet (CustomerFormView):
     template_name = "customer/wallet.html"
@@ -75,7 +75,6 @@ class TransactionCreationView(CustomerCreateView):
     def get_success_url(self):
         return reverse_lazy('customer:create', kwargs={'type': self.type})
 
-
     def get_form_kwargs(self):
         kwargs = super(CustomerCreateView, self).get_form_kwargs()
         kwargs['user'] = Customer.objects.get(username=self.request.user)
@@ -91,8 +90,9 @@ class TransactionCreationView(CustomerCreateView):
         return Forms.get_form_class(self.type)
 
     def form_valid(self, form):
+        messages.add_message(
+            self.request, messages.SUCCESS, 'تراکنش با موفقیت ثبت شد.')
         return super(TransactionCreationView, self).form_valid(form)
-
 
 
 class ReverseChargeCreationView(TransactionCreationView):
@@ -107,15 +107,9 @@ class ReverseChargeCreationView(TransactionCreationView):
 class TransactionDetailsView(MainTransactionDetails):
     template_name = "customer/transaction_details.html"
     mdoel = Request
-    # queryset = Request.objects.all()
-
-    # def get_queryset(self):
-    #     # """Return the last five published questions."""p
 
     def get_context_data(self, **kwargs):
         temp = super().get_context_data(**kwargs)
-        print(temp)
-        print(temp['foreigntrans'])
         temp['type'] = temp['foreigntrans']._meta.model_name
         return(temp)
 
@@ -196,7 +190,6 @@ class TransactionsListView(IsLoggedInView, IsCustomer, TemplateView):
         context = super(TransactionsListView, self).get_context_data(**kwargs)
         Compilation.get_wallet_requests(context, self.request.user.username, -1)
         return context
-
 
 
 class MakeTransactionView(IsLoggedInView, IsCustomer, FormView):

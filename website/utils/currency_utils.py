@@ -24,14 +24,14 @@ class Transactions:
     )
 
     request_types_for_review_json = (
-        ("0", 'accepted'),
-        ("1", 'rejected'),
-        ("4", 'reported'),
+        ("0", 'تایید'),
+        ("1", 'رد'),
+        ("4", 'گزارش'),
     )
 
     request_types_for_manager_json = (
-        ("0", 'accepted'),
-        ("1", 'rejected'),
+        ("0", 'تایید'),
+        ("1", 'رد'),
     )
 
     exhchange_matrix = [[1, 0.01, 0.01],

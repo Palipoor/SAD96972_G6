@@ -9,7 +9,6 @@
               <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_2-2"  data-toggle="tab">مشخصات درخواست</a></li>
               <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_3-2" %}"  data-toggle="tab">مشخصات پرداخت</a></li>
               <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_4-2" %}"  data-toggle="tab">دیگر جزییات</a></li>
-              <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_5-2" %}"  data-toggle="tab">مشخصات انجام</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1-1">
@@ -17,7 +16,7 @@
                       <dt>شناسه</dt>
                       <dd>{{object.id}}</dd>
                       <dt>نوع</dt>
-                      <dd>{{type}}</dd>
+                      <dd>{{object.type}}</dd>
                     </dl>
               </div><!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2-2">
@@ -46,12 +45,6 @@
                       <dt> دیگرجزییات سه</dt>
                       <dd> توضیح سه</dd>
                     </dl>
-                </div>
-                <div class="tab-pane" id="tab_5-2">
-                    <dt> وضعیت</dt>
-                    <dd> {{transaction.status}}</dd>
-                    <dt> زمان پیگیری درخواست</dt>
-                    <dd> 2010 - 10 - 10  13:10</dd>
                 </div>
                   <!-- /.tab-pane -->
             </div><!-- /.tab-content -->

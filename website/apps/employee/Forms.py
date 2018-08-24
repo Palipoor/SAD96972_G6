@@ -10,13 +10,21 @@ from django.forms import widgets
 
 class ReviewForm(forms.Form):
     CHOICES = Transactions.request_types_for_review_json
-    action = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())
-    transactionId = forms.IntegerField()
+    action = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(attrs = {"class": "form-check-input"}))
+    transactionId = forms.IntegerField(label = "شناسه تراکنش", widget = forms.NumberInput(attrs = {'class': 'form-control'}))
     description = fields.DESCRIPTION
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
+        if 'transaction_id' in kwargs:
+            id = kwargs.pop('transaction_id')
+        else:
+            id = ""
         super().__init__(*args, **kwargs)
+        if id != "":
+            print(self.fields.keys( ))
+            self.fields['transactionId'].widget = forms.HiddenInput(attrs={'value':id})
+
 
     def action_amount(self):
         super().action_amount()
