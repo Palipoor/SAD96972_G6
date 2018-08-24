@@ -110,7 +110,7 @@ class TransactionDetailsView(MainTransactionDetails):
 
     def get_context_data(self, **kwargs):
         temp = super().get_context_data(**kwargs)
-        temp['type'] = temp['foreigntrans']._meta.model_name
+        # temp['type'] = temp['foreigntrans']._meta.model_name
         return(temp)
 
 

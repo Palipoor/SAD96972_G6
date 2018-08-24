@@ -1,54 +1,27 @@
 <!-- transaction : transaction -->
 {% load static staticfiles %}
-
-        <section class="content">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs pull-right">
-              <li class="pull-right header"> جزئیات تراکنش</li>
-              <li class="active"><a href = "{% url 'customer:transaction_details' object.id %} #tab_1-1" %}"  data-toggle="tab">مشخصات اصلی</a></li>
-              <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_2-2"  data-toggle="tab">مشخصات درخواست</a></li>
-              <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_3-2" %}"  data-toggle="tab">مشخصات پرداخت</a></li>
-              <li><a href = "{% url 'customer:transaction_details' object.id %} /#tab_4-2" %}"  data-toggle="tab">دیگر جزییات</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1-1">
-                  <dl>
-                      <dt>شناسه</dt>
-                      <dd>{{object.id}}</dd>
-                      <dt>نوع</dt>
-                      <dd>{{object.type}}</dd>
-                    </dl>
-              </div><!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2-2">
-                  <dl>
-                      <dt>تاریخ و زمان ثبت درخواست</dt>
-                      <dd>{{transaction.time}}</dd>
-                      <dt>درخواست‌دهنده</dt>
-                      <dd>{{transaction.customer}}</dd> <!-- motmaen nistam !!! -->
-                    </dl>
-              </div><!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_3-2">
-                  <dl>
-                      <dt> مبلغ پرداختی</dt>
-                      <dd>{{transaction.amount}}</dd>
-                      <dt>{{transaction.currency}}</dt>
-                      <dt>کارمزد</dt>
-                      <dd>{{transaction.profit}}</dd>
-                    </dl>
-              </div>
-              <div class="tab-pane" id="tab_4-2">
-                  <dl>
-                      <dt> دیگرجزییات یک</dt>
-                      <dd> توضیح یک</dd>
-                      <dt> دیگرجزییات دو</dt>
-                      <dd> توضیح دو</dd>
-                      <dt> دیگرجزییات سه</dt>
-                      <dd> توضیح سه</dd>
-                    </dl>
-                </div>
-                  <!-- /.tab-pane -->
-            </div><!-- /.tab-content -->
-          </div><!-- nav-tabs-custom -->
-        </section>
-
-             
+        <!-- Main content -->
+<section class="content">
+          <!-- Small boxes (Stat box) -->
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">تراکنش {{object.id}}</h3>
+              <br>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <tbody>
+                {% for label,value in fields %}
+                <tr>
+                  <td>{{label}} </td>
+                  <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+                        
+</section><!-- /.content -->

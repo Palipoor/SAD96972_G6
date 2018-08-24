@@ -155,6 +155,7 @@ class NotificationsView(IsLoggedInView, TemplateView):
 
         return render(request, self.template_name, self.get_context_data(**kwargs))
 
+
 class Register(FormView):
     # todo errors are not shown properly. validation is not good! accepts ! as a valid username. shame on us.
     form_class = SignUpForm
@@ -288,20 +289,35 @@ def log_out(request):
 #     template = loader.get_template("user_panel.html")
 #     return HttpResponse(template.render())
 
+
 class TransactionDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(TransactionDetailsView, self).get_context_data(**kwargs)
         context = Compilation.get_last_request_and_transaction_id(context)
+        all_fields = context["object"]._meta.get_fields()
+        labels = context["object"].labels
+        selected_fields = []
+        selected_fields.append(("درخواست دهنده", getattr(context["object"], "creator").username))
+        selected_fields.append(("نوع", getattr(context["object"], "type")))
+        selected_fields.append(("وضعیت", Transactions.get_persian_status(getattr(context["object"], "status"))))
+        selected_fields.append(("مبلغ", str(getattr(context["object"], "amount")) + Transactions.get_currency_symbol(getattr(context["object"], "source_wallet"))))
+        selected_fields.append(("مبلغ به همراه هزینه تراکنش", str(getattr(context["object"], "amount")*(1+getattr(context["object"], "profitRate")) ) + Transactions.get_currency_symbol(getattr(context["object"], "source_wallet"))))
+        for field in all_fields:
+            if (field.name in labels):
+                selected_fields.append((labels[field.name], getattr(context["object"], field.name)))
+        context["fields"] = selected_fields
         return context
 
     def get_queryset(self):
         # """Return the last five published questions."""
         return Request.objects.filter(id=self.kwargs['pk'])
 
+
 class TransactionDetailsViewForStaff(FormMixin, TransactionDetailsView):
 
     form_class = ReviewForm
+
     def get_context_data(self, **kwargs):
         context = super(TransactionDetailsViewForStaff, self).get_context_data(**kwargs)
         context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
@@ -329,4 +345,3 @@ class TransactionDetailsViewForStaff(FormMixin, TransactionDetailsView):
         messages.add_message(
             self.request, messages.SUCCESS, 'بررسی تراکنش با موفقیت انجام شد.')
         return super().form_valid(form)
-
