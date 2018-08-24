@@ -15,7 +15,7 @@ from apps.main.Forms import UserPasswordChangeForm
 from apps.customer.models import Request
 from apps.main.models import Notification
 from apps.main.views import IsLoggedInView, IsEmployee, Compilation
-from apps.main.views import TransactionDetailsView as MainTransactionDetails
+from apps.main.views import TransactionDetailsViewForStaff as MainTransactionDetails
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
 from django.contrib import messages
@@ -104,41 +104,10 @@ class EmployeeSettingsView(IsLoggedInView, IsEmployee, UpdateView):
         return super(EmployeeSettingsView, self).form_valid(form)
 
 
-class TransactionDetailsView(FormMixin, MainTransactionDetails):
-
+class TransactionDetailsView(MainTransactionDetails):
     template_name = "employee/transaction_details.html"
-    form_class = ReviewForm
-
     def get_success_url(self):
         return reverse('employee:transaction_details', kwargs={'pk': self.object.id})
-
-    def get_context_data(self, **kwargs):
-        context = super(TransactionDetailsView, self).get_context_data(**kwargs)
-        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
-        context = Compilation.get_last_request_and_transaction_id(context)
-        context['form'] = self.get_form()
-        return context
-
-    def get_form_kwargs(self):
-        kwargs = super(TransactionDetailsView, self).get_form_kwargs()
-        kwargs['user'] = Employee.objects.get(username=self.request.user)
-        kwargs['transaction_id'] = self.kwargs['pk']
-        return kwargs
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            print(form.errors)
-            return self.form_invalid(form)
-
-    def form_valid(self, form):
-        form.update_db()
-        messages.add_message(
-            self.request, messages.SUCCESS, 'بررسی تراکنش با موفقیت انجام شد.')
-        return super().form_valid(form)
 
         
 
