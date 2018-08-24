@@ -6,6 +6,8 @@ from utils.currency_utils import Transactions
 from apps.employee.models import EmployeeReview
 from apps.manager.models import Manager
 from django.forms import ValidationError
+from django.contrib.auth.hashers import make_password
+
 import traceback
 
 
@@ -316,6 +318,7 @@ class Account_Request(Request):
         kwargs["dest_user"] = Manager.get_manager()
         super(Account_Request, self).__init__(*args, **kwargs)
 
+
 class IBT(Account_Request):
     test_center_name = models.CharField(max_length=100, null=False)
     test_center_code = models.CharField(max_length=50, null=False)
@@ -329,11 +332,10 @@ class IBT(Account_Request):
               "date": "تاریخ آزمون",
               }
     labels.update(Account_Request.labels)
-    
+
     def __init__(self, *args, **kwargs):
         kwargs["amount"] = Transactions.get_transaction_amount(kwargs['type'])
         super(Account_Request, self).__init__(*args, **kwargs)
-    
 
 
 class TOFEL(IBT):
@@ -404,7 +406,7 @@ class UniversityTrans(Account_Request):
         ("0", 'application fee'),
         ("1", 'deposit fee')
     )
-    university_transـtype = models.CharField(choices=types, max_length = 1,null=False)
+    university_transـtype = models.CharField(choices=types, max_length=1, null=False)
     university_name = models.CharField(max_length=50, null=False)
     link = models.URLField(null=False)
     guide = models.TextField(max_length=1000, null=False)
@@ -439,12 +441,11 @@ class BankTrans(Request):
     }
     labels.update(Request.labels)
 
-
     def __init__(self, *args, **kwargs):
         kwargs["type"] = "banktrans"
         kwargs["dest_user"] = Manager.get_manager()
         temp = super().__init__(*args, ** kwargs)
-        
+
     def set_initials(self, *args, **kwargs):
         self.source_user = self.creator
         self.dest_wallet = self.source_wallet
@@ -464,11 +465,35 @@ class InternalTrans(Request):
     bank_name = models.CharField(max_length=50)
 
 
-class UnknownTrans(Request):
-    account_number = models.CharField(max_length=20, null=False)
-    bank_name = models.CharField(max_length=50, null=False)
+class UnknownTrans(BankTrans):
     email = models.EmailField()
     phone_number = models.CharField(max_length=20)
+    labels = {
+        "email": "ایمیل مقصد",
+        "phone_number": "شمارهٔ تلفن مقصد",
+    }
+    labels.update(BankTrans.labels)
+
+    def set_initials(self, *args, **kwargs):
+        super().set_initials()
+        try:
+            self.final_user = Customer.objects.get(email=self.email)
+        except Exception as e:
+            base_username = self.email.split("@")[0]
+            extention = 0
+            while (len(Customer.objects.filter(username=base_username + str(extention))) > 0):
+                extention += 1
+            username = base_username + str(extention)
+            customer = Customer(username=username, email=self.email, phone_number=self.phone_number, account_number=-2)
+            customer.password = make_password(username+username)
+            customer.save()
+            self.dest_user = customer
+        self.fianl_wallet = self.source_wallet
+
+    def __init__(self, *args, **kwargs):
+        kwargs["type"] = "unkowntrans"
+        kwargs["dest_user"] = Manager.get_manager()
+        temp = super().__init__(*args, ** kwargs)
 
 
 class CustomTransactionInstance(Request):
