@@ -15,6 +15,11 @@ class Transactions:
                             "1": "dollar",
                             "2": "euro",
                             }
+    num_to_currency_symbol = {"0": " ریال",
+                              "1": " $",
+                              "2": " €",
+                              }
+
     request_types_json = (
         ("0", 'accepted'),
         ("1", 'rejected'),
@@ -22,6 +27,14 @@ class Transactions:
         ("3", 'failed'),
         ("4", 'reported'),
     )
+
+    persian_types_json = {
+        "0": 'تایید شده',
+        "1": 'رد شده',
+        "2": 'در انتظار',
+        "3": 'فیل',
+        "4": 'گزارش شده',
+    }
 
     request_types_for_review_json = (
         ("0", 'تایید'),
@@ -39,7 +52,9 @@ class Transactions:
                         [100, 1, 1, ]]
 
     profitRates = {"tofel": 0.05,
-                   "gre": 0.05
+                   "gre": 0.05,
+                   "universitytrans": 0.05,
+                   "foreigntrans": 0.05,
                    }
 
     transaction_amounts = {"tofel": 100,
@@ -74,3 +89,11 @@ class Transactions:
     @staticmethod
     def get_transaction_amount(type):
         return Transactions.transaction_amounts[type]
+
+    @staticmethod
+    def get_persian_status(num):
+        return Transactions.persian_types_json[num]
+
+    @staticmethod
+    def get_currency_symbol(num):
+        return Transactions.num_to_currency_symbol[num]

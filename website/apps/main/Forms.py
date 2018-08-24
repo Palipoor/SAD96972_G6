@@ -74,7 +74,7 @@ class SignUpForm(forms.Form):
 class WalletChargeForm(forms.Form):
     # form for charging wallets
     amount = forms.IntegerField(min_value=1, label='مبلغ درخواستی',
-                                widget=forms.widgets.TextInput(attrs={'name': 'desired-amount', 'oninput':'calculate()'}))
+                                widget=forms.widgets.TextInput(attrs={'name': 'desired-amount', 'oninput': 'calculate()'}))
 
     # TODO make exchanging from each wallet possible. make real rial charge possible.
     def __init__(self, *args, **kwargs):
@@ -89,7 +89,7 @@ class WalletChargeForm(forms.Form):
         # makes exception if charge is invalid
         self.needed_value = self.cleaned_data['amount'] * Transactions.get_exchange_rate(self.dest, self.source)
         if(self.dest != "0"):
-            self.transaction = Exchange(source_user=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
+            self.transaction = Exchange(source_user=self.user, creator=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
         else:
             print("hello")
             self.transaction = Charge(dest_user=self.user, dest_wallet=self.dest, amount=self.needed_value)
@@ -124,11 +124,11 @@ class UserPasswordChangeForm(forms.Form):
 
     new_password1 = forms.CharField(
         label="رمز عبور جدید",
-        widget=forms.PasswordInput(attrs = {'class': 'form-control'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
     new_password2 = forms.CharField(
         label="تکرار رمز عبور جدید",
-        widget=forms.PasswordInput(attrs = {'class': 'form-control'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
 
     def __init__(self, *args, **kwargs):
