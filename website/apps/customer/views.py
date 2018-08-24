@@ -77,7 +77,7 @@ class TransactionCreationView(CustomerCreateView):
 
     def get_form_kwargs(self):
         kwargs = super(CustomerCreateView, self).get_form_kwargs()
-        kwargs['user'] = Customer.objects.get(username=self.request.user)
+        kwargs['user'] = Customer.objects.get(username=self.request.user.username)
         # kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
         return kwargs
 
