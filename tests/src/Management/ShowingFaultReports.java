@@ -34,7 +34,7 @@ public class ShowingFaultReports {
         List<WebElement> tables = driver.findElements(By.xpath("//table"));
         boolean isThereAnyReportsTable = false;
         for (WebElement table : tables) {
-            if (table.getAttribute("name").equals("reports")) {
+            if (table.getAttribute("name").equals("reports-table")) {
                 isThereAnyReportsTable = true;
             }
         }

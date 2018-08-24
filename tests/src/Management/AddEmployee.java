@@ -147,7 +147,7 @@ public class AddEmployee {
 
 		boolean isAdded = ManagerReusables.employeeExists(employeeUsername);
         assertTrue(isAdded);
-        assertEquals(ManagerReusables.getSalary(employeeUsername), 10000);
+        assertEquals(ManagerReusables.getSalary(employeeUsername), 100000);
     }
 
     @Test

@@ -1,9 +1,6 @@
 package Management;
 
-import Reusables.GeneralReusables;
-import Reusables.ManagerReusables;
-import Reusables.Order;
-import Reusables.OrderedRunner;
+import Reusables.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -76,6 +73,9 @@ public class RemoveAccessCustomer {
     @AfterClass
     public static void tearDown(){
         GeneralReusables.logout(driver);
+		DBManager dbManager = new DBManager();
+		dbManager.connect();
+		dbManager.deleteCustomers();
     }
 
     private boolean successfulLogin(String username, String password) {

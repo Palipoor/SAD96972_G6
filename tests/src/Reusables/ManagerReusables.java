@@ -207,7 +207,7 @@ public class ManagerReusables {
 		}
 		if (tableRows.size() > 0) {
 			List<WebElement> employeeDetails = tableRows.get(0).findElements(By.xpath("//td"));
-			int salary = (int) Math.floor(Double.valueOf(employeeDetails.get(salaryIndex).getText()));
+			int salary = Integer.valueOf(employeeDetails.get(salaryIndex).getText());
 			GeneralReusables.logout(driver);
 			return salary;
 		}

@@ -1,6 +1,7 @@
 package Profile;
 
 
+import Reusables.DBManager;
 import Reusables.ProfileReusables;
 import Reusables.GeneralReusables;
 import org.junit.*;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SignUp {
 	private static WebDriver driver;
+	private static DBManager dbManager;
 
 	public static void goToSignupPage() {
 		GeneralReusables.setUpToHomepage(driver);
@@ -344,8 +346,9 @@ public class SignUp {
 	@AfterClass
 	public static void tearDown() {
 		driver.close();
-		// TODO : dummy account should be deleted???
-
+		dbManager = new DBManager();
+		dbManager.connect();
+		dbManager.deleteCustomers();
 	}
 
 
