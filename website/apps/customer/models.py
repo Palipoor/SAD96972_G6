@@ -427,7 +427,7 @@ class UniversityTrans(Account_Request):
         super(UniversityTrans, self).__init__(*args, **kwargs)
 
 
-class ForeignTrans(Request):
+class BankTrans(Request):
     # Only needs source user and wallet, amount, account number and bank name as arguments.
     account_number = models.CharField(max_length=20, null=False)
     bank_name = models.CharField(max_length=50, null=False)
@@ -441,7 +441,7 @@ class ForeignTrans(Request):
 
 
     def __init__(self, *args, **kwargs):
-        kwargs["type"] = "foreigntrans"
+        kwargs["type"] = "banktrans"
         kwargs["dest_user"] = Manager.get_manager()
         temp = super().__init__(*args, ** kwargs)
         
@@ -450,7 +450,7 @@ class ForeignTrans(Request):
         self.dest_wallet = self.source_wallet
 
     def save(self, *args, **kwargs):
-        super(ForeignTrans, self).save(*args, **kwargs)
+        super(BankTrans, self).save(*args, **kwargs)
 
     def set_status(self):
         self.status = "2"

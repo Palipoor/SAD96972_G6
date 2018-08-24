@@ -54,7 +54,7 @@ class Transactions:
     profitRates = {"tofel": 0.05,
                    "gre": 0.05,
                    "universitytrans": 0.05,
-                   "foreigntrans": 0.05,
+                   "banktrans": 0.05,
                    }
 
     transaction_amounts = {"tofel": 100,
