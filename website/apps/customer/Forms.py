@@ -71,6 +71,14 @@ def get_form_class(type, *args, **kwargs):
         # my_widgets["date"] = DateInput()
         # my_widgets["password"] = forms.PasswordInput
         my_sub_title += "پرداخت به حساب بانکی"
+    elif type == 'unkowntrans':
+        model_class = models.UnknownTrans
+        my_labels.update(model_class.labels)
+        for field in my_labels:
+            my_fields.insert(0, field)
+        # my_widgets["date"] = DateInput()
+        # my_widgets["password"] = forms.PasswordInput
+        my_sub_title += "پرداخت ناشناس"
     else:
         model_class = models.CustomTransactionInstance
         # TODO return nothing if type is wrong

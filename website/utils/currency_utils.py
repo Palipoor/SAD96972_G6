@@ -55,6 +55,7 @@ class Transactions:
                    "gre": 0.05,
                    "universitytrans": 0.05,
                    "banktrans": 0.05,
+                   "unkowntrans": 0.05,
                    }
 
     transaction_amounts = {"tofel": 100,
