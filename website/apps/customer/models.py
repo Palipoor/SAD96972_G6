@@ -71,7 +71,7 @@ class Request(PolymorphicModel):
         # print('end')
 
     def set_initials(self, *args, **kwargs):
-        #things to do after assigning creator
+        # things to do after assigning creator
         pass
 
     def save(self, *args, **kwargs):
@@ -292,7 +292,7 @@ class Exchange(Request):
         self.profitRate = 0
 
 
-class LangTest(Request):
+class Account_Request(Request):
     username = models.CharField(max_length=100, null=False)
     password = models.CharField(max_length=50, null=False)
     labels = {"password": "رمز عبور",
@@ -301,6 +301,7 @@ class LangTest(Request):
 
     def set_initials(self, *args, **kwargs):
         self.source_user = self.creator
+        self.dest_wallet = self.source_wallet
 
     def set_status(self):
         self.status = "2"
@@ -311,13 +312,10 @@ class LangTest(Request):
     def __init__(self, *args, **kwargs):
         type = kwargs["type"]
         kwargs["profitRate"] = Transactions.get_profirRate(type)
-        kwargs["amount"] = Transactions.get_transaction_amount(type)
         kwargs["dest_user"] = Manager.get_manager()
-        kwargs["dest_wallet"] = kwargs["source_wallet"]
-        super(LangTest, self).__init__(*args, **kwargs)
+        super(Account_Request, self).__init__(*args, **kwargs)
 
-
-class IBT(LangTest):
+class IBT(Account_Request):
     test_center_name = models.CharField(max_length=100, null=False)
     test_center_code = models.CharField(max_length=50, null=False)
     city = models.CharField(max_length=100, null=False)
@@ -329,7 +327,12 @@ class IBT(LangTest):
               "country": "کشور",
               "date": "تاریخ آزمون",
               }
-    labels.update(LangTest.labels)
+    labels.update(Account_Request.labels)
+    
+    def __init__(self, *args, **kwargs):
+        kwargs["amount"] = Transactions.get_transaction_amount(type)
+        super(Account_Request, self).__init__(*args, **kwargs)
+    
 
 
 class TOFEL(IBT):
@@ -395,17 +398,32 @@ class GRE(IBT):
         super(GRE, self).__init__(*args, **kwargs)
 
 
-class UniversityTrans(Request):
+class UniversityTrans(Account_Request):
     types = (
-        (0, 'application fee'),
-        (1, 'deposit fee')
+        ("0", 'application fee'),
+        ("1", 'deposit fee')
     )
-    type1 = models.IntegerField(choices=types, null=False)
+    university_transـtype = models.CharField(choices=types, max_length = 1,null=False)
     university_name = models.CharField(max_length=50, null=False)
     link = models.URLField(null=False)
-    username = models.CharField(max_length=100, null=False)
-    password = models.CharField(max_length=50, null=False)
-    guide = models.CharField(max_length=1000, null=False)
+    guide = models.TextField(max_length=1000, null=False)
+    other_details = models.TextField(max_length=1000, null=False)
+    file = models.FileField(null=True, blank=True)
+    labels = {
+        "file": "پیوست (‌در صورت نیاز)",
+        "other_details": "سایر ملاحظات",
+        "guide": "دستورالعمل پرداخت",
+        "link": "آدرس ورود",
+        "university_name": "نام دانشگاه",
+        "source_wallet": "ارز مبدا",
+        "university_transـtype": "نوع تراکنش",
+        "amount": "مبلغ",
+    }
+    labels.update(Account_Request.labels)
+
+    def __init__(self, *args, **kwargs):
+        kwargs["type"] = "universitytrans"
+        super(UniversityTrans, self).__init__(*args, **kwargs)
 
 
 class ForeignTrans(Request):
