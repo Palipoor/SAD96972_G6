@@ -44,7 +44,7 @@ class ReviewForm(forms.Form):
         try:
             transaction = Request.objects.get(id=cleaned_data['transactionId'])
         except:
-            raise forms.ValidationError('شناسه تراکنش معتبر نمی‌باشد.')
+            raise forms.ValidationError('شناسه تراکنش معتبر نیست.')
         if (transaction):
             self.review = EmployeeReview(description=cleaned_data["description"], request=transaction, employee=self.user, new_status=int(cleaned_data['action']))
             texts = self.review.exception_texts()
@@ -53,8 +53,6 @@ class ReviewForm(forms.Form):
         return cleaned_data
 
     def update_db(self):
-        # updates db
-        print(self.review.request.status)
         self.review.save()
 
 
