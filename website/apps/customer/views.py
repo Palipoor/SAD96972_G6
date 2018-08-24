@@ -30,7 +30,7 @@ class CustomerTemplateView(TemplateView):
         return context
 
 
-class CustomerFormView(FormView, IsLoggedInView, IsCustomer):
+class CustomerFormView(CreateView, IsLoggedInView, IsCustomer):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, customer = Compilation.get_customer_context_data(context, self.request.user.username)

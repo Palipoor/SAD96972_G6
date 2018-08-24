@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from utils.currency_utils import Transactions
 from utils import fields
 from apps.main.models import GenUser
+from apps.employee.Forms import ReviewForm as review_form
 import traceback
 
 
@@ -70,52 +71,9 @@ class CustomerAccessRemovalForm(forms.Form):
             raise forms.ValidationError("چنین مشتری‌ای وجود ندارد.")
         return self.cleaned_data['username']
 
-class ReviewForm(forms.Form):
-    CHOICES = Transactions.request_types_for_review_json
+class ReviewForm(review_form):
+    CHOICES = Transactions.request_types_for_manager_json
     action = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(attrs = {"class": "form-check-input"}))
-    transactionId = forms.IntegerField(label = "شناسه تراکنش", widget = forms.NumberInput(attrs = {'class': 'form-control'}))
-    description = fields.DESCRIPTION
 
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        if 'transaction_id' in kwargs:
-            id = kwargs.pop('transaction_id')
-        else:
-            id = ""
-        super().__init__(*args, **kwargs)
-        if id != "":
-            print(self.fields.keys( ))
-            self.fields['transactionId'].widget = forms.HiddenInput(attrs={'value':id})
 
-    def action_amount(self):
-        super().action_amount()
-        if action == 0:
-            self.transaction.accept()
-        elif action == 1:
-            self.transaction.reject()
-        elif action == 4:
-            self.transaction.report()
-        texts = self.transaction.exception_texts()
-        if (texts):
-            raise ValidationError(texts[0])
-
-    def clean(self):
-        cleaned_data = super().clean()
-        transaction = None
-        try:
-            transaction = Request.objects.get(id=cleaned_data['transactionId'])
-        except Exception as e:
-            print('in bug')
-            print(traceback.format_exc())
-            raise forms.ValidationError('شناسه تراکنش معتبر نمی‌باشد.')
-        if (transaction):
-            self.review = EmployeeReview(description=cleaned_data["description"], request=transaction, employee=self.user, new_status=int(cleaned_data['action']))
-            texts = self.review.exception_texts()
-            if (texts):
-                raise forms.ValidationError([forms.ValidationError(e) for e in texts])
-        return cleaned_data
-
-    def update_db(self):
-        # updates db
-        print(self.review.request.status)
-        self.review.save()
+    
