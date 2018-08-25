@@ -5,6 +5,7 @@ from django.forms import ModelForm
 from apps.customer.models import Customer
 from django.utils.translation import ugettext_lazy as _
 from django.forms.models import model_to_dict
+from utils.currency_utils import Transactions
 
 
 class Charge(forms.Form):
@@ -109,6 +110,15 @@ def get_form_class(type, *args, **kwargs):
             self.instance.creator = self.user
             self.instance.set_initials()
             self.transaction = None
+            self.has_amount = "amount" in self.Meta.labels
+            self.currency_sign = Transactions.get_currency_symbol(self.instance.source_wallet)
+            self.profitRate = self.instance.profitRate
+            self.pre_amount = self.instance.amount
+            if (self.pre_amount == None):
+                self.pre_amount = 0
+            self.pre_profit = self.pre_amount*self.profitRate
+            self.pre_payable = self.pre_amount+self.pre_profit
+            # print(self.M)
             for field in self.fields.values():
                 field.widget.attrs.update({"class": "form-control"})
                 field.error_messages.update({'required': 'پر کردن این فیلد الزامی است.'})

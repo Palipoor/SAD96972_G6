@@ -3,6 +3,13 @@
 
 class Transactions:
     # tables for convertig currencies, supportung transactions
+
+    transaction_types = [("tofel", "ثبت نام تافل", "پرداخت هزینهٔ ثبت نام آزمون تافل"),
+                         ("gre", "ثبت نام جی‌ار‌ای", "پرداخت هزینهٔ ثبت نام آزمون جی‌ار‌ای"),
+                         ("universitytrans", "پرداخت فرم دانشگاه", "پرداخت هزینهٔ فرم‌های اپلای"),
+                         ("banktrans", "پرداخت به حساب بانکی", "برداشت پول از کیف پول موجود در موسسه و واریز به حساب خارج موسسه"),
+                         ("unkowntrans", "پرداخت ناشناس", "پرداخت به شمارهٔ حسابی دیگر در درون مجموعه")
+                         ]
     currency_to_num_json = {"rial": "0",
                             "dollar": "1",
                             "euro": "2",

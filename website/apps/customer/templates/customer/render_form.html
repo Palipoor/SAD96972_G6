@@ -29,15 +29,29 @@
     <div name = "message"> {{message}} </div>
     {% endfor%}
         <form method="post" novalidate>
-            {% csrf_token %} {% for field in form %}
-            <div class="form-group has-feedback">
-                {{field.label}} {{field}}
-                {% for error in field.errors %}
-                <span class="text-danger" name="password-repeat-error">{{ error }}</span>
+            {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group has-feedback">
+                        {{field.label}} {{field}}
+                        {% for error in field.errors %}
+                             <span class="text-danger" name="password-repeat-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <span class="glyphicon form-control-feedback"></span> 
                 {% endfor %}
-                <span class="glyphicon form-control-feedback"></span>
+            
+            {% if not form.has_amount %}
+                <div class="form-group has-feedback">
+                        مبلغ <input disabled type="number" name="amount" step="any" class="form-control" id="id_amount" value={{form.pre_amount}}>
+                </div>
+            {% endif %}
+            <div class="form-group has-feedback">
+                        هزینهٔ تراکنش <input disabled type="number" name="amount" step="any" class="form-control" id="id_fee" value = {{form.pre_profit}}>  
             </div>
-            {% endfor %}
+
+            <div class="form-group has-feedback">
+                        مجموع پرداختی <input disabled type="number" name="amount" step="any" class="form-control" id="id_payable"  value={{form.pre_payable}}>  
+            </div>
             <div class="row">
                 <div class="col-xs-4">
                     <button type="submit" name="create" class="btn btn-primary btn-block btn-flat">ثبت </button>
@@ -50,5 +64,19 @@
         </form>
     </div>
 </div>
+
 {% endblock main_content %}
-             
+
+
+
+{% block scripts %}
+    {{block.super}}
+    <script>
+
+
+        $('#id_amount').bind('click keyup', function(){
+            $('#id_fee').val($(this).val()*{{form.profitRate}});
+            $('#id_payable').val($(this).val()*(1+{{form.profitRate}}));
+        });
+    </script>
+{% endblock scripts %}
