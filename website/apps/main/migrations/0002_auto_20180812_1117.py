@@ -131,7 +131,7 @@ def add_charge(apps, schema_editor):
     Charge = apps.get_model('customer', 'Charge')
     customer = Customer.objects.get(username='customer', email='customer@customer.com')
     for i in range(0, 5):
-        charge = Charge(dest_user=customer, creator=customer, dest_wallet="0", amount=i*10)
+        charge = Charge(dest_user=customer, creator=customer, type="charge", status=0, dest_wallet="0", amount=i*10)
         customer.rial_credit += i*10000000000000
         charge.save()
         customer.save()
@@ -152,11 +152,11 @@ def add_exchange(apps, schema_editor):
     Customer = apps.get_model('customer', 'Customer')
     Exchange = apps.get_model('customer', 'Exchange')
     customer = Customer.objects.get(username='customer', email='customer@customer.com')
-    exchange = Exchange(source_user=customer, source_wallet="0", creator=customer, amount=100000, dest_wallet="1")
+    exchange = Exchange(source_user=customer, dest_user=customer, source_wallet="0", type="exchange", status=0, creator=customer, amount=100000, dest_wallet="1")
     customer.rial_credit -= 100000
     customer.dollar_cent_credit += 1000
     exchange.save()
-    exchange = Exchange(source_user=customer, source_wallet="0", creator=customer,  amount=100000, dest_wallet="2")
+    exchange = Exchange(source_user=customer, dest_user=customer, source_wallet="0", type="exchange", status=0, creator=customer,  amount=100000, dest_wallet="2")
     customer.rial_credit -= 100000
     customer.euro_cent_credit += 1000
     exchange.save()
@@ -177,27 +177,35 @@ def remove_exchange(apps, schema_editor):
 
 def add_foreignTrans(apps, schema_editor):
     Customer = apps.get_model('customer', 'Customer')
+    manager = apps.get_model('manager', 'Manager').objects.first()
     BankTrans = apps.get_model('customer', 'BankTrans')
     customer = Customer.objects.get(username='customer', email='customer@customer.com')
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="0", amount=30000, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="0",
+                             type="banktrans", amount=30000, account_number='12312412', bank_name='mammadbagherbank')
     customer.rial_credit -= 30000 + 3000 * foreignTrans.profitRate
     foreignTrans.save()
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="1", amount=100, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="1",
+                             type="banktrans", amount=100, account_number='12312412', bank_name='mammadbagherbank')
     customer.dollar_cent_credit -= 100*(1*foreignTrans.profitRate)
     foreignTrans.save()
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="1", amount=100, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="1",
+                             type="banktrans", amount=100, account_number='12312412', bank_name='mammadbagherbank')
     customer.dollar_cent_credit -= 100*(1*foreignTrans.profitRate)
     foreignTrans.save()
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="1", amount=100, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="1",
+                             type="banktrans", amount=100, account_number='12312412', bank_name='mammadbagherbank')
     customer.dollar_cent_credit -= 100*(1*foreignTrans.profitRate)
     foreignTrans.save()
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="2", amount=100, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="2",
+                             type="banktrans", amount=100, account_number='12312412', bank_name='mammadbagherbank')
     customer.euro_cent_credit -= 100*(1*foreignTrans.profitRate)
     foreignTrans.save()
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="2", amount=100, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="2",
+                             type="banktrans", amount=100, account_number='12312412', bank_name='mammadbagherbank')
     customer.euro_cent_credit -= 100*(1*foreignTrans.profitRate)
     foreignTrans.save()
-    foreignTrans = BankTrans(source_user=customer, creator=customer, source_wallet="2", amount=100, account_number='12312412', bank_name='mammadbagherbank')
+    foreignTrans = BankTrans(source_user=customer, dest_user=manager, status=2, creator=customer, source_wallet="2",
+                             type="banktrans", amount=100, account_number='12312412', bank_name='mammadbagherbank')
     customer.euro_cent_credit -= 100*(1*foreignTrans.profitRate)
     foreignTrans.save()
     customer.save()

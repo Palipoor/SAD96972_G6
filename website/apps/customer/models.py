@@ -44,7 +44,7 @@ class Request(PolymorphicModel):
     dest_wallet = models.CharField(choices=currencies, max_length=1, default="0", blank=True)
     # who recieves
     final_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='final_user', null=True, blank=True)
-    fianl_wallet = models.CharField(choices=currencies, max_length=1, default="0", blank=True)
+    final_wallet = models.CharField(choices=currencies, max_length=1, default="0", blank=True)
     # amount of payment in rial or cents.
     amount = models.FloatField(null=False, blank=True)
     request_time = models.DateTimeField(auto_now_add=True, blank=True)
@@ -96,6 +96,7 @@ class Request(PolymorphicModel):
         # only works if the current status is pending or reported
         if (self.status == "2" or self.status == "4"):
             reject = self.create_reverse_request()
+            reject.take_action()
             reject.save()
             # sets the status to rejected
             self.status = "1"
@@ -107,7 +108,11 @@ class Request(PolymorphicModel):
         # only works if the current status is pending or reported
         if (not self.status == "2" and not self.status == "4"):
             self.excps += ['تراکنش در شرایطی که بتواند تایید شود نیست.']
-        self.status = 0
+        else:
+            self.status = 0
+            redirect = self.create_redirect_request()
+            redirect.take_action()
+            redirect.save()
         return None
 
     def report(self):
@@ -205,7 +210,7 @@ class Request(PolymorphicModel):
         #                          )
         reject = Reverse_Request(source_wallet=self.dest_wallet,
                                  dest_wallet=self.source_wallet,
-                                 creator=creator,
+                                 creator=self.creator,
                                  amount=self.amount*(1 + self.profitRate)*self.exchange_rate,
                                  profitRate=0,
                                  exchange_rate=1./self.exchange_rate,
@@ -222,6 +227,36 @@ class Request(PolymorphicModel):
             pass
 
         return reject
+
+    def create_redirect_request(self):
+        # created the transaction for rejecting current transaction.
+        # reject = Reverse_Request(source_user=self.dest_user,
+        #                          source_wallet=dest_wallet,
+        #                          dest_user=self.source_user,
+        #                          dest_wallet=self.source_wallet,
+        #                          amount=self.amount*(1 + self.profitRate)*exchange_rate,
+        #                          profitRate=0,
+        #                          exchange_rate=1./exchange_rate,
+        #                          related_request=self
+        #                          )
+        redirect = Redirect_Request(source_wallet=self.dest_wallet,
+                                    dest_wallet=self.final_wallet,
+                                    creator=self.creator,
+                                    amount=self.amount*self.exchange_rate,
+                                    profitRate=0,
+                                    reference = self
+                                    )
+        try:
+            redirect.dest_user = self.final_user
+        except:
+            pass
+
+        try:
+            redirect.source_user = self.dest_user
+        except:
+            pass
+
+        return redirect
 
     def take_action(self):
         self.pay()
@@ -249,7 +284,30 @@ class Reverse_Request(Request):
     # type of request when rejecting or failing a transatcion. Arguments similar to request.
     # reference to rejected transaction.
     # it is unique foreign key not one to one
-    reference = models.ForeignKey(Request,  on_delete=models.DO_NOTHING, unique=True, related_name='related_request')
+    reference = models.ForeignKey(Request,  on_delete=models.DO_NOTHING, unique=True, related_name='related_request_reverse')
+
+    
+    def __init__(self, *args, **kwargs):
+        kwargs["type"] = "reverserequest"
+        super(Reverse_Request, self).__init__(*args, **kwargs)
+    
+    def set_status(self):
+        self.status = "0"
+
+    def set_profitRate(self):
+        self.profitRate = 0
+
+
+class Redirect_Request(Request):
+    # type of request when rejecting or failing a transatcion. Arguments similar to request.
+    # reference to rejected transaction.
+    # it is unique foreign key not one to one
+    reference = models.ForeignKey(Request,  on_delete=models.DO_NOTHING, unique=True, related_name='related_request_redirect')
+
+    def __init__(self, *args, **kwargs):
+        kwargs["type"] = "redirectrequest"
+        super(Redirect_Request, self).__init__(*args, **kwargs)
+    
 
     def set_status(self):
         self.status = "0"
@@ -316,6 +374,8 @@ class Account_Request(Request):
         type = kwargs["type"]
         kwargs["profitRate"] = Transactions.get_profirRate(type)
         kwargs["dest_user"] = Manager.get_manager()
+        print('kwargs["dest_user"]')
+        print(kwargs["dest_user"])
         super(Account_Request, self).__init__(*args, **kwargs)
 
 
@@ -335,7 +395,7 @@ class IBT(Account_Request):
 
     def __init__(self, *args, **kwargs):
         kwargs["amount"] = Transactions.get_transaction_amount(kwargs["type"])
-        super(Account_Request, self).__init__(*args, **kwargs)
+        super(IBT, self).__init__(*args, **kwargs)
 
 
 class TOFEL(IBT):
@@ -497,7 +557,7 @@ class UnknownTrans(BankTrans):
                 customer.password = make_password(username+username)
                 customer.save()
                 self.dest_user = customer
-        super(UnknownTrans, self).save(*args, **kwargs) # Call the real save() method
+        super(UnknownTrans, self).save(*args, **kwargs)  # Call the real save() method
 
 
 class CustomTransactionInstance(Request):

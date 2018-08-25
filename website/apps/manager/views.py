@@ -25,6 +25,7 @@ from apps.manager.models import Manager
 from apps.main.models import Notification
 from apps.main.views import TransactionDetailsViewForStaff as MainTransactionDetails
 from django.views.generic.edit import FormMixin
+from django.urls import reverse
 
 
 class ManagerFormView(FormView):
@@ -122,6 +123,7 @@ class CustomerDetailsForManager(IsManager, TemplateView):
         context = Compilation.get_wallet_requests(context, customer.username, -1)
         context = Compilation.get_last_request_and_transaction_id(context)
         return context
+
 
 class EmployeeDetailsForManager(IsManager, TemplateView):
 
@@ -257,5 +259,6 @@ class EmployeeListView(IsLoggedInView, IsManager, FormView):
 
 class TransactionDetailsView(MainTransactionDetails):
     template_name = "manager/transaction_details.html"
+
     def get_success_url(self):
         return reverse('manager:transaction_details', kwargs={'pk': self.object.id})
