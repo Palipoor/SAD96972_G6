@@ -1,5 +1,6 @@
 package Wallet;
 
+import Reusables.DBManager;
 import Reusables.GeneralReusables;
 import Reusables.Order;
 import Reusables.WalletUsersReusables;
@@ -22,65 +23,65 @@ import static org.junit.Assert.assertNotEquals;
  */
 @RunWith(Reusables.OrderedRunner.class)
 public class WalletCreditCustomer {
-    private static WebDriver driver;
+	private static WebDriver driver;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-    }
+	@BeforeClass
+	public static void setUp() {
+		driver = new FirefoxDriver();
+		GeneralReusables.setUpToHomepage(driver);
+		GeneralReusables.loginAsACustomer(driver);
+	}
 
-    @Test
-    @Order(order = 1)
-    public void rialWalletCreditTest() {
-        WalletUsersReusables.navigateToWallet(driver, "rial");
-        List<WebElement> credits = driver.findElements(By.name("credit"));
-        assertNotEquals(credits.size(), 0);
-    }
+	@Test
+	@Order(order = 1)
+	public void rialWalletCreditTest() {
+		WalletUsersReusables.navigateToWallet(driver, "rial");
+		List<WebElement> credits = driver.findElements(By.name("credit"));
+		assertNotEquals(credits.size(), 0);
+	}
 
-    @Test
-    @Order(order = 2)
-    public void rialWalletCreditTextTest() {
-        WalletUsersReusables.navigateToWallet(driver, "rial");
-        WebElement credit = driver.findElement(By.name("credit"));
-        assertNotEquals(credit.getText(), "");
-    }
+	@Test
+	@Order(order = 2)
+	public void rialWalletCreditTextTest() {
+		WalletUsersReusables.navigateToWallet(driver, "rial");
+		WebElement credit = driver.findElement(By.name("credit"));
+		assertNotEquals(credit.getText(), "");
+	}
 
-    @Test
-    @Order(order = 3)
-    public void dollarWalletCreditTest() {
-        WalletUsersReusables.navigateToWallet(driver, "dollar");
-        List<WebElement> credits = driver.findElements(By.name("credit"));
-        assertNotEquals(credits.size(), 0);
-    }
+	@Test
+	@Order(order = 3)
+	public void dollarWalletCreditTest() {
+		WalletUsersReusables.navigateToWallet(driver, "dollar");
+		List<WebElement> credits = driver.findElements(By.name("credit"));
+		assertNotEquals(credits.size(), 0);
+	}
 
-    @Test
-    @Order(order = 4)
-    public void dollarWalletCreditTextTest() {
-        WalletUsersReusables.navigateToWallet(driver, "dollar");
-        WebElement credit = driver.findElement(By.name("credit"));
-        assertNotEquals(credit.getText(), "");
-    }
+	@Test
+	@Order(order = 4)
+	public void dollarWalletCreditTextTest() {
+		WalletUsersReusables.navigateToWallet(driver, "dollar");
+		WebElement credit = driver.findElement(By.name("credit"));
+		assertNotEquals(credit.getText(), "");
+	}
 
-    @Test
-    @Order(order = 5)
-    public void euroWalletCreditTest() {
-        WalletUsersReusables.navigateToWallet(driver, "euro");
-        List<WebElement> credits = driver.findElements(By.name("credit"));
-        assertNotEquals(credits.size(), 0);
-    }
+	@Test
+	@Order(order = 5)
+	public void euroWalletCreditTest() {
+		WalletUsersReusables.navigateToWallet(driver, "euro");
+		List<WebElement> credits = driver.findElements(By.name("credit"));
+		assertNotEquals(credits.size(), 0);
+	}
 
-    @Test
-    @Order(order = 6)
-    public void euroWalletCreditTextTest() {
-        WalletUsersReusables.navigateToWallet(driver, "euro");
-        WebElement credit = driver.findElement(By.name("credit"));
-        assertNotEquals(credit.getText(), "");
-    }
+	@Test
+	@Order(order = 6)
+	public void euroWalletCreditTextTest() {
+		WalletUsersReusables.navigateToWallet(driver, "euro");
+		WebElement credit = driver.findElement(By.name("credit"));
+		assertNotEquals(credit.getText(), "");
+	}
 
-    @AfterClass
-    public static void tearDown() {
-        GeneralReusables.logout(driver);
-    }
+	@AfterClass
+	public static void tearDown() {
+		GeneralReusables.logout(driver);
+	}
 }

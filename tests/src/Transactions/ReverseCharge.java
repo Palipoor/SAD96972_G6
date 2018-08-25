@@ -1,5 +1,6 @@
 package Transactions;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import org.junit.AfterClass;
@@ -33,11 +34,13 @@ public class ReverseCharge {
 	public void validCreation(){
 		WebElement amount = driver.findElement(By.name("amount"));
 		amount.clear();
-		amount.sendKeys("50");
+		amount.sendKeys("1000");
+
+		double rial_credit = CustomerReusables.get_credit("rial");
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
 		Select dropdown= new Select(currency);
-		dropdown.selectByVisibleText("dollar");
+		dropdown.selectByVisibleText("rial");
 
 
 		WebElement bank_name = driver.findElement(By.name("bank_name"));
@@ -55,6 +58,10 @@ public class ReverseCharge {
 		WebElement message = driver.findElement(By.name("message"));
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
+
+		double new_rial_credit = CustomerReusables.get_credit("rial");
+		//		Assert.assertEquals(5.0, rial_credit - new_rial_credit, GeneralReusables.delta);
+
 
 	}
 

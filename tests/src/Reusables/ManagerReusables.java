@@ -344,7 +344,7 @@ public class ManagerReusables {
 			}
 
 		}
-		WebElement tableRow = theTable.findElements(By.xpath(".//tbodyd//tr")).get(0);
+		WebElement tableRow = theTable.findElements(By.xpath(".//tbody//tr")).get(0);
 		List<WebElement> transactionDetails = tableRow.findElements(By.xpath(".//td"));
 		String the_type = transactionDetails.get(typeIndex).getText();
 		System.out.println("type type" + the_type);

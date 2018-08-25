@@ -1,5 +1,6 @@
 package Wallet;
 
+import Reusables.DBManager;
 import Reusables.GeneralReusables;
 import Reusables.Order;
 import Reusables.WalletUsersReusables;

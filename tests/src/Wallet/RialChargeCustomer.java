@@ -1,5 +1,6 @@
 package Wallet;
 
+import Reusables.DBManager;
 import Reusables.GeneralReusables;
 import Reusables.WalletUsersReusables;
 import org.apache.xalan.xsltc.util.IntegerArray;
@@ -43,5 +44,8 @@ public class RialChargeCustomer {
     @AfterClass
     public static void tearDown() {
         GeneralReusables.logout(driver);
+		DBManager manager = new DBManager();
+		manager.connect();
+		manager.setCustomersToDefault();
     }
 }

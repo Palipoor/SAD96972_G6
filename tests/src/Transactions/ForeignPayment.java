@@ -1,5 +1,6 @@
 package Transactions;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import org.junit.AfterClass;
@@ -33,7 +34,10 @@ public class ForeignPayment {
 	public void validCreation(){
 		WebElement amount = driver.findElement(By.name("amount"));
 		amount.clear();
-		amount.sendKeys("50");
+		amount.sendKeys("5");
+
+		double dollar_credit = CustomerReusables.get_credit("dollar");
+
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
 		Select dropdown= new Select(currency);
@@ -57,8 +61,8 @@ public class ForeignPayment {
 		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
 
 
-
-
+		double new_dollar_credit = CustomerReusables.get_credit("dollar");
+//		Assert.assertEquals(5.0, dollar_credit - new_dollar_credit, GeneralReusables.delta);
 	}
 
 	@AfterClass

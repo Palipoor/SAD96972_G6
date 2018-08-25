@@ -8,6 +8,8 @@ import java.sql.Statement;
 class Defaults {
 	static int DEFAULT_SALARY = 200;
 	static int DEFAULT_CUSTOMER_RIAL_CREDIT = 500000;
+	static int DEFAULT_CUSTOMER_DOLLAR_CREDIT = 500;
+	static int DEFAULT_CUSTOMER_EURO_CREDIT = 500;
 	static int DEFAULT_COMPANY_RIAL_CREDIT = 500000;
 	static int ZERO = 0;
 }
@@ -43,7 +45,7 @@ public class DBManager {
 	public void setCustomersToDefault() {
 		String query = String.format("update main_wallet_user as mw set rial_credit= %s, dollar_cent_credit= %s, euro_cent_credit= %s where exists(select wallet_user_ptr_id from customer_customer where wallet_user_ptr_id= mw.genuser_ptr_id);",
 				String.valueOf(Defaults.DEFAULT_CUSTOMER_RIAL_CREDIT),
-				String.valueOf(Defaults.ZERO), String.valueOf(Defaults.ZERO));
+				String.valueOf(Defaults.DEFAULT_CUSTOMER_DOLLAR_CREDIT), String.valueOf(Defaults.DEFAULT_CUSTOMER_EURO_CREDIT));
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(query);
@@ -172,7 +174,7 @@ public class DBManager {
 	public static void main(String[] args) {
 		DBManager manager = new DBManager();
 		manager.connect();
-		manager.deleteCustomers();
+		manager.setCustomersToDefault();
 	}
 
 }
