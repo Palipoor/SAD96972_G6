@@ -65,13 +65,13 @@ public class ManagerReusables {
 		WebElement employee = driver.findElement(By.name("employee"));
 		employee.click();
 		WebElement employeetable = driver.findElement(By.name("users-table"));
-		List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody//tr"));
+		List<WebElement> tableRows = employeetable.findElements(By.xpath(".//tbody//tr"));
 
 		if (tableRows.size() == 0) {
 			return createEmployee(driver);
 		} else {
-			List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead"));
-			List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+			List<WebElement> tableHeader = employeetable.findElements(By.xpath(".//thead"));
+			List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 			int usernameIndex = 0;
 			for (int i = 0; i < headerTitles.size(); i++) {
 				if (headerTitles.get(i).getText().equals("نام کاربری")) {
@@ -120,13 +120,13 @@ public class ManagerReusables {
 		WebElement customers = driver.findElement(By.name("customers"));
 		customers.click();
 		WebElement customersTable = driver.findElement(By.name("users-table"));
-		List<WebElement> tableRows = customersTable.findElements(By.xpath("//tbody//tr"));
+		List<WebElement> tableRows = customersTable.findElements(By.xpath(".//tbody//tr"));
 
 		if (tableRows.size() == 0) {
 			return createCustomer("desiredpassword");
 		} else {
-			List<WebElement> tableHeader = customersTable.findElements(By.xpath("//thead"));
-			List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+			List<WebElement> tableHeader = customersTable.findElements(By.xpath(".//thead"));
+			List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 			int idIndex = 0;
 			for (int i = 0; i < headerTitles.size(); i++) {
 				if (headerTitles.get(i).getText().equals("شناسه مشتری")) {
@@ -196,9 +196,9 @@ public class ManagerReusables {
 		usernameSearchBox.clear();
 		usernameSearchBox.sendKeys(employeeUsername);
 
-		List<WebElement> tableRows = employeetable.findElements(By.xpath("//tbody"));
-		List<WebElement> tableHeader = employeetable.findElements(By.xpath("//thead//tr"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+		List<WebElement> tableRows = employeetable.findElements(By.xpath(".//tbody"));
+		List<WebElement> tableHeader = employeetable.findElements(By.xpath(".//thead//tr"));
+		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int salaryIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
 			if (headerTitles.get(i).getText().equals("حقوق")) {
@@ -224,15 +224,15 @@ public class ManagerReusables {
 		idSearchBox.clear();
 		idSearchBox.sendKeys(id);
 
-		List<WebElement> tableHeader = reportsTable.findElements(By.xpath("//thead"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+		List<WebElement> tableHeader = reportsTable.findElements(By.xpath(".//thead"));
+		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int usernameIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
 			if (headerTitles.get(i).getText().equals("گزارش دهنده")) {
 				usernameIndex = i;
 			}
 		}
-		List<WebElement> tableRows = reportsTable.findElements(By.xpath("//tbody//tr"));
+		List<WebElement> tableRows = reportsTable.findElements(By.xpath(".//tbody//tr"));
 
 		for (WebElement tableRow : tableRows) {
 			List<WebElement> employeeDetails = tableRow.findElements(By.xpath("//td"));
@@ -252,11 +252,11 @@ public class ManagerReusables {
 		GeneralReusables.loginAsTheManager(driver);
 
 		WebElement theTable = driver.findElement(By.name("transactions-table"));
-		List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+		List<WebElement> tableHeader = theTable.findElements(By.xpath(".//thead"));
+		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int statusIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
-			if (headerTitles.get(i).getText().equals("وضعیت")) {
+			if (headerTitles.get(i).getText().contains("وضعیت")) {
 				statusIndex = i;
 			}
 		}
@@ -264,7 +264,7 @@ public class ManagerReusables {
 		WebElement idSearchBox = theTable.findElement(By.name("شناسه تراکنش"));
 		idSearchBox.clear();
 		idSearchBox.sendKeys(id);
-		List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
+		List<WebElement> tableRows = theTable.findElements(By.xpath(".//tbody//tr"));
 		List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
 
 		GeneralReusables.logout(driver);
@@ -277,8 +277,8 @@ public class ManagerReusables {
 		GeneralReusables.loginAsTheManager(driver);
 
 		WebElement theTable = driver.findElement(By.name("transactions-table"));
-		List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+		List<WebElement> tableHeader = theTable.findElements(By.xpath(".//thead"));
+		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int usernameIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
 			if (headerTitles.get(i).getText().equals("شناسه درخواست‌دهنده")) {
@@ -289,8 +289,8 @@ public class ManagerReusables {
 		WebElement idSearchBox = theTable.findElement(By.name("شناسه تراکنش"));
 		idSearchBox.clear();
 		idSearchBox.sendKeys(transactionId);
-		List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
-		List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
+		List<WebElement> tableRows = theTable.findElements(By.xpath(".//tbody//tr"));
+		List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath(".//td"));
 
 		GeneralReusables.logout(driver);
 		return transactionDetails.get(usernameIndex).getText();
@@ -302,19 +302,18 @@ public class ManagerReusables {
 		GeneralReusables.loginAsTheManager(driver);
 
 		WebElement theTable = driver.findElement(By.name("transactions-table"));
-		List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+		List<WebElement> tableHeader = theTable.findElements(By.xpath(".//thead"));
+		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int idIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
-			if (headerTitles.get(i).getText().equals("شناسه تراکنش")) {
+			if (headerTitles.get(i).getText().contains("شناسه")) {
 				idIndex = i;
-			}
-			if (headerTitles.get(i).getText().equals("تاریخ تراکنش")) {
-				headerTitles.get(i).click();// sort by time
+				break;
 			}
 		}
-		WebElement tableRow = theTable.findElements(By.xpath("//tbody//tr")).get(0);
-		List<WebElement> transactionDetails = tableRow.findElements(By.xpath("//td"));
+
+		WebElement tableRow = theTable.findElements(By.xpath(".//tbody//tr")).get(0);
+		List<WebElement> transactionDetails = tableRow.findElements(By.xpath(".//td"));
 		String id = transactionDetails.get(idIndex).findElement(By.tagName("a")).getText();
 		GeneralReusables.logout(driver);
 		return id;
@@ -336,8 +335,8 @@ public class ManagerReusables {
 		GeneralReusables.loginAsTheManager(driver);
 
 		WebElement theTable = driver.findElement(By.name("transactions-table"));
-		List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
+		List<WebElement> tableHeader = theTable.findElements(By.xpath(".//thead"));
+		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int typeIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
 			if (headerTitles.get(i).getText().equals("نوع تراکنش")) {
@@ -345,8 +344,8 @@ public class ManagerReusables {
 			}
 
 		}
-		WebElement tableRow = theTable.findElements(By.xpath("//tbody//tr")).get(0);
-		List<WebElement> transactionDetails = tableRow.findElements(By.xpath("//td"));
+		WebElement tableRow = theTable.findElements(By.xpath(".//tbodyd//tr")).get(0);
+		List<WebElement> transactionDetails = tableRow.findElements(By.xpath(".//td"));
 		String the_type = transactionDetails.get(typeIndex).getText();
 		System.out.println("type type" + the_type);
 		boolean result = the_type.equals(type);

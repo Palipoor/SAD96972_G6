@@ -37,12 +37,12 @@ public class ForeignPayment {
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
 		Select dropdown= new Select(currency);
-		dropdown.selectByVisibleText("dollar");
+		dropdown.selectByVisibleText("rial");
 
 
 		WebElement bank_name = driver.findElement(By.name("bank_name"));
 		bank_name.clear();
-		bank_name.sendKeys("ملی");
+		bank_name.sendKeys("جهانی");
 
 		WebElement account_number = driver.findElement(By.name("account_number"));
 		account_number.clear();
@@ -54,7 +54,10 @@ public class ForeignPayment {
 
 		WebElement message = driver.findElement(By.name("message"));
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
-		assertTrue(ManagerReusables.newTransactionExists("foreigntrans"));
+		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
+
+
+
 
 	}
 

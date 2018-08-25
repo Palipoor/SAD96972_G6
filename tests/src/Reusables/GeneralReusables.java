@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralReusables {
 
-	public static double delta = 0.05;
+	public static double delta = 0.005;
 
 	public static final Map<String, String> reusableStrings;
 

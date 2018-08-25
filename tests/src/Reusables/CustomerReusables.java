@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by Golpar on 4/19/2018 AD.
@@ -53,33 +55,6 @@ public class CustomerReusables {
         GeneralReusables.logout(driver);
 
     }
-
-
-    public static void createNewForeign(){
-        WebDriver driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-
-        WebElement paymentForm = driver.findElement(By.name("foreign-payment"));
-        paymentForm.click();
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(reusableStrings.get("amount"));
-
-        WebElement currency = driver.findElement(By.name("dollar-radio"));
-        currency.click();
-
-        WebElement accountNumber = driver.findElement(By.name("destination"));
-        accountNumber.clear();
-        accountNumber.sendKeys(reusableStrings.get("foreign-accountNumber"));
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-        GeneralReusables.logout(driver);
-
-    }
-
-
 
 
     public static void createNewWithdrawal(){
@@ -138,4 +113,38 @@ public class CustomerReusables {
         return tableRows.get(0).findElements(By.xpath("//td")).get(idIndex).getText();
 
     }
+
+	public static void createNewBankTransfer(String currency, String howmuch) {
+
+		WebDriver driver = new FirefoxDriver();
+		GeneralReusables.loginAsACustomer(driver);
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_banktrans");
+
+		WebElement amount = driver.findElement(By.name("amount"));
+		amount.clear();
+		amount.sendKeys(howmuch);
+
+		WebElement wallet = driver.findElement(By.name("source_wallet"));
+		Select dropdown= new Select(wallet);
+		dropdown.selectByVisibleText(currency);
+
+
+		WebElement bank_name = driver.findElement(By.name("bank_name"));
+		bank_name.clear();
+		bank_name.sendKeys("جهانی");
+
+		WebElement account_number = driver.findElement(By.name("account_number"));
+		account_number.clear();
+		account_number.sendKeys("1997-0335-0337");
+
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+		GeneralReusables.waitForSeconds(1);
+	}
+
+	public static double get_credit(String currency) {
+		WebDriver driver = new FirefoxDriver();
+		GeneralReusables.loginAsACustomer(driver);
+		return WalletUsersReusables.getWalletCredit(driver, currency);
+	}
 }

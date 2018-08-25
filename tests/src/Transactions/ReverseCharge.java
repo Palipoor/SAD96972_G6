@@ -1,85 +1,65 @@
 package Transactions;
 
-import Reusables.*;
-import org.junit.After;
+import Reusables.GeneralReusables;
+import Reusables.ManagerReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
- * Created by Golpar on 5/2/2018 AD.
+ * Created by Golpar on 8/24/2018 AD.
  */
-@RunWith(Reusables.OrderedRunner.class)
 public class ReverseCharge {
-    private static WebDriver driver;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-        WebElement reverseCharge = driver.findElement(By.name("reverse-charge"));
-        reverseCharge.click();
-    }
+	private static WebDriver driver;
 
-    @Test
-    @Order(order = 1)
-    public void invalidAmount() {
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys("abc");
+	@BeforeClass
+	public static void setUp() {
+		driver = new FirefoxDriver();
+		GeneralReusables.setUpToHomepage(driver);
+		GeneralReusables.loginAsACustomer(driver);
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_banktrans");
+	}
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+	@Test
+	public void validCreation(){
+		WebElement amount = driver.findElement(By.name("amount"));
+		amount.clear();
+		amount.sendKeys("50");
 
-        WebElement error = driver.findElement(By.name("amount-error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-amount-error"));
-    }
-
-    @Test
-    @Order(order = 2)
-    public void moreThanCredit() {
-        double moreThanRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial") + 200;
-        String amountValue = String.valueOf(moreThanRialCredit);
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(amountValue);
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+		WebElement currency = driver.findElement(By.name("source_wallet"));
+		Select dropdown= new Select(currency);
+		dropdown.selectByVisibleText("dollar");
 
 
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));
-    }
+		WebElement bank_name = driver.findElement(By.name("bank_name"));
+		bank_name.clear();
+		bank_name.sendKeys("ملی");
 
-    @Test
-    @Order(order = 3)
-    public void paymentsAreDone(){
-        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double lessThanCredit = rialCredit - 1;
-        String amountValue = String.valueOf(lessThanCredit);
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(amountValue);
+		WebElement account_number = driver.findElement(By.name("account_number"));
+		account_number.clear();
+		account_number.sendKeys("1997-0335-0337");
 
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+		GeneralReusables.waitForSeconds(1);
 
-        double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+		WebElement message = driver.findElement(By.name("message"));
+		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
+		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
 
-        assertEquals(newRialCredit, rialCredit - lessThanCredit, GeneralReusables.delta);
-    }
+	}
 
-    @AfterClass
-    public static void tearDown(){
-        GeneralReusables.logout(driver);
-    }
+	@AfterClass
+	public static void tearDown(){
+		GeneralReusables.logout(driver);
+	}
 }
