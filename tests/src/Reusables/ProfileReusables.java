@@ -33,7 +33,7 @@ public class ProfileReusables {
     }
     public static String firstName1 = "Dorna";
     public static String surName1 = "Abdolazimi";
-    public static String username1 = "Dorna";
+    public static String username1 = "TEST_Dorna";
     public static String password1 = "12345Dorna";
 
 	public static String invalidLogin = "نام کاربری یا رمز عبور اشتباه اند.";
@@ -47,7 +47,7 @@ public class ProfileReusables {
     public static String invalidAccountNumber = "!";
 
     public static String invalidEmailError = "لطفا یک ایمیل معتبر وارد کنید.";
-	public static String invalidPasswordRepaetError = "تکرار رمز عبور با آن یکسان نیست.";
+	public static String invalidPasswordRepaetError = "تکرار رمز عبور با آن یکی نیست.";
     public static String notRegisteredEmailError = "کاربری با این مشخصات وجود ندارد.";
     public static String loginError = "نام کاربری یا رمز عبور اشتباه اند.";
 	public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";
@@ -77,9 +77,6 @@ public class ProfileReusables {
         repeatValidPassword(driver);
 
         clickForSignUp(driver);
-
-		GeneralReusables.waitForSeconds(10);
-
     }
 
     public static void enterValidFirstName(WebDriver driver) {
@@ -99,14 +96,14 @@ public class ProfileReusables {
     public static void enterValidUsername(WebDriver driver) {
         WebElement username = driver.findElement(By.name("username"));
         username.clear();
-        username.sendKeys("dorna" + System.currentTimeMillis());  //TODO
+        username.sendKeys("TEST_dorna" + System.currentTimeMillis());  //TODO
 
     }
 
     public static void enterValidEmail(WebDriver driver) {
         WebElement email = driver.findElement(By.name("email"));
         email.clear();
-        email.sendKeys("dorna" + System.currentTimeMillis() + "@gmail.com");  //TODO
+        email.sendKeys("TEST_dorna" + System.currentTimeMillis() + "@gmail.com");  //TODO
 
     }
 

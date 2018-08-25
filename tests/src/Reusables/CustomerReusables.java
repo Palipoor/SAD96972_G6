@@ -1,5 +1,6 @@
 package Reusables;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
@@ -30,97 +30,41 @@ public class CustomerReusables {
 
     }
 
-    public static void createNewAnonymous(){
-        WebDriver driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-
-        WebElement paymentForm = driver.findElement(By.name("anonymous-payment"));
-        paymentForm.click();
-
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(reusableStrings.get("amount"));
-
-        WebElement email = driver.findElement(By.name("email"));
-        email.clear();
-        email.sendKeys(reusableStrings.get("anonymous-email"));
-
-        WebElement phone = driver.findElement(By.name("phone"));
-        phone.clear();
-        phone.sendKeys(reusableStrings.get("anonymous-phone"));
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-        GeneralReusables.logout(driver);
-
-    }
-
-
-    public static void createNewWithdrawal(){
-        WebDriver driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-
-        WebElement paymentForm = driver.findElement(By.name("reverse-charge"));
-        paymentForm.click();
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(reusableStrings.get("amount"));
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-        GeneralReusables.logout(driver);
+    public static void createNewAnonymous(String amount, String currency){
+//        WebDriver driver = new FirefoxDriver();
+//        GeneralReusables.setUpToHomepage(driver);
+//        GeneralReusables.loginAsACustomer(driver);
+//
+//        WebElement paymentForm = driver.findElement(By.name("anonymous-payment"));
+//        paymentForm.click();
+//
+//        WebElement amount = driver.findElement(By.name("amount"));
+//        amount.clear();
+//        amount.sendKeys(reusableStrings.get("amount"));
+//
+//        WebElement email = driver.findElement(By.name("email"));
+//        email.clear();
+//        email.sendKeys(reusableStrings.get("anonymous-email"));
+//
+//        WebElement phone = driver.findElement(By.name("phone"));
+//        phone.clear();
+//        phone.sendKeys(reusableStrings.get("anonymous-phone"));
+//
+//        WebElement submit = driver.findElement(By.name("submit-button"));
+//        submit.click();
+//        GeneralReusables.logout(driver);
 
     }
 
 
-    public static String createNewTransaction() { //requests a new transaction and returns its id
-        WebDriver driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
+	public static Pair<Double, Double> createNewBankTransfer(String currency, String howmuch) {
 
-        WebElement paymentForm = driver.findElement(By.name("anonymous-payment"));
-        paymentForm.click();
-
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys("10");
-
-        WebElement email = driver.findElement(By.name("email"));
-        email.clear();
-        email.sendKeys("palipoor976@gmail.com");
-
-        WebElement phone = driver.findElement(By.name("phone"));
-        phone.clear();
-        phone.sendKeys("09379605628");
-
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
-
-        driver.navigate().back();
-
-        WebElement newestTransactions = driver.findElement(By.name("newest-transactions"));
-        List<WebElement> tableHeader = newestTransactions.findElements(By.xpath("//thead"));
-        List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath("//th"));
-        int idIndex = 0;
-        for (int i = 0; i < headerTitles.size(); i++) {
-            if (headerTitles.get(i).getText().equals("شناسه تراکنش")) {
-                idIndex = i;
-            }
-        }
-        List<WebElement> tableRows = newestTransactions.findElements(By.xpath("//tbody//tr"));
-        return tableRows.get(0).findElements(By.xpath("//td")).get(idIndex).getText();
-
-    }
-
-	public static void createNewBankTransfer(String currency, String howmuch) {
-
+		Pair<Double, Double> cost;
 		WebDriver driver = new FirefoxDriver();
 		GeneralReusables.loginAsACustomer(driver);
 		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_banktrans");
 
-		WebElement amount = driver.findElement(By.name("amount"));
+		WebElement amount = driver.findElement(By.id("id_amount"));
 		amount.clear();
 		amount.sendKeys(howmuch);
 
@@ -137,14 +81,87 @@ public class CustomerReusables {
 		account_number.clear();
 		account_number.sendKeys("1997-0335-0337");
 
+		WebElement payableElement = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(payableElement.getAttribute("value"));
+
+		WebElement feeElement = driver.findElement(By.id("id_fee"));
+		double fee = Double.valueOf(feeElement.getAttribute("value"));
+
 		WebElement button = driver.findElement(By.name("create"));
 		button.click();
 		GeneralReusables.waitForSeconds(1);
+		GeneralReusables.logout(driver);
+		cost = Pair.of(payable, fee);
+		return cost;
 	}
 
 	public static double get_credit(String currency) {
 		WebDriver driver = new FirefoxDriver();
 		GeneralReusables.loginAsACustomer(driver);
 		return WalletUsersReusables.getWalletCredit(driver, currency);
+	}
+
+	public static Pair<Double, Double> createNewTofel() {
+
+		WebDriver driver = new FirefoxDriver();
+		GeneralReusables.loginAsACustomer(driver);
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_tofel");
+
+		WebElement username = driver.findElement(By.name("username"));
+		username.clear();
+		username.sendKeys("username");
+
+		WebElement password = driver.findElement(By.name("password"));
+		password.clear();
+		password.sendKeys("password");
+
+		WebElement date = driver.findElement(By.name("date"));
+		date.clear();
+		date.sendKeys("1997-05-07");
+
+		WebElement country = driver.findElement(By.name("country"));
+		country.clear();
+		country.sendKeys("Iran");
+
+		WebElement city = driver.findElement(By.name("city"));
+		city.clear();
+		city.sendKeys("Tehran");
+
+		WebElement code = driver.findElement(By.name("test_center_code"));
+		code.clear();
+		code.sendKeys("123");
+
+		WebElement center_name = driver.findElement(By.name("test_center_name"));
+		center_name.clear();
+		center_name.sendKeys("آهنچی مرکز");
+
+		WebElement id = driver.findElement(By.name("id_number"));
+		id.clear();
+		id.sendKeys("002003004");
+
+		WebElement id_type = driver.findElement(By.id("id_id_type"));
+		Select dropdown= new Select(id_type);
+		dropdown.selectByVisibleText("پاسپورت");
+
+		WebElement destination = driver.findElement(By.name("country_for_study"));
+		destination.clear();
+		destination.sendKeys("Spain");
+
+		WebElement reason = driver.findElement(By.name("reason"));
+		reason.clear();
+		reason.sendKeys("Blah Blah");
+
+		WebElement payableElement = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(payableElement.getAttribute("value"));
+
+		WebElement feeElement = driver.findElement(By.id("id_fee"));
+		double fee = Double.valueOf(feeElement.getAttribute("value"));
+
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+
+		Pair<Double, Double> cost;
+		cost = Pair.of(payable, fee);
+		return cost;
 	}
 }

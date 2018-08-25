@@ -3,6 +3,7 @@ package Employee;
 
 import Reusables.*;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,8 +22,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Reusables.OrderedRunner.class)
 public class ConfirmBankTransfer {
 	static WebDriver driver;
-	static String dollar_amount = "1";
-	static String rial_amount = "1000";
+	static double amount = 10;
 	static String transactionId;
 
 	@BeforeClass
@@ -30,6 +30,9 @@ public class ConfirmBankTransfer {
 		driver = new FirefoxDriver();
 		GeneralReusables.setUpToHomepage(driver);
 		GeneralReusables.loginAsAnEmployeeWithoutName(driver);
+		Pair<Double, Double> cost = CustomerReusables.createNewBankTransfer("dollar", String.valueOf(amount));
+		amount = cost.getLeft() - cost.getRight();
+
 		transactionId = ManagerReusables.getNewestTransactionId();
 	}
 
@@ -44,35 +47,16 @@ public class ConfirmBankTransfer {
 		String status = get_status(transactionId);
 
 		assertEquals(status, EmployeeReusables.ACCEPT);
-
 		double new_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
 
-		double amount = Double.valueOf(dollar_amount);
-
-		System.out.printf("former    " + String.valueOf(dollar_credit));
-		System.out.printf("new    " + String.valueOf(new_dollar_credit));
+		System.out.println("amount " + amount);
+		System.out.println("dollar credit" + dollar_credit);
+		System.out.printf("dollar new credit" + new_dollar_credit);
 		assertEquals(amount, dollar_credit - new_dollar_credit, GeneralReusables.delta);
 
 	}
 
 
-	public void acceptTransactionRial() {
-
-		double rial_credit = ManagerReusables.getCompanyCredit("rial");
-
-		EmployeeReusables.acceptTransaction(transactionId);
-		driver.navigate().refresh();
-		String status = get_status(transactionId);
-
-		assertEquals(status, EmployeeReusables.ACCEPT);
-
-		double new_rial_credit = ManagerReusables.getCompanyCredit("rial");
-
-		double amount = Double.valueOf(rial_amount);
-
-		assertEquals(amount, rial_credit - new_rial_credit, GeneralReusables.delta);
-
-	}
 	private String get_status(String transactionId) {
 		WebElement theTable = driver.findElement(By.name("transactions-table"));
 		List<WebElement> tableHeader = theTable.findElements(By.xpath("//thead"));
@@ -91,9 +75,7 @@ public class ConfirmBankTransfer {
 		List<WebElement> tableRows = theTable.findElements(By.xpath("//tbody//tr"));
 		List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
 
-		String status = transactionDetails.get(statusIndex).getText();
-		GeneralReusables.logout(driver);
-		return status;
+		return transactionDetails.get(statusIndex).getText();
 	}
 
 

@@ -1,5 +1,6 @@
 package Transactions;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import org.junit.AfterClass;
@@ -31,6 +32,12 @@ public class GRE {
 
 	@Test
 	public void validCreation(){
+
+		WebElement amountElement = driver.findElement(By.id("id_payable"));
+		double amount = Double.valueOf(amountElement.getAttribute("value"));
+
+		double dollar_credit = CustomerReusables.get_credit("dollar");
+
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
 		username.sendKeys("username");
@@ -82,6 +89,9 @@ public class GRE {
 		WebElement message = driver.findElement(By.name("message"));
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("gre"));
+
+		double new_dollar_credit = CustomerReusables.get_credit("dollar");
+		assertEquals(amount, dollar_credit - new_dollar_credit, GeneralReusables.delta);
 
 	}
 

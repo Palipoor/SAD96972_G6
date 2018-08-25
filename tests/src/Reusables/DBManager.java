@@ -8,8 +8,8 @@ import java.sql.Statement;
 class Defaults {
 	static int DEFAULT_SALARY = 200;
 	static int DEFAULT_CUSTOMER_RIAL_CREDIT = 500000;
-	static int DEFAULT_CUSTOMER_DOLLAR_CREDIT = 500;
-	static int DEFAULT_CUSTOMER_EURO_CREDIT = 500;
+	static int DEFAULT_CUSTOMER_DOLLAR_CREDIT = 5000000;
+	static int DEFAULT_CUSTOMER_EURO_CREDIT = 500000;
 	static int DEFAULT_COMPANY_RIAL_CREDIT = 500000;
 	static int ZERO = 0;
 }
@@ -55,10 +55,10 @@ public class DBManager {
 	}
 
 	public void deleteManagers() {
-		String manager_delete = "delete from manager_manager WHERE wallet_user_ptr_id in (select id from auth_user where username like 'test_%');";
-		String walletuser_delete = "delete from main_wallet_user where genuser_ptr_id in(select id from auth_user where username like 'test_%')";
-		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'test_%');";
-		String users_delete = "delete from auth_user where username like 'test_%';";
+		String manager_delete = "delete from manager_manager WHERE wallet_user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+		String walletuser_delete = "delete from main_wallet_user where genuser_ptr_id in(select id from auth_user where username like 'TEST_%')";
+		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+		String users_delete = "delete from auth_user where username like 'TEST_%';";
 
 		try {
 			Statement stmt = conn.createStatement();
@@ -71,9 +71,9 @@ public class DBManager {
 	}
 
 	public void deleteEmployees() {
-		String customers_delete = "delete from employee_employee WHERE genuser_ptr_id in (select id from auth_user where username like 'test_%'));";
-		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'test_%');";
-		String users_delete = "delete from auth_user where username like 'test_%';";
+		String customers_delete = "delete from employee_employee WHERE genuser_ptr_id in (select id from auth_user where username like 'TEST_%'));";
+		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+		String users_delete = "delete from auth_user where username like 'TEST_%';";
 
 		try {
 			Statement stmt = conn.createStatement();
@@ -86,16 +86,18 @@ public class DBManager {
 	}
 
 	public void deleteCustomers() {
-		String customers_delete = "delete from customer_customer WHERE wallet_user_ptr_id in (select id from auth_user where username like 'test_%');";
-		String walletuser_delete = "delete from main_wallet_user where genuser_ptr_id in(select id from auth_user where username like 'test_%')";
-		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'test_%');";
-		String users_delete = "delete from auth_user where username like 'test_%';";
+		String customers_delete = "delete from customer_customer WHERE wallet_user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+		String walletuser_delete = "delete from main_wallet_user where genuser_ptr_id in(select id from auth_user where username like 'TEST_%');";
+		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+		String groups_delete = "delete from auth_user_groups where user_id in (select id from auth_user where username like 'TEST_%');";
+		String users_delete = "delete from auth_user where username like 'TEST_%';";
 
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(customers_delete);
 			stmt.executeUpdate(walletuser_delete);
 			stmt.executeUpdate(genusers_delete);
+			stmt.executeUpdate(groups_delete);
 			stmt.executeUpdate(users_delete);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -117,8 +119,8 @@ public class DBManager {
 
 	public void deleteTestUsers() {
 		deleteCustomers();
-		deleteEmployees();
-		deleteManagers();
+//		deleteEmployees();
+//		deleteManagers();
 	}
 
 
@@ -174,7 +176,7 @@ public class DBManager {
 	public static void main(String[] args) {
 		DBManager manager = new DBManager();
 		manager.connect();
-		manager.setCustomersToDefault();
+		manager.setUsersToDefault();
 	}
 
 }

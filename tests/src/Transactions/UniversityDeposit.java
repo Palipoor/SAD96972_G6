@@ -1,7 +1,9 @@
 package Transactions;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
+import com.sun.tools.javac.jvm.Gen;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,7 +32,9 @@ public class UniversityDeposit {
 	}
 
 	@Test
-	public void validCreation(){
+	public void validCreation() {
+
+		double dollar_credit = CustomerReusables.get_credit("dollar");
 
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
@@ -44,12 +48,21 @@ public class UniversityDeposit {
 		amount.clear();
 		amount.sendKeys("50");
 
+		WebElement payableElement = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(payableElement.getAttribute("value"));
+
+		WebElement feeElement = driver.findElement(By.id("id_fee"));
+		double fee = Double.valueOf(feeElement.getAttribute("value"));
+
+		assertEquals(payable, fee + 50, GeneralReusables.delta);
+
+
 		WebElement type = driver.findElement(By.id("id_university_transـtype"));
-		Select dropdown= new Select(type);
+		Select dropdown = new Select(type);
 		dropdown.selectByVisibleText("deposit fee");
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
-		Select dropdown2= new Select(currency);
+		Select dropdown2 = new Select(currency);
 		dropdown2.selectByVisibleText("dollar");
 
 		WebElement university_name = driver.findElement(By.name("university_name"));
@@ -76,10 +89,13 @@ public class UniversityDeposit {
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("universitytrans"));
 
+		double new_dollar_credit = CustomerReusables.get_credit("dollar");
+		assertEquals(payable, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+
 	}
 
 	@AfterClass
-	public static void tearDown(){
+	public static void tearDown() {
 		GeneralReusables.logout(driver);
 	}
 }

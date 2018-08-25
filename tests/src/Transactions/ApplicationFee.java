@@ -3,8 +3,8 @@ package Transactions;
 import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
+import com.sun.tools.javac.jvm.Gen;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -32,7 +32,7 @@ public class ApplicationFee {
 	}
 
 	@Test
-	public void validCreation(){
+	public void validCreation() {
 
 		double dollar_credit = CustomerReusables.get_credit("dollar");
 
@@ -46,14 +46,23 @@ public class ApplicationFee {
 
 		WebElement amount = driver.findElement(By.name("amount"));
 		amount.clear();
-		amount.sendKeys("5");
+		amount.sendKeys("50");
+
+		WebElement payableElement = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(payableElement.getAttribute("value"));
+
+		WebElement feeElement = driver.findElement(By.id("id_fee"));
+		double fee = Double.valueOf(feeElement.getAttribute("value"));
+
+		assertEquals(payable, fee + 50, GeneralReusables.delta);
+
 
 		WebElement type = driver.findElement(By.id("id_university_transـtype"));
-		Select dropdown= new Select(type);
+		Select dropdown = new Select(type);
 		dropdown.selectByVisibleText("application fee");
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
-		Select dropdown2= new Select(currency);
+		Select dropdown2 = new Select(currency);
 		dropdown2.selectByVisibleText("dollar");
 
 		WebElement university_name = driver.findElement(By.name("university_name"));
@@ -81,12 +90,12 @@ public class ApplicationFee {
 		assertTrue(ManagerReusables.newTransactionExists("universitytrans"));
 
 		double new_dollar_credit = CustomerReusables.get_credit("dollar");
-//		Assert.assertEquals(5.0, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+		assertEquals(payable, dollar_credit - new_dollar_credit, GeneralReusables.delta);
 
 	}
 
 	@AfterClass
-	public static void tearDown(){
+	public static void tearDown() {
 		GeneralReusables.logout(driver);
 	}
 }

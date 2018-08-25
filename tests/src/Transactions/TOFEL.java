@@ -1,5 +1,6 @@
 package Transactions;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import org.junit.AfterClass;
@@ -30,7 +31,13 @@ public class TOFEL {
 	}
 
 	@Test
-	public void validCreation(){
+	public void validCreation() {
+
+		WebElement amountElement = driver.findElement(By.id("id_payable"));
+		double amount = Double.valueOf(amountElement.getAttribute("value"));
+
+		double dollar_credit = CustomerReusables.get_credit("dollar");
+
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
 		username.sendKeys("username");
@@ -64,7 +71,7 @@ public class TOFEL {
 		id.sendKeys("002003004");
 
 		WebElement id_type = driver.findElement(By.id("id_id_type"));
-		Select dropdown= new Select(id_type);
+		Select dropdown = new Select(id_type);
 		dropdown.selectByVisibleText("پاسپورت");
 
 		WebElement destination = driver.findElement(By.name("country_for_study"));
@@ -83,10 +90,17 @@ public class TOFEL {
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("tofel"));
 
+		double new_dollar_credit = CustomerReusables.get_credit("dollar");
+		System.out.println("dollar credit" + String.valueOf(dollar_credit));
+		System.out.println("new dollar credit" + String.valueOf(new_dollar_credit));
+		System.out.println("amount" + String.valueOf(amount));
+
+		assertEquals(amount, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+
 	}
 
 	@AfterClass
-	public static void tearDown(){
+	public static void tearDown() {
 		GeneralReusables.logout(driver);
 	}
 }

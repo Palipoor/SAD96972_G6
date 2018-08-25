@@ -31,7 +31,7 @@ public class ReverseCharge {
 	}
 
 	@Test
-	public void validCreation(){
+	public void validCreation() {
 		WebElement amount = driver.findElement(By.name("amount"));
 		amount.clear();
 		amount.sendKeys("1000");
@@ -39,7 +39,7 @@ public class ReverseCharge {
 		double rial_credit = CustomerReusables.get_credit("rial");
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
-		Select dropdown= new Select(currency);
+		Select dropdown = new Select(currency);
 		dropdown.selectByVisibleText("rial");
 
 
@@ -60,13 +60,13 @@ public class ReverseCharge {
 		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
 
 		double new_rial_credit = CustomerReusables.get_credit("rial");
-		//		Assert.assertEquals(5.0, rial_credit - new_rial_credit, GeneralReusables.delta);
+		assertEquals(1000, rial_credit - new_rial_credit, GeneralReusables.delta);
 
 
 	}
 
 	@AfterClass
-	public static void tearDown(){
+	public static void tearDown() {
 		GeneralReusables.logout(driver);
 	}
 }

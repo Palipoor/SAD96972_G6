@@ -14,6 +14,7 @@ import java.util.List;
 public class EmployeeReusables {
 
 	public static final String ACCEPT = "0" ;
+	public static final String REJECT = "1" ;
 	public static String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش و درخواست";
 
 
@@ -94,18 +95,24 @@ public class EmployeeReusables {
     }
 
     public static void rejectTransaction(String transactionId) {
-        WebDriver driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsAnEmployee(driver);
+		WebDriver driver = new FirefoxDriver();
+		GeneralReusables.loginAsAnEmployeeWithoutName(driver);
 
-        bringMeTheDetails(transactionId, driver);
+		WebElement idbox = driver.findElement(By.name("transactionId"));
+		idbox.clear();
+		idbox.sendKeys(transactionId);
 
-        // hala mire too details
+		WebElement description = driver.findElement(By.name("description"));
+		description.clear();
+		description.sendKeys("it is not ok.");
 
-        WebElement accept = driver.findElement(By.name("reject"));
-        accept.click();
-        WebElement done = driver.findElement(By.name("done"));
-        done.click();
-        GeneralReusables.logout(driver);
+		WebElement accept = driver.findElement(By.id("id_action_1"));
+		accept.click();
+
+		WebElement send = driver.findElement(By.name("send"));
+		GeneralReusables.waitForSeconds(5);
+		send.click();
+
+		driver.close();
     }
 }

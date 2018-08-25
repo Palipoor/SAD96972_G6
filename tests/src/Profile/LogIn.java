@@ -1,5 +1,6 @@
 package Profile;
 
+import Reusables.DBManager;
 import Reusables.Order;
 import Reusables.ProfileReusables;
 import Reusables.GeneralReusables;
@@ -139,6 +140,7 @@ public class LogIn {
 
 		ProfileReusables.signUpUser1(driver);
 
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/login");
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
 
@@ -161,6 +163,9 @@ public class LogIn {
 	@AfterClass
 	public static void tearDown() {
 		GeneralReusables.logout(driver);
+		DBManager manager = new DBManager();
+		manager.connect();
+		manager.deleteCustomers();
 	}
 
 

@@ -36,6 +36,8 @@ public class ForeignPayment {
 		amount.clear();
 		amount.sendKeys("5");
 
+		WebElement actual = driver.findElement(By.name("id_payable"));
+		double payable = Double.valueOf(actual.getAttribute("value"));
 		double dollar_credit = CustomerReusables.get_credit("dollar");
 
 
@@ -62,7 +64,7 @@ public class ForeignPayment {
 
 
 		double new_dollar_credit = CustomerReusables.get_credit("dollar");
-//		Assert.assertEquals(5.0, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+		assertEquals(payable, dollar_credit - new_dollar_credit, GeneralReusables.delta);
 	}
 
 	@AfterClass

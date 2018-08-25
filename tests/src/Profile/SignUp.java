@@ -5,21 +5,27 @@ import Reusables.DBManager;
 import Reusables.ProfileReusables;
 import Reusables.GeneralReusables;
 import org.junit.*;
+import Reusables.Order;
+import Reusables.OrderedRunner;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+@RunWith(Reusables.OrderedRunner.class)
 public class SignUp {
 	private static WebDriver driver;
 	private static DBManager dbManager;
 
-	public static void goToSignupPage() {
+	private static void goToSignupPage() {
 		GeneralReusables.setUpToHomepage(driver);
 		// Go to Sign up page
 		String linkToOpen = driver.findElement(By.name("sign up")).getAttribute("href");
@@ -31,17 +37,15 @@ public class SignUp {
 
 	@BeforeClass
 	public static void setUp() {
-		// Initialize the WebDriver
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//for checking already registered info
-		ProfileReusables.signUpUser1(driver);
 		goToSignupPage();
 
 
 	}
 
 	@Test
+	@Order(order = 1)
 	public void invalidFirstName() {
 
 		goToSignupPage();
@@ -70,6 +74,7 @@ public class SignUp {
 	}
 
 	@Test
+	@Order(order = 2)
 	public void invalidFamilyName() {
 		goToSignupPage();
 
@@ -99,6 +104,7 @@ public class SignUp {
 	}
 
 	@Test
+	@Order(order = 3)
 	public void invalidEmail() {
 		goToSignupPage();
 
@@ -130,74 +136,13 @@ public class SignUp {
 		assertEquals(errorText, ProfileReusables.invalidEmailError);
 	}
 
+
 	@Test
+	@Order(order = 4)
 	public void registeredEmail() {
+
+		ProfileReusables.signUpUser1(driver);
 		goToSignupPage();
-
-		ProfileReusables.enterValidFirstName(driver);
-		ProfileReusables.enterValidFamilyName(driver);
-
-		ProfileReusables.enterValidUsername(driver);
-
-
-		// Enter an already registered email
-		WebElement email = driver.findElement(By.name("email"));
-		email.sendKeys(ProfileReusables.reusableStrings.get("email"));   //already registered
-
-		ProfileReusables.enterValidPhoneNumber(driver);
-		ProfileReusables.enterValidAccountNumber(driver);
-		ProfileReusables.enterValidPassword(driver);
-		ProfileReusables.repeatValidPassword(driver);
-
-		ProfileReusables.clickForSignUp(driver);
-
-		GeneralReusables.waitForSeconds(3);
-
-		//  Verify that error message is displayed for authentication failure.
-		String errorText = "";
-		errorText = driver.findElement(By.name("email-error")).getText();
-
-
-		assertEquals(errorText, GeneralReusables.reusableStrings.get("username-exists"));
-	}
-
-	@Test
-	public void invalidUsername() {
-		goToSignupPage();
-
-		ProfileReusables.enterValidFirstName(driver);
-		ProfileReusables.enterValidFamilyName(driver);
-
-		//invalid username
-		WebElement username = driver.findElement(By.name("username"));
-		username.clear();
-		username.sendKeys(ProfileReusables.invalidName);
-
-
-		ProfileReusables.enterValidEmail(driver);
-		ProfileReusables.enterValidPhoneNumber(driver);
-		WebElement shomareHesab = driver.findElement(By.name("account_number"));
-		shomareHesab.clear();
-		shomareHesab.sendKeys("17385962846");
-		ProfileReusables.enterValidPassword(driver);
-		ProfileReusables.repeatValidPassword(driver);
-
-
-		ProfileReusables.clickForSignUp(driver);
-
-		GeneralReusables.waitForSeconds(3);
-
-		String errorText = "";
-		errorText = driver.findElement(By.name("username-error")).getText();
-
-		assertEquals(errorText, GeneralReusables.reusableStrings.get("invalid-username-error"));
-	}
-
-	@Test
-	public void registeredUsername() {
-
-		goToSignupPage();
-
 
 		ProfileReusables.enterValidFirstName(driver);
 		ProfileReusables.enterValidFamilyName(driver);
@@ -205,26 +150,34 @@ public class SignUp {
 		// Enter an already registered username
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
-		username.sendKeys(ProfileReusables.username1);
+		username.sendKeys("TEST_dornadorna");
 
-		ProfileReusables.enterValidEmail(driver);
+		WebElement email = driver.findElement(By.name("email"));
+		email.clear();
+		email.sendKeys(ProfileReusables.reusableStrings.get("email"));
+
 		ProfileReusables.enterValidPhoneNumber(driver);
-		ProfileReusables.enterValidAccountNumber(driver);
+		WebElement shomareHesab = driver.findElement(By.name("account_number"));
+		shomareHesab.clear();
+		shomareHesab.sendKeys("123456");
 		ProfileReusables.enterValidPassword(driver);
 		ProfileReusables.repeatValidPassword(driver);
 
 		ProfileReusables.clickForSignUp(driver);
 
-		GeneralReusables.waitForSeconds(3);
-
 		String errorText = "";
-		errorText = driver.findElement(By.name("username-error")).getText();
+		errorText = driver.findElement(By.name("email-error")).getText();
 
 		assertEquals(errorText, GeneralReusables.reusableStrings.get("username-exists"));
+
+		dbManager = new DBManager();
+		dbManager.connect();
+		dbManager.deleteCustomers();
 	}
 
 
 	@Test
+	@Order(order = 6)
 	public void invalidAccountNumber() {
 		goToSignupPage();
 
@@ -252,39 +205,9 @@ public class SignUp {
 		assertEquals(errorText, GeneralReusables.reusableStrings.get("invalid-account-number-error"));
 	}
 
-	@Test
-	public void registeredAccountNumber() {
-		goToSignupPage();
-
-
-		ProfileReusables.enterValidFirstName(driver);
-		ProfileReusables.enterValidFamilyName(driver);
-		ProfileReusables.enterValidUsername(driver);
-		ProfileReusables.enterValidEmail(driver);
-		ProfileReusables.enterValidPhoneNumber(driver);
-
-
-		WebElement accountNumber = driver.findElement(By.name("account_number"));
-		accountNumber.clear();
-		accountNumber.sendKeys(ProfileReusables.reusableStrings.get("account-number"));
-
-		ProfileReusables.enterValidPassword(driver);
-		ProfileReusables.repeatValidPassword(driver);
-
-		ProfileReusables.clickForSignUp(driver);
-
-		GeneralReusables.waitForSeconds(3);
-
-		//    Verify that error message is displayed for authentication failure.
-		String errorText = "";
-		errorText = driver.findElement(By.name("account-number-error")).getText();
-
-		assertEquals(errorText, GeneralReusables.reusableStrings.get("username-exists"));
-	}
-
 
 	@Test
-
+	@Order(order = 7)
 	public void invalidRepeatPassword() {
 		goToSignupPage();
 
@@ -316,6 +239,7 @@ public class SignUp {
 
 
 	@Test
+	@Order(order = 8)
 	public void validSignUp() {
 		goToSignupPage();
 
@@ -328,21 +252,21 @@ public class SignUp {
 		ProfileReusables.enterValidPassword(driver);
 		ProfileReusables.repeatValidPassword(driver);
 
-
+		GeneralReusables.waitForSeconds(10);
 		ProfileReusables.clickForSignUp(driver);
 
-		GeneralReusables.waitForSeconds(3);
-
-
-		//assertEquals(driver.getTitle(), successTitle);
-		GeneralReusables.setUpToHomepage(driver);
-		GeneralReusables.login(driver, ProfileReusables.reusableStrings.get("email"), ProfileReusables.password1);
-		assertEquals(driver.getTitle(), GeneralReusables.reusableStrings.get("panel-title"));
-
+		List<WebElement> successMessages = driver.findElements(By.name("success message"));
+		assertTrue(successMessages.size()> 0);
 
 	}
 
 
+	@After
+	public void tearDownEach(){
+		dbManager = new DBManager();
+		dbManager.connect();
+		dbManager.deleteCustomers();
+	}
 	@AfterClass
 	public static void tearDown() {
 		driver.close();
