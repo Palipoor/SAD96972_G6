@@ -476,24 +476,28 @@ class UnknownTrans(BankTrans):
 
     def set_initials(self, *args, **kwargs):
         super().set_initials()
-        try:
-            self.final_user = Customer.objects.get(email=self.email)
-        except Exception as e:
-            base_username = self.email.split("@")[0]
-            extention = 0
-            while (len(Customer.objects.filter(username=base_username + str(extention))) > 0):
-                extention += 1
-            username = base_username + str(extention)
-            customer = Customer(username=username, email=self.email, phone_number=self.phone_number, account_number=-2)
-            customer.password = make_password(username+username)
-            customer.save()
-            self.dest_user = customer
         self.fianl_wallet = self.source_wallet
 
     def __init__(self, *args, **kwargs):
         kwargs["type"] = "unkowntrans"
         kwargs["dest_user"] = Manager.get_manager()
-        temp = super().__init__(*args, ** kwargs)
+        temp = super().__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            try:
+                self.final_user = Customer.objects.get(email=self.email)
+            except Exception as e:
+                base_username = self.email.split("@")[0]
+                extention = 0
+                while (len(Customer.objects.filter(username=base_username + str(extention))) > 0):
+                    extention += 1
+                username = base_username + str(extention)
+                customer = Customer(username=username, email=self.email, phone_number=self.phone_number, account_number=self.account_number)
+                customer.password = make_password(username+username)
+                customer.save()
+                self.dest_user = customer
+        super(UnknownTrans, self).save(*args, **kwargs) # Call the real save() method
 
 
 class CustomTransactionInstance(Request):
