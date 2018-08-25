@@ -77,7 +77,7 @@ class TransactionCreationView(CustomerCreateView):
 
     def get_form_kwargs(self):
         kwargs = super(CustomerCreateView, self).get_form_kwargs()
-        kwargs['user'] = Customer.objects.get(username=self.request.user)
+        kwargs['user'] = Customer.objects.get(username=self.request.user.username)
         # kwargs['dest'] = Transactions.currency_to_num(self.kwargs['currency'])
         return kwargs
 
@@ -91,7 +91,7 @@ class TransactionCreationView(CustomerCreateView):
 
     def form_valid(self, form):
         messages.add_message(
-            self.request, messages.SUCCESS, 'تراکنش با موفقیت ثبت شد.')
+            self.request, messages.SUCCESS, "تراکنش با موفقیت ثبت شد.")
         return super(TransactionCreationView, self).form_valid(form)
 
 
@@ -106,12 +106,11 @@ class ReverseChargeCreationView(TransactionCreationView):
 
 class TransactionDetailsView(MainTransactionDetails):
     template_name = "customer/transaction_details.html"
-    mdoel = Request
 
     def get_context_data(self, **kwargs):
-        temp = super().get_context_data(**kwargs)
-        # temp['type'] = temp['foreigntrans']._meta.model_name
-        return(temp)
+        context = super().get_context_data(**kwargs)
+        context.update({'notifications': Notification.objects.filter(user__username=self.request.user.username, seen=False).order_by('-sent_date')})
+        return context
 
 
 # class ForeignPaymentCreationView(TransactionCreationView):

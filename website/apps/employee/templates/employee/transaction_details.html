@@ -35,6 +35,9 @@
             <form class="form" method = "POST">
                     {% csrf_token %}
                     <div class="box-body">
+                        {% for message in messages%}
+                        <div name = "message"> {{message}} </div>
+                        {% endfor%}
                       <div class="form-group">
                         {{form.transactionId}}
                           {% for error in form.transactionId.errors %}

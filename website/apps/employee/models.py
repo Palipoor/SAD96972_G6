@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 
 
 class Employee(main_models.GenUser):
-    current_salary = models.FloatField()
+    current_salary = models.IntegerField()
 
     def __init__(self, *args, **kwargs):
         super(Employee, self).__init__(*args, **kwargs)

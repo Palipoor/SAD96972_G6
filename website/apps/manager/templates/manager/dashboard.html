@@ -137,7 +137,7 @@
 </div>
 {% endcomment %}
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-8">
     <div class="box">
       <div class="box-header">
         <h3 class="box-title">تراکنش‌ها و درخواست‌های تراکنش</h3>
@@ -149,25 +149,28 @@
             <tr>
               <th style = "width: 20px">شناسه</th>
               <th style = "width: 150px">تاریخ تراکنش </th>
+              <th style = "width: 20px">نوع تراکنش</th>
               <th style = "width: 10px">وضعیت</th>
             </tr>
           </thead>
           <tbody>
             {% for req in requests %}
             <tr>
-              <td>
-                <a href='{% url "manager:transaction_details" pk=req.id %}'>{{req.id}}</a>
-              </td>
-              <td>{{req.request_time}}</td>
-              <td>{{req.status}}</td>
+                <td>
+                    <a href='{% url "manager:transaction_details" pk=req.id %}'>{{req.id}}</a>
+                  </td>
+                <td>{{req.request_time}}</td>
+                <td>{{req.type}}</td>
+                <td>{{req.status}}</td>
             </tr>
             {% endfor %}
           </tbody>
           <tfoot>
             <tr>
-              <th>شناسه</th>
-              <th>تاریخ تراکنش </th>
-              <th>وضعیت</th>
+                <th style = "width: 20px">شناسه</th>
+                <th style = "width: 150px">تاریخ تراکنش </th>
+                <th style = "width: 20px">نوع تراکنش</th>
+                <th style = "width: 10px">وضعیت</th>
             </tr>
           </tfoot>
         </table>
@@ -176,14 +179,14 @@
     </div>
     <!-- /.box -->
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="box">
       <div class="box-header">
         <h3 class="box-title">تراکنش‌های گزارش‌شده</h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-        <table id="table2" name="transactions-table" class="table table-bordered table-striped">
+        <table id="table2" name="reports-table" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th style = "width: 20px">شناسه</th>
@@ -248,7 +251,9 @@
       var title = $(this).text();
       $(this).html('<input type="text" name = "' + title + '" placeholder="Search ' + title + '" />');
     });
-
+    $('#table1').dataTable( {
+      "order": []
+    } );
     // DataTable
     var table = $('#table1').DataTable();
 
@@ -270,11 +275,13 @@
 <script>
   $(document).ready(function () {
     // Setup - add a text input to each footer cell
+    $('#table2').dataTable( {
+      "order": []
+    } );
     $('#table2 tfoot th').each(function () {
       var title = $(this).text();
       $(this).html('<input type="text" name = "' + title + '" placeholder="Search ' + title + '" />');
     });
-
     // DataTable
     var table = $('#table2').DataTable();
 
