@@ -334,7 +334,7 @@ class IBT(Account_Request):
     labels.update(Account_Request.labels)
 
     def __init__(self, *args, **kwargs):
-        kwargs["amount"] = Transactions.get_transaction_amount(type)
+        kwargs["amount"] = Transactions.get_transaction_amount(kwargs["type"])
         super(Account_Request, self).__init__(*args, **kwargs)
 
 
@@ -361,7 +361,7 @@ class TOFEL(IBT):
     def __init__(self, *args, **kwargs):
         kwargs["source_wallet"] = "1"
         kwargs["type"] = "tofel"
-        super(TOFEL, self).__init__(*args, ** kwargs)
+        super(TOFEL, self).__init__(*args, **kwargs)
 
 
 class GRE(IBT):
