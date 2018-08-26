@@ -61,6 +61,11 @@ class EmployeeReview(models.Model):
     def exception_texts(self):
         return self.request.exception_texts()
 
+    def clean(self):
+        temp = super().clean()
+        self.request.full_clean()
+        return temp
+
 
 class Salary(models.Model):
     employee = models.ForeignKey("main.GenUser", on_delete=models.DO_NOTHING)

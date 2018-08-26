@@ -59,6 +59,8 @@ class Request(PolymorphicModel):
     labels = {}
 
     def __init__(self, *args, **kwargs):
+        self.rejection_request = None
+        self.redirection_request = None
         super().__init__(*args, **kwargs)
         try:
             self.set_initials(*args, **kwargs)
@@ -82,22 +84,27 @@ class Request(PolymorphicModel):
         if not self.pk:
             self.set_status()
             self.set_profitRate()
-            try:
-                self.dest_user.save()
-            except Exception:
-                print(traceback.format_exc())
-            try:
-                self.source_user.save()
-            except Exception:
-                print(traceback.format_exc())
+        try:
+            self.dest_user.save()
+        except Exception:
+            print(traceback.format_exc())
+        try:
+            self.source_user.save()
+        except Exception:
+            print(traceback.format_exc())
+        if (self.rejection_request):
+            self.rejection_request.save()
+        if (self.redirection_request):
+            self.redirection_request.save()
         super(Request, self).save(*args, **kwargs)
 
     def reject(self):
         # only works if the current status is pending or reported
+        print("in reject")
         if (self.status == "2" or self.status == "4"):
-            reject = self.create_reverse_request()
-            reject.take_action()
-            reject.save()
+            self.rejection_request = self.create_reverse_request()
+            self.rejection_request.take_action()
+            # reject.save()
             # sets the status to rejected
             self.status = "1"
         else:
@@ -105,14 +112,15 @@ class Request(PolymorphicModel):
         return None
 
     def accept(self):
+        print("in accept")
         # only works if the current status is pending or reported
         if (not self.status == "2" and not self.status == "4"):
             self.excps += ['تراکنش در شرایطی که بتواند تایید شود نیست.']
         else:
             self.status = 0
-            redirect = self.create_redirect_request()
-            redirect.take_action()
-            redirect.save()
+            self.redirection_request = self.create_redirect_request()
+            self.redirection_request.take_action()
+            # redirect.save()
         return None
 
     def report(self):
@@ -208,14 +216,25 @@ class Request(PolymorphicModel):
         #                          exchange_rate=1./exchange_rate,
         #                          related_request=self
         #                          )
-        reject = Reverse_Request(source_wallet=self.dest_wallet,
-                                 dest_wallet=self.source_wallet,
-                                 creator=self.creator,
-                                 amount=self.amount*(1 + self.profitRate)*self.exchange_rate,
-                                 profitRate=0,
-                                 exchange_rate=1./self.exchange_rate,
-                                 reference=self
-                                 )
+
+        try:
+            reject = Reverse_Request.get(reference=self)
+            reject.source_wallet = self.dest_wallet,
+            reject.dest_wallet = self.source_wallet,
+            reject.creator = self.creator,
+            reject.amount = self.amount*(1 + self.profitRate)*self.exchange_rate,
+            reject.profitRate = 0,
+            reject.exchange_rate = 1./self.exchange_rate,
+        except Exception as e:
+            reject = Reverse_Request(source_wallet=self.dest_wallet,
+                                     dest_wallet=self.source_wallet,
+                                     creator=self.creator,
+                                     amount=self.amount*(1 + self.profitRate)*self.exchange_rate,
+                                     profitRate=0,
+                                     exchange_rate=1./self.exchange_rate,
+                                     reference=self
+                                     )
+
         try:
             reject.dest_user = self.source_user
         except:
@@ -239,13 +258,27 @@ class Request(PolymorphicModel):
         #                          exchange_rate=1./exchange_rate,
         #                          related_request=self
         #                          )
-        redirect = Redirect_Request(source_wallet=self.dest_wallet,
-                                    dest_wallet=self.final_wallet,
-                                    creator=self.creator,
-                                    amount=self.amount*self.exchange_rate,
-                                    profitRate=0,
-                                    reference = self
-                                    )
+
+        try:
+            print("in redirect")
+            print(self)
+            print(Redirect_Request.objects.get(reference=self))
+            redirect = Redirect_Request.objects.get(reference=self)
+            # redirect.source_wallet=self.dest_wallet
+            # redirect.dest_wallet=self.final_wallet,
+            # redirect.creator=self.creator,
+            # redirect.amount=self.amount*self.exchange_rate,
+            # redirect.profitRate = 0,
+            print("hasanbaba")
+                                        
+        except Exception as e:
+            redirect = Redirect_Request(source_wallet=self.dest_wallet,
+                                        dest_wallet=self.final_wallet,
+                                        creator=self.creator,
+                                        amount=self.amount*self.exchange_rate,
+                                        profitRate=0,
+                                        reference=self
+                                        )
         try:
             redirect.dest_user = self.final_user
         except:
@@ -277,6 +310,17 @@ class Request(PolymorphicModel):
             raise ValidationError([ValidationError(text) for text in errors])
             # raise ValidationError("d")
             # pass
+        # redirect = None
+        # reject = None
+        # try:
+        #     redirect = Redirect_Request.objects.get(reference=self)
+        # except Exception as e:
+        #     pass
+
+        # if (self.redirect):
+        #     redirect.clean()
+        # if (self.reject):
+            # reject.clean()
         return temp
 
 
@@ -286,11 +330,10 @@ class Reverse_Request(Request):
     # it is unique foreign key not one to one
     reference = models.ForeignKey(Request,  on_delete=models.DO_NOTHING, unique=True, related_name='related_request_reverse')
 
-    
     def __init__(self, *args, **kwargs):
         kwargs["type"] = "reverserequest"
         super(Reverse_Request, self).__init__(*args, **kwargs)
-    
+
     def set_status(self):
         self.status = "0"
 
@@ -307,7 +350,6 @@ class Redirect_Request(Request):
     def __init__(self, *args, **kwargs):
         kwargs["type"] = "redirectrequest"
         super(Redirect_Request, self).__init__(*args, **kwargs)
-    
 
     def set_status(self):
         self.status = "0"
@@ -502,6 +544,7 @@ class BankTrans(Request):
     labels.update(Request.labels)
 
     def __init__(self, *args, **kwargs):
+        # TODO not pk on inits
         kwargs["type"] = "banktrans"
         kwargs["dest_user"] = Manager.get_manager()
         temp = super().__init__(*args, ** kwargs)
