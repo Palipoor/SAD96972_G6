@@ -29,6 +29,7 @@ from apps.manager.Forms import ReviewForm
 import lxml.etree
 import lxml.html
 import requests
+from django import http
 from utils.currency_utils import Transactions
 
 
@@ -330,6 +331,7 @@ class TransactionDetailsViewForStaff(FormMixin, TransactionDetailsView):
         kwargs['transaction_id'] = self.kwargs['pk']
         return kwargs
 
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
@@ -339,8 +341,10 @@ class TransactionDetailsViewForStaff(FormMixin, TransactionDetailsView):
             print(form.errors)
             return self.form_invalid(form)
 
+
+
     def form_valid(self, form):
         form.update_db()
         messages.add_message(
             self.request, messages.SUCCESS, 'بررسی تراکنش با موفقیت انجام شد.')
-        return super().form_valid(form)
+        return http.HttpResponseRedirect(self.get_success_url())
