@@ -20,6 +20,7 @@ class GenUser(User):
     def exception_texts(self):
         return []
 
+
 class Wallet_User(GenUser):
     rial_credit = models.FloatField(default=0)
     dollar_cent_credit = models.FloatField(default=0)
@@ -40,9 +41,15 @@ class Wallet_User(GenUser):
 class Notification(models.Model):
 
     sent_date = models.DateTimeField(auto_now_add=True)
-    seen = models.BooleanField(default = False)
+    seen = models.BooleanField(default=False)
     user = models.ForeignKey('GenUser', on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
+
+    @staticmethod
+    def create(username, message):
+        user = GenUser.objects.get(username=username)
+        temp = Notification(user=user, text=message)
+        return temp
 
 
 class WalletChange(models.Model):
