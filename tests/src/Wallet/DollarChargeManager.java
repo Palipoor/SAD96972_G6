@@ -2,6 +2,7 @@ package Wallet;
 
 import Reusables.DBManager;
 import Reusables.GeneralReusables;
+import Reusables.ManagerReusables;
 import Reusables.WalletUsersReusables;
 import org.junit.*;
 import org.openqa.selenium.By;
@@ -30,6 +31,7 @@ public class DollarChargeManager {
 	@Test
 	public void conversionTest() {// مبلغی که نشون می‌ده برابر با مبلغ وارد شده ضربدر قیمت دلار باشه.
 		WebElement desiredAmount = driver.findElement(By.name("amount"));
+		desiredAmount.clear();
 		desiredAmount.sendKeys(amount);
 		double dollarPrice = GeneralReusables.getPrice("dollar");
 		double rial = dollarPrice * Double.valueOf(amount);
@@ -40,23 +42,22 @@ public class DollarChargeManager {
 
 	@Test
 	public void decreaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
-		double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+		double rialCredit = ManagerReusables.getCompanyCredit("rial");
 		WebElement desiredAmount = driver.findElement(By.name("amount"));
 		desiredAmount.clear();
 		desiredAmount.sendKeys(amount);
 		double dollarPrice = GeneralReusables.getPrice("dollar");
-		double rial = dollarPrice * Double.valueOf(amount);
 		WebElement chargeButton = driver.findElement(By.name("charge-button"));
 		WebElement rialAmount = driver.findElement(By.name("rial-amount"));
 		double shownRial = Double.valueOf(rialAmount.getText());
 		chargeButton.click();
-		double currentRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+		double currentRialCredit = ManagerReusables.getCompanyCredit("rial");
 		assertEquals(currentRialCredit, rialCredit - shownRial, GeneralReusables.delta);
 	}
 
 	@Test
 	public void increaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
-		double dollarCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+		double dollarCredit = ManagerReusables.getCompanyCredit("dollar");
 		WebElement chargeButton = driver.findElement(By.name("charge-button"));
 		double increaseAmount = Double.valueOf(amount);
 		chargeButton.click();
@@ -66,7 +67,7 @@ public class DollarChargeManager {
 
 	@Test
 	public void invalidDecreaseTest() {
-		int rialCredit = (int) WalletUsersReusables.getWalletCredit(driver, "dollar");
+		double rialCredit = ManagerReusables.getCompanyCredit("rial");
 		double decreaseAmount = (rialCredit + 20000) / GeneralReusables.getPrice("dollar"); // بیشتر از آن چه دارد.
 		WebElement desiredAmount = driver.findElement(By.name("amount"));
 		desiredAmount.sendKeys(String.valueOf(decreaseAmount));
@@ -80,8 +81,6 @@ public class DollarChargeManager {
 	@AfterClass
 	public static void tearDown() {
 		GeneralReusables.logout(driver);
-		DBManager manager = new DBManager();
-		manager.connect();
-		manager.setCustomersToDefault();
+
 	}
 }

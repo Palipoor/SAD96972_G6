@@ -34,9 +34,14 @@ public class TOFEL {
 	public void validCreation() {
 
 		WebElement amountElement = driver.findElement(By.id("id_payable"));
-		double amount = Double.valueOf(amountElement.getAttribute("value"));
+		double payable = Double.valueOf(amountElement.getAttribute("value"));
 
-		double dollar_credit = CustomerReusables.get_credit("dollar");
+		WebElement feeElement = driver.findElement(By.id("id_fee"));
+		double fee = Double.valueOf(feeElement.getAttribute("value"));
+
+		double customer_dollar_credit = CustomerReusables.get_credit("dollar");
+		double company_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
+		double company_rial_credit = ManagerReusables.getCompanyCredit("rial");
 
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
@@ -90,12 +95,13 @@ public class TOFEL {
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("tofel"));
 
-		double new_dollar_credit = CustomerReusables.get_credit("dollar");
-		System.out.println("dollar credit" + String.valueOf(dollar_credit));
-		System.out.println("new dollar credit" + String.valueOf(new_dollar_credit));
-		System.out.println("amount" + String.valueOf(amount));
+		double new_customer_dollar_credit = CustomerReusables.get_credit("dollar");
+		double new_company_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
+		double new_company_rial_credit = ManagerReusables.getCompanyCredit("rial");
 
-		assertEquals(amount, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+		assertEquals(payable - fee, new_company_dollar_credit - company_dollar_credit, GeneralReusables.delta);
+		assertEquals(fee * GeneralReusables.getPrice("dollar"), new_company_rial_credit - company_rial_credit, GeneralReusables.delta);
+		assertEquals(payable, customer_dollar_credit - new_customer_dollar_credit, GeneralReusables.delta);
 
 	}
 

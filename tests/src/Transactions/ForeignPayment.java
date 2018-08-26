@@ -38,8 +38,10 @@ public class ForeignPayment {
 
 		WebElement actual = driver.findElement(By.id("id_payable"));
 		double payable = Double.valueOf(actual.getAttribute("value"));
-		double dollar_credit = CustomerReusables.get_credit("dollar");
 
+		double customer_dollar_credit = CustomerReusables.get_credit("dollar");
+		double company_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
+		double company_rial_credit = ManagerReusables.getCompanyCredit("rial");
 
 		WebElement currency = driver.findElement(By.name("source_wallet"));
 		Select dropdown= new Select(currency);
@@ -54,6 +56,9 @@ public class ForeignPayment {
 		account_number.clear();
 		account_number.sendKeys("1997-0335-0337");
 
+		WebElement feeElement = driver.findElement(By.id("id_fee"));
+		double fee = Double.valueOf(feeElement.getAttribute("value"));
+
 		WebElement button = driver.findElement(By.name("create"));
 		button.click();
 		GeneralReusables.waitForSeconds(1);
@@ -62,9 +67,13 @@ public class ForeignPayment {
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
 
+		double new_customer_dollar_credit = CustomerReusables.get_credit("dollar");
+		double new_company_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
+		double new_company_rial_credit = ManagerReusables.getCompanyCredit("rial");
 
-		double new_dollar_credit = CustomerReusables.get_credit("dollar");
-		assertEquals(payable, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+		assertEquals(payable - fee, new_company_dollar_credit - company_dollar_credit, GeneralReusables.delta);
+		assertEquals(fee * GeneralReusables.getPrice("dollar"), new_company_rial_credit - company_rial_credit, GeneralReusables.delta);
+		assertEquals(payable, customer_dollar_credit - new_customer_dollar_credit, GeneralReusables.delta);
 	}
 
 	@AfterClass

@@ -34,7 +34,9 @@ public class ApplicationFee {
 	@Test
 	public void validCreation() {
 
-		double dollar_credit = CustomerReusables.get_credit("dollar");
+		double customer_dollar_credit = CustomerReusables.get_credit("dollar");
+		double company_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
+		double company_rial_credit = ManagerReusables.getCompanyCredit("rial");
 
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
@@ -89,8 +91,13 @@ public class ApplicationFee {
 		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
 		assertTrue(ManagerReusables.newTransactionExists("universitytrans"));
 
-		double new_dollar_credit = CustomerReusables.get_credit("dollar");
-		assertEquals(payable, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+		double new_customer_dollar_credit = CustomerReusables.get_credit("dollar");
+		double new_company_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
+		double new_company_rial_credit = ManagerReusables.getCompanyCredit("rial");
+
+		assertEquals(payable - fee, new_company_dollar_credit - company_dollar_credit, GeneralReusables.delta);
+		assertEquals(fee * GeneralReusables.getPrice("dollar"), new_company_rial_credit - company_rial_credit, GeneralReusables.delta);
+		assertEquals(payable, customer_dollar_credit - new_customer_dollar_credit, GeneralReusables.delta);
 
 	}
 

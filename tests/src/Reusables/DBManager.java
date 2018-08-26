@@ -177,8 +177,7 @@ public class DBManager {
 	public static void main(String[] args) {
 		DBManager manager = new DBManager();
 		manager.connect();
-		manager.deleteCustomers();
-		manager.setCustomersToDefault();
+		manager.setManagersToDefault();
 	}
 
 }

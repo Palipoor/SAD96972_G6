@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class ConfirmBankTransfer {
 	static WebDriver driver;
 	static double amount = 10;
+	static double fee;
 	static String transactionId;
 
 	@BeforeClass
@@ -32,7 +33,6 @@ public class ConfirmBankTransfer {
 		GeneralReusables.loginAsAnEmployeeWithoutName(driver);
 		Pair<Double, Double> cost = CustomerReusables.createNewBankTransfer("dollar", String.valueOf(amount));
 		amount = cost.getLeft() - cost.getRight();
-
 		transactionId = ManagerReusables.getNewestTransactionId();
 	}
 
