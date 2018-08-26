@@ -54,9 +54,9 @@ class Transactions:
         ("1", 'رد'),
     )
 
-    exhchange_matrix = [[1, 0.01, 0.01],
-                        [100, 1, 1],
-                        [100, 1, 1, ]]
+    exhchange_matrix = [[1, 0.0001, 0.0001],
+                        [10000, 1, 1],
+                        [10000, 1, 1, ]]
 
     profitRates = {"tofel": 0.05,
                    "gre": 0.05,

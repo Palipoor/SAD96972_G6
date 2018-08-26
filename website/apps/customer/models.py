@@ -462,6 +462,7 @@ class TOFEL(IBT):
 
     def __init__(self, *args, **kwargs):
         kwargs["source_wallet"] = "1"
+        kwargs["dest_wallet"] = "1"
         kwargs["type"] = "tofel"
         super(TOFEL, self).__init__(*args, **kwargs)
 
@@ -499,6 +500,7 @@ class GRE(IBT):
 
     def __init__(self, *args, **kwargs):
         kwargs["source_wallet"] = "1"
+        kwargs["dest_wallet"] = "1"
         kwargs["type"] = "gre"
         super(GRE, self).__init__(*args, **kwargs)
 
