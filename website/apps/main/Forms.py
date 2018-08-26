@@ -92,7 +92,7 @@ class WalletChargeForm(forms.Form):
             self.transaction = Exchange(source_user=self.user, creator=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
         else:
             print('i am here sosis')
-            self.transaction = Charge(dest_user=self.user, dest_wallet=self.dest, amount=self.needed_value, creator = self.user)
+            self.transaction = Charge(dest_user=self.user, source_user = self.user, dest_wallet=self.dest, amount=self.needed_value, creator = self.user)
         # TODO generalize peyments
         # exps = self.transaction.exception_texts()
         # print("clean_amount")
@@ -108,6 +108,7 @@ class WalletChargeForm(forms.Form):
 
     def update_db(self):
         # updates db
+        print(str(self.transaction.__dict__))
         self.transaction.save()
         pass
 

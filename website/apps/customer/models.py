@@ -3,6 +3,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 from django.contrib.auth.models import Group
 from utils.currency_utils import Transactions
+from utils.notification_tools import notify, send_notification
 from apps.employee.models import EmployeeReview
 from apps.manager.models import Manager
 from django.forms import ValidationError
@@ -104,8 +105,7 @@ class Request(PolymorphicModel):
         if (self.status == "2" or self.status == "4"):
             self.rejection_request = self.create_reverse_request()
             self.rejection_request.take_action()
-            # reject.save()
-            # sets the status to rejected
+            
             self.status = "1"
         else:
             self.excps += ['تراکنش در شرایطی که بتواند رد شود نیست.']
@@ -118,6 +118,9 @@ class Request(PolymorphicModel):
             self.excps += ['تراکنش در شرایطی که بتواند تایید شود نیست.']
         else:
             self.status = 0
+            message = 'تراکنش شما به شماره {} تایید شد.'.format(self.id)
+            send_notification(self.creator.username, message)
+            notify(self.creator.username,message, 'تایید تراکنش')
             self.redirection_request = self.create_redirect_request()
             self.redirection_request.take_action()
             # redirect.save()
@@ -152,7 +155,7 @@ class Request(PolymorphicModel):
         # what source user has to pay
         try:
             self.source_user
-            if (self.source_wallet == "0"):
+            if (self.source_wallet == "0" and self.source_user.id != self.dest_user.id):
                 self.source_user.rial_credit -= self.amount*(1+self.profitRate)
             elif (self.source_wallet == "1"):
                 self.source_user.dollar_cent_credit -= self.amount*(1+self.profitRate)

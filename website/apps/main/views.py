@@ -116,6 +116,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
             return self.post(request, *args, **kwargs)
 
     def form_valid(self, form):
+        print('form valid ast ! ')
         form.update_db()
         return super().form_valid(form)
 

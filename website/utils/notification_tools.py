@@ -6,7 +6,7 @@ from kavenegar import *
 
 
 def send_notification(username, message):
-    notification = Notification(message=message, username=username)
+    notification = Notification.create(message=message, username=username)
     notification.save()
 
 
@@ -37,8 +37,8 @@ def send_text(number, message, subject):
 
 
 def notify(customer_username, message, subject):
-    customer = apps.get_model('customer', "Customer").objects.get(username=username)
+    customer = apps.get_model('customer', "Customer").objects.get(username=customer_username)
     if customer.contact_way == 0:
         send_email(customer.email, subject)
     else:
-        send_text(str(customer.phone_number), subject)
+        send_text(str(customer.phone_number), message, subject)
