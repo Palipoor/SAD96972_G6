@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralReusables {
 
-	public static double delta = 0.005;
+	public static double delta = 1.5;
 
 	public static final Map<String, String> reusableStrings;
 
@@ -121,14 +121,14 @@ public class GeneralReusables {
 
 	}
 
-	public static int getPrice(String currency) {
+	public static double getPrice(String currency) {
 		String elementName = currency + "-price";
 		WebDriver homepage = new FirefoxDriver();
 		setUpToHomepage(homepage);
 		WebElement priceElement = homepage.findElement(By.name(elementName));
-		int price = Integer.valueOf(priceElement.getText());
+		double price = Double.valueOf(priceElement.getText());
 		homepage.close();
-		return price;
+		return price * 10000;
 	}
 
 	public static void waitForSeconds(int seconds) {

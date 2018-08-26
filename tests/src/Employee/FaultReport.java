@@ -1,6 +1,7 @@
 package Employee;
 
 import Reusables.CustomerReusables;
+import Reusables.EmployeeReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
 import com.sun.source.tree.AssertTree;
@@ -27,6 +28,7 @@ public class FaultReport {
 
     @BeforeClass
     public static void setUp() {
+		CustomerReusables.createNewBankTransfer("dollar", "2");
         transactionId = ManagerReusables.getNewestTransactionId();
         driver = new FirefoxDriver();
         GeneralReusables.loginAsAnEmployeeWithoutName(driver);
@@ -45,7 +47,6 @@ public class FaultReport {
 
 		WebElement send = driver.findElement(By.name("send"));
 		send.click();
-		GeneralReusables.waitForSeconds(5);
 		WebElement message = driver.findElement(By.name("error"));
 		assertTrue(!message.getText().equals("") && message.getText().equals(GeneralReusables.reusableStrings.get("wrong-id-error")));
     }
@@ -57,16 +58,15 @@ public class FaultReport {
 		idEntry.sendKeys(transactionId);
 		WebElement reasonEntry = driver.findElement(By.name("description"));
 		reasonEntry.sendKeys(reason);
-		List<WebElement> choices = driver.findElements(By.className("form-check-input"));
-		WebElement report_choice = choices.get(choices.size() -1 );
-		report_choice.click();
+		WebElement report = driver.findElement(By.id("id_action_2"));
+		report.click();
 
 		WebElement send = driver.findElement(By.name("send"));
 		send.click();
-		GeneralReusables.waitForSeconds(5);
+		GeneralReusables.waitForSeconds(2);
         WebElement message = driver.findElement(By.name("message"));
         assertTrue(!message.getText().equals("") && message.getText().equals("بررسی تراکنش با موفقیت انجام شد."));
-		assertTrue(ManagerReusables.reportExists(transactionId, employeeUsername) && ManagerReusables.getTransactionStatus(transactionId).equals(GeneralReusables.reusableStrings.get("reported-transaction")));
+		assertTrue(ManagerReusables.getTransactionStatus(transactionId).equals(EmployeeReusables.REPORT));
 
 	}
 

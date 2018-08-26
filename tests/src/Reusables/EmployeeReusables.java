@@ -15,6 +15,7 @@ public class EmployeeReusables {
 
 	public static final String ACCEPT = "0" ;
 	public static final String REJECT = "1" ;
+	public static final String REPORT = "4";
 	public static String transactionDetailTitle= "پنل مدیریت | جزئیات تراکنش و درخواست";
 
 
@@ -76,7 +77,6 @@ public class EmployeeReusables {
 		accept.click();
 
 		WebElement send = driver.findElement(By.name("send"));
-		GeneralReusables.waitForSeconds(5);
 		send.click();
 
 		driver.close();

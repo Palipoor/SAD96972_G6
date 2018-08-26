@@ -63,6 +63,7 @@ public class DBManager {
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(manager_delete);
+			stmt.executeUpdate(walletuser_delete);
 			stmt.executeUpdate(genusers_delete);
 			stmt.executeUpdate(users_delete);
 		} catch (SQLException e) {
@@ -86,22 +87,22 @@ public class DBManager {
 	}
 
 	public void deleteCustomers() {
-		String customers_delete = "delete from customer_customer WHERE wallet_user_ptr_id in (select id from auth_user where username like 'TEST_%');";
-		String walletuser_delete = "delete from main_wallet_user where genuser_ptr_id in(select id from auth_user where username like 'TEST_%');";
-		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'TEST_%');";
-		String groups_delete = "delete from auth_user_groups where user_id in (select id from auth_user where username like 'TEST_%');";
-		String users_delete = "delete from auth_user where username like 'TEST_%';";
-
-		try {
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(customers_delete);
-			stmt.executeUpdate(walletuser_delete);
-			stmt.executeUpdate(genusers_delete);
-			stmt.executeUpdate(groups_delete);
-			stmt.executeUpdate(users_delete);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		String customers_delete = "delete from customer_customer WHERE wallet_user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+//		String walletuser_delete = "delete from main_wallet_user where genuser_ptr_id in(select id from auth_user where username like 'TEST_%');";
+//		String genusers_delete = "delete from main_genuser where user_ptr_id in (select id from auth_user where username like 'TEST_%');";
+//		String groups_delete = "delete from auth_user_groups where user_id in (select id from auth_user where username like 'TEST_%');";
+//		String users_delete = "delete from auth_user where username like 'TEST_%';";
+//
+//		try {
+//			Statement stmt = conn.createStatement();
+//			stmt.executeUpdate(customers_delete);
+//			stmt.executeUpdate(walletuser_delete);
+//			stmt.executeUpdate(genusers_delete);
+//			stmt.executeUpdate(groups_delete);
+//			stmt.executeUpdate(users_delete);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public Connection connect() {
@@ -176,7 +177,8 @@ public class DBManager {
 	public static void main(String[] args) {
 		DBManager manager = new DBManager();
 		manager.connect();
-		manager.setUsersToDefault();
+		manager.deleteCustomers();
+		manager.setCustomersToDefault();
 	}
 
 }

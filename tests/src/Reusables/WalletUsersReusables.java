@@ -21,8 +21,10 @@ public class WalletUsersReusables {
         reusableStrings.put("dollar-wallet-title", "پنل مدیریت |کیف پول دلار");
         reusableStrings.put("euro-wallet-title", "پنل مدیریت | کیف پول یورو");
         reusableStrings.put("rial-wallet-title", "پنل مدیریت | کیف پول ریال");
-        reusableStrings.put("not-enough-error", "موجودی شما کافی نیست.");
-    }
+        reusableStrings.put("not-enough-error-rial", "موجودی کیف پول ریالی کافی نیست.");
+		reusableStrings.put("not-enough-error-dollar", "موجودی کیف پول دلار کافی نیست.");
+		reusableStrings.put("not-enough-error-euro", "موجودی کیف پول یورو کافی نیست.");
+	}
 
     public static void navigateToWallet(WebDriver panel, String currency) {
         WebElement wallets = panel.findElement(By.name("my-wallets"));

@@ -56,7 +56,7 @@ public class DollarChargeManager {
 
 	@Test
 	public void increaseTest() {// مبلغی که کسر می‌شه برابر با مبلغی که نشون می‌ده باشه.
-		double dollarCredit = WalletUsersReusables.getWalletCredit(driver, "dollar");
+		double dollarCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
 		WebElement chargeButton = driver.findElement(By.name("charge-button"));
 		double increaseAmount = Double.valueOf(amount);
 		chargeButton.click();
@@ -66,14 +66,14 @@ public class DollarChargeManager {
 
 	@Test
 	public void invalidDecreaseTest() {
-		int rialCredit = (int) WalletUsersReusables.getWalletCredit(driver, "rial");
-		int decreaseAmount = Math.round((rialCredit + 20000) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
+		int rialCredit = (int) WalletUsersReusables.getWalletCredit(driver, "dollar");
+		double decreaseAmount = (rialCredit + 20000) / GeneralReusables.getPrice("dollar"); // بیشتر از آن چه دارد.
 		WebElement desiredAmount = driver.findElement(By.name("amount"));
 		desiredAmount.sendKeys(String.valueOf(decreaseAmount));
 		WebElement chargeButton = driver.findElement(By.name("charge-button"));
 		chargeButton.click();
 		WebElement errorMessage = driver.findElement(By.name("amount-error"));
-		assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));// ارور خالی نباشد!
+		assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error-rial"));
 	}
 
 

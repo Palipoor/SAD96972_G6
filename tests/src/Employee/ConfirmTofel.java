@@ -39,7 +39,7 @@ public class ConfirmTofel {
 	@Test
 	public void acceptTransactionDollar() {
 
-		double dollar_credit = ManagerReusables.getCompanyCredit("rial");
+		double dollar_credit = ManagerReusables.getCompanyCredit("dollar");
 
 		System.out.println("transaction id " + transactionId);
 		EmployeeReusables.acceptTransaction(transactionId);
@@ -48,7 +48,7 @@ public class ConfirmTofel {
 
 		assertEquals(status, EmployeeReusables.ACCEPT);
 
-		double new_dollar_credit = ManagerReusables.getCompanyCredit("rial");
+		double new_dollar_credit = ManagerReusables.getCompanyCredit("dollar");
 
 		System.out.println("amount " + amount);
 		System.out.println("dollar credit" + dollar_credit);

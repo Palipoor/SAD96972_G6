@@ -31,13 +31,13 @@ public class RialChargeCustomer {
 
     @Test
     public void rialWalletCharge() {
-        int rialCredit = Integer.valueOf(driver.findElement(By.name("credit")).getText());
+        double rialCredit = Double.valueOf(driver.findElement(By.name("credit")).getText());
         WebElement amountBox = driver.findElement(By.name("amount"));
         amountBox.sendKeys("10000");
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
-		int newRialCredit = Integer.valueOf(driver.findElement(By.name("credit")).getText());
-        int charged = newRialCredit - rialCredit;
+		double newRialCredit = Double.valueOf(driver.findElement(By.name("credit")).getText());
+        double charged = newRialCredit - rialCredit;
         assertEquals(charged, 10000.0, GeneralReusables.delta); // oon ghadri ke lazeme charge shode bashe
     }
 

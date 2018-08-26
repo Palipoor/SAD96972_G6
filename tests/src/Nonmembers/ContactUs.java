@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -172,17 +173,15 @@ public class ContactUs {
 		WebElement content = theForm.findElement(By.name("message"));
 		content.clear();
 
+		GeneralReusables.waitForSeconds(5);
+
 		WebElement sendButton = theForm.findElement(By.name("contact_form"));
 		sendButton.click();
 
 		js.executeScript("window.scrollBy(0,5000)");
 
 		WebElement messageError = driver.findElement(By.name("message-error"));
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		GeneralReusables.waitForSeconds(5);
 		assertTrue(messageError.isDisplayed());
 	}
 
@@ -210,6 +209,7 @@ public class ContactUs {
 		WebElement content = theForm.findElement(By.name("message"));
 		content.clear();
 		content.sendKeys("my message");
+		GeneralReusables.waitForSeconds(5);
 
 		WebElement sendButton = theForm.findElement(By.name("contact_form"));
 		sendButton.click();
@@ -217,7 +217,7 @@ public class ContactUs {
 		js.executeScript("window.scrollBy(0,5000)");
 
 		WebElement successMessage = driver.findElement(By.name("success"));
-		assertFalse(successMessage.getText().equals(""));
+		assertNotEquals(successMessage, "");
 	}
 
 	@Test
@@ -233,11 +233,7 @@ public class ContactUs {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(password));
 		password.sendKeys("mardechini");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		GeneralReusables.waitForSeconds(3);
 		driver.findElement(By.id("passwordNext")).click();
 		driver.get("http://gmail.com");
 		List<WebElement> emails = driver.findElements(By.cssSelector("div.xT>div.y6>span>b"));

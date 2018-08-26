@@ -256,44 +256,21 @@ public class ManagerReusables {
 		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
 		int statusIndex = 0;
 		for (int i = 0; i < headerTitles.size(); i++) {
+			System.out.println(headerTitles.get(i));
 			if (headerTitles.get(i).getText().contains("وضعیت")) {
 				statusIndex = i;
 			}
 		}
 
-		WebElement idSearchBox = theTable.findElement(By.name("شناسه تراکنش"));
+		WebElement idSearchBox = theTable.findElement(By.name("شناسه"));
 		idSearchBox.clear();
 		idSearchBox.sendKeys(id);
 		List<WebElement> tableRows = theTable.findElements(By.xpath(".//tbody//tr"));
 		List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath("//td"));
 
+		String status = transactionDetails.get(statusIndex).getText();
 		GeneralReusables.logout(driver);
-		return transactionDetails.get(statusIndex).getText();
-	}
-
-	public static String getTransactionsCustomerUsername(String transactionId) {
-		WebDriver driver = new FirefoxDriver();
-		GeneralReusables.setUpToHomepage(driver);
-		GeneralReusables.loginAsTheManager(driver);
-
-		WebElement theTable = driver.findElement(By.name("transactions-table"));
-		List<WebElement> tableHeader = theTable.findElements(By.xpath(".//thead"));
-		List<WebElement> headerTitles = tableHeader.get(0).findElements(By.xpath(".//th"));
-		int usernameIndex = 0;
-		for (int i = 0; i < headerTitles.size(); i++) {
-			if (headerTitles.get(i).getText().equals("شناسه درخواست‌دهنده")) {
-				usernameIndex = i;
-			}
-		}
-
-		WebElement idSearchBox = theTable.findElement(By.name("شناسه تراکنش"));
-		idSearchBox.clear();
-		idSearchBox.sendKeys(transactionId);
-		List<WebElement> tableRows = theTable.findElements(By.xpath(".//tbody//tr"));
-		List<WebElement> transactionDetails = tableRows.get(0).findElements(By.xpath(".//td"));
-
-		GeneralReusables.logout(driver);
-		return transactionDetails.get(usernameIndex).getText();
+		return status;
 	}
 
 	public static String getNewestTransactionId() {

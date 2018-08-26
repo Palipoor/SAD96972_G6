@@ -24,7 +24,6 @@ public class ConfirmAnonymous {
 	static String dollar_amount = "1";
 	static String rial_amount = "1000";
 	static String transactionId;
-	static String email;
 
 	@BeforeClass
 	public static void setUp() {
@@ -39,7 +38,7 @@ public class ConfirmAnonymous {
 	@Test
 	public void acceptTransactionDollar() {
 
-		double rial_credit = ManagerReusables.getCompanyCredit("rial");
+		double dollar_credit = ManagerReusables.getCompanyCredit("dollar");
 
 		EmployeeReusables.acceptTransaction(transactionId);
 		driver.navigate().refresh();
@@ -47,11 +46,11 @@ public class ConfirmAnonymous {
 
 		assertEquals(status, EmployeeReusables.ACCEPT);
 
-		double new_rial_credit = ManagerReusables.getCompanyCredit("rial");
+		double new_dollar_credit = ManagerReusables.getCompanyCredit("rial");
 
 		double amount = Double.valueOf(dollar_amount);
 
-		assertEquals(amount, rial_credit - new_rial_credit, GeneralReusables.delta);
+		assertEquals(amount, dollar_credit - new_dollar_credit, GeneralReusables.delta);
 	}
 
 	private String get_status(String transactionId) {

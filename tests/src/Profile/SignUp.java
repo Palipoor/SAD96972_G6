@@ -32,8 +32,6 @@ public class SignUp {
 		driver.get(linkToOpen);
 	}
 
-	String successTitle = ""; //TODO;
-
 
 	@BeforeClass
 	public static void setUp() {
@@ -147,7 +145,6 @@ public class SignUp {
 		ProfileReusables.enterValidFirstName(driver);
 		ProfileReusables.enterValidFamilyName(driver);
 
-		// Enter an already registered username
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
 		username.sendKeys("TEST_dornadorna");
@@ -243,30 +240,54 @@ public class SignUp {
 	public void validSignUp() {
 		goToSignupPage();
 
-		ProfileReusables.enterValidFirstName(driver);
-		ProfileReusables.enterValidFamilyName(driver);
-		ProfileReusables.enterValidUsername(driver);
-		ProfileReusables.enterValidEmail(driver);
-		ProfileReusables.enterValidPhoneNumber(driver);
-		ProfileReusables.enterValidAccountNumber(driver);
-		ProfileReusables.enterValidPassword(driver);
-		ProfileReusables.repeatValidPassword(driver);
+		WebElement element = driver.findElement(By.name("username"));
+		element.clear();
+		element.sendKeys("palipoor");
 
-		GeneralReusables.waitForSeconds(10);
+		element = driver.findElement(By.name("first_name"));
+		element.clear();
+		element.sendKeys("Pegah");
+
+		element = driver.findElement(By.name("last_name"));
+		element.clear();
+		element.sendKeys("Alipoor");
+
+		element = driver.findElement(By.name("email"));
+		element.clear();
+		element.sendKeys("palipoor@ce.sharif.edu");
+
+		element = driver.findElement(By.name("phone_number"));
+		element.clear();
+		element.sendKeys("09122143367");
+
+		element = driver.findElement(By.name("account_number"));
+		element.clear();
+		element.sendKeys("115315195835");
+
+		element = driver.findElement(By.name("password"));
+		element.clear();
+		element.sendKeys("aybaba1aybaba");
+
+
+		element = driver.findElement(By.name("password2"));
+		element.clear();
+		element.sendKeys("aybaba1aybaba");
+
 		ProfileReusables.clickForSignUp(driver);
 
 		List<WebElement> successMessages = driver.findElements(By.name("success message"));
-		assertTrue(successMessages.size()> 0);
+		assertTrue(successMessages.size() > 0);
 
 	}
 
 
 	@After
-	public void tearDownEach(){
+	public void tearDownEach() {
 		dbManager = new DBManager();
 		dbManager.connect();
 		dbManager.deleteCustomers();
 	}
+
 	@AfterClass
 	public static void tearDown() {
 		driver.close();

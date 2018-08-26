@@ -45,7 +45,7 @@ public class Conversion {
 		calculateButton = driver.findElement(By.name("convert_form"));
 		dropdown = new Select(driver.findElement(By.name("conversion_type")));
 		dropdown.selectByValue("dollar2rial");
-        int twoDollarsPrice = 2 * GeneralReusables.getPrice("dollar");
+        double twoDollarsPrice = 2 * GeneralReusables.getPrice("dollar");
         valueBox.clear();
         valueBox.sendKeys("2");
         calculateButton.click();
@@ -62,7 +62,7 @@ public class Conversion {
 		calculateButton = driver.findElement(By.name("convert_form"));
 		dropdown = new Select(driver.findElement(By.name("conversion_type")));
 		dropdown.selectByValue("rial2dollar");
-        int twoDollarsPrice = 2 * GeneralReusables.getPrice("dollar");
+        double twoDollarsPrice = 2 * GeneralReusables.getPrice("dollar");
         valueBox.clear();
         valueBox.sendKeys(String.valueOf(twoDollarsPrice));
         calculateButton.click();
@@ -78,7 +78,7 @@ public class Conversion {
 		calculateButton = driver.findElement(By.name("convert_form"));
 		dropdown = new Select(driver.findElement(By.name("conversion_type")));
 		dropdown.selectByValue("euro2rial");
-        int twoEurosPrice = 2 * GeneralReusables.getPrice("euro");
+        double twoEurosPrice = 2 * GeneralReusables.getPrice("euro");
         valueBox.clear();
         valueBox.sendKeys("2");
         calculateButton.click();
@@ -94,7 +94,7 @@ public class Conversion {
 		calculateButton = driver.findElement(By.name("convert_form"));
 		dropdown = new Select(driver.findElement(By.name("conversion_type")));
 		dropdown.selectByValue("rial2euro");
-        int threeEurosPrice = 3 * GeneralReusables.getPrice("euro");
+        double threeEurosPrice = 3 * GeneralReusables.getPrice("euro");
         valueBox.clear();
         valueBox.sendKeys(String.valueOf(threeEurosPrice));
         calculateButton.click();

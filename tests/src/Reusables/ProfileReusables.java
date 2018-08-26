@@ -47,7 +47,7 @@ public class ProfileReusables {
     public static String invalidAccountNumber = "!";
 
     public static String invalidEmailError = "لطفا یک ایمیل معتبر وارد کنید.";
-	public static String invalidPasswordRepaetError = "تکرار رمز عبور با آن یکی نیست.";
+	public static String invalidPasswordRepaetError = "تکرار رمز عبور با آن یکسان نیست.";
     public static String notRegisteredEmailError = "کاربری با این مشخصات وجود ندارد.";
     public static String loginError = "نام کاربری یا رمز عبور اشتباه اند.";
 	public static String wrongPasswordError = "رمز عبور وارد شده غلط است.";

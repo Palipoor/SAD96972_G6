@@ -36,7 +36,7 @@ public class ForeignPayment {
 		amount.clear();
 		amount.sendKeys("5");
 
-		WebElement actual = driver.findElement(By.name("id_payable"));
+		WebElement actual = driver.findElement(By.id("id_payable"));
 		double payable = Double.valueOf(actual.getAttribute("value"));
 		double dollar_credit = CustomerReusables.get_credit("dollar");
 

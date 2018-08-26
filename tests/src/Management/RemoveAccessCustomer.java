@@ -72,10 +72,7 @@ public class RemoveAccessCustomer {
 
     @AfterClass
     public static void tearDown(){
-        GeneralReusables.logout(driver);
-		DBManager dbManager = new DBManager();
-		dbManager.connect();
-		dbManager.deleteCustomers();
+		driver.close();
     }
 
     private boolean successfulLogin(String username, String password) {

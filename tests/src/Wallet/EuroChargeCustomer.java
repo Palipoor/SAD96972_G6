@@ -66,14 +66,14 @@ public class EuroChargeCustomer {
 
 	@Test
 	public void invalidDecreaseTest() {
-		int rialCredit = (int) WalletUsersReusables.getWalletCredit(driver, "rial");
-		int decreaseAmount = Math.round((rialCredit + 20000) / GeneralReusables.getPrice("euro")); // بیشتر از آن چه دارد.
+		double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+		double decreaseAmount = (rialCredit + 20000) / GeneralReusables.getPrice("euro"); // بیشتر از آن چه دارد.
 		WebElement desiredAmount = driver.findElement(By.name("amount"));
 		desiredAmount.sendKeys(String.valueOf(decreaseAmount));
 		WebElement chargeButton = driver.findElement(By.name("charge-button"));
 		chargeButton.click();
 		WebElement errorMessage = driver.findElement(By.name("amount-error"));
-		assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));// ارور خالی نباشد!
+		assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error-rial"));// ارور خالی نباشد!
 	}
 
 

@@ -1,136 +1,137 @@
 package Transactions;
 
+import Reusables.CustomerReusables;
 import Reusables.GeneralReusables;
 import Reusables.ManagerReusables;
-import Reusables.Order;
-import Reusables.WalletUsersReusables;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
- * Created by Golpar on 5/2/2018 AD.
+ * Created by Golpar on 8/24/2018 AD.
  */
-@RunWith(Reusables.OrderedRunner.class)
 public class AnonymousPayment {
-    private static WebDriver driver;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = new FirefoxDriver();
-        GeneralReusables.setUpToHomepage(driver);
-        GeneralReusables.loginAsACustomer(driver);
-        WebElement anonymousPayment = driver.findElement(By.name("anonymous-payment"));
-        anonymousPayment.click();
-    }
+	private static WebDriver driver;
 
-    @Test
-    @Order(order = 1)
-    public void invalidAmount() {
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys("abc");
+	@BeforeClass
+	public static void setUp() {
+		driver = new FirefoxDriver();
+		GeneralReusables.setUpToHomepage(driver);
+		GeneralReusables.loginAsACustomer(driver);
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_unkowntrans");
+	}
 
-        WebElement email = driver.findElement(By.name("email"));
-        email.clear();
-        email.sendKeys("palipoor976@gmail.com");
+	@Test
+	public void validCreationDollar() {
+		WebElement amount = driver.findElement(By.id("id_amount"));
+		amount.clear();
+		amount.sendKeys("5");
 
-        WebElement phone = driver.findElement(By.name("phone"));
-        phone.clear();
-        phone.sendKeys("09379605628");
-
-        WebElement button = driver.findElement(By.name("submit-button"));
-        button.click();
-
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("wrong-amount-error"));
-    }
-
-    @Test
-    @Order(order = 2)
-    public void invalidEmail() {
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys("1000");
-
-        WebElement email = driver.findElement(By.name("email"));
-        email.clear();
-        email.sendKeys("palipoor976");
+		WebElement actual = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(actual.getAttribute("value"));
+		double dollar_credit = CustomerReusables.get_credit("dollar");
 
 
-        WebElement button = driver.findElement(By.name("submit-button"));
-        button.click();
+		WebElement currency = driver.findElement(By.name("source_wallet"));
+		Select dropdown = new Select(currency);
+		dropdown.selectByVisibleText("dollar");
 
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), GeneralReusables.reusableStrings.get("invalid-email-error"));
-    }
 
-    @Test
-    @Order(order = 3)
-    public void moreThanCredit() {
-        double moreThanRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial") + 200;
-        String amountValue = String.valueOf(moreThanRialCredit);
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(amountValue);
-        WebElement email = driver.findElement(By.name("email"));
-        email.clear();
-        email.sendKeys("palipoor976@gmail.com");
+		String email = "TEST_" + System.currentTimeMillis() + "pegah@gmail.com";
+		String phone = String.valueOf(System.currentTimeMillis());
 
-        WebElement phone = driver.findElement(By.name("phone"));
-        phone.clear();
-        phone.sendKeys("09379605628");
+		WebElement emailElement = driver.findElement(By.id("id_email"));
+		emailElement.clear();
+		emailElement.sendKeys(email);
 
-        WebElement button = driver.findElement(By.name("submit-button"));
-        button.click();
 
-        WebElement error = driver.findElement(By.name("error"));
-        assertEquals(error.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));
-    }
+		WebElement phoneElement = driver.findElement(By.id("id_phone_number"));
+		phoneElement.clear();
+		phoneElement.sendKeys(phone);
 
-    @Test
-    @Order(order = 4)
-    public void paymentsAreDone() {
 
-        String paymentAmount = "1000";
-        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double companyRialCredit = ManagerReusables.getCompanyCredit("rial");
+		WebElement bank_name = driver.findElement(By.name("bank_name"));
+		bank_name.clear();
+		bank_name.sendKeys("جهانی");
 
-        WebElement amount = driver.findElement(By.name("amount"));
-        amount.clear();
-        amount.sendKeys(paymentAmount);
+		WebElement account_number = driver.findElement(By.name("account_number"));
+		account_number.clear();
+		account_number.sendKeys(String.valueOf(System.currentTimeMillis()));
 
-        WebElement karmozd = driver.findElement(By.name("karmozd"));
-        double karmozdValue = Double.valueOf(karmozd.getText());
-        WebElement submit = driver.findElement(By.name("submit-button"));
-        submit.click();
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+		GeneralReusables.waitForSeconds(1);
 
-        double newRialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
-        double newCompanyRialCredit = ManagerReusables.getCompanyCredit("rial");
+		WebElement message = driver.findElement(By.name("message"));
+		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
+		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
 
-        assertEquals(newRialCredit, rialCredit - karmozdValue - 1000.0, GeneralReusables.delta);
-        assertEquals(newCompanyRialCredit, companyRialCredit + karmozdValue + 1000.0, GeneralReusables.delta);
-    }
 
-    @Test
-    @Order(order = 5)
-    public void transactionIsAdded() {
-        String myUsername = GeneralReusables.getUsername(driver);
-        String otherUsername = ManagerReusables.getTransactionsCustomerUsername(ManagerReusables.getNewestTransactionId());
+		double new_dollar_credit = CustomerReusables.get_credit("dollar");
+		assertEquals(payable, dollar_credit - new_dollar_credit, GeneralReusables.delta);
+	}
 
-        assertEquals(otherUsername, myUsername);
-    }
+	@Test
+	public void validCreationRial() {
+		WebElement amount = driver.findElement(By.id("id_amount"));
+		amount.clear();
+		amount.sendKeys("5");
 
-    @AfterClass
-    public static void tearDown() {
-        GeneralReusables.logout(driver);
-    }
+		WebElement actual = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(actual.getAttribute("value"));
+		double rial_credit = CustomerReusables.get_credit("rial");
+
+
+		WebElement currency = driver.findElement(By.name("source_wallet"));
+		Select dropdown = new Select(currency);
+		dropdown.selectByVisibleText("rial");
+
+
+		String email = "TEST_" + System.currentTimeMillis() + "pegah@gmail.com";
+		String phone = String.valueOf(System.currentTimeMillis());
+
+		WebElement emailElement = driver.findElement(By.id("id_email"));
+		emailElement.clear();
+		emailElement.sendKeys(email);
+
+
+		WebElement phoneElement = driver.findElement(By.id("id_phone_number"));
+		phoneElement.clear();
+		phoneElement.sendKeys(phone);
+
+
+		WebElement bank_name = driver.findElement(By.name("bank_name"));
+		bank_name.clear();
+		bank_name.sendKeys("جهانی");
+
+		WebElement account_number = driver.findElement(By.name("account_number"));
+		account_number.clear();
+		account_number.sendKeys(String.valueOf(System.currentTimeMillis()));
+
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+		GeneralReusables.waitForSeconds(1);
+
+		WebElement message = driver.findElement(By.name("message"));
+		assertEquals(message.getText(), GeneralReusables.reusableStrings.get("successful-creation"));
+		assertTrue(ManagerReusables.newTransactionExists("banktrans"));
+
+
+		double new_rial_credit = CustomerReusables.get_credit("rial");
+		assertEquals(payable, rial_credit - new_rial_credit, GeneralReusables.delta);
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		GeneralReusables.logout(driver);
+	}
 }

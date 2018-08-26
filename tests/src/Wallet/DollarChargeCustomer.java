@@ -31,8 +31,8 @@ public class DollarChargeCustomer {
     public void conversionTest() {// مبلغی که نشون می‌ده برابر با مبلغ وارد شده ضربدر قیمت دلار باشه.
         WebElement desiredAmount = driver.findElement(By.name("amount"));
         desiredAmount.sendKeys(amount);
-        double dollarPrice = GeneralReusables.getPrice("dollar");
-        double rial = dollarPrice * Double.valueOf(amount);
+        double dollarPrice = GeneralReusables.getPrice("dollar");;
+		double rial = dollarPrice * Double.valueOf(amount);
         WebElement rialAmount = driver.findElement(By.name("rial-amount"));
         double shownRial = Double.valueOf(rialAmount.getText());
         assertEquals(rial, shownRial, GeneralReusables.delta);
@@ -66,14 +66,14 @@ public class DollarChargeCustomer {
 
     @Test
     public void invalidDecreaseTest() {
-        int rialCredit = (int) WalletUsersReusables.getWalletCredit(driver, "rial");
-        int decreaseAmount = Math.round((rialCredit + 20000) / GeneralReusables.getPrice("dollar")); // بیشتر از آن چه دارد.
+        double rialCredit = WalletUsersReusables.getWalletCredit(driver, "rial");
+        double decreaseAmount = (rialCredit + 20000) / GeneralReusables.getPrice("dollar"); // بیشتر از آن چه دارد.
         WebElement desiredAmount = driver.findElement(By.name("amount"));
         desiredAmount.sendKeys(String.valueOf(decreaseAmount));
         WebElement chargeButton = driver.findElement(By.name("charge-button"));
         chargeButton.click();
         WebElement errorMessage = driver.findElement(By.name("amount-error"));
-        assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error"));// ارور خالی نباشد!
+        assertEquals(errorMessage.getText(), WalletUsersReusables.reusableStrings.get("not-enough-error-rial"));// ارور خالی نباشد!
     }
 
 

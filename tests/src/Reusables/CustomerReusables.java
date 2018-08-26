@@ -30,29 +30,49 @@ public class CustomerReusables {
 
     }
 
-    public static void createNewAnonymous(String amount, String currency){
-//        WebDriver driver = new FirefoxDriver();
-//        GeneralReusables.setUpToHomepage(driver);
-//        GeneralReusables.loginAsACustomer(driver);
-//
-//        WebElement paymentForm = driver.findElement(By.name("anonymous-payment"));
-//        paymentForm.click();
-//
-//        WebElement amount = driver.findElement(By.name("amount"));
-//        amount.clear();
-//        amount.sendKeys(reusableStrings.get("amount"));
-//
-//        WebElement email = driver.findElement(By.name("email"));
-//        email.clear();
-//        email.sendKeys(reusableStrings.get("anonymous-email"));
-//
-//        WebElement phone = driver.findElement(By.name("phone"));
-//        phone.clear();
-//        phone.sendKeys(reusableStrings.get("anonymous-phone"));
-//
-//        WebElement submit = driver.findElement(By.name("submit-button"));
-//        submit.click();
-//        GeneralReusables.logout(driver);
+    public static void createNewAnonymous(String howmuch, String wallet){
+		Pair<Double, Double> cost;
+		WebDriver driver = new FirefoxDriver();
+		GeneralReusables.loginAsACustomer(driver);
+		driver.get(GeneralReusables.reusableStrings.get("homepage") + "/customer/create_unkowntrans");
+
+		WebElement amount = driver.findElement(By.id("id_amount"));
+		amount.clear();
+		amount.sendKeys(howmuch);
+
+		WebElement actual = driver.findElement(By.id("id_payable"));
+		double payable = Double.valueOf(actual.getAttribute("value"));
+
+
+		WebElement currency = driver.findElement(By.name("source_wallet"));
+		Select dropdown = new Select(currency);
+		dropdown.selectByVisibleText(wallet);
+
+
+		String email = "TEST_" + System.currentTimeMillis() + "pegah@gmail.com";
+		String phone = String.valueOf(System.currentTimeMillis());
+
+		WebElement emailElement = driver.findElement(By.id("id_email"));
+		emailElement.clear();
+		emailElement.sendKeys(email);
+
+
+		WebElement phoneElement = driver.findElement(By.id("id_phone_number"));
+		phoneElement.clear();
+		phoneElement.sendKeys(phone);
+
+
+		WebElement bank_name = driver.findElement(By.name("bank_name"));
+		bank_name.clear();
+		bank_name.sendKeys("جهانی");
+
+		WebElement account_number = driver.findElement(By.name("account_number"));
+		account_number.clear();
+		account_number.sendKeys("1997-0335-0337");
+
+		WebElement button = driver.findElement(By.name("create"));
+		button.click();
+		GeneralReusables.waitForSeconds(1);
 
     }
 
