@@ -1,12 +1,16 @@
 # from apps.customer.models import Customer
-from apps.main.models import Notification
 from django.apps import apps
 from django.core.mail import send_mail, BadHeaderError
 from kavenegar import *
 
 
 def send_notification(username, message):
-    notification = Notification(message=message, username=username)
+    notification = apps.get_model("main", "Notification").create(message=message, username=username)
+    notification.save()
+
+
+def send_critical_credit_notification(username):
+    notification = apps.get_model("main", "Critical_Credit_Notification").get_or_create(username=username)
     notification.save()
 
 

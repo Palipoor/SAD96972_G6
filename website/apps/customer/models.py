@@ -82,6 +82,7 @@ class Request(PolymorphicModel):
     def save(self, *args, **kwargs):
         # if it is being saved for the first time does the payment and sets status to default. If exchange rate is nul computes it.
         if not self.pk:
+            self.minimum_rial_credit = 0
             self.set_status()
             self.set_profitRate()
         try:

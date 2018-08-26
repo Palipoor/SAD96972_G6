@@ -1,12 +1,12 @@
+from apps.main.models import GenUser
 from django.db import models
-from apps.main import models as main_models
 from django.contrib.auth.models import Group
 
 
 # Create your models here.
 
 
-class Employee(main_models.GenUser):
+class Employee(GenUser):
     current_salary = models.IntegerField()
 
     def __init__(self, *args, **kwargs):

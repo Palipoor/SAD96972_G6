@@ -3,6 +3,9 @@ from django.contrib.auth.models import User, Group
 from polymorphic.models import PolymorphicModel
 from django.core.validators import MinValueValidator
 from utils import strings
+from django.apps import apps
+from utils.notification_tools import send_critical_credit_notification
+from django.db.models import Sum
 
 
 # Create your models here.
@@ -26,6 +29,7 @@ class Wallet_User(GenUser):
     dollar_cent_credit = models.FloatField(default=0)
     euro_cent_credit = models.FloatField(default=0)
     account_number = models.CharField(max_length=20, unique=True, null=False)
+    minimum_rial_credit = models.IntegerField(null=True, blank=True)
 
     def exception_texts(self):
         exceptions = []
@@ -37,8 +41,24 @@ class Wallet_User(GenUser):
             exceptions += [strings.NOT_ENOUGH_EURO]
         return exceptions
 
+    def save(self, *args, **kwargs):
+        print("in save")
+        if self.minimum_rial_credit == None:
+            print("in none")
+            print(apps.get_model('employee', "Employee"))
+            print(apps.get_model('employee', "Employee").objects)
+            print(apps.get_model('employee', "Employee").objects.aggregate(Sum('current_salary')))
+            print(self.rial_credit)
+            if apps.get_model('employee', "Employee").objects.aggregate(Sum('current_salary'))["current_salary__sum"] > self.rial_credit:
+                send_critical_credit_notification(self.username)
+        else:
+            if self.minimum_rial_credit < self.rial_credit:
+                send_critical_credit_notification(self.username)
 
-class Notification(models.Model):
+        super(Wallet_User, self).save(*args, **kwargs)  # Call the real save() method
+
+
+class Notification(PolymorphicModel):
 
     sent_date = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
@@ -49,6 +69,19 @@ class Notification(models.Model):
     def create(username, message):
         user = GenUser.objects.get(username=username)
         temp = Notification(user=user, text=message)
+        return temp
+
+
+class Critical_Credit_Notification(Notification):
+
+    def __init__(self, *args, **kwargs):
+        super(Critical_Credit_Notification, self).__init__(*args, **kwargs)
+        self.text = "موجودی کیف پول ریالی از مقدار تعیین شده کمتر است."
+
+    @staticmethod
+    def get_or_create(username):
+        user = GenUser.objects.get(username=username)
+        temp = Critical_Credit_Notification.objects.get_or_create(seen=False, user=user)
         return temp
 
 
