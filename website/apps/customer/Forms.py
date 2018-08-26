@@ -82,17 +82,26 @@ def get_form_class(type, *args, **kwargs):
         my_sub_title += "پرداخت ناشناس"
     else:
         model_class = models.CustomTransactionInstance
-        # TODO return nothing if type is wrong
-        print("TYPE : " + type)
-        details = model_to_dict(models.CustomTransactionType.objects.get(type=type))
-        for name, value in details.items():
-            # print(str(name) + str(value))
-            if name.endswith("exists") and not value:
-                my_excludes.append(name[:-7])
-                # print(name[:-6])
+        try:
+            type_class = models.CustomTransactionType.objects.get(type=type)
+        except Exception as e:
+            pass
+        for field in type_class._meta.get_fields():
+            if (field.name.endswith("_exists")):
+                if (getattr(type_class, field.name)):
+                    my_labels[field.name[:-7]] = getattr(type_class, field.name[:-7] + "_label")
+                    my_fields.insert(0, field.name[:-7])
+        print(my_labels)
+        # print("TYPE : " + type)
+        # details = model_to_dict(models.CustomTransactionType.objects.get(type=type))
+        # for name, value in details.items():
+        #     # print(str(name) + str(value))
+        #     if name.endswith("exists") and not value:
+        #         my_excludes.append(name[:-7])
+        #         # print(name[:-6])
 
-            if name.endswith("label") and value:
-                my_labels[name[:-6]] = value
+        #     if name.endswith("label") and value:
+        #         my_labels[name[:-6]] = value
 
     class _ObjectForm(forms.ModelForm):
         class Meta:
@@ -108,9 +117,11 @@ def get_form_class(type, *args, **kwargs):
             self.sub_title = my_sub_title
             temp = super(_ObjectForm, self).__init__(*args, **kwargs)
             self.instance.creator = self.user
+            self.instance.type = type
             self.instance.set_initials()
             self.transaction = None
             self.has_amount = "amount" in self.Meta.labels
+            print("has amount " + str(self.has_amount))
             self.currency_sign = Transactions.get_currency_symbol(self.instance.source_wallet)
             self.profitRate = self.instance.profitRate
             self.pre_amount = self.instance.amount

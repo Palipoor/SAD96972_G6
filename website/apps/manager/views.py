@@ -46,12 +46,10 @@ class ManagerCreateView(CreateView):
 
 class CreateTransactionTypeView(IsLoggedInView, IsManager, ManagerCreateView):
     # TODO has problems with being child og managercreateview probably because of its get context
-    template_name = "customer/render_form.html"
+    template_name = "manager/render_form.html"
     model = CustomTransactionType
     fields = '__all__'
-
-    def get_success_url(self):
-        return ""
+    success_url = reverse_lazy('manager:create_transaction_type')
 
 
 class ManagerDashboardView(IsLoggedInView, IsManager, ManagerFormView):

@@ -1,0 +1,57 @@
+{% extends "customer/mother_panel.html" %}
+{% load static staticfiles %}
+
+ {% block title %} 
+{{form.title}}
+ {% endblock title %}
+
+
+{% block content_header_text %}
+<h1>{{form.title}} {{form.sub_title}}
+</h1>
+{{ block.super }}
+{% endblock content_header_text %}
+
+{% block content_header_link %}
+{{ block.super }}
+<li class="active">{{form.title}}
+ </li>
+<li class="active">{{form.sub_title}}
+</li>
+{% endblock content_header_link %} 
+
+
+{% block main_content %}
+<div class="col-md-6">
+    <div class="register-box-body">
+    <p class="login-box-msg">{{form.title}} {{form.sub_title}}</p>
+    {% for message in messages%}
+    <div name = "message"> {{message}} </div>
+    {% endfor%}
+        <form method="post" novalidate>
+            {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group has-feedback">
+                        {{field.label}} {{field}}
+                        {% for error in field.errors %}
+                             <span class="text-danger" name="password-repeat-error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <span class="glyphicon form-control-feedback"></span> 
+                {% endfor %}
+            
+            <div class="row">
+                <div class="col-xs-4">
+                    <button type="submit" name="create" class="btn btn-primary btn-block btn-flat">ثبت </button>
+                </div>
+                <!-- /.col -->
+            </div>
+            {% for error in form.non_field_errors  %}
+              <span class="text-danger" name="first-name-error">{{ error }}</span>
+           {% endfor %}
+        </form>
+    </div>
+</div>
+
+{% endblock main_content %}
+
