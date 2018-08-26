@@ -10,8 +10,8 @@ class Compilation():
     def customer_context(context, customer):
         if(customer):
             Compilation.user_context(context, customer)
-            context['euro_credit'] = customer.euro_cent_credit / 100
-            context['dollar_credit'] = customer.dollar_cent_credit / 100
+            context['euro_credit'] = customer.euro_cent_credit
+            context['dollar_credit'] = customer.dollar_cent_credit
             context['rial_credit'] = customer.rial_credit
         return context
 
