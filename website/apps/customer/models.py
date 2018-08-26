@@ -7,7 +7,7 @@ from apps.employee.models import EmployeeReview
 from apps.manager.models import Manager
 from django.forms import ValidationError
 from django.contrib.auth.hashers import make_password
-
+from utils import notification_tools
 import traceback
 
 
@@ -19,8 +19,10 @@ class Customer(Wallet_User):
     contact_way = models.IntegerField(choices=((0, 'ایمیل'), (1, 'پیامک')), default=0)
 
     def __init__(self, *args, **kwargs):
+        kwargs["minimum_rial_credit"] = 0
         super(Customer, self).__init__(*args, **kwargs)
         self.user_type = 0
+
 
     def save(self, *args, **kwargs):
         super(Customer, self).save(*args, **kwargs)
@@ -600,6 +602,8 @@ class UnknownTrans(BankTrans):
                 customer = Customer(username=username, email=self.email, phone_number=self.phone_number, account_number=self.account_number)
                 customer.password = make_password(username+username)
                 customer.save()
+                notification_tools.send_email(self.email, "اکانت شما در سامانهٔ سپا ساخته شده است. پسوورد شما " + username+username + " و نام کاربری شما" + username + "است.", "")
+                notification_tools.send_text(self.phone_number, "اکانت شما در سامانهٔ سپا ساخته شده است. پسوورد شما " + username+username + " و نام کاربری شما" + username + "است.","")
                 self.dest_user = customer
         super(UnknownTrans, self).save(*args, **kwargs)  # Call the real save() method
 

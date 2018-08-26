@@ -26,7 +26,7 @@ def send_email(email, message,  subject):
 
 def send_text(number, message, subject):
     try:
-        api = KavenegarAPI('656A434D654A78314964374C64645272683064576D54794861774E2F48495473')
+        api = KavenegarAPI('634346565A42563850416D5A6D41517631317959563377437048375258394449')
         params = {
             'sender': '',
             'receptor': number,
