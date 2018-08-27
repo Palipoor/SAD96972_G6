@@ -25,8 +25,8 @@ class Compilation():
     def manager_context(context, manager):
         if(manager):
             Compilation.user_context(context, manager)
-            context['euro_credit'] = manager.euro_cent_credit / 100
-            context['dollar_credit'] = manager.dollar_cent_credit / 100
+            context['euro_credit'] = manager.euro_cent_credit
+            context['dollar_credit'] = manager.dollar_cent_credit
             context['rial_credit'] = manager.rial_credit
         return context
 
@@ -66,15 +66,16 @@ class Compilation():
         if (wallet == -1):
             context['requests'] = Request.objects.filter(source_user=user).order_by('-request_time') | Request.objects.filter(dest_user=user).order_by('-request_time')
         else:
-            context['requests'] = Request.objects.filter(source_user=user, source_wallet=wallet).order_by('-request_time') | Request.objects.filter(dest_user=user, dest_wallet=wallet).order_by('-request_time')
+            context['requests'] = Request.objects.filter(source_user=user, source_wallet=wallet).order_by(
+                '-request_time') | Request.objects.filter(dest_user=user, dest_wallet=wallet).order_by('-request_time')
         return context
 
     def get_all_requests(context):
         context['requests'] = Request.objects.all().order_by('-request_time')
         return context
-    
+
     def get_reported_requests(context):
-        context['reported_requests'] = Request.objects.filter(status = 4)
+        context['reported_requests'] = Request.objects.filter(status=4)
         return context
 
     def get_last_request_and_transaction_id(context):

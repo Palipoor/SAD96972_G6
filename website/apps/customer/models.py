@@ -9,6 +9,7 @@ from django.forms import ValidationError
 from django.contrib.auth.hashers import make_password
 from utils import notification_tools
 import traceback
+from utils.currency_utils import Transactions
 
 
 # Create your models here.
@@ -61,8 +62,11 @@ class Request(PolymorphicModel):
 
     def __init__(self, *args, **kwargs):
         self.rejection_request = None
+        self.rejection_fee_request = None
         self.redirection_request = None
         super().__init__(*args, **kwargs)
+        if ("profitRate" not in kwargs):
+            self.set_profitRate()
         try:
             self.set_initials(*args, **kwargs)
         except Exception as identifier:
@@ -70,6 +74,7 @@ class Request(PolymorphicModel):
             print(traceback.format_exc())
         self.excps = []
         if (not self.exchange_rate):
+            print("salam salam")
             self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
         # print('in iniit')
         # print(self.dest_user.dollar_cent_credit)
@@ -98,6 +103,8 @@ class Request(PolymorphicModel):
             self.rejection_request.save()
         if (self.redirection_request):
             self.redirection_request.save()
+        if (self.rejection_fee_request):
+            self.rejection_fee_request.save()
         super(Request, self).save(*args, **kwargs)
 
     def reject(self):
@@ -106,6 +113,9 @@ class Request(PolymorphicModel):
         if (self.status == "2" or self.status == "4"):
             self.rejection_request = self.create_reverse_request()
             self.rejection_request.take_action()
+            if (not self.profitRate == 0):
+                self.rejection_fee_request = self.create_reverse_fee()
+                self.rejection_fee_request.take_action()
             # reject.save()
             # sets the status to rejected
             self.status = "1"
@@ -148,18 +158,25 @@ class Request(PolymorphicModel):
 
     def set_profitRate(self):
         # for determining default profitRate of request. Default status is pending.
-        self.profitRate = 0.05
+        self.profitRate = Transactions.get_profirRate(self.type)
+
 
     def pay(self):
         # what source user has to pay
         try:
+            print("in print source wallet")
             self.source_user
-            if (self.source_wallet == "0"):
-                self.source_user.rial_credit -= self.amount*(1+self.profitRate)
-            elif (self.source_wallet == "1"):
+            print(self.source_user)
+            print(self.source_wallet)
+            if (str(self.source_wallet) == "0"):
+                print("in print source wallet")
+                print(self.source_user.rial_credit)
+                self.source_user.rial_credit -= self.amount * (1 + self.profitRate)
+                print(self.source_user.rial_credit)
+            elif (str(self.source_wallet) == "1"):
                 self.source_user.dollar_cent_credit -= self.amount*(1+self.profitRate)
-            elif (self.source_wallet == "2"):
-                self.source_user.dollar_cent_credit -= self.amount * (1 + self.profitRate)
+            elif (str(self.source_wallet) == "2"):
+                self.source_user.euro_cent_credit -= self.amount * (1 + self.profitRate)
             # self.source_user.save()
         except Exception:
             print(traceback.format_exc())
@@ -167,22 +184,18 @@ class Request(PolymorphicModel):
     def recieve(self):
         # what dest user revieves. we assume that dest user always recieves the profit.
         try:
-            self.dest_user
-            # print("goodbye")
-            # print(self.dest_wallet == 1)
+            print("in recieve")
+            self.dest_user.rial_credit += self.amount * self.profitRate * Transactions.get_exchange_rate(self.source_wallet, 0)
             if (self.dest_wallet == "0"):
-                print('zero wallet')
-                print(self.amount * (1 + self.profitRate) * self.exchange_rate)
-                print(self.dest_user.rial_credit)
-                self.dest_user.rial_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
+                self.dest_user.rial_credit += self.amount * self.exchange_rate
             elif (self.dest_wallet == "1"):
-                # print('one wallet')
+                print('one wallet')
                 # print(self.amount * (1 + self.profitRate) * self.exchange_rate)
                 # print(self.dest_user.dollar_cent_credit)
-                self.dest_user.dollar_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
+                self.dest_user.dollar_cent_credit += self.amount * self.exchange_rate
                 # print(self.dest_user.dollar_cent_credit)
             elif (self.dest_wallet == "2"):
-                self.dest_user.euro_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
+                self.dest_user.euro_cent_credit += self.amount * self.exchange_rate
             # self.dest_user.save()
         except Exception:
             print(traceback.format_exc())
@@ -200,7 +213,7 @@ class Request(PolymorphicModel):
         except Exception:
             print(traceback.format_exc())
         try:
-            if(self.source_user != self.final_user and self.source_user != self.dest_user):
+            if(self.source_user != self.final_user and self.final_user != self.dest_user):
                 self.excps += self.final_user.exception_texts()
             print('source user')
         except Exception:
@@ -220,22 +233,69 @@ class Request(PolymorphicModel):
         #                          )
 
         try:
-            reject = Reverse_Request.get(reference=self)
-            reject.source_wallet = self.dest_wallet,
-            reject.dest_wallet = self.source_wallet,
-            reject.creator = self.creator,
-            reject.amount = self.amount*(1 + self.profitRate)*self.exchange_rate,
-            reject.profitRate = 0,
-            reject.exchange_rate = 1./self.exchange_rate,
+            print("in try")
+            reject = Reverse_Request.objects.get(reference=self)
+            print("middles try")
+            reject.source_wallet = self.dest_wallet
+            reject.dest_wallet = self.source_wallet
+            reject.creator = self.creator
+            print("middles try")
+            reject.amount = self.amount*self.exchange_rate
+            reject.profitRate = 0
+            reject.exchange_rate = 1./self.exchange_rate
+            print("end try")
         except Exception as e:
             reject = Reverse_Request(source_wallet=self.dest_wallet,
                                      dest_wallet=self.source_wallet,
                                      creator=self.creator,
-                                     amount=self.amount*(1 + self.profitRate)*self.exchange_rate,
+                                     amount=self.amount*self.exchange_rate,
                                      profitRate=0,
                                      exchange_rate=1./self.exchange_rate,
                                      reference=self
                                      )
+
+        try:
+            reject.dest_user = self.source_user
+        except:
+            pass
+
+        try:
+            reject.source_user = self.dest_user
+        except:
+            pass
+
+        return reject
+
+    def create_reverse_fee(self):
+        # created the transaction for rejecting current transaction.
+        # reject = Reverse_Request(source_user=self.dest_user,
+        #                          source_wallet=dest_wallet,
+        #                          dest_user=self.source_user,
+        #                          dest_wallet=self.source_wallet,
+        #                          amount=self.amount*(1 + self.profitRate)*exchange_rate,
+        #                          profitRate=0,
+        #                          exchange_rate=1./exchange_rate,
+        #                          related_request=self
+        #                          )
+
+        try:
+            reject = Reverse_Fee.objects.get(reference=self)
+            reject.source_wallet = 0
+            reject.dest_wallet = self.source_wallet
+            reject.creator = self.creator
+            reject.amount = self.amount*self.profitRate*Transactions.get_exchange_rate(self.dest_wallet, 0)
+            reject.profitRate = 0
+            reject.exchange_rate = Transactions.get_exchange_rate(0, self.dest_wallet)
+        except Exception as e:
+            print
+            reject = Reverse_Fee(source_wallet=0,
+                                 dest_wallet=self.source_wallet,
+                                 creator=self.creator,
+                                 amount=self.amount*self.profitRate*Transactions.get_exchange_rate(self.dest_wallet, 0),
+                                 profitRate=0,
+                                 exchange_rate=Transactions.get_exchange_rate(0, self.dest_wallet),
+                                 reference=self
+                                 )
 
         try:
             reject.dest_user = self.source_user
@@ -266,11 +326,11 @@ class Request(PolymorphicModel):
             print(self)
             print(Redirect_Request.objects.get(reference=self))
             redirect = Redirect_Request.objects.get(reference=self)
-            # redirect.source_wallet=self.dest_wallet
-            # redirect.dest_wallet=self.final_wallet,
-            # redirect.creator=self.creator,
-            # redirect.amount=self.amount*self.exchange_rate,
-            # redirect.profitRate = 0,
+            redirect.source_wallet = self.dest_wallet
+            redirect.dest_wallet = self.final_wallet
+            redirect.creator = self.creator
+            redirect.amount = self.amount*self.exchange_rate
+            redirect.profitRate = 0
             print("hasanbaba")
 
         except Exception as e:
@@ -294,6 +354,9 @@ class Request(PolymorphicModel):
         return redirect
 
     def take_action(self):
+        if (not self.exchange_rate):
+            print("salam salam")
+            self.exchange_rate = Transactions.get_exchange_rate(self.source_wallet, self.dest_wallet)
         self.pay()
         self.recieve()
 
@@ -324,6 +387,23 @@ class Request(PolymorphicModel):
         # if (self.reject):
             # reject.clean()
         return temp
+
+
+class Reverse_Fee(Request):
+    # type of request when rejecting or failing a transatcion which returns fee. Arguments similar to request.
+    # reference to rejected transaction.
+    # it is unique foreign key not one to one
+    reference = models.ForeignKey(Request,  on_delete=models.DO_NOTHING, unique=True, related_name='related_fee_request_reverse')
+
+    def __init__(self, *args, **kwargs):
+        kwargs["type"] = "reversefee"
+        super(Reverse_Fee, self).__init__(*args, **kwargs)
+
+    def set_status(self):
+        self.status = "0"
+
+    def set_profitRate(self):
+        self.profitRate = 0
 
 
 class Reverse_Request(Request):
@@ -411,12 +491,9 @@ class Account_Request(Request):
     def set_status(self):
         self.status = "2"
 
-    def set_profitRate(self):
-        self.profitRate = 0.005
 
     def __init__(self, *args, **kwargs):
         type = kwargs["type"]
-        kwargs["profitRate"] = Transactions.get_profirRate(type)
         kwargs["dest_user"] = Manager.get_manager()
         print('kwargs["dest_user"]')
         print(kwargs["dest_user"])
@@ -439,6 +516,7 @@ class IBT(Account_Request):
 
     def __init__(self, *args, **kwargs):
         kwargs["amount"] = Transactions.get_transaction_amount(kwargs["type"])
+        kwargs["exchange_rate"] = 1
         super(IBT, self).__init__(*args, **kwargs)
 
 
@@ -603,7 +681,7 @@ class UnknownTrans(BankTrans):
                 customer.save()
                 notification_tools.send_email(self.email, "اکانت شما در سامانهٔ سپا ساخته شده است. پسوورد شما " + username+username + " و نام کاربری شما" + username + "است.", "")
                 notification_tools.send_text(self.phone_number, "اکانت شما در سامانهٔ سپا ساخته شده است. پسوورد شما " + username+username + " و نام کاربری شما" + username + "است.", "")
-                self.dest_user = customer
+                self.final_user = customer
         super(UnknownTrans, self).save(*args, **kwargs)  # Call the real save() method
 
 
@@ -665,6 +743,7 @@ class CustomTransactionInstance(Request):
             print(field.name)
             if (field.name.endswith("_default")):
                 setattr(self, field.name[:-8], getattr(type_class, field.name))
+
 
 class CustomTransactionType(models.Model):
     # each type of custom transaction is an instance of this

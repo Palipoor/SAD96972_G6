@@ -82,7 +82,7 @@ class Critical_Credit_Notification(Notification):
     def get_or_create(username):
         print(username)
         user = GenUser.objects.get(username=username)
-        temp = Critical_Credit_Notification.objects.get_or_create(seen=False, user=user)
+        temp = Critical_Credit_Notification.objects.get_or_create(seen=False, user=user)[0]
         return temp
 
 

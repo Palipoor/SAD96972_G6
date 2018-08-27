@@ -11,6 +11,7 @@ def send_notification(username, message):
 
 def send_critical_credit_notification(username):
     notification = apps.get_model("main", "Critical_Credit_Notification").get_or_create(username=username)
+    print(notification)
     notification.save()
 
 

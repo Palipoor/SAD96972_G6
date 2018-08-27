@@ -92,7 +92,9 @@ class Transactions:
 
     @staticmethod
     def get_profirRate(type):
-        return Transactions.profitRates[type]
+        if(type in Transactions.profitRates):
+            return Transactions.profitRates[type]
+        return 0
 
     @staticmethod
     def get_transaction_amount(type):
