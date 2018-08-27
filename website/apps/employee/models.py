@@ -1,6 +1,9 @@
 from apps.main.models import GenUser
 from django.db import models
+from django.apps import apps
 from django.contrib.auth.models import Group
+from utils.currency_utils import Transactions
+from utils.notification_tools import notify, send_notification
 
 
 # Create your models here.
@@ -54,10 +57,18 @@ class EmployeeReview(models.Model):
         return temp
 
     def save(self, *args, **kwargs):
-        # TODO cover all scenarios
         self.request.save()
-        super(EmployeeReview, self).save(*args, **kwargs)
 
+        message = 'وضعیت تراکنش شما به شماره {0} به {1} تغییر یافت.'.format(self.request.id, Transactions.get_persian_status(self.request.status) )
+        send_notification(self.request.creator.username, message)
+        notify(self.request.creator.username,message, 'تغییر وضعیت تراکنش')
+
+        if self.new_status == 4:
+            message = "کارمند با نام کاربری {0} تراکنش {1} را با این توضیح گزارش کرد: {2}".format(self.employee.username, self.request.id, self.description)
+            manager = apps.get_model('manager', 'Manager').objects.first().username
+            send_notification(manager, message)
+
+        super(EmployeeReview, self).save(*args, **kwargs)
     def exception_texts(self):
         return self.request.exception_texts()
 
