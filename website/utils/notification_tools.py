@@ -44,6 +44,6 @@ def send_text(number, message, subject):
 def notify(customer_username, message, subject):
     customer = apps.get_model('customer', "Customer").objects.get(username=customer_username)
     if customer.contact_way == 0:
-        send_email(customer.email, subject)
+        send_email(customer.email, message , subject)
     else:
         send_text(str(customer.phone_number), message, subject)
