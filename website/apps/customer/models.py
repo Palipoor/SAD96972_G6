@@ -447,11 +447,11 @@ class Charge(Request):
     # Only needs destination user and wallet and amount as argument.
 
     def set_initials(self, *args, **kwargs):
-        self.source_user = self.creator
+        self.dest_user = self.creator
 
     def __init__(self, *args, **kwargs):
         super(Charge, self).__init__(*args, type="Charge", **kwargs)
-        self.source_user = self.creator
+        self.dest_user = self.creator
 
     def set_status(self):
         self.status = "0"

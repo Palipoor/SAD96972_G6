@@ -20,7 +20,7 @@ from django.views.generic import TemplateView
 from apps.main.views import IsLoggedInView, DetailsView, IsManager
 from apps.manager.Forms import EmployeeCreationForm, EmployeeAccessRemovalForm, ChangeSalaryForm, \
     CustomerAccessRemovalForm
-from apps.manager.Forms import ReviewForm
+from apps.manager.Forms import ReviewForm, ManagerSettingsForm
 from apps.manager.models import Manager
 from apps.main.models import Notification
 from apps.main.views import TransactionDetailsViewForStaff as MainTransactionDetails
@@ -41,6 +41,8 @@ class ManagerCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
+        context = Compilation.get_last_request_and_transaction_id(context)
+
         return context
 
 
@@ -99,11 +101,34 @@ class ManagerPasswordChangeView(IsManager, FormView):
         return context
 
 
-class CompanySettingsView(IsLoggedInView, IsManager, UpdateView):
-    # model = Company
-    template_name = "manager/settings.html"
-    fields = ['english_name', 'persian_name', 'account']
-    # TODO incomplete
+class ManagerSettingsView(IsLoggedInView, IsManager, UpdateView):
+    form_class = ManagerSettingsForm
+    template_name = 'manager/settings.html'
+    success_url = reverse_lazy('manager:settings')
+
+    def get_object(self, queryset=None):
+        username = self.request.user.username
+        print("username is " + username)
+        return Manager.objects.get(username=username)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        context = {}
+        self.object = context.update(clean)
+        return super(ManagerSettingsView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ManagerSettingsView, self).get_context_data(**kwargs)
+        context = Compilation.get_last_request_and_transaction_id(context)
+        context, manager = Compilation.get_manager_context_data(context, self.request.user.username)
+        print("aaa")
+        print(Manager.get_manager())
+        print(Manager.get_manager().minimum_rial_credit)
+        context["min_val"] = Manager.get_manager().minimum_rial_credit
+        return context
 
 
 class CustomerDetailsForManager(IsManager, TemplateView):

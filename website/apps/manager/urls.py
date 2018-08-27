@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from apps.main.views import WalletView, NotificationsView
-from apps.manager.views import ManagerPasswordChangeView, CompanySettingsView, \
+from apps.manager.views import ManagerPasswordChangeView, ManagerSettingsView, \
     ManagerDashboardView, EmployeeListView, CustomersListView, EmployeeDetailsForManager, \
     CustomerDetailsForManager, TransactionDetailsView, CreateTransactionTypeView
 
 urlpatterns = [
     path('dashboard/', ManagerDashboardView.as_view(), name='dashboard'),
     path('change_password', ManagerPasswordChangeView.as_view(), name='change_password'),
-    path('settings', CompanySettingsView.as_view(), name='settings'),
+    path('settings', ManagerSettingsView.as_view(), name='settings'),
     path('<pk>_transaction_details', TransactionDetailsView.as_view(), name='transaction_details'),
     path('employee_users/', EmployeeListView.as_view(), name='employee_users'),
     path('customer_users/', CustomersListView.as_view(), name='customer_users'),

@@ -34,6 +34,13 @@
     </a>
 </li>
 <li>
+<a href='{% url "manager:create_transaction_type" %}' name="create_type">
+        <em class="glyphicon glyphicon-credit-card"></em>
+        <span> ساخت نوع جدید تراکنش</span>
+    </a>
+</li>
+
+<li>
     <a href='{% url "manager:transaction_details" pk=last_request_id %}' name="requests">
         <em class="fa fa-comments"></em>
         <span>درخواست‌های تاییدنشده</span>
