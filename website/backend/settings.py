@@ -151,3 +151,4 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'contact.us.sapaa@gmail.com'
 EMAIL_HOST_PASSWORD = 'pegahomoeen'
+ALLOWED_HOSTS = ['*']

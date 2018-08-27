@@ -133,7 +133,7 @@ class Request(PolymorphicModel):
             self.status = 0
             message = 'تراکنش شما به شماره {} تایید شد.'.format(self.id)
             send_notification(self.creator.username, message)
-            notify(self.creator.username, message, 'تایید تراکنش')
+            notify(self.creator.username,message, 'تایید تراکنش')
             self.redirection_request = self.create_redirect_request()
             self.redirection_request.take_action()
             # redirect.save()
@@ -164,19 +164,26 @@ class Request(PolymorphicModel):
         # for determining default profitRate of request. Default status is pending.
         self.profitRate = Transactions.get_profirRate(self.type)
 
+
     def pay(self):
         # what source user has to pay
         try:
             print("in print source wallet")
             self.source_user
+<<<<<<< HEAD
             print(self.source_user)
             print(self.source_wallet)
-            if (str(self.source_wallet) == "0"):
+            if (str(self.source_wallet) == "0"  and self.source_user.id != self.dest_user.id)):
                 print("in print source wallet")
                 print(self.source_user.rial_credit)
                 self.source_user.rial_credit -= self.amount * (1 + self.profitRate)
                 print(self.source_user.rial_credit)
             elif (str(self.source_wallet) == "1"):
+=======
+            if (self.source_wallet == "0" and self.source_user.id != self.dest_user.id):
+                self.source_user.rial_credit -= self.amount*(1+self.profitRate)
+            elif (self.source_wallet == "1"):
+>>>>>>> users
                 self.source_user.dollar_cent_credit -= self.amount*(1+self.profitRate)
             elif (str(self.source_wallet) == "2"):
                 self.source_user.euro_cent_credit -= self.amount * (1 + self.profitRate)
@@ -493,6 +500,7 @@ class Account_Request(Request):
 
     def set_status(self):
         self.status = "2"
+
 
     def __init__(self, *args, **kwargs):
         type = kwargs["type"]

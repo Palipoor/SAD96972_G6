@@ -67,16 +67,15 @@ class SignUpForm(forms.Form):
 
     def clean_password2(self):
         if self.cleaned_data['password'] != self.cleaned_data['password2']:
-            raise forms.ValidationError('تکرار رمز عبور با آن یکی نیست.')
+            raise forms.ValidationError('تکرار رمز عبور با آن یکسان نیست.')
         return not self.cleaned_data['password2']
 
 
 class WalletChargeForm(forms.Form):
     # form for charging wallets
-    amount = forms.IntegerField(min_value=1, label='مبلغ درخواستی',
-                                widget=forms.widgets.TextInput(attrs={'name': 'desired-amount', 'oninput': 'calculate()'}))
+    amount = forms.FloatField(min_value=1.0, label='مبلغ درخواستی',
+                              widget=forms.widgets.TextInput(attrs={'name': 'desired-amount', 'oninput': 'calculate()'}))
 
-    # TODO make exchanging from each wallet possible. make real rial charge possible.
     def __init__(self, *args, **kwargs):
         print("in init")
         self.user = kwargs.pop('user')
@@ -89,10 +88,11 @@ class WalletChargeForm(forms.Form):
         # makes exception if charge is invalid
         self.needed_value = self.cleaned_data['amount'] * Transactions.get_exchange_rate(self.dest, self.source)
         if(self.dest != "0"):
+            print('i am here ketri')
             self.transaction = Exchange(source_user=self.user, creator=self.user, dest_user=self.user, source_wallet=self.source, dest_wallet=self.dest, amount=self.needed_value)
         else:
-            print("hello")
-            self.transaction = Charge(dest_user=self.user, dest_wallet=self.dest, amount=self.needed_value)
+            print('i am here sosis')
+            self.transaction = Charge(dest_user=self.user, dest_wallet=self.dest, amount=self.needed_value, creator=self.user)
         # TODO generalize peyments
         # exps = self.transaction.exception_texts()
         # print("clean_amount")
@@ -108,6 +108,7 @@ class WalletChargeForm(forms.Form):
 
     def update_db(self):
         # updates db
+        print(str(self.transaction.__dict__))
         self.transaction.save()
         pass
 

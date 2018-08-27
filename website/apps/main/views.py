@@ -26,6 +26,7 @@ from django.views.decorators.csrf import csrf_exempt
 from apps.customer.models import Customer, Request
 from apps.manager.models import Manager
 from apps.manager.Forms import ReviewForm
+from apps.customer.models import Transactions
 import lxml.etree
 import lxml.html
 import requests
@@ -35,21 +36,12 @@ from utils.currency_utils import Transactions
 
 # returns a dictionary containing dollar and euro prices
 def get_prices():
-    # request = requests.get("http://2gheroon.ir")
-    # root = lxml.html.fromstring(request.content)
+   exchange_matrix = Transactions.exhchange_matrix
+   prices = {}
+   prices.update({'euro': exchange_matrix[2][0]/10000})
+   prices.update({'dollar': exchange_matrix[1][0]/10000})
 
-    # table_rows = root.xpath('//td[@class = "priceTitle"]')
-    # prices = {}
-    # for row in table_rows:
-    #     if 'دلار' in str(row.text):
-    #         prices['dollar'] = int((row.xpath('./following::td')[0]).text)
-    #         break
-    # for row in table_rows:
-    #     if 'یورو' in str(row.text):
-    #         prices['euro'] = int((row.xpath('./following::td')[0]).text)
-    #         break
-    return {'euro': 6, 'dollar': 4}  # TODO
-
+   return prices
 
 class IsLoggedInView(LoginRequiredMixin):
     login_url = '/login'
@@ -124,6 +116,7 @@ class WalletView(FormView, IsLoggedInView, IsWalletUser):
             return self.post(request, *args, **kwargs)
 
     def form_valid(self, form):
+        print('form valid ast ! ')
         form.update_db()
         return super().form_valid(form)
 
@@ -236,9 +229,11 @@ class LandingPageView(FormView):
                 send_mail(subject, message, from_email, ['palipoor976@gmail.com'])
                 success = True
             except BadHeaderError:
+                print('ay baba ay baba ay baba')
                 return HttpResponse('Invalid header found.')
             context = self.get_context_data()  # todo man balad nistam ino. dorost bayad beshe.
             if success:
+                print('succeesssssssssssssssss')
                 context.update({'success': 'پیام شما با موفقیت ارسال شد.'})
             return render(self.request, 'main/index.html', context)
 
@@ -336,6 +331,8 @@ class TransactionDetailsViewForStaff(FormMixin, TransactionDetailsView):
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
+            messages.add_message(
+            self.request, messages.SUCCESS, "بررسی تراکنش با موفقیت انجام شد.")
             return self.form_valid(form)
         else:
             print(form.errors)
