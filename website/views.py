@@ -1,6 +1,6 @@
 from apps.customer.models import Customer
 from apps.main.models import GenUser
-from apps.employee.models import Employee
+from apps.employee.models import Employee, EmployeeReview
 from apps.manager.models import Manager
 from apps.customer.models import Request
 
@@ -72,6 +72,11 @@ class Compilation():
 
     def get_all_requests(context):
         context['requests'] = Request.objects.all().order_by('-request_time')
+        return context
+
+    def get_employee_reviews(context, employee):
+        context['requests'] = EmployeeReview.objects.filter(employee=employee)
+        print(context['requests'])
         return context
 
     def get_reported_requests(context):

@@ -27,6 +27,43 @@
           </div>
             </div>
             </div>
+                <div class = "col-md-6">
+                    <div class = "box">
+                      <div class = "box-header with-border">
+                          <h3>تراکنش‌ها</h3>
+                      </div>
+                      <div class = "box-body">
+                          <table id="table" class="table table-bordered table-striped">
+                             <thead>
+                        <tr>
+                            <th>شناسه فعالیت</th>
+                            <th> شناسه درخواست</th>
+                            <th> وضعیت جدید</th>
+                            <th>توضیحات</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for req in requests %}
+                        <tr>
+                            <td>{{req.id}}</td>
+                            <td>{{req.request.id}}</td>
+                            <td>{{req.new_status}}</td>
+                            <td>{{req.description}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>شناسه فعالیت</th>
+                            <th> شناسه درخواست</th>
+                            <th> وضعیت جدید</th>
+                            <th>توضیحات</th>
+                        </tr>
+                        </tfoot>
+                          </table>
+                      </div>
+                    </div>
+                </div>
           </div><!-- /.row -->
 
 

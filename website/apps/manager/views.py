@@ -160,6 +160,7 @@ class EmployeeDetailsForManager(IsManager, TemplateView):
         context = super(EmployeeDetailsForManager, self).get_context_data(**kwargs)
         employee = Employee.objects.get(id=self.user_id)
         context['employee'] = employee
+        context = Compilation.get_employee_reviews(context, employee)
         context = Compilation.get_last_request_and_transaction_id(context)
         return context
 
