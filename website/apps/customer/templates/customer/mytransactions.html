@@ -39,28 +39,31 @@
                 <div class="box-body">
                   <table id="table" class="table table-bordered table-striped" name = "transactions-table">
                     <thead>
-                      <tr>
-                        <th>شناسه تراکنش</th>
-                        <th>مبلغ</th>
-                        <th>وضعیت</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        {% for transaction in requests %}
-                      <tr>
-                          <td><a href= "{{transaction.id}}_transaction_details">{{transaction.id}}</a></td>
-                          <td>{{transaction.amount}}</td>
-                          <td>{{transaction.status}}</td>
-                      </tr>
-                    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>شناسه تراکنش</th>
-                        <th>مبلغ</th>
-                        <th>وضعیت</th>
-                      </tr>
-                    </tfoot>
+                        <tr>
+                            <th>شناسه تراکنش مربوط</th>
+                            <th>مبلغ ( {{currency}})</th>
+                            <th>وضعیت</th>
+                            <th>نوع</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for req in requests %}
+                        <tr>
+                            <td><a href="{{req.id}}_transaction_details">{{req.id}}</a></td>
+                            <td>{{req.amount}}</td>
+                            <td>{{req.status}}</td>
+                            <td>{{req.type}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>شناسه تراکنش مربوط</th>
+                            <th>مبلغ ( {{currency}})</th>
+                            <th>وضعیت</th>
+                            <th>نوع</th>
+                        </tr>
+                        </tfoot>
                   </table>
                 </div>
                 <!-- /.box-body -->

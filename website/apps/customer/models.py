@@ -11,6 +11,7 @@ from django.contrib.auth.hashers import make_password
 from utils import notification_tools
 import traceback
 from utils.currency_utils import Transactions
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -49,7 +50,8 @@ class Request(PolymorphicModel):
     final_user = models.ForeignKey('main.Wallet_User', on_delete=models.DO_NOTHING, related_name='final_user', null=True, blank=True)
     final_wallet = models.CharField(choices=currencies, max_length=1, default="0", blank=True)
     # amount of payment in rial or cents.
-    amount = models.FloatField(null=False, blank=True)
+    amount = models.FloatField(null=False, blank=True, validators=[MinValueValidator(10, ('حداقل مقدار پرداختی برابر است با  %(limit_value)s')),
+                                                                   MaxValueValidator(1000000, ('حداکثر مقدار پرداختی برابر است با  %(limit_value)s'))])
     request_time = models.DateTimeField(auto_now_add=True, blank=True)
     description = models.CharField(max_length=500, blank=True)
     # defaul status varies between children. some may be accepted since creation.
@@ -444,11 +446,11 @@ class Charge(Request):
     # Only needs destination user and wallet and amount as argument.
 
     def set_initials(self, *args, **kwargs):
-        self.source_user = self.creator
+        self.dest_user = self.creator
 
     def __init__(self, *args, **kwargs):
         super(Charge, self).__init__(*args, type="Charge", **kwargs)
-        self.source_user = self.creator
+        self.dest_user = self.creator
 
     def set_status(self):
         self.status = "0"
