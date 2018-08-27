@@ -86,9 +86,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
-                        <img src='{% static "images/logo.png" %}' alt="Logo">
-                    </a>
+                    
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar" id="bs-example-navbar-collapse-1">
@@ -125,10 +123,6 @@
         <div class="container home-container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="logo text-center">
-                        <!-- LOGO -->
-                        <img width="125" height="55" src='{% static "images/logo.png" %}' alt="">
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -154,7 +148,6 @@
                 </div>
                 <div class="col-md-3 col-md-offset-1 col-sm-4">
                     <div class="home-iphone">
-                        <img src='{% static "images/iPhone_Home.png" %}' alt="">
                     </div>
                 </div>
             </div>
@@ -192,7 +185,6 @@
                 <div class="col-md-6">
                     <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- PHONE -->
-                        <img src='{% static "images/about_iphone.png" %}' alt="">
                     </div>
                 </div>
                 <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -211,20 +203,10 @@
                                 <i class="pe-7s-timer"></i>
                             </div>
                             <!-- HEADING DESCRIPTION -->
-                            <h3>سهولت کاربری</h3>
-                            <p>رابط کاربری سپاا استفاده از آن را برای مشتریان با هر سنی و از هر قشری ساده کرده است.</p>
+                            <h3>سهولت کاربری و کارمزد کمتر</h3>
+                            <p>رابط کاربری سپاا استفاده از آن را برای مشتریان با هر سنی و از هر قشری ساده کرده است</p>
                         </div>
 
-                        <!-- SINGLE DESC -->
-                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="2s">
-                            <!-- ICON -->
-                            <div>
-                                <i class="pe-7s-stopwatch"></i>
-                            </div>
-                            <!-- HEADING DESCRIPTION -->
-                            <h3>کارمزد کمتر</h3>
-                            <p></p>
-                        </div>
                         <!-- END SINGLE DESC -->
 
                     </div>
@@ -381,8 +363,6 @@
                 <div class="col-md-4">
                     <div class="feature_iphone">
                         <!-- FEATURE PHONE IMAGE -->
-                        <img class="wow bounceIn" data-wow-duration="1s"     src='{% static "images/iPhone02.png" %}'
-                             alt="">
                     </div>
                 </div>
                 <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
@@ -516,7 +496,6 @@
                 <div class="col-md-6">
                     <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- PHONE -->
-                        <img src='{% static "images/about_iphone.png" %}' alt="">
                     </div>
                 </div>
                 <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
@@ -555,7 +534,7 @@
                         </div>
                         <div class="row">
                             <button class="btn home-btn wow fadeInLeft" style='margin: 15px;'value="conversion" name="convert_form">محاسبه کن</button>
-                            <label id="convert_form" name="result" dir="rtl"> مبلغ وارد شده معادل با {{result}}  واحد {{currency}} است. </label>
+                            <label id="convert_form" name="result" dir="rtl">{{result}} </label>
                         </div>
                     </form>
                 </div>

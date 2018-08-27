@@ -38,8 +38,8 @@ from utils.currency_utils import Transactions
 def get_prices():
    exchange_matrix = Transactions.exhchange_matrix
    prices = {}
-   prices.update({'euro': exchange_matrix[2][0]/10000})
-   prices.update({'dollar': exchange_matrix[1][0]/10000})
+   prices.update({'euro': exchange_matrix[2][0]})
+   prices.update({'dollar': exchange_matrix[1][0]})
 
    return prices
 
