@@ -7,6 +7,7 @@ from kavenegar import *
 
 def send_notification(username, message):
     notification = Notification.create(message=message, username=username)
+    print('username is ' + username)
     notification.save()
 
 

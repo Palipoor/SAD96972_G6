@@ -118,9 +118,6 @@ class Request(PolymorphicModel):
             self.excps += ['تراکنش در شرایطی که بتواند تایید شود نیست.']
         else:
             self.status = 0
-            message = 'تراکنش شما به شماره {} تایید شد.'.format(self.id)
-            send_notification(self.creator.username, message)
-            notify(self.creator.username,message, 'تایید تراکنش')
             self.redirection_request = self.create_redirect_request()
             self.redirection_request.take_action()
             # redirect.save()
@@ -177,9 +174,10 @@ class Request(PolymorphicModel):
                 print(self.dest_user.rial_credit)
                 self.dest_user.rial_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
             elif (self.dest_wallet == "1"):
-                # print('one wallet')
-                # print(self.amount * (1 + self.profitRate) * self.exchange_rate)
-                # print(self.dest_user.dollar_cent_credit)
+                print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+                print('one wallet')
+                print(self.amount * (1 + self.profitRate) * self.exchange_rate)
+                print(self.dest_user.dollar_cent_credit)
                 self.dest_user.dollar_cent_credit += self.amount * (1 + self.profitRate) * self.exchange_rate
                 # print(self.dest_user.dollar_cent_credit)
             elif (self.dest_wallet == "2"):

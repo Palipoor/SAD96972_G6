@@ -49,6 +49,7 @@ class Notification(models.Model):
     def create(username, message):
         user = GenUser.objects.get(username=username)
         temp = Notification(user=user, text=message)
+        print('user is ' + str(user.__dict__))
         temp.seen = False
         return temp
 
